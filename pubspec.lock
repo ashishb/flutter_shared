@@ -35,7 +35,7 @@ packages:
       name: characters
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.1"
+    version: "0.5.0"
   charcode:
     dependency: transitive
     description:
@@ -70,7 +70,7 @@ packages:
       name: dartx
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0"
+    version: "0.4.0"
   email_validator:
     dependency: "direct main"
     description:

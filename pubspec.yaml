@@ -24,7 +24,7 @@ dependencies:
   mime_type: ^0.3.0
 
 dependency_overrides:
-  dartx: ^0.4.0
+  dartx: ^0.3.0
   path: ^1.7.0
 
 dev_dependencies:

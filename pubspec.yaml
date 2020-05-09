@@ -1,0 +1,36 @@
+name: flutter_shared
+description: A new Flutter package project.
+version: 0.0.1
+author:
+homepage: distantfutu.re
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_parsed_text: ^1.2.4
+  package_info: ^0.4.0+17
+  url_launcher: ^5.4.5
+  email_validator: ^1.0.4
+  hive: ^1.4.1+1
+  hive_flutter: ^0.3.0+2
+  flutter_icons: ^1.1.0
+  fluttertoast: ^4.0.1
+  intl: ^0.16.1
+  native_pdf_renderer: ^2.0.1
+  mime_type: ^0.3.0
+
+dependency_overrides:
+  dartx: ^0.3.0
+  path: ^1.7.0
+
+dev_dependencies:
+  lint: ^1.1.1
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

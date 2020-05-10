@@ -22,6 +22,8 @@ dependencies:
   intl: ^0.16.1
   native_pdf_renderer: ^2.0.1
   mime_type: ^0.3.0
+  flutter_svg: ^0.17.4
+  http: ^0.12.1
 
 dependency_overrides:
   dartx: ^0.3.0

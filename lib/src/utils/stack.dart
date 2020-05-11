@@ -39,4 +39,8 @@ class ListStack<T> {
   void clear() {
     _list.clear();
   }
+
+  List<T> list() {
+    return _list.toList();
+  }
 }

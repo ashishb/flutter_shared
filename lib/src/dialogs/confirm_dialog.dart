@@ -4,6 +4,7 @@ Future<bool> showConfirmDialog({
   @required BuildContext context,
   @required String title,
   @required String message,
+  List<Widget> children = const <Widget>[],
   String okButtonName = 'OK',
   String cancelButtonName = 'Cancel',
 }) async {
@@ -20,6 +21,7 @@ Future<bool> showConfirmDialog({
           child: ListBody(
             children: <Widget>[
               Text(message),
+              ...children,
             ],
           ),
         ),

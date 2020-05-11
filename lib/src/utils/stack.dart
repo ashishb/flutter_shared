@@ -9,6 +9,8 @@ class ListStack<T> {
   /// check if the stack is not empty.
   bool get isNotEmpty => _list.isNotEmpty;
 
+  int get length => _list.length;
+
   /// push element in top of the stack.
   void push(T e) {
     _list.addLast(e);

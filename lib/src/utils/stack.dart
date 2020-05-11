@@ -40,7 +40,5 @@ class ListStack<T> {
     _list.clear();
   }
 
-  List<T> list() {
-    return _list.toList();
-  }
+  List<T> get list => _list.toList();
 }

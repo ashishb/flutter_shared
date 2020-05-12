@@ -29,3 +29,4 @@ export 'src/widgets/colored_button.dart';
 export 'src/widgets/dialog_button.dart';
 export 'src/widgets/file_info.dart';
 export 'src/widgets/svg_image.dart';
+export 'src/widgets/svg_asset.dart';

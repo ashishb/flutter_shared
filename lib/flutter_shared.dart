@@ -14,6 +14,10 @@ export 'src/extensions/num_ext.dart';
 export 'src/extensions/size_ext.dart';
 export 'src/extensions/string_ext.dart';
 
+export 'src/firebase/auth.dart';
+export 'src/firebase/firebase_user_provider.dart';
+export 'src/firebase/firestore_refs.dart';
+export 'src/firebase/firestore.dart';
 export 'src/firebase/serializable.dart';
 
 export 'src/hive_db/hive_box.dart';

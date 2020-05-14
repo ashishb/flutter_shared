@@ -29,6 +29,8 @@ export 'src/hive_db/hive_opener.dart';
 export 'src/hive_db/hive_utils.dart';
 
 export 'src/image/image_url_model.dart';
+export 'src/image/image_delete_dialog.dart';
+export 'src/image/image_upload_dialog.dart';
 export 'src/image/super_image.dart';
 
 export 'src/utils/server_file.dart';

@@ -6,7 +6,13 @@ import 'package:flutter_shared/src/firebase/firestore.dart';
 import 'package:flutter_shared/src/widgets/loading_widget.dart';
 
 class ChatAdminScreenContents extends StatefulWidget {
-  const ChatAdminScreenContents();
+  const ChatAdminScreenContents({
+    @required this.title,
+    @required this.name,
+  });
+
+  final String title;
+  final String name;
 
   @override
   _ChatAdminScreenContentsState createState() =>
@@ -61,6 +67,8 @@ class _ChatAdminScreenContentsState extends State<ChatAdminScreenContents> {
                             ],
                           ),
                           isAdmin: true,
+                          title: widget.title,
+                          name: widget.name,
                         ),
                       ),
                     );

@@ -9,6 +9,14 @@ import 'package:flutter_shared/src/firebase/firestore.dart';
 import 'package:provider/provider.dart';
 
 class ChatScreen extends StatefulWidget {
+  const ChatScreen({
+    @required this.title,
+    @required this.name,
+  });
+
+  final String title;
+  final String name;
+
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -45,7 +53,10 @@ class _ChatScreenState extends State<ChatScreen> {
     }
 
     if (userProvider.isAdmin) {
-      return const ChatAdminScreenContents();
+      return ChatAdminScreenContents(
+        title: widget.title,
+        name: widget.name,
+      );
     }
 
     return ChatScreenContents(
@@ -56,6 +67,8 @@ class _ChatScreenState extends State<ChatScreen> {
           WhereQuery('admin', userProvider.userId),
         ],
       ),
+      title: widget.title,
+      name: widget.name,
     );
   }
 }

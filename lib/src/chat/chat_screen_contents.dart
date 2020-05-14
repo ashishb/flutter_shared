@@ -15,11 +15,15 @@ class ChatScreenContents extends StatefulWidget {
     @required this.stream,
     this.isAdmin = false,
     @required this.toUid,
+    @required this.title,
+    @required this.name,
   });
 
   final Stream<List<ChatMessage>> stream;
   final bool isAdmin;
   final String toUid;
+  final String title;
+  final String name;
 
   @override
   _ChatScreenContentsState createState() => _ChatScreenContentsState();
@@ -140,8 +144,9 @@ class _ChatScreenContentsState extends State<ChatScreenContents> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Developer Chat'),
-          actions: [_scrollToBottomButton()]),
+        title: Text(widget.title),
+        actions: [_scrollToBottomButton()],
+      ),
       body: StreamBuilder<dynamic>(
         stream: widget.stream,
         builder: (context, snap) {
@@ -170,10 +175,10 @@ class _ChatScreenContentsState extends State<ChatScreenContents> {
                     toUid: widget.toUid,
                     user: ChatUser(
                       uid: 'admin',
-                      name: 'Developer',
+                      name: widget.name,
                     ),
                     text:
-                        'Hi, send me a message if you find a bug or have a suggestion.'),
+                        'Hi, send us a message if you need help, find a bug or have a suggestion.'),
               ];
             }
 

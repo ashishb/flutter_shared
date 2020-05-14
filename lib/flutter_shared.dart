@@ -1,6 +1,7 @@
 library flutter_shared;
 
 export 'src/chat/chat_screen.dart';
+export 'src/chat/chat_models.dart';
 
 export 'src/dialogs/alert_dialog.dart';
 export 'src/dialogs/confirm_dialog.dart';

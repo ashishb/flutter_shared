@@ -14,6 +14,8 @@ export 'src/extensions/num_ext.dart';
 export 'src/extensions/size_ext.dart';
 export 'src/extensions/string_ext.dart';
 
+export 'src/firebase/serializable.dart';
+
 export 'src/hive_db/hive_box.dart';
 export 'src/hive_db/hive_data.dart';
 export 'src/hive_db/hive_opener.dart';

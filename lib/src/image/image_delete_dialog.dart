@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shared/flutter_shared.dart';
-import 'package:flutter_shared/src/chat/image_url_model.dart';
+import 'package:flutter_shared/src/image/image_url_model.dart';
 import 'package:flutter_shared/src/image/super_image.dart';
 
 class ImageDeleteDialog extends StatefulWidget {

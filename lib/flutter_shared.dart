@@ -28,6 +28,9 @@ export 'src/hive_db/hive_data.dart';
 export 'src/hive_db/hive_opener.dart';
 export 'src/hive_db/hive_utils.dart';
 
+export 'src/image/image_url_model.dart';
+export 'src/image/super_image.dart';
+
 export 'src/utils/server_file.dart';
 export 'src/utils/stack.dart';
 export 'src/utils/string_utils.dart';

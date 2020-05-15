@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-Future<void> showWidgetDialog({
+Future<bool> showWidgetDialog({
   @required BuildContext context,
   @required String title,
   @required List<Widget> children,
+  bool showCancel = false,
+  String okButtonName = 'OK',
+  String cancelButtonName = 'Cancel',
 }) {
-  return showDialog<void>(
+  return showDialog<bool>(
     context: context,
     barrierDismissible: true,
     builder: (context) => AlertDialog(
@@ -20,11 +23,20 @@ Future<void> showWidgetDialog({
         ),
       ),
       actions: <Widget>[
+        Visibility(
+          visible: showCancel,
+          child: FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: Text(cancelButtonName),
+          ),
+        ),
         FlatButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(true);
           },
-          child: const Text('OK'),
+          child: Text(okButtonName),
         ),
       ],
     ),

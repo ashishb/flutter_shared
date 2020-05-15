@@ -1,4 +1,7 @@
-library flutter_shared;
+library flutter_shared_extra;
+
+export 'src/chat/chat_screen.dart';
+export 'src/chat/chat_models.dart';
 
 export 'src/firebase/auth.dart';
 export 'src/firebase/firebase_user_provider.dart';

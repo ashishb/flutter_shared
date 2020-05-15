@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/flutter_shared_extra.dart';
 import 'package:flutter_shared/src/login/user_login_button.dart';
 
 class UserLoginView extends StatefulWidget {

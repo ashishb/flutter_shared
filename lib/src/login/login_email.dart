@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/flutter_shared_extra.dart';
 
 class LoginData {
   String email = '';

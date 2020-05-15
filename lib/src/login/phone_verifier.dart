@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/flutter_shared_extra.dart';
 
 class PhoneVerifyier extends ChangeNotifier {
   String _verificationId;

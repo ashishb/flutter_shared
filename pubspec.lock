@@ -346,7 +346,7 @@ packages:
     source: hosted
     version: "3.1.4"
   image:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       name: image
       url: "https://pub.dartlang.org"
@@ -519,7 +519,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.1"
+    version: "4.1.2"
   quiver:
     dependency: transitive
     description:

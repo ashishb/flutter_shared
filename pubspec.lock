@@ -29,27 +29,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
-  bubble:
-    dependency: "direct main"
-    description:
-      name: bubble
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.9+1"
-  built_collection:
-    dependency: transitive
-    description:
-      name: built_collection
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.3.2"
-  built_value:
-    dependency: transitive
-    description:
-      name: built_value
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "7.1.0"
   characters:
     dependency: transitive
     description:
@@ -99,27 +78,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
-  equatable:
-    dependency: transitive
-    description:
-      name: equatable
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.1"
-  extended_image:
-    dependency: "direct main"
-    description:
-      name: extended_image
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.7.3+1"
-  extended_image_library:
-    dependency: transitive
-    description:
-      name: extended_image_library
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.3"
   extension:
     dependency: transitive
     description:
@@ -127,13 +85,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.1"
-  fixnum:
-    dependency: transitive
-    description:
-      name: fixnum
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.11"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -146,13 +97,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
-  flutter_keyboard_visibility:
-    dependency: "direct main"
-    description:
-      name: flutter_keyboard_visibility
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.0"
   flutter_parsed_text:
     dependency: "direct main"
     description:
@@ -160,13 +104,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.4"
-  flutter_plugin_android_lifecycle:
-    dependency: transitive
-    description:
-      name: flutter_plugin_android_lifecycle
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.7"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -212,13 +149,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.1"
-  http_client_helper:
-    dependency: transitive
-    description:
-      name: http_client_helper
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.1"
   http_parser:
     dependency: transitive
     description:
@@ -227,26 +157,12 @@ packages:
     source: hosted
     version: "3.1.4"
   image:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.12"
-  image_picker:
-    dependency: "direct main"
-    description:
-      name: image_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.6.6+1"
-  image_picker_platform_interface:
-    dependency: transitive
-    description:
-      name: image_picker_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   intl:
     dependency: "direct main"
     description:
@@ -254,13 +170,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.1"
-  intl_phone_number_input:
-    dependency: "direct main"
-    description:
-      name: intl_phone_number_input
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.1"
   js:
     dependency: transitive
     description:
@@ -268,13 +177,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.1+1"
-  libphonenumber:
-    dependency: transitive
-    description:
-      name: libphonenumber
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
   lint:
     dependency: "direct dev"
     description:
@@ -310,13 +212,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.4"
   package_info:
     dependency: "direct main"
     description:
@@ -394,13 +289,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
-  provider:
-    dependency: "direct main"
-    description:
-      name: provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.1.2"
   quiver:
     dependency: transitive
     description:
@@ -408,13 +296,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.3"
-  random_string:
-    dependency: "direct main"
-    description:
-      name: random_string
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   sky_engine:
     dependency: transitive
     description: flutter

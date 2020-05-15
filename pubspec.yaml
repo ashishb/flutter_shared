@@ -41,6 +41,7 @@ dependencies:
 dependency_overrides:
   dartx: ^0.3.0
   path: ^1.7.0
+  image: ^2.1.12
 
 dev_dependencies:
   lint: ^1.2.0

@@ -26,6 +26,7 @@ export 'src/utils/string_utils.dart';
 export 'src/utils/utils.dart';
 
 export 'src/widgets/bottom_slideup_sheet.dart';
+export 'src/widgets/bottom_navbar/bottom_navbar.dart';
 export 'src/widgets/checkerboard_container.dart';
 export 'src/widgets/colored_button.dart';
 export 'src/widgets/dialog_button.dart';

@@ -19,11 +19,13 @@ export 'src/hive_db/hive_data.dart';
 export 'src/hive_db/hive_opener.dart';
 export 'src/hive_db/hive_utils.dart';
 
+export 'src/utils/debouncer.dart';
 export 'src/utils/server_file.dart';
 export 'src/utils/stack.dart';
 export 'src/utils/string_utils.dart';
 export 'src/utils/utils.dart';
 
+export 'src/widgets/bottom_slideup_sheet.dart';
 export 'src/widgets/checkerboard_container.dart';
 export 'src/widgets/colored_button.dart';
 export 'src/widgets/dialog_button.dart';

@@ -10,7 +10,7 @@ extension StringUtils on String {
   String fromCamelCase() {
     String displayName = '';
     bool lastUpper = false;
-    for (final String r in characters) {
+    for (final String r in chars) {
       if (r.toUpperCase() == r) {
         displayName += lastUpper ? r : ' $r';
 

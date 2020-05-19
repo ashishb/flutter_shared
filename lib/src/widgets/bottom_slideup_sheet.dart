@@ -86,15 +86,6 @@ class _SheetList extends StatelessWidget {
     return Container(
       padding:
           const EdgeInsets.only(bottom: 20, top: 12.0, right: 20, left: 20),
-      decoration: const BoxDecoration(
-        borderRadius: _borderRadius,
-        boxShadow: [
-          BoxShadow(
-            blurRadius: 10.0,
-            color: Color.fromRGBO(0, 0, 0, 0.15),
-          )
-        ],
-      ),
       child: DraggableScrollableSheet(
         expand: false,
         initialChildSize: sliderContent.initialChildSize,

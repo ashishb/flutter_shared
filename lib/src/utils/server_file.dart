@@ -88,6 +88,8 @@ class ServerFile {
       return _lastModified;
     }
 
+    _lastModified = DateTime.now();
+
     // uses dart:io, not for web
     if (!Utils.isWeb()) {
       _lastModified = File(path).lastModifiedSync();

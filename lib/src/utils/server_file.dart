@@ -21,6 +21,7 @@ class ServerFile {
   ServerFile({
     @required this.path,
     @required this.isDirectory,
+    this.directoryCount,
   });
 
   factory ServerFile.fromMap(Map<String, dynamic> map) {
@@ -32,6 +33,7 @@ class ServerFile {
 
   final String path;
   final bool isDirectory;
+  final int directoryCount;
   String _name;
   String _directoryPath;
   String _directoryName;

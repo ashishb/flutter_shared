@@ -25,13 +25,12 @@ Future<String> showStringDialog({
 
 class _DialogContents extends StatefulWidget {
   const _DialogContents({
-    Key key,
     @required this.title,
     @required this.message,
     this.okButtonName = 'OK',
     this.cancelButtonName = 'Cancel',
     this.defaultName = '',
-  }) : super(key: key);
+  });
 
   final String title;
   final String message;
@@ -51,6 +50,13 @@ class __DialogContentsState extends State<_DialogContents> {
     super.initState();
 
     _textController = TextEditingController(text: widget.defaultName);
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+
+    super.dispose();
   }
 
   @override

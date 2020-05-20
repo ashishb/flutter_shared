@@ -74,9 +74,13 @@ class ServerFile {
       return _lastAccessed;
     }
 
+    _lastAccessed = DateTime.now();
+
     // uses dart:io, not for web
     if (!Utils.isWeb()) {
-      _lastAccessed = File(path).lastAccessedSync();
+      if (isFile) {
+        _lastAccessed = File(path).lastAccessedSync();
+      }
     }
 
     return _lastAccessed;
@@ -92,7 +96,9 @@ class ServerFile {
 
     // uses dart:io, not for web
     if (!Utils.isWeb()) {
-      _lastModified = File(path).lastModifiedSync();
+      if (isFile) {
+        _lastModified = File(path).lastModifiedSync();
+      }
     }
 
     return _lastModified;

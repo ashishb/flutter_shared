@@ -102,11 +102,14 @@ class ServerFile {
       return _length;
     }
 
-    // uses dart:io, not for web
-    if (!Utils.isWeb()) {
-      _length = File(path).lengthSync();
-    }
+    _length = 0;
 
+    if (isFile) {
+      // uses dart:io, not for web
+      if (!Utils.isWeb()) {
+        _length = File(path).lengthSync();
+      }
+    }
     return _length;
   }
 

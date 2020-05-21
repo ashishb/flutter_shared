@@ -19,10 +19,13 @@ enum ServerFileType {
 
 class ServerFile {
   ServerFile({
-    @required this.path,
+    @required path,
     @required this.isDirectory,
     this.directoryCount,
-  });
+  }) {
+    // remove trailing slash Directory.path and File.path return / at end
+    this.path = p.normalize(path);
+  }
 
   factory ServerFile.fromMap(Map<String, dynamic> map) {
     return ServerFile(
@@ -31,7 +34,7 @@ class ServerFile {
     );
   }
 
-  final String path;
+  String path;
   final bool isDirectory;
   final int directoryCount;
   String _name;

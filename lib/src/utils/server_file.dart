@@ -205,4 +205,8 @@ class ServerFile {
 
     return Icon(iconData, size: size, color: color);
   }
+
+  String toString() {
+    return path;
+  }
 }

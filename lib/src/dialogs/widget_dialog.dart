@@ -16,7 +16,7 @@ Future<bool> showWidgetDialog({
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
-      title: Text(title),
+      title: title == null ? null : Text(title),
       content: SingleChildScrollView(
         child: Column(
           children: children,

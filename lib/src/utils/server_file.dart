@@ -19,7 +19,7 @@ enum ServerFileType {
 
 class ServerFile {
   ServerFile({
-    @required path,
+    @required String path,
     @required this.isDirectory,
     this.directoryCount,
   }) {
@@ -206,6 +206,7 @@ class ServerFile {
     return Icon(iconData, size: size, color: color);
   }
 
+  @override
   String toString() {
     return path;
   }

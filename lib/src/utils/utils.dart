@@ -428,7 +428,6 @@ class __ToastState extends State<_Toast> {
   @override
   Widget build(BuildContext context) {
     return IgnorePointer(
-      ignoring: true,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(

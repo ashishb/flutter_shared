@@ -71,7 +71,6 @@ class _FileInfoState extends State<FileInfo> {
         if (child != null) {
           list.add(
             Align(
-              alignment: Alignment.center,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: CheckerboardContainer(
@@ -125,7 +124,6 @@ class _FileInfoState extends State<FileInfo> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                flex: 1,
                 child: Text(
                   '$key:',
                   style: const TextStyle(

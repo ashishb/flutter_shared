@@ -38,9 +38,9 @@ class SuperImage extends StatelessWidget {
             },
             child: Stack(
               fit: StackFit.expand,
-              children: <Widget>[
+              children: const <Widget>[
                 Icon(Icons.error, size: 30, color: Colors.red),
-                const Positioned(
+                Positioned(
                   bottom: 10.0,
                   left: 0.0,
                   right: 0.0,

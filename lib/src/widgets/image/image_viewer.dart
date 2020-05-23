@@ -161,7 +161,7 @@ class _ImageSwiperState extends State<ImageViewer>
     // snackbar needed a new context
     return Builder(builder: (BuildContext context) {
       return PopupMenuButton<String>(
-        icon: Icon(Icons.more_vert),
+        icon: const Icon(Icons.more_vert),
         onSelected: (String result) {
           switch (result) {
             case 'copy':

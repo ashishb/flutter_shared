@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 
@@ -70,84 +71,103 @@ class _ImageSwiperState extends State<ImageViewer>
     super.dispose();
   }
 
+  Widget heroBuilderForSlidingPage(Widget result, int index, String heroTag) {
+    if (index < min(9, widget.swiperItems.length)) {
+      return Hero(
+        tag: heroTag,
+        child: result,
+      );
+    } else {
+      return result;
+    }
+  }
+
+  GestureConfig initGestureConfigHandler(
+    ExtendedImageState state,
+    Size size,
+  ) {
+    double initialScale = 1.0;
+
+    if (state.extendedImageInfo != null &&
+        state.extendedImageInfo.image != null) {
+      initialScale = initScale(
+          size: size,
+          initialScale: initialScale,
+          imageSize: Size(state.extendedImageInfo.image.width.toDouble(),
+              state.extendedImageInfo.image.height.toDouble()));
+    }
+    return GestureConfig(
+      inPageView: true,
+      initialScale: initialScale,
+      maxScale: max(initialScale, 5.0),
+      animationMaxScale: max(initialScale, 5.0),
+      cacheGesture: false,
+    );
+  }
+
+  void onDoubleTap(ExtendedImageGestureState state) {
+    final pointerDownPosition = state.pointerDownPosition;
+    final double begin = state.gestureDetails.totalScale;
+    double end;
+
+    _animation?.removeListener(animationListener);
+
+    _animationController.stop();
+
+    _animationController.reset();
+
+    if (begin == doubleTapScales[0]) {
+      end = doubleTapScales[1];
+    } else {
+      end = doubleTapScales[0];
+    }
+
+    animationListener = () {
+      state.handleDoubleTap(
+          scale: _animation.value, doubleTapPosition: pointerDownPosition);
+    };
+    _animation =
+        _animationController.drive(Tween<double>(begin: begin, end: end));
+
+    _animation.addListener(animationListener);
+
+    _animationController.forward();
+  }
+
   Widget _itemBuilder(BuildContext context, int index) {
     final size = MediaQuery.of(context).size;
 
     final url = widget.swiperItems[index].url;
     final String heroTag = widget.swiperItems[index].heroTag;
 
-    final Widget image = ExtendedImage.network(
-      url,
-      fit: BoxFit.contain,
-      enableSlideOutPage: true,
-      mode: ExtendedImageMode.gesture,
-      heroBuilderForSlidingPage: (Widget result) {
-        if (index < min(9, widget.swiperItems.length)) {
-          return Hero(
-            tag: heroTag,
-            child: result,
-          );
-        } else {
-          return result;
-        }
-      },
-      initGestureConfigHandler: (state) {
-        double initialScale = 1.0;
+    Widget image;
 
-        if (state.extendedImageInfo != null &&
-            state.extendedImageInfo.image != null) {
-          initialScale = initScale(
-              size: size,
-              initialScale: initialScale,
-              imageSize: Size(state.extendedImageInfo.image.width.toDouble(),
-                  state.extendedImageInfo.image.height.toDouble()));
-        }
-        return GestureConfig(
-            inPageView: true,
-            initialScale: initialScale,
-            maxScale: max(initialScale, 5.0),
-            animationMaxScale: max(initialScale, 5.0),
-            // you can cache gesture state even though page view page change.
-            // remember call clearGestureDetailsCache() method at the right time.(for example,this page dispose)
-            cacheGesture: false);
-      },
-      onDoubleTap: (ExtendedImageGestureState state) {
-        // you can use define pointerDownPosition as you can,
-        // default value is double tap pointer down postion.
-        final pointerDownPosition = state.pointerDownPosition;
-        final double begin = state.gestureDetails.totalScale;
-        double end;
+    if (url.firstChar == '/') {
+      image = ExtendedImage.file(
+        File(url),
+        fit: BoxFit.contain,
+        enableSlideOutPage: true,
+        mode: ExtendedImageMode.gesture,
+        heroBuilderForSlidingPage: (Widget result) =>
+            heroBuilderForSlidingPage(result, index, heroTag),
+        initGestureConfigHandler: (state) =>
+            initGestureConfigHandler(state, size),
+        onDoubleTap: onDoubleTap,
+      );
+    } else {
+      image = ExtendedImage.network(
+        url,
+        fit: BoxFit.contain,
+        enableSlideOutPage: true,
+        mode: ExtendedImageMode.gesture,
+        heroBuilderForSlidingPage: (Widget result) =>
+            heroBuilderForSlidingPage(result, index, heroTag),
+        initGestureConfigHandler: (state) =>
+            initGestureConfigHandler(state, size),
+        onDoubleTap: onDoubleTap,
+      );
+    }
 
-        // remove old
-        _animation?.removeListener(animationListener);
-
-        //stop pre
-        _animationController.stop();
-
-        //reset to use
-        _animationController.reset();
-
-        if (begin == doubleTapScales[0]) {
-          end = doubleTapScales[1];
-        } else {
-          end = doubleTapScales[0];
-        }
-
-        animationListener = () {
-          // print(_animation.value);
-          state.handleDoubleTap(
-              scale: _animation.value, doubleTapPosition: pointerDownPosition);
-        };
-        _animation =
-            _animationController.drive(Tween<double>(begin: begin, end: end));
-
-        _animation.addListener(animationListener);
-
-        _animationController.forward();
-      },
-    );
-
-    // wrap in a gesture detector and add caption
     return GestureDetector(
       onTap: () {
         slidePagekey.currentState.popPage();
@@ -158,7 +178,6 @@ class _ImageSwiperState extends State<ImageViewer>
   }
 
   Widget _toolsButton() {
-    // snackbar needed a new context
     return Builder(builder: (BuildContext context) {
       return PopupMenuButton<String>(
         icon: const Icon(Icons.more_vert),
@@ -186,7 +205,6 @@ class _ImageSwiperState extends State<ImageViewer>
 
   @override
   Widget build(BuildContext context) {
-    // needed Scaffold for our snackbar
     final Widget imagePage = Scaffold(
       body: Material(
         // if you use ExtendedImageSlidePage and slideType =SlideType.onlyImage,
@@ -225,17 +243,8 @@ class _ImageSwiperState extends State<ImageViewer>
       slideAxis: SlideAxis.both,
       slideType: SlideType.onlyImage,
       onSlidingPage: (state) {
-        // you can change other widgets' state on page as you want
-        // base on offset/isSliding etc
-        // var offset= state.offset;
         final showSwiper = !state.isSliding;
         if (showSwiper != _showSwiper) {
-          // do not setState directly here, the image state will change,
-          // you should only notify the widgets which are needed to change
-          // setState(() {
-          // _showSwiper = showSwiper;
-          // });
-
           _showSwiper = showSwiper;
           rebuildSwiper.add(_showSwiper);
         }

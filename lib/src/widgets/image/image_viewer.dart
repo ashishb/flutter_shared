@@ -7,6 +7,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:open_file/open_file.dart';
 import 'package:random_string/random_string.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
@@ -32,10 +33,15 @@ double initScale({Size imageSize, Size size, double initialScale}) {
 }
 
 class ImageViewer extends StatefulWidget {
-  const ImageViewer({this.index, this.swiperItems});
+  const ImageViewer({
+    this.index,
+    this.swiperItems,
+    this.useImageFile = false,
+  });
 
   final int index;
   final List<ImageSwiperItem> swiperItems;
+  final bool useImageFile;
 
   @override
   _ImageSwiperState createState() => _ImageSwiperState();
@@ -142,7 +148,7 @@ class _ImageSwiperState extends State<ImageViewer>
 
     Widget image;
 
-    if (url.firstChar == '/') {
+    if (widget.useImageFile) {
       image = ExtendedImage.file(
         File(url),
         fit: BoxFit.contain,
@@ -179,27 +185,38 @@ class _ImageSwiperState extends State<ImageViewer>
 
   Widget _toolsButton() {
     return Builder(builder: (BuildContext context) {
-      return PopupMenuButton<String>(
-        icon: const Icon(Icons.more_vert),
-        onSelected: (String result) {
-          switch (result) {
-            case 'copy':
-              final String url = widget.swiperItems[currentIndex].url;
-              Clipboard.setData(ClipboardData(text: url));
+      if (widget.useImageFile) {
+        return IconButton(
+          iconSize: 44,
+          icon: const Icon(Icons.open_in_browser),
+          onPressed: () {
+            final String url = widget.swiperItems[currentIndex].url;
+            OpenFile.open(url);
+          },
+        );
+      } else {
+        return PopupMenuButton<String>(
+          icon: const Icon(Icons.more_vert),
+          onSelected: (String result) {
+            switch (result) {
+              case 'copy':
+                final String url = widget.swiperItems[currentIndex].url;
+                Clipboard.setData(ClipboardData(text: url));
 
-              Utils.showSnackbar(context, 'URL copied to clipboard');
-              break;
-          }
-        },
-        itemBuilder: (BuildContext context) {
-          return [
-            const PopupMenuItem<String>(
-              value: 'copy',
-              child: Text('Copy URL'),
-            ),
-          ];
-        },
-      );
+                Utils.showSnackbar(context, 'URL copied to clipboard');
+                break;
+            }
+          },
+          itemBuilder: (BuildContext context) {
+            return [
+              const PopupMenuItem<String>(
+                value: 'copy',
+                child: Text('Copy URL'),
+              ),
+            ];
+          },
+        );
+      }
     });
   }
 
@@ -227,7 +244,7 @@ class _ImageSwiperState extends State<ImageViewer>
             physics: const BouncingScrollPhysics(),
           ),
           Positioned(
-            bottom: 0,
+            bottom: 10,
             left: 0,
             right: 0,
             child: _toolsButton(),

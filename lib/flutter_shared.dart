@@ -19,6 +19,8 @@ export 'src/hive_db/hive_data.dart';
 export 'src/hive_db/hive_opener.dart';
 export 'src/hive_db/hive_utils.dart';
 
+export 'src/widgets/image/super_image.dart';
+
 export 'src/utils/debouncer.dart';
 export 'src/utils/server_file.dart';
 export 'src/utils/stack.dart';

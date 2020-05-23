@@ -99,8 +99,8 @@ class _ImageSwiperState extends State<ImageViewer>
     return GestureConfig(
       inPageView: true,
       initialScale: initialScale,
-      maxScale: max(initialScale, 10.0),
-      animationMaxScale: max(initialScale, 10.0),
+      maxScale: 10.0,
+      animationMaxScale: 10.0,
       cacheGesture: false,
     );
   }
@@ -203,14 +203,17 @@ class _ImageSwiperState extends State<ImageViewer>
     });
   }
 
+  bool _defaultCanMovePage(GestureDetails gestureDetails) =>
+      widget.swiperItems.length > 1;
+
   @override
   Widget build(BuildContext context) {
     final Widget imagePage = Scaffold(
       backgroundColor: Colors.transparent,
       body: Stack(
-        fit: StackFit.expand,
         children: <Widget>[
           ExtendedImageGesturePageView.builder(
+            canMovePage: _defaultCanMovePage,
             itemBuilder: _itemBuilder,
             itemCount: widget.swiperItems.length,
             onPageChanged: (int index) {

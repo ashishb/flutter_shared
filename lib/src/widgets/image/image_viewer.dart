@@ -11,24 +11,24 @@ import 'package:random_string/random_string.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
 double initScale({Size imageSize, Size size, double initialScale}) {
-  final n1 = imageSize.height / imageSize.width;
-  final n2 = size.height / size.width;
+  // final n1 = imageSize.height / imageSize.width;
+  // final n2 = size.height / size.width;
 
-  if (n1 > n2) {
-    final FittedSizes fittedSizes =
-        applyBoxFit(BoxFit.contain, imageSize, size);
-    final Size destinationSize = fittedSizes.destination;
+  // if (n1 > n2) {
+  //   final FittedSizes fittedSizes =
+  //       applyBoxFit(BoxFit.contain, imageSize, size);
+  //   final Size destinationSize = fittedSizes.destination;
 
-    return size.width / destinationSize.width;
-  } else if (n1 / n2 < 1 / 4) {
-    final FittedSizes fittedSizes =
-        applyBoxFit(BoxFit.contain, imageSize, size);
-    final Size destinationSize = fittedSizes.destination;
+  //   return size.width / destinationSize.width;
+  // } else if (n1 / n2 < 1 / 4) {
+  //   final FittedSizes fittedSizes =
+  //       applyBoxFit(BoxFit.contain, imageSize, size);
+  //   final Size destinationSize = fittedSizes.destination;
 
-    return size.height / destinationSize.height;
-  }
+  //   return size.height / destinationSize.height;
+  // }
 
-  return initialScale;
+  return .9;
 }
 
 class ImageViewer extends StatefulWidget {
@@ -99,8 +99,8 @@ class _ImageSwiperState extends State<ImageViewer>
     return GestureConfig(
       inPageView: true,
       initialScale: initialScale,
-      maxScale: max(initialScale, 5.0),
-      animationMaxScale: max(initialScale, 5.0),
+      maxScale: max(initialScale, 10.0),
+      animationMaxScale: max(initialScale, 10.0),
       cacheGesture: false,
     );
   }
@@ -206,39 +206,37 @@ class _ImageSwiperState extends State<ImageViewer>
   @override
   Widget build(BuildContext context) {
     final Widget imagePage = Scaffold(
-      body: Material(
-        // if you use ExtendedImageSlidePage and slideType =SlideType.onlyImage,
-        // make sure your page is transparent background
-        color: Colors.transparent,
-        shadowColor: Colors.transparent,
-        child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            ExtendedImageGesturePageView.builder(
-              itemBuilder: _itemBuilder,
-              itemCount: widget.swiperItems.length,
-              onPageChanged: (int index) {
-                currentIndex = index;
-                rebuildIndex.add(index);
-              },
-              controller: PageController(
-                initialPage: currentIndex,
-              ),
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          ExtendedImageGesturePageView.builder(
+            itemBuilder: _itemBuilder,
+            itemCount: widget.swiperItems.length,
+            onPageChanged: (int index) {
+              currentIndex = index;
+              rebuildIndex.add(index);
+            },
+            controller: PageController(
+              initialPage: currentIndex,
             ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: _toolsButton(),
-            )
-          ],
-        ),
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: _toolsButton(),
+          )
+        ],
       ),
     );
 
     return ExtendedImageSlidePage(
+      slidePageBackgroundHandler: (Offset offset, Size pageSize) {
+        return Colors.black54;
+      },
       key: slidePagekey,
       slideAxis: SlideAxis.both,
       slideType: SlideType.onlyImage,

@@ -48,7 +48,7 @@ class _ImageSwiperState extends State<ImageViewer>
   AnimationController _animationController;
   Animation<double> _animation;
   void Function() animationListener;
-  List<double> doubleTapScales = <double>[1.0, 2.0];
+  List<double> doubleTapScales = <double>[.9, 3.0];
   GlobalKey<ExtendedImageSlidePageState> slidePagekey =
       GlobalKey<ExtendedImageSlidePageState>();
   int currentIndex;

@@ -2,7 +2,6 @@ library flutter_shared;
 
 export 'src/dialogs/alert_dialog.dart';
 export 'src/dialogs/confirm_dialog.dart';
-export 'src/dialogs/custom_dialog.dart';
 export 'src/dialogs/string_dialog.dart';
 export 'src/dialogs/widget_dialog.dart';
 

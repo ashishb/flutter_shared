@@ -20,6 +20,7 @@ export 'src/hive_db/hive_opener.dart';
 export 'src/hive_db/hive_utils.dart';
 
 export 'src/widgets/image/super_image.dart';
+export 'src/widgets/image/image_viewer.dart';
 
 export 'src/utils/debouncer.dart';
 export 'src/utils/server_file.dart';

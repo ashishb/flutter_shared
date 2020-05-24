@@ -10,7 +10,7 @@ extension ExtendedInt on int {
 
   String formatBytes(int decimals) {
     if (this == 0) {
-      return '0';
+      return '0 Bytes';
     }
     const k = 1024;
     final dm = decimals <= 0 ? 0 : decimals;

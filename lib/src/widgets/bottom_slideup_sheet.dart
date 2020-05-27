@@ -10,6 +10,7 @@ abstract class SliderContent {
   Widget buttonBarBuilder(BuildContext context);
   bool enableCopyButton();
   double get initialChildSize;
+  Color backgroundColor(BuildContext context);
 }
 
 const BorderRadius _borderRadius = BorderRadius.only(
@@ -84,6 +85,7 @@ class _SheetList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: sliderContent.backgroundColor(context),
       padding:
           const EdgeInsets.only(bottom: 20, top: 12.0, right: 20, left: 20),
       child: DraggableScrollableSheet(

@@ -35,7 +35,7 @@ extension StringUtils on String {
 
     if (Utils.isNotEmpty(result)) {
       if (result.length > max) {
-        result = '${result.substring(result.length - max, result.length)}...';
+        result = '${result.substring(0, result.length - max)}...';
       }
     }
 

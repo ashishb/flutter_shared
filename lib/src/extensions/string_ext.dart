@@ -1,4 +1,5 @@
 import 'package:dartx/dartx.dart';
+import 'package:flutter_shared/flutter_shared.dart';
 
 extension StringUtils on String {
   bool get isAssetUrl {
@@ -27,5 +28,29 @@ extension StringUtils on String {
     }
 
     return displayName;
+  }
+
+  String truncate([int max = 20]) {
+    String result = this;
+
+    if (Utils.isNotEmpty(result)) {
+      if (result.length > max) {
+        result = '${result.substring(result.length - max, result.length)}...';
+      }
+    }
+
+    return result;
+  }
+
+  String preTruncate([int max = 20]) {
+    String result = this;
+
+    if (Utils.isNotEmpty(result)) {
+      if (result.length > max) {
+        result = '...${result.substring(result.length - max, result.length)}';
+      }
+    }
+
+    return result;
   }
 }

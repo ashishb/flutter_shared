@@ -24,6 +24,7 @@ class BottomSlideupSheet {
     SliderContent sliderContent,
   }) {
     return showModalBottomSheet<void>(
+      backgroundColor: sliderContent.backgroundColor(context),
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: _borderRadius,
@@ -85,7 +86,6 @@ class _SheetList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: sliderContent.backgroundColor(context),
       padding:
           const EdgeInsets.only(bottom: 20, top: 12.0, right: 20, left: 20),
       child: DraggableScrollableSheet(

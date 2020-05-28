@@ -53,4 +53,14 @@ extension StringUtils on String {
 
     return result;
   }
+
+  String removeTrailing(String trailing) {
+    if (Utils.isNotEmpty(trailing)) {
+      if (endsWith(trailing)) {
+        return substring(0, length - trailing.length);
+      }
+    }
+
+    return this;
+  }
 }

@@ -24,7 +24,7 @@ class ServerFile {
     this.directoryCount,
   }) {
     // remove trailing slash Directory.path and File.path return / at end
-    this.path = p.normalize(path);
+    this.path = path.removeTrailing('/');
   }
 
   factory ServerFile.fromMap(Map<String, dynamic> map) {

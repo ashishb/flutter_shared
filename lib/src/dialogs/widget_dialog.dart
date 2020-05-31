@@ -29,14 +29,16 @@ Future<bool> showWidgetDialog({
             onPressed: () {
               Navigator.of(context).pop(false);
             },
-            child: Text(cancelButtonName),
+            child: Text(cancelButtonName,
+                style: TextStyle(color: Theme.of(context).accentColor)),
           ),
         ),
         FlatButton(
           onPressed: () {
             Navigator.of(context).pop(true);
           },
-          child: Text(okButtonName),
+          child: Text(okButtonName,
+              style: TextStyle(color: Theme.of(context).primaryColor)),
         ),
       ],
     ),

@@ -82,13 +82,15 @@ class __DialogContentsState extends State<_DialogContents> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: Text(widget.cancelButtonName),
+          child: Text(widget.cancelButtonName,
+              style: TextStyle(color: Theme.of(context).accentColor)),
         ),
         FlatButton(
           onPressed: () {
             Navigator.of(context).pop(_textController.text);
           },
-          child: Text(widget.okButtonName),
+          child: Text(widget.okButtonName,
+              style: TextStyle(color: Theme.of(context).primaryColor)),
         ),
       ],
     );

@@ -210,4 +210,21 @@ class ServerFile {
   String toString() {
     return path;
   }
+
+  @override
+  bool operator ==(dynamic other) {
+    if (other is ServerFile) {
+      if (other.path == path && other.isDirectory == isDirectory) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  @override
+  int get hashCode => hashValues(
+        path,
+        isDirectory,
+      );
 }

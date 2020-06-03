@@ -33,6 +33,7 @@ export 'src/widgets/dialog_button.dart';
 export 'src/widgets/file_info.dart';
 export 'src/widgets/image/image_viewer.dart';
 export 'src/widgets/image/super_image.dart';
+export 'src/widgets/list_row.dart';
 export 'src/widgets/loading_widget.dart';
 export 'src/widgets/menu_item.dart';
 export 'src/widgets/svg_asset.dart';

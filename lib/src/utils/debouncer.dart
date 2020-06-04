@@ -20,4 +20,18 @@ class Debouncer {
       },
     );
   }
+
+  void runImmediate(VoidCallback action) {
+    if (_timer == null) {
+      action();
+
+      _timer ??= Timer(
+        Duration(milliseconds: milliseconds),
+        () {
+          _timer.cancel();
+          _timer = null;
+        },
+      );
+    }
+  }
 }

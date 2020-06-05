@@ -83,6 +83,16 @@ class _FileInfoState extends State<FileInfo> {
             ),
           );
         }
+      } else if (widget.serverFile.isVideo) {
+        if (_onWeb) {
+          String url = '${widget.hostUrl}?preview=${widget.serverFile.path}';
+          url = Uri.encodeFull(url);
+
+          list.add(VideoPlayerWidget(serverFile: null, hostUrl: url));
+        } else {
+          list.add(
+              VideoPlayerWidget(serverFile: widget.serverFile, hostUrl: null));
+        }
       }
     }
 

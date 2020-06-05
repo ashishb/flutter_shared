@@ -36,5 +36,7 @@ export 'src/widgets/image/super_image.dart';
 export 'src/widgets/list_row.dart';
 export 'src/widgets/loading_widget.dart';
 export 'src/widgets/menu_item.dart';
+export 'src/widgets/preview_dialog.dart';
 export 'src/widgets/svg_asset.dart';
 export 'src/widgets/svg_image.dart';
+export 'src/widgets/video_player_widget.dart';

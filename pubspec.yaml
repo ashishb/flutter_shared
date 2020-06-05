@@ -28,6 +28,7 @@ dependencies:
   extended_image: ^0.9.0
   random_string: ^2.0.1
   open_file: ^3.0.1
+  video_player: ^0.10.11+1
 
 dependency_overrides:
   path: ^1.7.0

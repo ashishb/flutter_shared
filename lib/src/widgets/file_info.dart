@@ -163,17 +163,6 @@ class _FileInfoState extends State<FileInfo> {
 
     widgets.addAll(_buildPreview(context));
 
-    if (_onWeb) {
-      return [
-        Expanded(
-          child: ListView.builder(
-            itemCount: widgets.length,
-            itemBuilder: (context, index) => widgets[index],
-          ),
-        )
-      ];
-    }
-
     return widgets;
   }
 

@@ -127,7 +127,7 @@ class _PlayPauseOverlay extends StatelessWidget {
           bottom: 0,
           top: 0,
           right: 10,
-          child: controller.value.isPlaying && hasVideoFile
+          child: controller.value.isPlaying || !hasVideoFile
               ? const SizedBox.shrink()
               : Padding(
                   padding: const EdgeInsets.all(8.0),

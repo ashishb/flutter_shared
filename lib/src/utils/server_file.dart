@@ -80,6 +80,7 @@ class ServerFile {
       'isDirectory': isDirectory,
       'directoryCount': directoryCount,
       'lastModified': _lastModified?.toString(),
+      'length': _length,
     };
   }
 

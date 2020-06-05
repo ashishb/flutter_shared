@@ -28,10 +28,20 @@ class ServerFile {
   }
 
   factory ServerFile.fromMap(Map<String, dynamic> map) {
-    return ServerFile(
+    final result = ServerFile(
       path: map['path'] as String,
       isDirectory: map['isDirectory'] as bool,
+      directoryCount: map['directoryCount'] as int,
     );
+
+    result._length = map['length'] as int;
+
+    final mod = map['lastModified'] as String;
+    if (mod != null) {
+      result._lastModified = DateTime.parse(mod);
+    }
+
+    return result;
   }
 
   String path;
@@ -68,6 +78,8 @@ class ServerFile {
     return <String, dynamic>{
       'path': path,
       'isDirectory': isDirectory,
+      'directoryCount': directoryCount,
+      'lastModified': _lastModified?.toString(),
     };
   }
 

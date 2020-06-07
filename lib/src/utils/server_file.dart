@@ -153,8 +153,8 @@ class ServerFile {
             return ServerFileType.audio;
             break;
           case 'video':
-            // .3gp crashes
-            if (extension != '.3gp') {
+            // .3gp crashes, .wmv doesn't work
+            if (extension != '.3gp' && extension != '.wmv') {
               return ServerFileType.video;
             }
             break;

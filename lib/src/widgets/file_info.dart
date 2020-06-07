@@ -32,17 +32,26 @@ class _FileInfoState extends State<FileInfo> {
     _loadPDFImage();
   }
 
-  Future<void> _loadPDFImage() async {
-    if (widget.serverFile != null && widget.serverFile.isPdf) {
-      // open pdf, make image of first page
-      final document = await PdfDocument.openFile(widget.serverFile.path);
-      final page = await document.getPage(1);
-      final PdfPageImage pageImage =
-          await page.render(width: page.width, height: page.height);
+  @override
+  void didUpdateWidget(FileInfo oldWidget) {
+    super.didUpdateWidget(oldWidget);
 
-      setState(() {
-        _pdfImageData = pageImage.bytes;
-      });
+    _loadPDFImage();
+  }
+
+  Future<void> _loadPDFImage() async {
+    if (!_onWeb) {
+      if (widget.serverFile != null && widget.serverFile.isPdf) {
+        // open pdf, make image of first page
+        final document = await PdfDocument.openFile(widget.serverFile.path);
+        final page = await document.getPage(1);
+        final PdfPageImage pageImage =
+            await page.render(width: page.width, height: page.height);
+
+        setState(() {
+          _pdfImageData = pageImage.bytes;
+        });
+      }
     }
   }
 

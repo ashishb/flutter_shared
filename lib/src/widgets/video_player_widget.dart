@@ -14,7 +14,12 @@ Future<void> showVideoDialog(BuildContext context,
     context: context,
     children: [
       Flexible(
-        child: VideoPlayerWidget(serverFile: serverFile, hostUrl: hostUrl),
+        child: VideoPlayerWidget(
+            serverFile: serverFile,
+            hostUrl: hostUrl,
+            onClose: () {
+              Navigator.pop(context);
+            }),
       ),
     ],
   );
@@ -24,10 +29,12 @@ class VideoPlayerWidget extends StatefulWidget {
   const VideoPlayerWidget({
     @required this.serverFile,
     @required this.hostUrl,
+    this.onClose,
   });
 
   final ServerFile serverFile;
   final String hostUrl;
+  final void Function() onClose;
 
   @override
   _VideoPlayerWidgetState createState() => _VideoPlayerWidgetState();
@@ -75,7 +82,10 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         child: Stack(
           children: [
             VideoPlayer(_controller),
-            _PlayPauseOverlay(controller: _controller),
+            _PlayPauseOverlay(
+              controller: _controller,
+              onClose: widget.onClose,
+            ),
             Positioned(
               bottom: 0,
               left: 0,
@@ -92,9 +102,14 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 }
 
 class _PlayPauseOverlay extends StatelessWidget {
-  const _PlayPauseOverlay({Key key, this.controller}) : super(key: key);
+  const _PlayPauseOverlay({
+    Key key,
+    this.controller,
+    this.onClose,
+  }) : super(key: key);
 
   final VideoPlayerController controller;
+  final void Function() onClose;
 
   @override
   Widget build(BuildContext context) {
@@ -143,25 +158,28 @@ class _PlayPauseOverlay extends StatelessWidget {
                   ),
                 ),
         ),
-        Positioned(
-          bottom: 0,
-          top: 0,
-          left: 10,
-          child: controller.value.isPlaying
-              ? const SizedBox.shrink()
-              : Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Icon(
-                      Icons.clear,
-                      color: Colors.white54,
-                      size: 32,
+        Visibility(
+          visible: onClose != null,
+          child: Positioned(
+            bottom: 0,
+            top: 0,
+            left: 10,
+            child: controller.value.isPlaying
+                ? const SizedBox.shrink()
+                : Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: InkWell(
+                      onTap: () {
+                        onClose();
+                      },
+                      child: const Icon(
+                        Icons.clear,
+                        color: Colors.white54,
+                        size: 32,
+                      ),
                     ),
                   ),
-                ),
+          ),
         ),
       ],
     );

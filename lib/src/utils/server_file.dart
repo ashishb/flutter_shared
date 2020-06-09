@@ -102,18 +102,28 @@ class ServerFile {
     return _lastAccessed;
   }
 
+  // this is used when detecting modified directories
+  // we need a fresh mod date, call this before lastModified
+  void clearLastModified() {
+    _lastModified = null;
+  }
+
   // mobile/desktop only
   DateTime get lastModified {
     if (_lastModified != null) {
       return _lastModified;
     }
 
-    _lastModified = DateTime.now();
+    // set to some a date in the past just to signal it's clearly not workin
+    // but setting _lastModified prevents futher calls
+    _lastModified = DateTime.utc(1969);
 
     // uses dart:io, not for web
     if (!Utils.isWeb()) {
       if (isFile) {
         _lastModified = File(path).lastModifiedSync();
+      } else {
+        _lastModified = Directory(path).statSync().modified;
       }
     }
 

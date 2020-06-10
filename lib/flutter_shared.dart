@@ -32,6 +32,7 @@ export 'src/themes/editor/theme_set_manager.dart';
 export 'src/themes/themes.dart';
 
 export 'src/utils/debouncer.dart';
+export 'src/utils/device_info_screen.dart';
 export 'src/utils/preferences.dart';
 export 'src/utils/server_file.dart';
 export 'src/utils/stack.dart';

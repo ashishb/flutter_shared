@@ -33,6 +33,7 @@ dependencies:
   barcode_widget: ^1.2.4
   barcode_scan: ^3.0.1
   path_provider: ^1.6.10
+  device_info: ^0.4.2+4
 
   flutter_colorpicker:
     git: git://github.com/sgehrman/flutter_colorpicker

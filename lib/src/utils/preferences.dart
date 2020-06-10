@@ -22,9 +22,23 @@ class Preferences extends ChangeNotifier {
     prefs.clear();
   }
 
-  bool get showPerformanceOverlay {
-    return prefs.get('perfOverlay', defaultValue: false) as bool;
-  }
+  static String get loginEmail =>
+      HiveBox.prefsBox.get('loginEmail', defaultValue: null) as String;
+  static set loginEmail(String email) =>
+      HiveBox.prefsBox.put('loginEmail', email);
+
+  static String get loginName =>
+      HiveBox.prefsBox.get('loginName', defaultValue: null) as String;
+  static set loginName(String email) =>
+      HiveBox.prefsBox.put('loginName', email);
+
+  static String get loginPhone =>
+      HiveBox.prefsBox.get('loginPhone', defaultValue: null) as String;
+  static set loginPhone(String phone) =>
+      HiveBox.prefsBox.put('loginPhone', phone);
+
+  bool get showPerformanceOverlay =>
+      prefs.get('perfOverlay', defaultValue: false) as bool;
 
   set showPerformanceOverlay(bool value) {
     if (showPerformanceOverlay != value) {
@@ -32,9 +46,8 @@ class Preferences extends ChangeNotifier {
     }
   }
 
-  bool get showCheckerboardImages {
-    return prefs.get('checkerboardImages', defaultValue: false) as bool;
-  }
+  bool get showCheckerboardImages =>
+      prefs.get('checkerboardImages', defaultValue: false) as bool;
 
   set showCheckerboardImages(bool value) {
     if (showCheckerboardImages != value) {
@@ -42,9 +55,8 @@ class Preferences extends ChangeNotifier {
     }
   }
 
-  bool get showCheckerboardLayers {
-    return prefs.get('checkerboardLayers', defaultValue: false) as bool;
-  }
+  bool get showCheckerboardLayers =>
+      prefs.get('checkerboardLayers', defaultValue: false) as bool;
 
   set showCheckerboardLayers(bool value) {
     if (showCheckerboardLayers != value) {
@@ -52,10 +64,9 @@ class Preferences extends ChangeNotifier {
     }
   }
 
-  List<String> getFavoriteGoogleFonts() {
-    return prefs.get('favoriteGoogleFonts', defaultValue: <String>[])
-        as List<String>;
-  }
+  List<String> getFavoriteGoogleFonts() =>
+      prefs.get('favoriteGoogleFonts', defaultValue: <String>[])
+          as List<String>;
 
   void setFavoriteGoogleFonts(List<String> value) {
     if (getFavoriteGoogleFonts() != value) {

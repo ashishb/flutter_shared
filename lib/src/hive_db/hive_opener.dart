@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shared/src/hive_db/hive_box.dart';
+import 'package:flutter_shared/flutter_shared.dart';
 
 class HiveOpener extends StatefulWidget {
   const HiveOpener({@required this.child, @required this.box});

@@ -29,6 +29,22 @@ dependencies:
   random_string: ^2.0.1
   open_file: ^3.0.1
   video_player: ^0.10.11+1
+  google_fonts: ^1.1.0
+  barcode_widget: ^1.2.4
+  barcode_scan: ^3.0.1
+  path_provider: ^1.6.10
+
+  flutter_colorpicker:
+    git: git://github.com/sgehrman/flutter_colorpicker
+    # path: ../forks/flutter_colorpicker
+
+  barcode_image:
+    git:
+      url: git://github.com/sgehrman/dart_barcode
+      path: image
+
+  share_extend:
+    git: git://github.com/sgehrman/ShareExtend
 
 dependency_overrides:
   path: ^1.7.0

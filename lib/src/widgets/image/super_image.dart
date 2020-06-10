@@ -3,12 +3,11 @@ import 'dart:io';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shared/flutter_shared.dart';
-import 'package:flutter_shared/src/widgets/image/image_viewer.dart';
 
 class SuperImage extends StatelessWidget {
   const SuperImage(
     this.urlOrPath, {
-    this.useImageFile,
+    this.useImageFile = false,
     Key key,
     this.width,
     this.height,

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:native_pdf_renderer/native_pdf_renderer.dart';
 import 'package:flutter_shared/flutter_shared.dart';
-import 'package:flutter_shared/src/widgets/checkerboard_container.dart';
 
 class FileInfo extends StatefulWidget {
   const FileInfo(

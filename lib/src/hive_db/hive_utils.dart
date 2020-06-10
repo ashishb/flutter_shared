@@ -1,7 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:flutter_shared/src/hive_db/hive_box.dart';
-import 'package:flutter_shared/src/hive_db/hive_data.dart';
+import 'package:flutter_shared/flutter_shared.dart';
 
 class HiveUtils {
   HiveUtils._();

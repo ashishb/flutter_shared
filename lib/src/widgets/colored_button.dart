@@ -26,8 +26,10 @@ class ColoredButton extends StatelessWidget {
     if (label != null) {
       return label;
     }
-    return Text(title,
-        textAlign: TextAlign.center, style: const TextStyle(height: 1));
+    return Text(
+      title,
+      textAlign: TextAlign.center,
+    );
   }
 
   @override

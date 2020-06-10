@@ -18,7 +18,6 @@ class ThemeButton extends StatelessWidget {
     return Text(
       title,
       textAlign: TextAlign.center,
-      style: const TextStyle(height: 1),
     );
   }
 

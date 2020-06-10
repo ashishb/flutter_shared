@@ -120,33 +120,28 @@ class AppTheme {
       button: TextStyle(
         fontWeight: FontWeight.bold,
         color: buttonContentColor,
-        height: 1, // certain fonts have extra vertical space, this removes it
       ),
 
       // used for ListTile title in drawer
       bodyText1: startTheme.bodyText1.copyWith(
         fontSize: 17.0,
         color: textColor,
-        height: 1, // certain fonts have extra vertical space, this removes it
       ),
 
       // used for ListTile subtitle in non-drawer list
       bodyText2: startTheme.bodyText2.copyWith(
         color: textColor,
         fontSize: 16.0,
-        height: 1, // certain fonts have extra vertical space, this removes it
       ),
 
       // used for control text
       subtitle1: startTheme.bodyText1.copyWith(
         fontSize: 16.0,
-        height: 1, // certain fonts have extra vertical space, this removes it
         color: textColor,
       ),
 
       // used for header title
       headline4: TextStyle(
-        height: 1, // certain fonts have extra vertical space, this removes it
         color: headerTextColor,
         fontWeight: FontWeight.bold,
         fontSize: 16.0,
@@ -159,7 +154,6 @@ class AppTheme {
 
       // used for listTile subtitle
       caption: startTheme.bodyText1.copyWith(
-        height: 1, // certain fonts have extra vertical space, this removes it
         fontSize: 14.0,
         color: subtitleColor,
       ),

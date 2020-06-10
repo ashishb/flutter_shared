@@ -121,7 +121,7 @@ class ThemeSetManager {
 
   String get googleFont => _currentTheme.fontName ?? defaultFont;
   set googleFont(String fontName) {
-    final newTheme = currentTheme.copyWith(fontName: fontName);
+    final newTheme = currentTheme.copyWith(fontName: fontName ?? defaultFont);
 
     currentTheme = newTheme;
   }

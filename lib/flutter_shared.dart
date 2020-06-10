@@ -49,6 +49,7 @@ export 'src/widgets/draggable_scrollbar.dart';
 export 'src/widgets/file_info.dart';
 export 'src/widgets/image/image_viewer.dart';
 export 'src/widgets/image/super_image.dart';
+export 'src/widgets/json_widget.dart';
 export 'src/widgets/list_row.dart';
 export 'src/widgets/loading_widget.dart';
 export 'src/widgets/menu_item.dart';

@@ -7,17 +7,22 @@ class ThemeButton extends StatelessWidget {
     @required this.onPressed,
     this.icon,
     this.disabled = false,
+    this.padding,
+    this.fontSize,
   });
 
   final String title;
   final void Function() onPressed;
   final Icon icon;
   final bool disabled;
+  final double fontSize;
+  final EdgeInsets padding;
 
   Widget buttonLabel() {
     return Text(
       title,
       textAlign: TextAlign.center,
+      style: TextStyle(fontSize: fontSize),
     );
   }
 
@@ -42,12 +47,14 @@ class ThemeButton extends StatelessWidget {
         disabledColor: disabledColor,
         textColor: textColor ?? Colors.white,
         onPressed: disabled ? null : onPressed,
+        padding: padding,
       );
     }
     return FlatButton(
       color: Theme.of(context).primaryColor,
       disabledColor: disabledColor,
       textColor: textColor ?? Colors.white,
+      padding: padding,
       onPressed: disabled ? null : onPressed,
       child: buttonLabel(),
     );

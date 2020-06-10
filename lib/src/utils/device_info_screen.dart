@@ -164,7 +164,7 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
         physics: const BouncingScrollPhysics(),
         itemCount: _dataList.length,
         separatorBuilder: (context, index) {
-          return const Divider();
+          return const Divider(height: 1);
         },
         itemBuilder: (context, index) {
           final bool darkMode = Utils.isDarkMode(context);

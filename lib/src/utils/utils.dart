@@ -365,7 +365,6 @@ class Utils {
     Fluttertoast.showToast(
       msg: value,
       toastLength: Toast.LENGTH_SHORT,
-      timeInSecForIosWeb: 1,
       backgroundColor:
           Colors.cyan, // no context Theme.of(context).primaryColor,
       textColor: Colors.white,

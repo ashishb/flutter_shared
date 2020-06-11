@@ -138,7 +138,6 @@ class _FileInfoState extends State<FileInfo> {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
-            mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(

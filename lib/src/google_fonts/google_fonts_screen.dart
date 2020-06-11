@@ -81,11 +81,9 @@ class _GoogleFontsScreenState extends State<GoogleFontsScreen> {
               ThemeSetManager().googleFont = fontObj.name;
             },
             child: Column(
-              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 Expanded(
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
                         child: Padding(

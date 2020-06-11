@@ -10,7 +10,6 @@ class SvgAsset extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       assetPath,
-      fit: BoxFit.contain,
     );
   }
 }

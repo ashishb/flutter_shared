@@ -147,8 +147,6 @@ class BottomNavBarState extends State<BottomNavBar>
                 color: shadowColor, offset: const Offset(0, -1), blurRadius: 8)
           ]),
           child: Row(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: widget.tabs
                 .map(
                   (t) => TabItem(

@@ -74,7 +74,6 @@ class _SheetList extends StatelessWidget {
     }
 
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         sliderContent.buttonBarBuilder(context),

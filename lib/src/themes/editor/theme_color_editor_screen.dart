@@ -47,6 +47,7 @@ class _ThemeColorEditorScreenState extends State<ThemeColorEditorScreen> {
         child: Center(
           child: Column(
             children: <Widget>[
+              const SizedBox(height: 10),
               HsvColorPicker(
                 showLabel: false,
                 pickerAreaBorderRadius:

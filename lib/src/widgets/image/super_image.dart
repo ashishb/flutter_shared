@@ -138,7 +138,6 @@ class SuperImage extends StatelessWidget {
           urlOrPath,
           width: width,
           fit: fit,
-          cache: true,
           loadStateChanged: (state) => _loadStateChanged(context, state),
         );
       }

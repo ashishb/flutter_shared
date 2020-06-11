@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
@@ -28,6 +30,11 @@ class ThemeSet {
   });
 
   factory ThemeSet.defaultSet() {
+    if (Utils.isNotEmpty(_appDefaultSet)) {
+      return ThemeSet.fromMap(
+          Map<String, dynamic>.from(json.decode(_appDefaultSet) as Map));
+    }
+
     return ThemeSet(
       name: 'Default',
       primaryColor: Colors.cyan,
@@ -60,6 +67,10 @@ class ThemeSet {
       lightBackground: map['lightBackground'] as bool,
     );
   }
+
+  // the app sets this at startup if they don't like the hard coded default
+  static String _appDefaultSet;
+  static set appsDefaultSet(String set) => _appDefaultSet = set;
 
   static Color _colorFromInt(dynamic color) {
     if (color != null && color is int) {

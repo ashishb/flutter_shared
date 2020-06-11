@@ -240,7 +240,6 @@ class _ImageSwiperState extends State<ImageViewer>
             controller: PageController(
               initialPage: currentIndex,
             ),
-            scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
           ),
           Positioned(
@@ -258,8 +257,6 @@ class _ImageSwiperState extends State<ImageViewer>
         return Colors.black54;
       },
       key: slidePagekey,
-      slideAxis: SlideAxis.both,
-      slideType: SlideType.onlyImage,
       onSlidingPage: (state) {
         final showSwiper = !state.isSliding;
         if (showSwiper != _showSwiper) {

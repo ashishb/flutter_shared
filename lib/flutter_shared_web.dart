@@ -30,6 +30,7 @@ export 'src/utils/debouncer.dart';
 export 'src/utils/directory_listing_spec.dart';
 export 'src/utils/preferences.dart';
 export 'src/utils/server_file.dart';
+export 'src/utils/sort_menu_button.dart';
 export 'src/utils/stack.dart';
 export 'src/utils/string_utils.dart';
 export 'src/utils/utils.dart';

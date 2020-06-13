@@ -7,8 +7,8 @@ import 'package:flutter_shared/flutter_shared.dart';
 class DirectoryListingSpec {
   DirectoryListingSpec({
     @required this.serverFile,
-    @required this.sortStyle,
     @required this.recursive,
+    @required this.sortStyle,
     @required this.showHidden,
     @required this.searchHiddenDirs,
     @required this.directoryCounts,
@@ -39,53 +39,28 @@ class DirectoryListingSpec {
   final bool searchHiddenDirs;
   final bool directoryCounts;
 
-  DirectoryListingSpec copyWith(ServerFile serverFile) {
-    return DirectoryListingSpec(
-      serverFile: serverFile,
-      recursive: recursive,
-      directoryCounts: directoryCounts,
-      sortStyle: sortStyle,
-      showHidden: showHidden,
-      searchHiddenDirs: searchHiddenDirs,
-    );
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    if (other is DirectoryListingSpec) {
-      if (other.recursive == recursive &&
-          other.serverFile?.path == serverFile?.path &&
-          other.sortStyle == sortStyle &&
-          other.showHidden == showHidden &&
-          other.searchHiddenDirs == searchHiddenDirs &&
-          other.directoryCounts == directoryCounts) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  @override
-  int get hashCode {
-    int filehash = 1;
-
-    if (serverFile != null) {
-      filehash = serverFile.path.hashCode;
-    }
-
-    return filehash *
-        recursive.hashCode *
-        sortStyle.hashCode *
-        directoryCounts.hashCode *
-        showHidden.hashCode *
-        searchHiddenDirs.hashCode;
-  }
-
   bool shouldRebuildForNewSpec(DirectoryListingSpec otherSpec) {
     return sortStyle != otherSpec.sortStyle ||
         showHidden != otherSpec.showHidden ||
         searchHiddenDirs != otherSpec.searchHiddenDirs;
+  }
+
+  DirectoryListingSpec copyWith({
+    ServerFile serverFile,
+    bool recursive,
+    String sortStyle,
+    bool showHidden,
+    bool searchHiddenDirs,
+    bool directoryCounts,
+  }) {
+    return DirectoryListingSpec(
+      serverFile: serverFile ?? this.serverFile,
+      recursive: recursive ?? this.recursive,
+      sortStyle: sortStyle ?? this.sortStyle,
+      showHidden: showHidden ?? this.showHidden,
+      searchHiddenDirs: searchHiddenDirs ?? this.searchHiddenDirs,
+      directoryCounts: directoryCounts ?? this.directoryCounts,
+    );
   }
 
   Map<String, dynamic> toMap() {
@@ -100,4 +75,34 @@ class DirectoryListingSpec {
   }
 
   String toJson() => json.encode(toMap());
+
+  @override
+  String toString() {
+    return 'DirectoryListingSpec(serverFile: $serverFile, recursive: $recursive, sortStyle: $sortStyle, showHidden: $showHidden, searchHiddenDirs: $searchHiddenDirs, directoryCounts: $directoryCounts)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+
+    return other is DirectoryListingSpec &&
+        other.serverFile == serverFile &&
+        other.recursive == recursive &&
+        other.sortStyle == sortStyle &&
+        other.showHidden == showHidden &&
+        other.searchHiddenDirs == searchHiddenDirs &&
+        other.directoryCounts == directoryCounts;
+  }
+
+  @override
+  int get hashCode {
+    return serverFile.hashCode ^
+        recursive.hashCode ^
+        sortStyle.hashCode ^
+        showHidden.hashCode ^
+        searchHiddenDirs.hashCode ^
+        directoryCounts.hashCode;
+  }
 }

@@ -58,3 +58,24 @@ class SortStyle {
     SortStyle(id: SortStyle.sizeSmallFirst, name: 'Size (Smallest first)'),
   ];
 }
+
+class BrowserUtils {
+  static DirectoryListingSpec spec({
+    @required ServerFile serverFile,
+    bool recursive = false,
+    bool directoryCounts = false,
+  }) {
+    final bool searchHiddenDirs = BrowserPrefs.searchInsideHidden;
+    final String sortStyle = BrowserPrefs.sortStyle;
+    final bool showHidden = BrowserPrefs.showHidden;
+
+    return DirectoryListingSpec(
+      serverFile: serverFile,
+      recursive: recursive,
+      directoryCounts: directoryCounts,
+      sortStyle: sortStyle,
+      showHidden: showHidden,
+      searchHiddenDirs: searchHiddenDirs,
+    );
+  }
+}

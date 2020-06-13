@@ -25,6 +25,7 @@ export 'src/themes/editor/theme_set_button.dart';
 export 'src/themes/editor/theme_set_manager.dart';
 export 'src/themes/themes.dart';
 
+export 'src/utils/browser_prefs.dart';
 export 'src/utils/debouncer.dart';
 export 'src/utils/directory_listing_spec.dart';
 export 'src/utils/preferences.dart';

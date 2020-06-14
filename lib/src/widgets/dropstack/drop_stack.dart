@@ -7,7 +7,7 @@ import 'package:hive/hive.dart';
 
 // web and mobile have different implementations, see DropStackImpMobile, DropStackImpWeb
 typedef DropStackImplementation = void Function(
-    ServerFile serverFile, ServerFile directory);
+    BuildContext context, ServerFile serverFile, ServerFile directory);
 
 class DropStack extends ChangeNotifier {
   factory DropStack() {
@@ -52,9 +52,10 @@ class DropStack extends ChangeNotifier {
   }
 
   // _dropFile isn't async because we don't want to wait until completed
-  void _dropFile(ServerFile serverFile, ServerFile directory) {
+  void _dropFile(
+      BuildContext context, ServerFile serverFile, ServerFile directory) {
     if (DropStack.imp != null) {
-      DropStack.imp(serverFile, directory);
+      DropStack.imp(context, serverFile, directory);
     } else {
       print('Set the imp on DropStack');
     }
@@ -133,7 +134,7 @@ class DropStack extends ChangeNotifier {
             final ServerFile serverFile = _stack.pop();
 
             if (serverFile != null) {
-              _dropFile(serverFile, directory);
+              _dropFile(context, serverFile, directory);
             } else {
               done = true;
             }

@@ -109,7 +109,8 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
     if (content is List) {
       return JsonArrayViewerWidget(content, notRoot: true);
     } else {
-      return JsonViewerWidget(content as Map<String, dynamic>, notRoot: true);
+      return JsonViewerWidget(Map<String, dynamic>.from(content as Map),
+          notRoot: true);
     }
   }
 

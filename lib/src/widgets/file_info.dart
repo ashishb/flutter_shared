@@ -176,9 +176,6 @@ class _FileInfoState extends State<FileInfo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: _onWeb
-          ? Utils.isDarkMode(context) ? Colors.grey[900] : Colors.grey[100]
-          : null,
       padding: const EdgeInsets.all(20),
       child: Column(
         children: <Widget>[

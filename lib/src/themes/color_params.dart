@@ -11,8 +11,13 @@ class ColorParams {
     barColor = appColor;
     barColorDark = appColor;
 
-    barTextColor = Colors.black;
-    barTextColorDark = Colors.white;
+    if (integratedAppBar) {
+      barTextColor = themeSet.textColor;
+      barTextColorDark = themeSet.textColor;
+    } else {
+      barTextColor = Colors.black;
+      barTextColorDark = Colors.white;
+    }
 
     // our app bar color is dark colored, so use the 'dark' test color
     darkModeAppBarText = true;

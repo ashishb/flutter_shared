@@ -163,7 +163,7 @@ class AppTheme {
   }
 
   TextTheme _appBarTextTheme(bool darkMode, ColorParams params) {
-    final result = TextTheme(
+    final result = _textTheme(darkMode).copyWith(
       headline6: TextStyle(
         color: params.getBarTextColor(darkMode: darkMode),
         fontSize: 18,

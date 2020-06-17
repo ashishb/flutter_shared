@@ -71,9 +71,10 @@ class DropStack extends ChangeNotifier {
     for (final serverFile in _stack.list) {
       itemsDropping.add(
         Padding(
-          padding: const EdgeInsets.only(left: 8.0),
+          padding: const EdgeInsets.only(left: 12.0),
           child: Text(
-            serverFile.path.preTruncate(),
+            serverFile.name.preTruncate(),
+            // serverFile.path.preTruncate(),
           ),
         ),
       );
@@ -86,12 +87,19 @@ class DropStack extends ChangeNotifier {
     return showConfirmDialog(
       context: context,
       title: 'Confirm Drop',
-      message: 'Dropping these paths',
       okButtonName: 'Drop',
       children: <Widget>[
+        Text('Dropping:',
+            style: TextStyle(color: Theme.of(context).primaryColor)),
+        const SizedBox(height: 6),
         ...itemsDropping,
         const SizedBox(height: 10),
-        Text('To: ${directory.path.preTruncate()}'),
+        Text('To:', style: TextStyle(color: Theme.of(context).primaryColor)),
+        const SizedBox(height: 6),
+        Padding(
+          padding: const EdgeInsets.only(left: 12.0),
+          child: Text(directory.name.preTruncate()),
+        ),
         ValueListenableBuilder<Box>(
           valueListenable: HiveBox.prefsBox.listenable(),
           builder: (BuildContext context, Box<dynamic> prefsBox, Widget _) {

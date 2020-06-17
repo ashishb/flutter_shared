@@ -51,12 +51,13 @@ class FloatingActionBubble extends AnimatedWidget {
           child: ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            separatorBuilder: (_, __) => const SizedBox(height: 8.0),
+            separatorBuilder: (_, __) => const SizedBox(height: 4.0),
             padding: const EdgeInsets.symmetric(vertical: 12),
             itemCount: items.length,
             itemBuilder: buildItem,
           ),
         ),
+        const SizedBox(height: 6.0),
         FloatingActionButton.extended(
           onPressed: onPressed,
           label: Text(title),
@@ -103,7 +104,7 @@ class BubbleMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialButton(
       shape: const StadiumBorder(),
-      padding: const EdgeInsets.only(top: 11, bottom: 13, left: 32, right: 32),
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 22),
       color: item.bubbleColor,
       splashColor: Colors.grey.withOpacity(0.1),
       highlightColor: Colors.grey.withOpacity(0.1),
@@ -114,16 +115,14 @@ class BubbleMenu extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Icon(
-            item.icon,
-            color: item.iconColor,
-          ),
-          const SizedBox(
-            width: 10.0,
-          ),
           Text(
             item.title,
             style: item.titleStyle,
+          ),
+          const SizedBox(width: 14.0),
+          Icon(
+            item.icon,
+            color: item.iconColor,
           ),
         ],
       ),

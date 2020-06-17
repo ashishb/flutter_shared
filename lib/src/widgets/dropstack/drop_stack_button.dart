@@ -48,10 +48,10 @@ class _DropStackButtonState extends State<DropStackButton>
     final List<ActionBubble> result = <ActionBubble>[];
 
     result.add(ActionBubble(
-      title: 'Clear Drop Stack',
+      title: 'Clear Stack',
       iconColor: textColor,
       bubbleColor: bubbleColor,
-      icon: Icons.clear,
+      icon: Icons.clear_all,
       titleStyle: const TextStyle(fontSize: fontSize, color: textColor),
       onPressed: () {
         dropStack.clear();
@@ -64,7 +64,7 @@ class _DropStackButtonState extends State<DropStackButton>
         title: 'Drop Top Only',
         iconColor: textColor,
         bubbleColor: bubbleColor,
-        icon: Icons.input,
+        icon: Icons.file_download,
         titleStyle: const TextStyle(fontSize: fontSize, color: textColor),
         onPressed: () async {
           await dropStack.drop(
@@ -79,7 +79,7 @@ class _DropStackButtonState extends State<DropStackButton>
       title: 'Drop Here',
       iconColor: textColor,
       bubbleColor: bubbleColor,
-      icon: Icons.input,
+      icon: Icons.file_download,
       titleStyle: const TextStyle(fontSize: fontSize, color: textColor),
       onPressed: () async {
         await dropStack.drop(

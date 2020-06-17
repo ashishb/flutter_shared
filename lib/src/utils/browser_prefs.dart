@@ -2,28 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
 class BrowserPrefs {
-  // show hidden
   static bool get showHidden =>
       HiveBox.prefsBox.get('showHidden', defaultValue: false) as bool;
   static set showHidden(bool flag) => HiveBox.prefsBox.put('showHidden', flag);
 
-  // sort
   static String get sortStyle =>
       HiveBox.prefsBox.get('sortStyle', defaultValue: SortStyle.foldersFirst)
           as String;
   static set sortStyle(String style) =>
       HiveBox.prefsBox.put('sortStyle', style);
 
-  // searchInsideHidden
   static bool get searchInsideHidden =>
       HiveBox.prefsBox.get('searchInsideHidden', defaultValue: false) as bool;
   static set searchInsideHidden(bool flag) =>
       HiveBox.prefsBox.put('searchInsideHidden', flag);
 
-  // copy on drop
   static bool get copyOnDrop =>
       HiveBox.prefsBox.get('copyOnDrop', defaultValue: false) as bool;
   static set copyOnDrop(bool flag) => HiveBox.prefsBox.put('copyOnDrop', flag);
+
+  static bool get replaceOnDrop =>
+      HiveBox.prefsBox.get('replaceOnDrop', defaultValue: false) as bool;
+  static set replaceOnDrop(bool flag) =>
+      HiveBox.prefsBox.put('replaceOnDrop', flag);
 }
 
 // sort constants

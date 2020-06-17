@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
-
+import 'package:path/path.dart' as p;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -97,6 +97,43 @@ class Utils {
     for (final String p in paths) {
       debugPrint('ASSET: $p', wrapWidth: 555);
     }
+  }
+
+  static String uniqueFileName(String name, String directoryPath) {
+    int nameIndex = 1;
+    final String fileName = name;
+    String tryDirName = fileName;
+
+    String destFile = p.join(directoryPath, tryDirName);
+    while (File(destFile).existsSync() || Directory(destFile).existsSync()) {
+      // test-1.xyz
+      final String baseName = p.basenameWithoutExtension(fileName);
+      final String extension = p.extension(fileName);
+
+      tryDirName = '$baseName-$nameIndex$extension';
+      destFile = p.join(directoryPath, tryDirName);
+
+      nameIndex++;
+    }
+
+    return destFile;
+  }
+
+  static String uniqueDirName(String name, String directoryPath) {
+    int nameIndex = 1;
+    final String dirName = p.basenameWithoutExtension(name);
+    String tryDirName = dirName;
+
+    String destFolder = p.join(directoryPath, tryDirName);
+    while (
+        File(destFolder).existsSync() || Directory(destFolder).existsSync()) {
+      tryDirName = '$dirName-$nameIndex';
+      destFolder = p.join(directoryPath, tryDirName);
+
+      nameIndex++;
+    }
+
+    return destFolder;
   }
 
   // ===========================================

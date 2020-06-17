@@ -74,7 +74,6 @@ class DropStack extends ChangeNotifier {
           padding: const EdgeInsets.only(left: 12.0),
           child: Text(
             serverFile.name.preTruncate(),
-            // serverFile.path.preTruncate(),
           ),
         ),
       );
@@ -105,19 +104,35 @@ class DropStack extends ChangeNotifier {
           builder: (BuildContext context, Box<dynamic> prefsBox, Widget _) {
             final color = Theme.of(context).primaryColor;
 
-            return SwitchListTile(
-              value: BrowserPrefs.copyOnDrop,
-              activeColor: color,
-              activeTrackColor: Colors.white,
-              inactiveTrackColor: Colors.white,
-              inactiveThumbColor: color,
-              selected: true,
-              onChanged: (bool newValue) {
-                BrowserPrefs.copyOnDrop = newValue;
-              },
-              title: Text(BrowserPrefs.copyOnDrop
-                  ? 'Perform a Copy'
-                  : 'Perform a Move'),
+            return Column(
+              children: [
+                SwitchListTile(
+                  value: BrowserPrefs.copyOnDrop,
+                  activeColor: color,
+                  activeTrackColor: Colors.white,
+                  inactiveTrackColor: Colors.white,
+                  inactiveThumbColor: color,
+                  selected: true,
+                  onChanged: (bool newValue) {
+                    BrowserPrefs.copyOnDrop = newValue;
+                  },
+                  title: Text(BrowserPrefs.copyOnDrop
+                      ? 'Perform a Copy'
+                      : 'Perform a Move'),
+                ),
+                SwitchListTile(
+                  value: BrowserPrefs.replaceOnDrop,
+                  activeColor: color,
+                  activeTrackColor: Colors.white,
+                  inactiveTrackColor: Colors.white,
+                  inactiveThumbColor: color,
+                  selected: true,
+                  onChanged: (bool newValue) {
+                    BrowserPrefs.replaceOnDrop = newValue;
+                  },
+                  title: const Text('Replace'),
+                ),
+              ],
             );
           },
         ),

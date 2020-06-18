@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 import 'package:flutter_shared/src/widgets/dropstack/drop_stack.dart';
 import 'package:flutter_shared/src/widgets/dropstack/floating_action_bubble.dart';
+import 'package:flutter_shared/src/widgets/dropstack/overlay_container.dart';
 import 'package:provider/provider.dart';
 
 class DropStackButton extends StatefulWidget {
@@ -17,6 +18,17 @@ class _DropStackButtonState extends State<DropStackButton>
   Animation<double> _animation;
   AnimationController _animationController;
 
+  void _statusListener(AnimationStatus status) {
+    switch (status) {
+      case AnimationStatus.dismissed:
+      case AnimationStatus.completed:
+        setState(() {});
+        break;
+      default:
+        break;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -26,6 +38,8 @@ class _DropStackButtonState extends State<DropStackButton>
       duration: const Duration(milliseconds: 200),
     );
 
+    _animationController.addStatusListener(_statusListener);
+
     final curvedAnimation =
         CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
 
@@ -34,6 +48,7 @@ class _DropStackButtonState extends State<DropStackButton>
 
   @override
   void dispose() {
+    _animationController.removeStatusListener(_statusListener);
     _animationController.dispose();
     _animationController = null;
 
@@ -92,6 +107,36 @@ class _DropStackButtonState extends State<DropStackButton>
     return result;
   }
 
+  Widget _overlay(BuildContext context, Widget child) {
+    Widget showChild = Align(
+      alignment: Alignment.bottomRight,
+      child: child,
+    );
+
+    if (_animation.value == 1) {
+      showChild = GestureDetector(
+        onTap: onPressed,
+        child: Container(
+          // needs a color set otherwise onTap never gets called
+          color: Colors.transparent,
+          child: showChild,
+        ),
+      );
+    }
+
+    return OverlayContainer(
+      child: Container(
+        child: showChild,
+      ),
+    );
+  }
+
+  void onPressed() {
+    _animationController.isCompleted
+        ? _animationController.reverse()
+        : _animationController.forward();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider.value(
@@ -99,17 +144,16 @@ class _DropStackButtonState extends State<DropStackButton>
       builder: (context, child) {
         final DropStack dropStack = Provider.of<DropStack>(context);
 
-        return FloatingActionBubble(
-          title: dropStack.count.toString(),
-          tooltip: 'Drop Stack',
-          items: _items(context, dropStack),
-          animation: _animation,
-          onPressed: () {
-            _animationController.isCompleted
-                ? _animationController.reverse()
-                : _animationController.forward();
-          },
-          icon: AnimatedIcons.menu_close,
+        return _overlay(
+          context,
+          FloatingActionBubble(
+            title: dropStack.count.toString(),
+            tooltip: 'Drop Stack',
+            items: _items(context, dropStack),
+            animation: _animation,
+            onPressed: onPressed,
+            icon: AnimatedIcons.menu_close,
+          ),
         );
       },
     );

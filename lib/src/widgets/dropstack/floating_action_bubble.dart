@@ -42,33 +42,38 @@ class FloatingActionBubble extends AnimatedWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        IgnorePointer(
-          ignoring: _animation.value == 0,
-          child: ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            separatorBuilder: (_, __) => const SizedBox(height: 4.0),
-            padding: const EdgeInsets.symmetric(vertical: 12),
-            itemCount: items.length,
-            itemBuilder: buildItem,
+    final Widget child = Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          IgnorePointer(
+            ignoring: _animation.value == 0,
+            child: ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              separatorBuilder: (_, __) => const SizedBox(height: 4.0),
+              padding: const EdgeInsets.symmetric(vertical: 12),
+              itemCount: items.length,
+              itemBuilder: buildItem,
+            ),
           ),
-        ),
-        const SizedBox(height: 6.0),
-        FloatingActionButton.extended(
-          onPressed: onPressed,
-          label: Text(title),
-          tooltip: tooltip,
-          icon: AnimatedIcon(
-            icon: icon,
-            progress: _animation,
+          const SizedBox(height: 6.0),
+          FloatingActionButton.extended(
+            onPressed: onPressed,
+            label: Text(title),
+            tooltip: tooltip,
+            icon: AnimatedIcon(
+              icon: icon,
+              progress: _animation,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
+
+    return child;
   }
 }
 

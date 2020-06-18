@@ -115,7 +115,7 @@ class _DropStackButtonState extends State<DropStackButton>
 
     if (_animation.value == 1) {
       showChild = GestureDetector(
-        onTap: onPressed,
+        onTap: () => onPressed(reverseOnly: true),
         child: Container(
           // needs a color set otherwise onTap never gets called
           color: Colors.transparent,
@@ -131,10 +131,18 @@ class _DropStackButtonState extends State<DropStackButton>
     );
   }
 
-  void onPressed() {
-    _animationController.isCompleted
-        ? _animationController.reverse()
-        : _animationController.forward();
+  void onPressed({
+    bool reverseOnly = false,
+  }) {
+    if (reverseOnly) {
+      if (_animationController.isCompleted) {
+        _animationController.reverse();
+      }
+    } else {
+      _animationController.isCompleted
+          ? _animationController.reverse()
+          : _animationController.forward();
+    }
   }
 
   @override

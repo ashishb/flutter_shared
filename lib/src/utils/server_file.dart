@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:mime_type/mime_type.dart';
+import 'package:flutter_shared/src/utils/mime_type.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter_shared/flutter_shared.dart';
 
@@ -70,9 +70,21 @@ class ServerFile {
   String get name => _name ??= p.basename(path);
   String get lowerCaseName => _lowerCaseName ??= name.toLowerCase();
   bool get hidden => _hidden ??= name.startsWith('.');
-  String get extension => _extension ??= p.extension(path).toLowerCase();
   String get directoryPath => _directoryPath ??= p.dirname(path);
   String get directoryName => _directoryName ??= p.basename(directoryPath);
+
+  // String get extension => _extension ??= p.extension(path).toLowerCase();
+  // Wondering if this is faster than above
+  String get extension {
+    if (_extension == null) {
+      final int lastDot = name.lastIndexOf('.', name.length - 1);
+      if (lastDot != -1) {
+        _extension = name.substring(lastDot).toLowerCase();
+      }
+    }
+
+    return _extension;
+  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -149,49 +161,59 @@ class ServerFile {
 
   ServerFileType get type {
     if (_type == null) {
-      final String mimeType = mime(name);
+      if (Utils.isNotEmpty(extension)) {
+        String noDot = extension;
 
-      if (mimeType != null) {
-        switch (mimeType.split('/')[0]) {
-          case 'image':
-            return ServerFileType.image;
-            break;
-          case 'text':
-            return ServerFileType.text;
-            break;
-          case 'audio':
-            return ServerFileType.audio;
-            break;
-          case 'video':
-            // .3gp crashes, .wmv doesn't work
-            if (extension != '.3gp' && extension != '.wmv') {
-              return ServerFileType.video;
-            }
-            break;
+        if (noDot.length > 1) {
+          noDot = extension.substring(1);
+        }
+
+        final String mimeType = mimeFromExtension(noDot);
+
+        if (mimeType != null) {
+          switch (mimeType.split('/')[0]) {
+            case 'image':
+              _type = ServerFileType.image;
+              break;
+            case 'text':
+              _type = ServerFileType.text;
+              break;
+            case 'audio':
+              _type = ServerFileType.audio;
+              break;
+            case 'video':
+              // .3gp crashes, .wmv doesn't work
+              if (extension != '.3gp' && extension != '.wmv') {
+                _type = ServerFileType.video;
+              }
+              break;
+          }
+        }
+
+        if (_type == null) {
+          switch (extension) {
+            case '.raw':
+              _type = ServerFileType.image;
+              break;
+            case '.xml':
+              _type = ServerFileType.text;
+              break;
+            case '.pdf':
+              _type = ServerFileType.pdf;
+              break;
+            case '.json':
+              _type = ServerFileType.json;
+              break;
+            case '.zip':
+            case '.tar':
+            case '.gz':
+              _type = ServerFileType.archive;
+              break;
+          }
         }
       }
 
-      switch (extension) {
-        case '.raw':
-          return ServerFileType.image;
-          break;
-        case '.xml':
-          return ServerFileType.text;
-          break;
-        case '.pdf':
-          return ServerFileType.pdf;
-          break;
-        case '.json':
-          return ServerFileType.json;
-          break;
-        case '.zip':
-        case '.tar':
-        case '.gz':
-          return ServerFileType.archive;
-          break;
-      }
-
-      return ServerFileType.unknown;
+      _type ??= ServerFileType.unknown;
     }
 
     return _type;

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
+import 'package:intl/intl.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -134,6 +135,28 @@ class Utils {
     }
 
     return destFolder;
+  }
+
+  static String formatDateString(String iso) {
+    final DateTime date = DateTime.parse(iso);
+
+    return formatDateTime(date);
+  }
+
+  static String formatDateTime(DateTime date) {
+    final DateTime now = DateTime.now();
+    final DateTime yDay = now.subtract(const Duration(days: 1));
+    final DateTime yyDay = yDay.subtract(const Duration(days: 1));
+
+    final formatter = DateFormat.MMMd().add_jm();
+
+    if (date.compareTo(yDay) != -1) {
+      return 'Today ${formatter.format(date)}';
+    } else if (date.compareTo(yyDay) != -1) {
+      return 'Yesterday ${formatter.format(date)}';
+    } else {
+      return formatter.format(date);
+    }
   }
 
   // ===========================================

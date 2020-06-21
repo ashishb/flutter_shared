@@ -173,7 +173,11 @@ class ServerFile {
         if (mimeType != null) {
           switch (mimeType.split('/')[0]) {
             case 'image':
-              _type = ServerFileType.image;
+              // might want to set the type as an image, but filter when being drawn
+              // psd for example crashes
+              if (extension != '.psd') {
+                _type = ServerFileType.image;
+              }
               break;
             case 'text':
               _type = ServerFileType.text;

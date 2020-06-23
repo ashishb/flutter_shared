@@ -11,7 +11,7 @@ extension StringUtils on String {
   String fromCamelCase() {
     String displayName = '';
     bool lastUpper = false;
-    for (final String r in chars) {
+    for (final String r in characters) {
       if (r.toUpperCase() == r) {
         displayName += lastUpper ? r : ' $r';
 

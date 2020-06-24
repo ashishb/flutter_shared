@@ -61,38 +61,41 @@ class __DialogContentsState extends State<_DialogContents> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 600.0),
+      child: AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        title: Text(widget.title),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: <Widget>[
+              Text(widget.message),
+              const SizedBox(height: 10),
+              TextField(
+                controller: _textController,
+              ),
+            ],
+          ),
+        ),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text(widget.cancelButtonName,
+                style: TextStyle(color: Theme.of(context).accentColor)),
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop(_textController.text);
+            },
+            child: Text(widget.okButtonName,
+                style: TextStyle(color: Theme.of(context).primaryColor)),
+          ),
+        ],
       ),
-      title: Text(widget.title),
-      content: SingleChildScrollView(
-        child: ListBody(
-          children: <Widget>[
-            Text(widget.message),
-            const SizedBox(height: 10),
-            TextField(
-              controller: _textController,
-            ),
-          ],
-        ),
-      ),
-      actions: <Widget>[
-        FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(widget.cancelButtonName,
-              style: TextStyle(color: Theme.of(context).accentColor)),
-        ),
-        FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop(_textController.text);
-          },
-          child: Text(widget.okButtonName,
-              style: TextStyle(color: Theme.of(context).primaryColor)),
-        ),
-      ],
     );
   }
 }

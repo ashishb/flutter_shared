@@ -13,14 +13,14 @@ Future<bool> showConfirmDialog({
     context: context,
     barrierDismissible: true, // can return null
     builder: (BuildContext context) {
-      return ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 600.0),
-        child: AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          title: Text(title),
-          content: SingleChildScrollView(
+      return AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        title: Text(title),
+        content: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 600.0),
+          child: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
                 if (Utils.isNotEmpty(message)) Text(message),
@@ -28,23 +28,23 @@ Future<bool> showConfirmDialog({
               ],
             ),
           ),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-              child: Text(cancelButtonName,
-                  style: TextStyle(color: Theme.of(context).accentColor)),
-            ),
-            FlatButton(
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-              child: Text(okButtonName,
-                  style: TextStyle(color: Theme.of(context).primaryColor)),
-            ),
-          ],
         ),
+        actions: <Widget>[
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop(false);
+            },
+            child: Text(cancelButtonName,
+                style: TextStyle(color: Theme.of(context).accentColor)),
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+            child: Text(okButtonName,
+                style: TextStyle(color: Theme.of(context).primaryColor)),
+          ),
+        ],
       );
     },
   );

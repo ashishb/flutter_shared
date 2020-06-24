@@ -61,14 +61,14 @@ class __DialogContentsState extends State<_DialogContents> {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 600.0),
-      child: AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        title: Text(widget.title),
-        content: SingleChildScrollView(
+    return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      title: Text(widget.title),
+      content: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 600.0),
+        child: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
               Text(widget.message),
@@ -79,23 +79,23 @@ class __DialogContentsState extends State<_DialogContents> {
             ],
           ),
         ),
-        actions: <Widget>[
-          FlatButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text(widget.cancelButtonName,
-                style: TextStyle(color: Theme.of(context).accentColor)),
-          ),
-          FlatButton(
-            onPressed: () {
-              Navigator.of(context).pop(_textController.text);
-            },
-            child: Text(widget.okButtonName,
-                style: TextStyle(color: Theme.of(context).primaryColor)),
-          ),
-        ],
       ),
+      actions: <Widget>[
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Text(widget.cancelButtonName,
+              style: TextStyle(color: Theme.of(context).accentColor)),
+        ),
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop(_textController.text);
+          },
+          child: Text(widget.okButtonName,
+              style: TextStyle(color: Theme.of(context).primaryColor)),
+        ),
+      ],
     );
   }
 }

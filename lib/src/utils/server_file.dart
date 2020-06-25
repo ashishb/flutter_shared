@@ -57,6 +57,7 @@ class ServerFile {
   DateTime _lastAccessed;
   DateTime _lastModified;
   int _length;
+  String _modeString;
 
   bool get isFile => !isDirectory;
   bool get isImage => type == ServerFileType.image;
@@ -118,6 +119,13 @@ class ServerFile {
   // we need a fresh mod date, call this before lastModified
   void clearLastModified() {
     _lastModified = null;
+  }
+
+  String get modeString {
+    if (isFile) {
+      return _modeString ??= File(path).statSync().modeString();
+    }
+    return _modeString ??= Directory(path).statSync().modeString();
   }
 
   // mobile/desktop only

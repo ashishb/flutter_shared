@@ -1,12 +1,28 @@
+import 'dart:io';
+
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
 class HiveUtils {
   HiveUtils._();
 
   static Future<void> init() async {
-    await Hive.initFlutter('hive');
+    // store this in the application support on iOS
+    // await Hive.initFlutter('hive'); doesn't allow picking location
+    if (!Utils.isWeb) {
+      // data directory on android
+      Directory appDir = await getApplicationDocumentsDirectory();
+
+      if (Utils.isIOS) {
+        appDir = await getLibraryDirectory();
+      }
+
+      String path = appDir.path;
+      path = p.join(path, 'app_data');
+      Hive.init(path);
+    }
 
     // register adapters
     Hive.registerAdapter<HiveData>(HiveDataAdapter());

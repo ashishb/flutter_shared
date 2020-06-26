@@ -164,7 +164,7 @@ class Utils {
 
   static bool get isAndroid {
     // Platform not available on web
-    if (isWeb()) {
+    if (isWeb) {
       return false;
     }
 
@@ -173,7 +173,7 @@ class Utils {
 
   static bool get isIOS {
     // Platform not available on web
-    if (isWeb()) {
+    if (isWeb) {
       return false;
     }
     return Platform.isIOS;
@@ -183,7 +183,7 @@ class Utils {
     return isAndroid || isIOS;
   }
 
-  static bool isWeb() {
+  static bool get isWeb {
     // Platform not available on web
     // but this constant is the current work around
     if (kIsWeb) {
@@ -199,7 +199,7 @@ class Utils {
   }
 
   static Future<String> getAppVersion() async {
-    if (isWeb()) {
+    if (isWeb) {
       return '0.0.0';
     }
 
@@ -208,7 +208,7 @@ class Utils {
   }
 
   static Future<String> getAppID() async {
-    if (isWeb()) {
+    if (isWeb) {
       return '0.0.0';
     }
 
@@ -217,7 +217,7 @@ class Utils {
   }
 
   static Future<String> getAppName() async {
-    if (isWeb()) {
+    if (isWeb) {
       return 'web';
     }
 

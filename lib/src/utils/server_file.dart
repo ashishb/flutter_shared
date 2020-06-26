@@ -167,6 +167,28 @@ class ServerFile {
     return _length;
   }
 
+  // some images crash when drawing on android
+  // to be safe, only draw known formats
+  bool get isImageDrawable {
+    if (isImage) {
+      switch (extension) {
+        case '.jpg':
+        case '.jpeg':
+        case '.png':
+        case '.gif':
+        case '.raw':
+        case '.tiff':
+        case '.bmp':
+        case '.webp':
+        case '.ico':
+          return true;
+          break;
+      }
+    }
+
+    return false;
+  }
+
   ServerFileType get type {
     if (_type == null) {
       if (Utils.isNotEmpty(extension)) {

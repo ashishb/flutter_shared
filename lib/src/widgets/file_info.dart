@@ -60,17 +60,15 @@ class _FileInfoState extends State<FileInfo> {
 
     if (widget.serverFile != null && widget.serverFile.isFile) {
       // svgs crash Image
-      if ((widget.serverFile.isImage || widget.serverFile.isPdf) &&
+      if ((widget.serverFile.isImageDrawable || widget.serverFile.isPdf) &&
           !widget.serverFile.isSvg) {
         if (_onWeb) {
           String url = '${widget.hostUrl}?preview=${widget.serverFile.path}';
           url = Uri.encodeFull(url);
           child = Image.network(url);
         } else {
-          if (widget.serverFile.isPdf) {
-            if (_pdfImageData != null) {
-              child = Image.memory(_pdfImageData);
-            }
+          if (_pdfImageData != null) {
+            child = Image.memory(_pdfImageData);
           } else {
             child = Image.file(File(widget.serverFile.path));
           }

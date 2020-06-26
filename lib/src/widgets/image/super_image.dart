@@ -3,33 +3,32 @@ import 'dart:io';
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/widgets/image/super_image_source.dart';
 
 class SuperImage extends StatelessWidget {
   const SuperImage(
-    this.urlOrPath, {
-    this.useImageFile = false,
+    this.imageSrc, {
     Key key,
     this.width,
     this.height,
     this.fit = BoxFit.cover,
     this.enableViewer = false,
-    this.swiperUrls,
+    this.swiperImageSrcs,
   }) : super(key: key);
 
-  final String urlOrPath;
+  final SuperImageSource imageSrc;
   final double width;
   final double height;
   final BoxFit fit;
-  final bool useImageFile;
   final bool enableViewer;
-  final List<String> swiperUrls;
+  final List<SuperImageSource> swiperImageSrcs;
 
   Widget _loadStateChanged(BuildContext context, ExtendedImageState state) {
     Widget result;
 
     switch (state.extendedImageLoadState) {
       case LoadState.loading:
-        if (!useImageFile) {
+        if (imageSrc.isNetworkImage) {
           result = const Center(
             child: CircularProgressIndicator(),
           );
@@ -59,13 +58,13 @@ class SuperImage extends StatelessWidget {
           int index = 0;
           final List<ImageSwiperItem> swiperItems = [];
 
-          if (swiperUrls != null) {
-            for (int i = 0; i < swiperUrls.length; i++) {
-              final String u = swiperUrls[i];
+          if (swiperImageSrcs != null) {
+            for (int i = 0; i < swiperImageSrcs.length; i++) {
+              final SuperImageSource src = swiperImageSrcs[i];
 
-              final ImageSwiperItem item = ImageSwiperItem(u);
+              final ImageSwiperItem item = ImageSwiperItem(src);
 
-              if (u == urlOrPath) {
+              if (src.path == imageSrc.path || src.url == imageSrc.url) {
                 swiperItem = item;
                 index = i;
               }
@@ -73,7 +72,7 @@ class SuperImage extends StatelessWidget {
               swiperItems.add(item);
             }
           } else {
-            swiperItem = ImageSwiperItem(urlOrPath);
+            swiperItem = ImageSwiperItem(imageSrc);
             swiperItems.add(swiperItem);
           }
 
@@ -83,7 +82,6 @@ class SuperImage extends StatelessWidget {
                 builder: (BuildContext context) => ImageViewer(
                   index: index,
                   swiperItems: swiperItems,
-                  useImageFile: useImageFile,
                 ),
               ));
             },
@@ -115,33 +113,39 @@ class SuperImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (Utils.isNotEmpty(urlOrPath)) {
-      if (useImageFile) {
-        return ExtendedImage.file(
-          File(urlOrPath),
-          width: width,
-          height: height,
-          fit: fit,
-          loadStateChanged: (state) => _loadStateChanged(context, state),
-        );
-      } else {
-        if (urlOrPath.isAssetUrl) {
-          return ExtendedImage.asset(
-            urlOrPath,
-            width: width,
-            fit: fit,
-            loadStateChanged: (state) => _loadStateChanged(context, state),
-          );
-        }
-
-        return ExtendedImage.network(
-          urlOrPath,
+    if (imageSrc.isFileImage) {
+      return ExtendedImage.file(
+        File(imageSrc.path),
+        width: width,
+        height: height,
+        fit: fit,
+        loadStateChanged: (state) => _loadStateChanged(context, state),
+      );
+    } else if (imageSrc.isNetworkImage) {
+      if (imageSrc.url.isAssetUrl) {
+        return ExtendedImage.asset(
+          imageSrc.url,
           width: width,
           fit: fit,
           loadStateChanged: (state) => _loadStateChanged(context, state),
         );
       }
+
+      return ExtendedImage.network(
+        imageSrc.url,
+        width: width,
+        fit: fit,
+        loadStateChanged: (state) => _loadStateChanged(context, state),
+      );
+    } else if (imageSrc.isMemoryImage) {
+      return ExtendedImage.memory(
+        imageSrc.memory,
+        width: width,
+        fit: fit,
+        loadStateChanged: (state) => _loadStateChanged(context, state),
+      );
     }
+
     return NothingWidget();
   }
 }

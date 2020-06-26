@@ -7,6 +7,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_shared/src/widgets/image/super_image_source.dart';
 import 'package:open_file/open_file.dart';
 import 'package:random_string/random_string.dart';
 import 'package:flutter_shared/flutter_shared.dart';
@@ -34,14 +35,12 @@ double initScale({Size imageSize, Size size, double initialScale}) {
 
 class ImageViewer extends StatefulWidget {
   const ImageViewer({
-    this.index,
-    this.swiperItems,
-    this.useImageFile = false,
+    @required this.index,
+    @required this.swiperItems,
   });
 
   final int index;
   final List<ImageSwiperItem> swiperItems;
-  final bool useImageFile;
 
   @override
   _ImageSwiperState createState() => _ImageSwiperState();
@@ -143,14 +142,14 @@ class _ImageSwiperState extends State<ImageViewer>
   Widget _itemBuilder(BuildContext context, int index) {
     final size = MediaQuery.of(context).size;
 
-    final url = widget.swiperItems[index].url;
+    final imageSrc = widget.swiperItems[index].imageSrc;
     final String heroTag = widget.swiperItems[index].heroTag;
 
     Widget image;
 
-    if (widget.useImageFile) {
+    if (imageSrc.isFileImage) {
       image = ExtendedImage.file(
-        File(url),
+        File(imageSrc.path),
         fit: BoxFit.contain,
         enableSlideOutPage: true,
         mode: ExtendedImageMode.gesture,
@@ -160,9 +159,35 @@ class _ImageSwiperState extends State<ImageViewer>
             initGestureConfigHandler(state, size),
         onDoubleTap: onDoubleTap,
       );
-    } else {
+    } else if (imageSrc.isNetworkImage) {
+      if (imageSrc.url.isAssetUrl) {
+        return ExtendedImage.asset(
+          imageSrc.url,
+          fit: BoxFit.contain,
+          enableSlideOutPage: true,
+          mode: ExtendedImageMode.gesture,
+          heroBuilderForSlidingPage: (Widget result) =>
+              heroBuilderForSlidingPage(result, index, heroTag),
+          initGestureConfigHandler: (state) =>
+              initGestureConfigHandler(state, size),
+          onDoubleTap: onDoubleTap,
+        );
+      }
+
       image = ExtendedImage.network(
-        url,
+        imageSrc.url,
+        fit: BoxFit.contain,
+        enableSlideOutPage: true,
+        mode: ExtendedImageMode.gesture,
+        heroBuilderForSlidingPage: (Widget result) =>
+            heroBuilderForSlidingPage(result, index, heroTag),
+        initGestureConfigHandler: (state) =>
+            initGestureConfigHandler(state, size),
+        onDoubleTap: onDoubleTap,
+      );
+    } else if (imageSrc.isMemoryImage) {
+      image = ExtendedImage.memory(
+        imageSrc.memory,
         fit: BoxFit.contain,
         enableSlideOutPage: true,
         mode: ExtendedImageMode.gesture,
@@ -185,22 +210,26 @@ class _ImageSwiperState extends State<ImageViewer>
 
   Widget _toolsButton() {
     return Builder(builder: (BuildContext context) {
-      if (widget.useImageFile) {
+      final SuperImageSource imageSrc =
+          widget.swiperItems[currentIndex].imageSrc;
+
+      if (imageSrc.isFileImage) {
         return IconButton(
           iconSize: 44,
           icon: const Icon(Icons.open_in_browser),
           onPressed: () {
-            final String url = widget.swiperItems[currentIndex].url;
+            final String url = widget.swiperItems[currentIndex].imageSrc.path;
             OpenFile.open(url);
           },
         );
-      } else {
+      } else if (imageSrc.isNetworkImage) {
         return PopupMenuButton<String>(
           icon: const Icon(Icons.more_vert),
           onSelected: (String result) {
             switch (result) {
               case 'copy':
-                final String url = widget.swiperItems[currentIndex].url;
+                final String url =
+                    widget.swiperItems[currentIndex].imageSrc.url;
                 Clipboard.setData(ClipboardData(text: url));
 
                 Utils.showSnackbar(context, 'URL copied to clipboard');
@@ -217,6 +246,8 @@ class _ImageSwiperState extends State<ImageViewer>
           },
         );
       }
+
+      return NothingWidget();
     });
   }
 
@@ -270,9 +301,10 @@ class _ImageSwiperState extends State<ImageViewer>
 }
 
 class ImageSwiperItem {
-  ImageSwiperItem(this.url, {this.caption = ''}) : heroTag = randomString(10);
+  ImageSwiperItem(this.imageSrc, {this.caption = ''})
+      : heroTag = randomString(10);
 
-  final String url;
+  final SuperImageSource imageSrc;
   final String caption;
   final String heroTag;
 }

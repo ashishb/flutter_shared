@@ -50,6 +50,7 @@ export 'src/widgets/dropstack/drop_stack_button.dart';
 export 'src/widgets/file_info.dart';
 export 'src/widgets/image/image_viewer.dart';
 export 'src/widgets/image/super_image.dart';
+export 'src/widgets/image/super_image_source.dart';
 export 'src/widgets/json_widget.dart';
 export 'src/widgets/list_row.dart';
 export 'src/widgets/loading_widget.dart';

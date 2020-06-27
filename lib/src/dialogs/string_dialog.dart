@@ -44,14 +44,12 @@ class _DialogContents extends StatefulWidget {
 
 class __DialogContentsState extends State<_DialogContents> {
   TextEditingController _textController;
-  FocusNode focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
 
     _textController = TextEditingController(text: widget.defaultName);
-    FocusScope.of(context).requestFocus(focusNode);
   }
 
   @override
@@ -76,11 +74,8 @@ class __DialogContentsState extends State<_DialogContents> {
               Text(widget.message),
               const SizedBox(height: 10),
               TextField(
+                autofocus: true,
                 controller: _textController,
-                focusNode: focusNode,
-                onSubmitted: (text) {
-                  Navigator.of(context).pop(text);
-                },
               ),
             ],
           ),

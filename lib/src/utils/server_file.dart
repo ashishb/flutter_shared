@@ -253,6 +253,23 @@ class ServerFile {
     return _type;
   }
 
+  bool get isReadOnly {
+    bool result = false;
+    final String mode = modeString;
+
+    if (mode != null) {
+      if (mode.length == 9) {
+        // rwxrwxrwx
+        if ((mode.substring(mode.length - 2, mode.length - 1) != 'w') ||
+            (mode.substring(mode.length - 5, mode.length - 4) != 'w')) {
+          result = true;
+        }
+      }
+    }
+
+    return result;
+  }
+
   Icon icon({double size}) {
     IconData iconData;
 

@@ -55,9 +55,12 @@ extension StringUtils on String {
   }
 
   String removeTrailing(String trailing) {
-    if (Utils.isNotEmpty(trailing)) {
-      if (endsWith(trailing)) {
-        return substring(0, length - trailing.length);
+    // don't remove last '/' if path is '/'
+    if (this != trailing) {
+      if (Utils.isNotEmpty(trailing)) {
+        if (endsWith(trailing)) {
+          return substring(0, length - trailing.length);
+        }
       }
     }
 

@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
 class BrowserStatusBar extends StatelessWidget {
   const BrowserStatusBar({
     @required this.status,
     @required this.callback,
+    this.locked,
     this.web = false,
   });
 
   final String status;
   final void Function(String action) callback;
   final bool web;
+  final bool locked;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,20 @@ class BrowserStatusBar extends StatelessWidget {
                 ),
               ),
             ),
+            if (locked == true) // could be null
+              const Positioned.fill(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Icon(
+                      Entypo.lock,
+                      size: 16,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       );
@@ -55,7 +72,6 @@ class BrowserStatusBar extends StatelessWidget {
           )
         ],
       ),
-      // color: Colors.black,
       child: Stack(
         children: [
           Positioned.fill(
@@ -76,6 +92,19 @@ class BrowserStatusBar extends StatelessWidget {
               child: const Icon(Icons.more_horiz),
             ),
           ),
+          if (locked == true) // could be null
+            const Positioned.fill(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Icon(
+                    Entypo.lock,
+                    size: 14,
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );

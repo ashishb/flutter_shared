@@ -7,6 +7,7 @@ Future<String> showStringDialog({
   String okButtonName = 'OK',
   String cancelButtonName = 'Cancel',
   String defaultName = '',
+  TextInputType keyboardType = TextInputType.text,
 }) async {
   return showDialog<String>(
     context: context,
@@ -18,6 +19,7 @@ Future<String> showStringDialog({
         okButtonName: okButtonName,
         defaultName: defaultName,
         cancelButtonName: cancelButtonName,
+        keyboardType: keyboardType,
       );
     },
   );
@@ -30,6 +32,7 @@ class _DialogContents extends StatefulWidget {
     this.okButtonName = 'OK',
     this.cancelButtonName = 'Cancel',
     this.defaultName = '',
+    this.keyboardType = TextInputType.text,
   });
 
   final String title;
@@ -37,6 +40,7 @@ class _DialogContents extends StatefulWidget {
   final String defaultName;
   final String okButtonName;
   final String cancelButtonName;
+  final TextInputType keyboardType;
 
   @override
   __DialogContentsState createState() => __DialogContentsState();
@@ -74,6 +78,7 @@ class __DialogContentsState extends State<_DialogContents> {
               Text(widget.message),
               const SizedBox(height: 10),
               TextField(
+                keyboardType: widget.keyboardType ?? TextInputType.text,
                 autofocus: true,
                 controller: _textController,
               ),

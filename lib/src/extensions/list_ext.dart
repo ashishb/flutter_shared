@@ -13,7 +13,7 @@ extension ExtendedList on List {
       result.add(this[i] as Widget);
 
       if (i < length - 1) {
-        result.add(const Divider(height: 2));
+        result.add(const Divider(height: 6));
       }
     }
 

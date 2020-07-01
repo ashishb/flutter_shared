@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -12,6 +13,8 @@ class HiveUtils {
     // store this in the application support on iOS
     // await Hive.initFlutter('hive'); doesn't allow picking location
     if (!Utils.isWeb) {
+      WidgetsFlutterBinding.ensureInitialized();
+
       // data directory on android
       Directory appDir = await getApplicationDocumentsDirectory();
 

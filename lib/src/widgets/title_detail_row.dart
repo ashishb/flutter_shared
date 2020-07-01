@@ -24,6 +24,7 @@ class TitleDetailRow extends StatelessWidget {
           ),
         ),
         Expanded(
+          flex: 2,
           child: Padding(
             padding: const EdgeInsets.only(left: 12),
             child: Text(

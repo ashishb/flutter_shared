@@ -9,6 +9,7 @@ export 'src/extensions/canvas_ext.dart';
 export 'src/extensions/color_ext.dart';
 export 'src/extensions/date_ext.dart';
 export 'src/extensions/duration_ext.dart';
+export 'src/extensions/list_ext.dart';
 export 'src/extensions/map_ext.dart';
 export 'src/extensions/num_ext.dart';
 export 'src/extensions/size_ext.dart';

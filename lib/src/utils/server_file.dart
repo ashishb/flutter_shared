@@ -122,10 +122,24 @@ class ServerFile {
   }
 
   String get modeString {
-    if (isFile) {
-      return _modeString ??= File(path).statSync().modeString();
+    if (_modeString != null) {
+      return _modeString;
     }
-    return _modeString ??= Directory(path).statSync().modeString();
+
+    String modeStr;
+
+    if (isFile) {
+      modeStr = File(path).statSync().modeString();
+    } else if (isDirectory) {
+      modeStr = Directory(path).statSync().modeString();
+    } else {
+      modeStr = 'wtfwtfwtf';
+    }
+
+    // Removes potential prepended permission bits, such as '(suid)' and '(guid)'.
+    _modeString = modeStr.substring(modeStr.length - 9);
+
+    return _modeString;
   }
 
   // mobile/desktop only
@@ -259,12 +273,23 @@ class ServerFile {
 
     if (mode != null) {
       if (mode.length == 9) {
-        // rwxrwxrwx
         if (mode.substring(mode.length - 2, mode.length - 1) == 'w') {
+          // user
           result = false;
         } else if (mode.substring(mode.length - 5, mode.length - 4) == 'w') {
+          // group
           result = false;
+        } else if (mode.substring(mode.length - 8, mode.length - 7) == 'w') {
+          // root
+
+          // ios seems weird, still investigating
+          // only checking root on iOS
+          if (Utils.isIOS) {
+            result = false;
+          }
         }
+      } else {
+        print('modeString not 9?');
       }
     }
 

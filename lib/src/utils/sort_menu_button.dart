@@ -61,21 +61,25 @@ class BrowserSortMenuButton extends StatelessWidget {
       ));
     }
 
-    return PopupMenuButton<BrowserSortMenuItem>(
-      tooltip: 'Sort',
-      itemBuilder: (context) {
-        return menuItems;
-      },
-      onSelected: (selected) {
-        if (selected.itemType == SortMenuItemType.foldersFirstItem) {
-          BrowserPrefs.sortFoldersFirst = !BrowserPrefs.sortFoldersFirst;
-        } else if (selected.itemType == SortMenuItemType.ascendingItem) {
-          BrowserPrefs.sortAscending = !BrowserPrefs.sortAscending;
-        } else {
-          BrowserPrefs.sortType = selected.sortType.id;
-        }
-      },
-      child: const Icon(Icons.sort),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: PopupMenuButton<BrowserSortMenuItem>(
+        offset: const Offset(0, 50),
+        tooltip: 'Sort',
+        itemBuilder: (context) {
+          return menuItems;
+        },
+        onSelected: (selected) {
+          if (selected.itemType == SortMenuItemType.foldersFirstItem) {
+            BrowserPrefs.sortFoldersFirst = !BrowserPrefs.sortFoldersFirst;
+          } else if (selected.itemType == SortMenuItemType.ascendingItem) {
+            BrowserPrefs.sortAscending = !BrowserPrefs.sortAscending;
+          } else {
+            BrowserPrefs.sortType = selected.sortType.id;
+          }
+        },
+        child: const Icon(Icons.sort),
+      ),
     );
   }
 

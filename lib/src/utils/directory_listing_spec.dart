@@ -48,6 +48,8 @@ class DirectoryListingSpec {
   bool shouldRebuildForNewSpec(DirectoryListingSpec otherSpec) {
     return sortType != otherSpec.sortType ||
         showHidden != otherSpec.showHidden ||
+        sortAscending != otherSpec.sortAscending ||
+        sortFoldersFirst != otherSpec.sortFoldersFirst ||
         searchHiddenDirs != otherSpec.searchHiddenDirs;
   }
 

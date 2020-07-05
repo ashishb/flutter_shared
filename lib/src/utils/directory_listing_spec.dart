@@ -9,6 +9,8 @@ class DirectoryListingSpec {
     @required this.serverFile,
     @required this.recursive,
     @required this.sortType,
+    @required this.sortAscending,
+    @required this.sortFoldersFirst,
     @required this.showHidden,
     @required this.searchHiddenDirs,
     @required this.directoryCounts,
@@ -23,6 +25,8 @@ class DirectoryListingSpec {
       serverFile: ServerFile.fromMap(map['serverFile'] as Map<String, dynamic>),
       recursive: map['recursive'] as bool,
       sortType: map['sortType'] as String,
+      sortAscending: map['sortAscending'] as bool,
+      sortFoldersFirst: map['sortFoldersFirst'] as bool,
       showHidden: map['showHidden'] as bool,
       searchHiddenDirs: map['searchHiddenDirs'] as bool,
       directoryCounts: map['directoryCounts'] as bool,
@@ -35,6 +39,8 @@ class DirectoryListingSpec {
   final ServerFile serverFile;
   final bool recursive;
   final String sortType;
+  final bool sortAscending;
+  final bool sortFoldersFirst;
   final bool showHidden;
   final bool searchHiddenDirs;
   final bool directoryCounts;
@@ -49,6 +55,8 @@ class DirectoryListingSpec {
     ServerFile serverFile,
     bool recursive,
     String sortType,
+    bool sortFoldersFirst,
+    bool sortAscending,
     bool showHidden,
     bool searchHiddenDirs,
     bool directoryCounts,
@@ -57,6 +65,8 @@ class DirectoryListingSpec {
       serverFile: serverFile ?? this.serverFile,
       recursive: recursive ?? this.recursive,
       sortType: sortType ?? this.sortType,
+      sortFoldersFirst: sortFoldersFirst ?? this.sortFoldersFirst,
+      sortAscending: sortAscending ?? this.sortAscending,
       showHidden: showHidden ?? this.showHidden,
       searchHiddenDirs: searchHiddenDirs ?? this.searchHiddenDirs,
       directoryCounts: directoryCounts ?? this.directoryCounts,
@@ -68,6 +78,8 @@ class DirectoryListingSpec {
       'serverFile': serverFile?.toMap(),
       'recursive': recursive,
       'sortType': sortType,
+      'sortFoldersFirst': sortFoldersFirst,
+      'sortAscending': sortAscending,
       'showHidden': showHidden,
       'searchHiddenDirs': searchHiddenDirs,
       'directoryCounts': directoryCounts,
@@ -78,7 +90,8 @@ class DirectoryListingSpec {
 
   @override
   String toString() {
-    return 'DirectoryListingSpec(serverFile: $serverFile, recursive: $recursive, sortType: $sortType, showHidden: $showHidden, searchHiddenDirs: $searchHiddenDirs, directoryCounts: $directoryCounts)';
+    return 'DirectoryListingSpec(serverFile: $serverFile, recursive: $recursive, sortType: $sortType, showHidden: $showHidden, '
+        'searchHiddenDirs: $searchHiddenDirs, directoryCounts: $directoryCounts, sortFoldersFirst: $sortFoldersFirst, sortAscending: $sortAscending)';
   }
 
   @override
@@ -91,6 +104,8 @@ class DirectoryListingSpec {
         other.serverFile == serverFile &&
         other.recursive == recursive &&
         other.sortType == sortType &&
+        other.sortFoldersFirst == sortFoldersFirst &&
+        other.sortAscending == sortAscending &&
         other.showHidden == showHidden &&
         other.searchHiddenDirs == searchHiddenDirs &&
         other.directoryCounts == directoryCounts;
@@ -101,6 +116,8 @@ class DirectoryListingSpec {
     return serverFile.hashCode ^
         recursive.hashCode ^
         sortType.hashCode ^
+        sortFoldersFirst.hashCode ^
+        sortAscending.hashCode ^
         showHidden.hashCode ^
         searchHiddenDirs.hashCode ^
         directoryCounts.hashCode;

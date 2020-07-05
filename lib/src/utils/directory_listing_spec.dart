@@ -8,7 +8,7 @@ class DirectoryListingSpec {
   DirectoryListingSpec({
     @required this.serverFile,
     @required this.recursive,
-    @required this.sortStyle,
+    @required this.sortType,
     @required this.showHidden,
     @required this.searchHiddenDirs,
     @required this.directoryCounts,
@@ -22,7 +22,7 @@ class DirectoryListingSpec {
     return DirectoryListingSpec(
       serverFile: ServerFile.fromMap(map['serverFile'] as Map<String, dynamic>),
       recursive: map['recursive'] as bool,
-      sortStyle: map['sortStyle'] as String,
+      sortType: map['sortType'] as String,
       showHidden: map['showHidden'] as bool,
       searchHiddenDirs: map['searchHiddenDirs'] as bool,
       directoryCounts: map['directoryCounts'] as bool,
@@ -34,13 +34,13 @@ class DirectoryListingSpec {
 
   final ServerFile serverFile;
   final bool recursive;
-  final String sortStyle;
+  final String sortType;
   final bool showHidden;
   final bool searchHiddenDirs;
   final bool directoryCounts;
 
   bool shouldRebuildForNewSpec(DirectoryListingSpec otherSpec) {
-    return sortStyle != otherSpec.sortStyle ||
+    return sortType != otherSpec.sortType ||
         showHidden != otherSpec.showHidden ||
         searchHiddenDirs != otherSpec.searchHiddenDirs;
   }
@@ -48,7 +48,7 @@ class DirectoryListingSpec {
   DirectoryListingSpec copyWith({
     ServerFile serverFile,
     bool recursive,
-    String sortStyle,
+    String sortType,
     bool showHidden,
     bool searchHiddenDirs,
     bool directoryCounts,
@@ -56,7 +56,7 @@ class DirectoryListingSpec {
     return DirectoryListingSpec(
       serverFile: serverFile ?? this.serverFile,
       recursive: recursive ?? this.recursive,
-      sortStyle: sortStyle ?? this.sortStyle,
+      sortType: sortType ?? this.sortType,
       showHidden: showHidden ?? this.showHidden,
       searchHiddenDirs: searchHiddenDirs ?? this.searchHiddenDirs,
       directoryCounts: directoryCounts ?? this.directoryCounts,
@@ -67,7 +67,7 @@ class DirectoryListingSpec {
     return <String, dynamic>{
       'serverFile': serverFile?.toMap(),
       'recursive': recursive,
-      'sortStyle': sortStyle,
+      'sortType': sortType,
       'showHidden': showHidden,
       'searchHiddenDirs': searchHiddenDirs,
       'directoryCounts': directoryCounts,
@@ -78,7 +78,7 @@ class DirectoryListingSpec {
 
   @override
   String toString() {
-    return 'DirectoryListingSpec(serverFile: $serverFile, recursive: $recursive, sortStyle: $sortStyle, showHidden: $showHidden, searchHiddenDirs: $searchHiddenDirs, directoryCounts: $directoryCounts)';
+    return 'DirectoryListingSpec(serverFile: $serverFile, recursive: $recursive, sortType: $sortType, showHidden: $showHidden, searchHiddenDirs: $searchHiddenDirs, directoryCounts: $directoryCounts)';
   }
 
   @override
@@ -90,7 +90,7 @@ class DirectoryListingSpec {
     return other is DirectoryListingSpec &&
         other.serverFile == serverFile &&
         other.recursive == recursive &&
-        other.sortStyle == sortStyle &&
+        other.sortType == sortType &&
         other.showHidden == showHidden &&
         other.searchHiddenDirs == searchHiddenDirs &&
         other.directoryCounts == directoryCounts;
@@ -100,7 +100,7 @@ class DirectoryListingSpec {
   int get hashCode {
     return serverFile.hashCode ^
         recursive.hashCode ^
-        sortStyle.hashCode ^
+        sortType.hashCode ^
         showHidden.hashCode ^
         searchHiddenDirs.hashCode ^
         directoryCounts.hashCode;

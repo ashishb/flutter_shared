@@ -6,11 +6,20 @@ class BrowserPrefs {
       HiveBox.prefsBox.get('showHidden', defaultValue: false) as bool;
   static set showHidden(bool flag) => HiveBox.prefsBox.put('showHidden', flag);
 
-  static String get sortStyle =>
-      HiveBox.prefsBox.get('sortStyle', defaultValue: SortStyle.foldersFirst)
+  static String get sortType =>
+      HiveBox.prefsBox.get('sortType', defaultValue: SortTypes.sortByName)
           as String;
-  static set sortStyle(String style) =>
-      HiveBox.prefsBox.put('sortStyle', style);
+  static set sortType(String style) => HiveBox.prefsBox.put('sortType', style);
+
+  static bool get sortAscending =>
+      HiveBox.prefsBox.get('sortAscending', defaultValue: true) as bool;
+  static set sortAscending(bool style) =>
+      HiveBox.prefsBox.put('sortAscending', style);
+
+  static bool get sortFoldersFirst =>
+      HiveBox.prefsBox.get('sortFoldersFirst', defaultValue: true) as bool;
+  static set sortFoldersFirst(bool style) =>
+      HiveBox.prefsBox.put('sortFoldersFirst', style);
 
   static bool get searchInsideHidden =>
       HiveBox.prefsBox.get('searchInsideHidden', defaultValue: false) as bool;
@@ -27,10 +36,29 @@ class BrowserPrefs {
       HiveBox.prefsBox.put('replaceOnDrop', flag);
 }
 
-// sort constants
+class BrowserUtils {
+  static DirectoryListingSpec spec({
+    @required ServerFile serverFile,
+    bool recursive = false,
+    bool directoryCounts = false,
+  }) {
+    final bool searchHiddenDirs = BrowserPrefs.searchInsideHidden;
+    final String sortType = BrowserPrefs.sortType;
+    final bool showHidden = BrowserPrefs.showHidden;
 
-class SortStyle {
-  SortStyle({
+    return DirectoryListingSpec(
+      serverFile: serverFile,
+      recursive: recursive,
+      directoryCounts: directoryCounts,
+      sortType: sortType,
+      showHidden: showHidden,
+      searchHiddenDirs: searchHiddenDirs,
+    );
+  }
+}
+
+class SortTypes {
+  SortTypes({
     @required this.id,
     @required this.name,
   });
@@ -39,44 +67,15 @@ class SortStyle {
   final String name;
 
   // constants
-  static const String foldersFirst = 'foldersFirst';
-  static const String foldersLast = 'foldersLast';
-  static const String filesA2Z = 'filesA2Z';
-  static const String filesZ2A = 'filesZ2A';
-  static const String dateOldFirst = 'dateOldFirst';
-  static const String dateNewFirst = 'dateNewFirst';
-  static const String sizeLargeFirst = 'sizeLargeFirst';
-  static const String sizeSmallFirst = 'sizeSmallFirst';
+  static const String sortByName = 'name';
+  static const String sortBySize = 'size';
+  static const String sortByDate = 'date';
+  static const String sortByKind = 'kind';
 
-  static List<SortStyle> sortStyles = <SortStyle>[
-    SortStyle(id: SortStyle.foldersFirst, name: 'Folders on top'),
-    SortStyle(id: SortStyle.foldersLast, name: 'Folders on bottom'),
-    SortStyle(id: SortStyle.filesA2Z, name: 'File name (A to Z)'),
-    SortStyle(id: SortStyle.filesZ2A, name: 'File name (Z to A)'),
-    SortStyle(id: SortStyle.dateOldFirst, name: 'Date (oldest first)'),
-    SortStyle(id: SortStyle.dateNewFirst, name: 'Date (newest first)'),
-    SortStyle(id: SortStyle.sizeLargeFirst, name: 'Size (largest first)'),
-    SortStyle(id: SortStyle.sizeSmallFirst, name: 'Size (Smallest first)'),
+  static List<SortTypes> sortTypes = <SortTypes>[
+    SortTypes(id: SortTypes.sortByName, name: 'Name'),
+    SortTypes(id: SortTypes.sortBySize, name: 'Size'),
+    SortTypes(id: SortTypes.sortByDate, name: 'Date'),
+    SortTypes(id: SortTypes.sortByKind, name: 'Kind'),
   ];
-}
-
-class BrowserUtils {
-  static DirectoryListingSpec spec({
-    @required ServerFile serverFile,
-    bool recursive = false,
-    bool directoryCounts = false,
-  }) {
-    final bool searchHiddenDirs = BrowserPrefs.searchInsideHidden;
-    final String sortStyle = BrowserPrefs.sortStyle;
-    final bool showHidden = BrowserPrefs.showHidden;
-
-    return DirectoryListingSpec(
-      serverFile: serverFile,
-      recursive: recursive,
-      directoryCounts: directoryCounts,
-      sortStyle: sortStyle,
-      showHidden: showHidden,
-      searchHiddenDirs: searchHiddenDirs,
-    );
-  }
 }

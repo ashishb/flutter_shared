@@ -82,6 +82,8 @@ class ServerFile {
       if (lastDot != -1) {
         _extension = name.substring(lastDot).toLowerCase();
       }
+
+      _extension ??= '';
     }
 
     return _extension;

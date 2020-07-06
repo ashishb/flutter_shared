@@ -29,8 +29,7 @@ class TitleDetailRow extends StatelessWidget {
             child: Text(
               detail ?? '',
               style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
+                fontSize: 16,
               ),
             ),
           ),

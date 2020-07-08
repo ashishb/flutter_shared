@@ -33,7 +33,8 @@ class TitleDetailRow extends StatelessWidget {
             child: Text(
               detail ?? '',
               maxLines: oneLine ? 1 : null,
-              overflow: oneLine ? TextOverflow.fade : null,
+              overflow: oneLine ? TextOverflow.ellipsis : null,
+              softWrap: false,
               style: TextStyle(
                 fontSize: fontSize ?? 16,
               ),

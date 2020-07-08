@@ -4,10 +4,14 @@ class TitleDetailRow extends StatelessWidget {
   const TitleDetailRow({
     this.title,
     this.detail,
+    this.fontSize,
+    this.oneLine,
   });
 
   final String title;
   final String detail;
+  final double fontSize;
+  final bool oneLine;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +22,8 @@ class TitleDetailRow extends StatelessWidget {
           child: Text(
             title ?? '',
             textAlign: TextAlign.right,
-            style: const TextStyle(
-              fontSize: 16,
+            style: TextStyle(
+              fontSize: fontSize ?? 16,
             ),
           ),
         ),
@@ -28,8 +32,10 @@ class TitleDetailRow extends StatelessWidget {
             padding: const EdgeInsets.only(left: 12),
             child: Text(
               detail ?? '',
-              style: const TextStyle(
-                fontSize: 16,
+              maxLines: oneLine ? 1 : null,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                fontSize: fontSize ?? 16,
               ),
             ),
           ),

@@ -43,6 +43,113 @@ class DateTimeFormField extends StatelessWidget {
   final DateTime firstDate;
   final DateTime lastDate;
 
+  Future<void> _tap(
+      BuildContext context, FormFieldState<DateTime> state) async {
+    DateTime date;
+    TimeOfDay time = const TimeOfDay(hour: 0, minute: 0);
+    if (onlyDate) {
+      if (Platform.isAndroid) {
+        date = await showDatePicker(
+          context: context,
+          initialDate: state.value,
+          firstDate: firstDate,
+          lastDate: lastDate,
+        );
+        if (date != null) {
+          state.didChange(date);
+        }
+      } else {
+        await showModalBottomSheet<void>(
+          context: context,
+          builder: (BuildContext builder) {
+            return Container(
+              height: MediaQuery.of(context).size.height / 4,
+              child: CupertinoDatePicker(
+                mode: CupertinoDatePickerMode.date,
+                onDateTimeChanged: (DateTime dateTime) =>
+                    state.didChange(dateTime),
+                initialDateTime: state.value,
+                minimumYear: firstDate.year,
+                maximumYear: lastDate.year,
+              ),
+            );
+          },
+        );
+      }
+    } else if (onlyTime) {
+      if (Platform.isAndroid) {
+        time = await showTimePicker(
+          context: context,
+          initialTime: TimeOfDay.fromDateTime(state.value),
+        );
+        if (time != null) {
+          state.didChange(DateTime(
+            initialValue.year,
+            initialValue.month,
+            initialValue.day,
+            time.hour,
+            time.minute,
+          ));
+        }
+      } else {
+        await showModalBottomSheet<void>(
+          context: context,
+          builder: (BuildContext builder) {
+            return Container(
+              height: MediaQuery.of(context).size.height / 4,
+              child: CupertinoDatePicker(
+                mode: CupertinoDatePickerMode.time,
+                onDateTimeChanged: (DateTime dateTime) =>
+                    state.didChange(dateTime),
+                initialDateTime: state.value,
+                minuteInterval: 5,
+              ),
+            );
+          },
+        );
+      }
+    } else {
+      if (Platform.isAndroid) {
+        date = await showDatePicker(
+          context: context,
+          initialDate: state.value,
+          firstDate: firstDate,
+          lastDate: lastDate,
+        );
+        if (date != null) {
+          time = await showTimePicker(
+            context: context,
+            initialTime: TimeOfDay.fromDateTime(state.value),
+          );
+          if (time != null) {
+            state.didChange(DateTime(
+              date.year,
+              date.month,
+              date.day,
+              time.hour,
+              time.minute,
+            ));
+          }
+        }
+      } else {
+        await showModalBottomSheet<void>(
+          context: context,
+          builder: (BuildContext builder) {
+            return Container(
+              height: MediaQuery.of(context).size.height / 4,
+              child: CupertinoDatePicker(
+                onDateTimeChanged: (DateTime dateTime) =>
+                    state.didChange(dateTime),
+                initialDateTime: state.value,
+                minuteInterval: 5,
+              ),
+            );
+          },
+        );
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return FormField<DateTime>(
@@ -53,109 +160,9 @@ class DateTimeFormField extends StatelessWidget {
       enabled: enabled,
       builder: (FormFieldState<DateTime> state) {
         return InkWell(
-          onTap: () async {
-            DateTime date;
-            TimeOfDay time = const TimeOfDay(hour: 0, minute: 0);
-            if (onlyDate) {
-              if (Platform.isAndroid) {
-                date = await showDatePicker(
-                  context: context,
-                  initialDate: state.value,
-                  firstDate: firstDate,
-                  lastDate: lastDate,
-                );
-                if (date != null) {
-                  state.didChange(date);
-                }
-              } else {
-                await showModalBottomSheet<void>(
-                  context: context,
-                  builder: (BuildContext builder) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height / 4,
-                      child: CupertinoDatePicker(
-                        mode: CupertinoDatePickerMode.date,
-                        onDateTimeChanged: (DateTime dateTime) =>
-                            state.didChange(dateTime),
-                        initialDateTime: state.value,
-                        minimumYear: firstDate.year,
-                        maximumYear: lastDate.year,
-                      ),
-                    );
-                  },
-                );
-              }
-            } else if (onlyTime) {
-              if (Platform.isAndroid) {
-                time = await showTimePicker(
-                  context: context,
-                  initialTime: TimeOfDay.fromDateTime(state.value),
-                );
-                if (time != null) {
-                  state.didChange(DateTime(
-                    initialValue.year,
-                    initialValue.month,
-                    initialValue.day,
-                    time.hour,
-                    time.minute,
-                  ));
-                }
-              } else {
-                await showModalBottomSheet<void>(
-                  context: context,
-                  builder: (BuildContext builder) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height / 4,
-                      child: CupertinoDatePicker(
-                        mode: CupertinoDatePickerMode.time,
-                        onDateTimeChanged: (DateTime dateTime) =>
-                            state.didChange(dateTime),
-                        initialDateTime: state.value,
-                        minuteInterval: 5,
-                      ),
-                    );
-                  },
-                );
-              }
-            } else {
-              if (Platform.isAndroid) {
-                date = await showDatePicker(
-                  context: context,
-                  initialDate: state.value,
-                  firstDate: firstDate,
-                  lastDate: lastDate,
-                );
-                if (date != null) {
-                  time = await showTimePicker(
-                    context: context,
-                    initialTime: TimeOfDay.fromDateTime(state.value),
-                  );
-                  if (time != null) {
-                    state.didChange(DateTime(
-                      date.year,
-                      date.month,
-                      date.day,
-                      time.hour,
-                      time.minute,
-                    ));
-                  }
-                }
-              } else {
-                await showModalBottomSheet<void>(
-                  context: context,
-                  builder: (BuildContext builder) {
-                    return Container(
-                      height: MediaQuery.of(context).size.height / 4,
-                      child: CupertinoDatePicker(
-                        onDateTimeChanged: (DateTime dateTime) =>
-                            state.didChange(dateTime),
-                        initialDateTime: state.value,
-                        minuteInterval: 5,
-                      ),
-                    );
-                  },
-                );
-              }
+          onTap: () {
+            if (enabled) {
+              _tap(context, state);
             }
           },
           child: InputDecorator(

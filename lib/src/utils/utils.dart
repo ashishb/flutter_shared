@@ -167,7 +167,7 @@ class Utils {
     if (date != null) {
       DateFormat formatter = format;
 
-      formatter ??= DateFormat.MMMd().add_jm();
+      formatter ??= DateFormat('MMM dd, jm');
 
       return formatter.format(date.toLocal());
     }

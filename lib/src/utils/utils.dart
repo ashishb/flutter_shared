@@ -180,6 +180,55 @@ class Utils {
     return '';
   }
 
+  // sometimes you get a weird date format that crashes
+  // not a perfect solution, but enough for now
+  static String formatLocalDateString(String dateString) {
+    String result;
+
+    if (isNotEmpty(dateString)) {
+      try {
+        final DateTime theDate = parseDate(dateString);
+
+        if (theDate != null) {
+          result = formatLocalDateTime(date: theDate);
+        }
+      } catch (err) {
+        print('Error: dateString: $dateString, err: $err');
+      }
+    }
+
+    return result ?? '';
+  }
+
+  static DateTime parseDate(String dateString) {
+    if (isNotEmpty(dateString)) {
+      DateTime theDate;
+
+      try {
+        theDate = DateTime.parse(dateString);
+      } catch (err) {
+        print('Error: dateString: $dateString, err: $err');
+      }
+
+      if (theDate != null) {
+        return theDate;
+      }
+
+      try {
+        // try again with DateFormat.parse()
+        theDate = DateFormat('MM/dd/yyy HH:mm:ss').parse(dateString);
+      } catch (err) {
+        print('Error-2: dateString: $dateString, err: $err');
+      }
+
+      if (theDate != null) {
+        return theDate;
+      }
+    }
+
+    return null;
+  }
+
   // ===========================================
   // Package Info
 

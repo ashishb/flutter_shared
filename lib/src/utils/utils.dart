@@ -167,7 +167,7 @@ class Utils {
     if (date != null) {
       DateFormat formatter = format;
 
-      formatter ??= DateFormat('MMM dd, hh:mm a');
+      formatter ??= DateFormat('MMM dd, h:mm a');
 
       return formatter.format(date.toLocal());
     }

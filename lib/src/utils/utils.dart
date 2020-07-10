@@ -197,6 +197,11 @@ class Utils {
       }
     }
 
+    // pass back unchanged on failure
+    if (Utils.isEmpty(result)) {
+      result = dateString;
+    }
+
     return result ?? '';
   }
 

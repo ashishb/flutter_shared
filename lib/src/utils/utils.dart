@@ -162,12 +162,16 @@ class Utils {
   // if date is in UTC, use this to get local
   static String formatLocalDateTime({
     @required DateTime date,
-    DateFormat format,
+    bool addDay = false,
   }) {
     if (date != null) {
-      DateFormat formatter = format;
+      String day = '';
 
-      formatter ??= DateFormat('MMM dd, h:mm a');
+      if (addDay) {
+        day = 'E, ';
+      }
+
+      final DateFormat formatter = DateFormat('${day}MMM dd, h:mm a');
 
       return formatter.format(date.toLocal());
     }

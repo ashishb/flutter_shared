@@ -162,10 +162,14 @@ class Utils {
   // if date is in UTC, use this to get local
   static String formatLocalDateTime({
     @required DateTime date,
-    String format = 'MMM dd, hh:mm',
+    DateFormat format,
   }) {
     if (date != null) {
-      return DateFormat('MMM dd, hh:mm').format(date.toLocal());
+      DateFormat formatter = format;
+
+      formatter ??= DateFormat.MMMd().add_jm();
+
+      return formatter.format(date.toLocal());
     }
 
     // don't want to crash Text, return '' instead of null

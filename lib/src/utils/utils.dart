@@ -159,6 +159,19 @@ class Utils {
     }
   }
 
+  // if date is in UTC, use this to get local
+  static String formatLocalDateTime({
+    @required DateTime date,
+    String format = 'MMM dd, hh:mm',
+  }) {
+    if (date != null) {
+      return DateFormat('MMM dd, hh:mm').format(date.toLocal());
+    }
+
+    // don't want to crash Text, return '' instead of null
+    return '';
+  }
+
   // ===========================================
   // Package Info
 

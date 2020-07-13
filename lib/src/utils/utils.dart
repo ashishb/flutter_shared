@@ -11,7 +11,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_parsed_text/flutter_parsed_text.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:bot_toast/bot_toast.dart';
 
 // Some globals I may want to experiment with
 
@@ -496,26 +496,12 @@ class Utils {
     return !isNotEmpty(input);
   }
 
-  static void showToast(BuildContext context, String message) {
-    final FlutterToast ft = FlutterToast(context);
-
-    final Widget toast = Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25.0),
-        color: const Color.fromRGBO(61, 61, 61, .7),
-      ),
-      child: Text(
-        message,
-        style: const TextStyle(color: Colors.white),
-      ),
-    );
-
-    ft.showToast(
-      child: toast,
-      gravity: ToastGravity.TOP,
-      toastDuration: const Duration(seconds: 3),
-    );
+  static void showToast(String message) {
+    BotToast.showText(
+      text: message,
+      duration: const Duration(seconds: 3),
+      align: Alignment.topCenter,
+    ); //popup a text toast;
   }
 }
 

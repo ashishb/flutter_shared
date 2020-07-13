@@ -497,8 +497,8 @@ class Utils {
   }
 
   static void showToast(String message) {
-    BotToast.showText(
-      text: message,
+    BotToast.showSimpleNotification(
+      title: message,
       duration: const Duration(seconds: 3),
       align: Alignment.topCenter,
     ); //popup a text toast;

@@ -496,14 +496,25 @@ class Utils {
     return !isNotEmpty(input);
   }
 
-  static void showToast(String value) {
-    Fluttertoast.showToast(
-      msg: value,
-      toastLength: Toast.LENGTH_SHORT,
-      backgroundColor:
-          Colors.cyan, // no context Theme.of(context).primaryColor,
-      textColor: Colors.white,
+  static void showToast(BuildContext context, String message) {
+    final FlutterToast ft = FlutterToast(context);
+
+    final Widget toast = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: const Color.fromRGBO(61, 61, 61, .7),
+      ),
+      child: Text(
+        message,
+        style: const TextStyle(color: Colors.white),
+      ),
+    );
+
+    ft.showToast(
+      child: toast,
       gravity: ToastGravity.TOP,
+      toastDuration: const Duration(seconds: 3),
     );
   }
 }

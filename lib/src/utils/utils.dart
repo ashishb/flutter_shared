@@ -185,6 +185,10 @@ class Utils {
   static String formatLocalDateString(String dateString) {
     String result;
 
+    if (dateString == 'Invalid DateTime') {
+      return '';
+    }
+
     if (isNotEmpty(dateString)) {
       try {
         final DateTime theDate = parseDate(dateString);

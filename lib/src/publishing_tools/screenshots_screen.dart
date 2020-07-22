@@ -39,15 +39,6 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
     });
   }
 
-  Future<ui.Image> loadUiImage(String imageAssetPath) async {
-    final ByteData data = await rootBundle.load(imageAssetPath);
-    final Completer<ui.Image> completer = Completer();
-    ui.decodeImageFromList(Uint8List.view(data.buffer), (ui.Image img) {
-      return completer.complete(img);
-    });
-    return completer.future;
-  }
-
   void _onPreviewPressed() {
     setState(() {
       _image = maker.createImage(
@@ -57,7 +48,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
 
   Future<void> _onGenerateShots() async {
     try {
-      final ui.Image assetImage = await loadUiImage(widget.imageUrl);
+      final ui.Image assetImage = await Utils.loadUiImage(widget.imageUrl);
 
       final CaptureResult capture = await maker.createImage(
         assetImage,

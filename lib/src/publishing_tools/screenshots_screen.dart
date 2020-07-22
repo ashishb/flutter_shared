@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
-import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_shared/flutter_shared.dart';
@@ -33,7 +31,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
   void initState() {
     super.initState();
 
-    loadUiImage(widget.imageUrl).then((ui.Image image) {
+    Utils.loadUiImage(widget.imageUrl).then((ui.Image image) {
       assetImage = image;
       setState(() {});
     });

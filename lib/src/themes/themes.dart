@@ -45,8 +45,13 @@ class AppTheme {
       color: ThemeSetManager().currentTheme.backgroundColor,
     );
 
+    final CardTheme cardTheme = CardTheme(
+      color: ThemeSetManager().currentTheme.backgroundColor,
+    );
+
     final baseTheme = ThemeData(
       scaffoldBackgroundColor: ThemeSetManager().currentTheme.backgroundColor,
+      cardTheme: cardTheme,
       popupMenuTheme: popupMenuTheme,
       primaryColorBrightness: Brightness.dark,
       bottomAppBarTheme: _bottomBarTheme(darkMode),

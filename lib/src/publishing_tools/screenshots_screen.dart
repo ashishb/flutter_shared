@@ -22,8 +22,9 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
   ScreenshotMaker maker = ScreenshotMaker();
   Future<CaptureResult> _image;
   PhoneMenuItem selectedItem = PhoneMenuItem.items[0];
+  bool _showBackground = false;
   ScreenshotMenuItem selectedScreenshotItem =
-      ScreenshotMenuItem(filename: 'nothing', title: 'Select title');
+      ScreenshotMenuItem(filename: 'default', title: 'Select Title');
 
   ui.Image assetImage;
 
@@ -40,29 +41,40 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
   void _onPreviewPressed() {
     setState(() {
       _image = maker.createImage(
-          assetImage, selectedScreenshotItem.title, selectedItem.type);
+          assetImage, selectedScreenshotItem.title, selectedItem.type,
+          showBackground: _showBackground);
     });
   }
 
-  Future<void> _onGenerateShots() async {
-    try {
-      final ui.Image assetImage = await Utils.loadUiImage(widget.imageUrl);
-
-      final CaptureResult capture = await maker.createImage(
-        assetImage,
-        selectedScreenshotItem.title,
-        selectedItem.type,
-      );
-
-      final String n = selectedScreenshotItem.filename;
-      await maker.saveToFile(n, capture);
-    } catch (e) {
-      print(e);
-    }
-
-    Utils.showToast(
-      'Generate Complete',
+  Future<void> _saveClicked() async {
+    // ask user for file name
+    final String fileName = await showStringDialog(
+      context: context,
+      title: 'Filename',
+      message: 'Choose a file name',
+      defaultName: selectedScreenshotItem.filename,
     );
+
+    if (Utils.isNotEmpty(fileName)) {
+      try {
+        final ui.Image assetImage = await Utils.loadUiImage(widget.imageUrl);
+
+        final CaptureResult capture = await maker.createImage(
+          assetImage,
+          selectedScreenshotItem.title,
+          selectedItem.type,
+          showBackground: _showBackground,
+        );
+
+        await maker.saveToFile(fileName, capture);
+      } catch (e) {
+        print(e);
+      }
+
+      Utils.showToast(
+        'Generate Complete',
+      );
+    }
   }
 
   @override
@@ -95,6 +107,16 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
                     },
                     selectedItem: selectedScreenshotItem,
                   ),
+                  CheckboxListTile(
+                    contentPadding: EdgeInsets.zero,
+                    value: _showBackground,
+                    title: const Text('Show Background'),
+                    onChanged: (x) {
+                      setState(() {
+                        _showBackground = x;
+                      });
+                    },
+                  ),
                   const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -105,7 +127,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
                       ),
                       const SizedBox(width: 12),
                       ColoredButton(
-                        onPressed: _onGenerateShots,
+                        onPressed: _saveClicked,
                         title: 'Save',
                       ),
                     ],

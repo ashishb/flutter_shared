@@ -17,22 +17,28 @@ class CaptureResult {
 }
 
 class ScreenshotMaker {
-  final Color phoneColor = const Color.fromRGBO(65, 65, 65, 1);
-  final Color phoneFrameColor = const Color.fromRGBO(35, 35, 35, 1);
-  static const Color cameraColor = Color.fromRGBO(0, 0, 0, 1);
+  final Color phoneColor = const Color.fromRGBO(0, 0, 0, 1);
+  final Color phoneFrameColor = const Color.fromRGBO(0, 0, 0, 1);
+  static const Color cameraColor = Color.fromRGBO(70, 70, 70, 1);
   final double speakerHeight = 20;
   final Paint dotPaint = Paint()..color = cameraColor;
 
   Future<CaptureResult> createImage(
-      ui.Image assetImage, String title, PhoneType type) async {
+      ui.Image assetImage, String title, PhoneType type,
+      {bool showBackground = true}) async {
     final Size imageSize = Size(
       assetImage.width.toDouble(),
       assetImage.height.toDouble(),
     );
     final double imageAspectRatio = imageSize.width / imageSize.height;
 
-    const double titleBoxHeight = 300;
-    const double footerBoxHeight = 150;
+    double titleBoxHeight = 20;
+    double footerBoxHeight = 20;
+
+    if (showBackground) {
+      titleBoxHeight = 300;
+      footerBoxHeight = 150;
+    }
 
     double phoneFrameWidth;
     Radius frameRadius;
@@ -118,13 +124,15 @@ class ScreenshotMaker {
     final pictureRecorder = ui.PictureRecorder();
     final canvas = Canvas(pictureRecorder);
 
-    _drawTitle(
-      title: title,
-      canvas: canvas,
-      centerX: resultRect.topCenter.dx,
-      startY: resultRect.top,
-      titleBoxHeight: titleBoxHeight,
-    );
+    if (showBackground && Utils.isNotEmpty(title)) {
+      _drawTitle(
+        title: title,
+        canvas: canvas,
+        centerX: resultRect.topCenter.dx,
+        startY: resultRect.top,
+        titleBoxHeight: titleBoxHeight,
+      );
+    }
 
     // draw frame
     final Path path = Path();
@@ -233,6 +241,7 @@ class ScreenshotMaker {
       pictureRecorder: pictureRecorder,
       imageSize: imageSize,
       rect: resultRect,
+      drawBackground: showBackground,
     );
   }
 
@@ -240,12 +249,14 @@ class ScreenshotMaker {
     ui.PictureRecorder pictureRecorder,
     Size imageSize,
     Rect rect,
+    bool drawBackground = false,
   }) async {
     final pic = pictureRecorder.endRecording();
     final ui.Image image =
         await pic.toImage(rect.width.toInt(), rect.height.toInt());
 
-    final ui.Image resizedImage = await resizeImage(image, imageSize);
+    final ui.Image resizedImage =
+        await resizeImage(image, imageSize, drawBackground: drawBackground);
 
     final data = await resizedImage.toByteData(format: ui.ImageByteFormat.png);
     final buffer = data.buffer.asUint8List();
@@ -299,7 +310,8 @@ class ScreenshotMaker {
     tp.paint(canvas, Offset(centerX - w, startY + h));
   }
 
-  Future<ui.Image> resizeImage(ui.Image image, Size size) async {
+  Future<ui.Image> resizeImage(ui.Image image, Size size,
+      {bool drawBackground = true}) async {
     final pictureRecorder = ui.PictureRecorder();
     final canvas = Canvas(pictureRecorder);
 
@@ -312,11 +324,14 @@ class ScreenshotMaker {
 
     final Rect rect = Offset.zero & newSize;
 
-    _drawBackground(
+    if (drawBackground) {
+      _drawBackground(
         canvas: canvas,
         rect: rect,
         startColor: Colors.pink,
-        endColor: Colors.cyan);
+        endColor: Colors.cyan,
+      );
+    }
 
     paintImage(
       canvas: canvas,
@@ -632,6 +647,8 @@ class ScreenshotMaker {
   Future<void> saveToFile(String filename, CaptureResult capture) async {
     String path = await documentsPath;
     path = '$path/${filename}_screenshot.png';
+
+    print('saved to: $path');
 
     final File file = File(path);
     file.createSync(recursive: true);

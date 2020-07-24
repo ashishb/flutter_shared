@@ -134,20 +134,22 @@ class _ThemeEditorWidgetState extends State<ThemeEditorWidget> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ThemeButton(
-              onPressed: () async {
-                final ScanResult result = await BarcodeScanner.scan();
+            // scanning only on mobile
+            if (Utils.isMobile)
+              ThemeButton(
+                onPressed: () async {
+                  final ScanResult result = await BarcodeScanner.scan();
 
-                if (Utils.isNotEmpty(result.rawContent)) {
-                  final ThemeSet newTheme = ThemeSet.fromMap(
-                      json.decode(result.rawContent) as Map<String, dynamic>);
+                  if (Utils.isNotEmpty(result.rawContent)) {
+                    final ThemeSet newTheme = ThemeSet.fromMap(
+                        json.decode(result.rawContent) as Map<String, dynamic>);
 
-                  ThemeSetManager.saveTheme(newTheme, scanned: true);
-                }
-              },
-              title: 'Scan Theme',
-              icon: const Icon(FontAwesome.qrcode),
-            ),
+                    ThemeSetManager.saveTheme(newTheme, scanned: true);
+                  }
+                },
+                title: 'Scan Theme',
+                icon: const Icon(FontAwesome.qrcode),
+              ),
             ThemeButton(
               onPressed: () async {
                 _showQRCodeDialog(context);

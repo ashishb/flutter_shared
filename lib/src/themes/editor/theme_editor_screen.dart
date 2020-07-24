@@ -26,7 +26,7 @@ class ThemeEditorScreen extends StatelessWidget {
                 context: context,
                 title: 'Delete Theme?',
                 message:
-                    'Do you want to delete the theme nameed: "${themes[index].name}"',
+                    'Do you want to delete the theme named: "${themes[index].name}"',
               );
 
               if (result == true) {

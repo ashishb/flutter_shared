@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 extension ExtendedList on List {
-  // like now, but returns beginning of day
   List<Widget> addDividers() {
     final List<Widget> result = [];
 

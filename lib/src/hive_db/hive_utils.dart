@@ -13,18 +13,23 @@ class HiveUtils {
     // store this in the application support on iOS
     // await Hive.initFlutter('hive'); doesn't allow picking location
     if (!Utils.isWeb) {
-      WidgetsFlutterBinding.ensureInitialized();
+      if (Utils.isMobile) {
+        WidgetsFlutterBinding.ensureInitialized();
 
-      // data directory on android
-      Directory appDir = await getApplicationDocumentsDirectory();
+        // data directory on android
+        Directory appDir = await getApplicationDocumentsDirectory();
 
-      if (Utils.isIOS) {
-        appDir = await getLibraryDirectory();
+        if (Utils.isIOS) {
+          appDir = await getLibraryDirectory();
+        }
+
+        String path = appDir.path;
+        path = p.join(path, 'app_data');
+        Hive.init(path);
+      } else {
+        // a server
+        Hive.init('./hive');
       }
-
-      String path = appDir.path;
-      path = p.join(path, 'app_data');
-      Hive.init(path);
     }
 
     // register adapters

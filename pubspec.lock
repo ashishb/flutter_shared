@@ -21,7 +21,7 @@ packages:
       name: barcode
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.14.0"
+    version: "1.16.1"
   barcode_image:
     dependency: "direct main"
     description:
@@ -44,7 +44,7 @@ packages:
       name: barcode_widget
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.4.0"
+    version: "1.5.0"
   bot_toast:
     dependency: "direct main"
     description:
@@ -107,7 +107,7 @@ packages:
       name: extended_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.9.0"
+    version: "1.0.0"
   extended_image_library:
     dependency: transitive
     description:
@@ -303,7 +303,7 @@ packages:
     source: hosted
     version: "0.4.1"
   path:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       name: path
       url: "https://pub.dartlang.org"

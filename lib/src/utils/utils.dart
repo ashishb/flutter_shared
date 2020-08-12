@@ -73,6 +73,19 @@ class Utils {
     return result;
   }
 
+  static void showLicenses(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (context) {
+          return Theme(
+            data: ThemeData.light(),
+            child: const LicensePage(),
+          );
+        },
+      ),
+    );
+  }
+
   static Future<void> printAssets(BuildContext context,
       {String directoryName, String ext}) async {
     String matchDir = '';

@@ -6,6 +6,7 @@ import 'package:flutter_shared/src/themes/editor/theme_set_manager.dart';
 import 'package:flutter_shared/src/utils/preferences.dart';
 import 'package:flutter_shared/src/extensions/string_ext.dart';
 import 'package:flutter_shared/src/widgets/draggable_scrollbar.dart';
+import 'package:flutter_shared/src/widgets/theme_button.dart';
 
 class _FontObj {
   _FontObj({this.name, this.displayName, this.fav, this.firstChar});
@@ -19,7 +20,10 @@ class _FontObj {
 class GoogleFontsWidget extends StatefulWidget {
   const GoogleFontsWidget({
     Key key,
+    this.showNext = false,
   }) : super(key: key);
+
+  final bool showNext;
 
   @override
   GoogleFontsWidgetState createState() => GoogleFontsWidgetState();
@@ -170,11 +174,58 @@ class GoogleFontsWidgetState extends State<GoogleFontsWidget> {
     );
   }
 
+  void _next() {
+    final String fontName = ThemeSetManager.defaultFont;
+
+    // scroll to default
+    int index = 0;
+    for (int i = 0; i < _fontList.length; i++) {
+      final font = _fontList[i];
+
+      if (font.name == fontName) {
+        index = i;
+        break;
+      }
+    }
+
+    _scrollController.animateTo(
+      _itemHeight * index,
+      duration: const Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
+
+    int nextIndex = index + 1;
+    if (nextIndex >= _fontList.length) {
+      nextIndex = 0;
+    }
+
+    print(index);
+    print(nextIndex);
+    print(_fontList[nextIndex].name);
+
+    ThemeSetManager().googleFont = _fontList[nextIndex].name;
+  }
+
   @override
   Widget build(BuildContext context) {
     final Color normalColor = Theme.of(context).textTheme.bodyText2.color;
     final String currentFont = ThemeSetManager().googleFont;
 
+    if (widget.showNext) {
+      return Column(
+        children: [
+          ThemeButton(
+            onPressed: () {
+              _next();
+            },
+            title: 'Next',
+          ),
+          Expanded(
+            child: _contents(normalColor, currentFont),
+          ),
+        ],
+      );
+    }
     return _contents(normalColor, currentFont);
   }
 }

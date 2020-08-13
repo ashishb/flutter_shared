@@ -64,9 +64,8 @@ class Preferences extends ChangeNotifier {
     }
   }
 
-  List<String> getFavoriteGoogleFonts() =>
-      prefs.get('favoriteGoogleFonts', defaultValue: <String>[])
-          as List<String>;
+  List<String> getFavoriteGoogleFonts() => List<String>.from(
+      prefs.get('favoriteGoogleFonts', defaultValue: <String>[]) as List);
 
   void setFavoriteGoogleFonts(List<String> value) {
     if (getFavoriteGoogleFonts() != value) {

@@ -8,10 +8,11 @@ Future<bool> showWidgetDialog({
   bool showCancel = false,
   String okButtonName = 'OK',
   String cancelButtonName = 'Cancel',
+  bool barrierDismissible = true,
 }) {
   return showDialog<bool>(
     context: context,
-    barrierDismissible: true,
+    barrierDismissible: barrierDismissible,
     builder: (context) => AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),

@@ -8,10 +8,11 @@ Future<String> showStringDialog({
   String cancelButtonName = 'Cancel',
   String defaultName = '',
   TextInputType keyboardType = TextInputType.text,
+  bool barrierDismissible = true,
 }) async {
   return showDialog<String>(
     context: context,
-    barrierDismissible: true, // if true, null can be returned
+    barrierDismissible: barrierDismissible, // if true, null can be returned
     builder: (BuildContext context) {
       return _DialogContents(
         title: title,

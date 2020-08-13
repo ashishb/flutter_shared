@@ -5,10 +5,11 @@ Future<void> showAlertDialog({
   @required BuildContext context,
   @required String title,
   @required String message,
+  bool barrierDismissible = true,
 }) {
   return showDialog<void>(
     context: context,
-    barrierDismissible: true,
+    barrierDismissible: barrierDismissible,
     builder: (context) => AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),

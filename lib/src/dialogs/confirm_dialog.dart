@@ -8,10 +8,11 @@ Future<bool> showConfirmDialog({
   List<Widget> children = const <Widget>[],
   String okButtonName = 'OK',
   String cancelButtonName = 'Cancel',
+  bool barrierDismissible = true,
 }) async {
   return showDialog<bool>(
     context: context,
-    barrierDismissible: true, // can return null
+    barrierDismissible: barrierDismissible, // can return null
     builder: (BuildContext context) {
       return AlertDialog(
         shape: RoundedRectangleBorder(

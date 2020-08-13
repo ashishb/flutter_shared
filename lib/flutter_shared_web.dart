@@ -18,6 +18,7 @@ export 'src/hive_db/hive_data.dart';
 export 'src/hive_db/hive_opener.dart';
 export 'src/hive_db/hive_utils.dart';
 export 'src/network_discovery/bonjour.dart';
+export 'src/network_discovery/bonjour_web.dart';
 export 'src/network_discovery/network_client.dart';
 export 'src/network_discovery/network_discovery_screen.dart';
 export 'src/publishing_tools/phone_menu.dart';

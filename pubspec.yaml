@@ -41,11 +41,14 @@ dependencies:
   hex: ^0.1.2
   path: ^1.7.0
   bonsoir: ^0.1.2+1
-  multicast_dns: 0.2.2
 
   flutter_colorpicker:
     git: git://github.com/sgehrman/flutter_colorpicker
     # path: ../forks/flutter_colorpicker
+
+  multicast_dns:
+    # git: git://github.com/sgehrman/flutter_colorpicker
+    path: ../forks/multicast_dns
 
   barcode_image:
     git:

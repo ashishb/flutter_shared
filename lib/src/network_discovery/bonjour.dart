@@ -55,13 +55,17 @@ class Bonjour extends ChangeNotifier {
   }
 
   Future<void> startDiscovery() async {
-    if (discovery != null) {
-      return;
-    }
-
     if (Utils.isWeb) {
       await _startWebDiscovery();
     } else {
+      if (discovery != null) {
+        return;
+      }
+
+      discovery = BonsoirDiscovery(type: serviceType);
+      await discovery.ready;
+      await discovery.start();
+
       discovery.eventStream.listen((event) {
         if (event.type ==
             BonsoirDiscoveryEventType.DISCOVERY_SERVICE_RESOLVED) {
@@ -79,9 +83,6 @@ class Bonjour extends ChangeNotifier {
           print('Service lost : ${event.service.toJson()}');
         }
       });
-      discovery = BonsoirDiscovery(type: serviceType);
-      await discovery.ready;
-      await discovery.start();
     }
   }
 

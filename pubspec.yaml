@@ -46,10 +46,6 @@ dependencies:
     git: git://github.com/sgehrman/flutter_colorpicker
     # path: ../forks/flutter_colorpicker
 
-  multicast_dns:
-    # git: git://github.com/sgehrman/flutter_colorpicker
-    path: ../forks/multicast_dns
-
   barcode_image:
     git:
       url: git://github.com/sgehrman/dart_barcode

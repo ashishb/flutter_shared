@@ -175,14 +175,14 @@ class GoogleFontsWidgetState extends State<GoogleFontsWidget> {
   }
 
   void _next() {
-    final String fontName = ThemeSetManager.defaultFont;
+    final String currentFont = ThemeSetManager().googleFont;
 
     // scroll to default
     int index = 0;
     for (int i = 0; i < _fontList.length; i++) {
       final font = _fontList[i];
 
-      if (font.name == fontName) {
+      if (font.name == currentFont) {
         index = i;
         break;
       }
@@ -198,10 +198,6 @@ class GoogleFontsWidgetState extends State<GoogleFontsWidget> {
     if (nextIndex >= _fontList.length) {
       nextIndex = 0;
     }
-
-    print(index);
-    print(nextIndex);
-    print(_fontList[nextIndex].name);
 
     ThemeSetManager().googleFont = _fontList[nextIndex].name;
   }

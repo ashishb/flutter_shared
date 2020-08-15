@@ -18,8 +18,12 @@ class ScreenshotParams {
     @required this.phoneRect,
     @required this.showBackground,
     @required this.type,
+    this.phoneColor = const Color.fromRGBO(0, 0, 0, 1),
+    this.phoneFrameColor = const Color.fromRGBO(0, 0, 0, 1),
   });
 
+  Color phoneColor;
+  Color phoneFrameColor;
   PhoneType type;
   Rect resultRect;
   bool showBackground;

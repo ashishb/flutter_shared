@@ -47,10 +47,7 @@ class ScreenshotMaker {
     PhoneShapes.drawPhoneNotch(
       type: p.type,
       canvas: canvas,
-      bottomBezelHeight: p.bottomBezelHeight,
-      phoneFrameWidth: p.phoneFrameWidth,
-      screenshotRect: p.screenshotRect,
-      topBezelHeight: p.topBezelHeight,
+      params: p,
       centerX: p.resultRect.width / 2,
     );
 
@@ -84,16 +81,16 @@ class ScreenshotMaker {
     path.addRRect(rrect);
 
     final fillPaint = Paint();
-    fillPaint.color = PhoneShapes.phoneColor;
+    fillPaint.color = p.phoneColor;
     canvas.drawPath(path, fillPaint);
 
-    PhoneShapes.drawPhoneButtons(canvas, p.phoneRect, p.type);
+    PhoneShapes.drawPhoneButtons(canvas, p);
 
     // phone frame on top of phone buttons
     final framePaint = Paint();
     framePaint.style = PaintingStyle.stroke;
     framePaint.strokeWidth = 3;
-    framePaint.color = PhoneShapes.phoneFrameColor;
+    framePaint.color = p.phoneFrameColor;
     canvas.drawPath(path, framePaint);
 
     // draw image
@@ -251,6 +248,8 @@ class ScreenshotMaker {
     @required PhoneType type,
     @required Size imageSize,
     @required bool showBackground,
+    Color phoneColor,
+    Color phoneFrameColor,
   }) {
     final double imageAspectRatio = imageSize.width / imageSize.height;
 
@@ -357,6 +356,8 @@ class ScreenshotMaker {
       phoneRect: phoneRect,
       showBackground: showBackground,
       type: type,
+      phoneColor: phoneColor,
+      phoneFrameColor: phoneFrameColor,
     );
 
     return params;

@@ -4,8 +4,6 @@ import 'package:flutter_shared/flutter_shared.dart';
 import 'package:flutter_shared/src/publishing_tools/phone_menu.dart';
 
 class PhoneShapes {
-  static Color phoneColor = const Color.fromRGBO(220, 0, 0, 1);
-  static Color phoneFrameColor = const Color.fromRGBO(0, 220, 0, 1);
   static const Color cameraColor = Color.fromRGBO(70, 70, 70, 1);
   static double speakerHeight = 20;
   static Paint dotPaint = Paint()..color = cameraColor;
@@ -109,13 +107,14 @@ class PhoneShapes {
   }
 
   static void drawNotch({
+    @required ScreenshotParams params,
     @required Canvas canvas,
     @required bool appleNotch,
     @required double centerX,
     @required double startY,
   }) {
     final Paint notchPaint = Paint();
-    notchPaint.color = phoneColor;
+    notchPaint.color = params.phoneColor;
 
     if (appleNotch) {
       canvas.drawPath(iPhoneNotchPath(centerX, startY), notchPaint);
@@ -142,20 +141,20 @@ class PhoneShapes {
     }
   }
 
-  static void drawPhoneButtons(Canvas canvas, Rect phoneRect, PhoneType type) {
+  static void drawPhoneButtons(Canvas canvas, ScreenshotParams params) {
     final Paint paint = Paint();
-    paint.color = phoneColor;
+    paint.color = params.phoneColor;
     const double volButtonW = 100;
     const double volButtonH = 184;
     const double muteButtonH = 100;
-    double volButtonY = phoneRect.top + 300;
+    double volButtonY = params.phoneRect.top + 300;
     const double stickout = 16;
     const r = Radius.circular(10);
     Rect rect;
 
     bool drawMuteSwitch = false;
     bool drawButtons = false;
-    switch (type) {
+    switch (params.type) {
       case PhoneType.iPhone11:
       case PhoneType.iPhone5:
         drawMuteSwitch = true;
@@ -173,8 +172,8 @@ class PhoneShapes {
 
     // mute switch
     if (drawMuteSwitch) {
-      rect = Rect.fromLTWH(
-          phoneRect.left - stickout, volButtonY, volButtonW, muteButtonH);
+      rect = Rect.fromLTWH(params.phoneRect.left - stickout, volButtonY,
+          volButtonW, muteButtonH);
       canvas.drawRRect(RRect.fromRectAndRadius(rect, r), paint);
     }
 
@@ -184,7 +183,7 @@ class PhoneShapes {
 
       // volume top
       rect = Rect.fromLTWH(
-          phoneRect.left - stickout, volButtonY, volButtonW, volButtonH);
+          params.phoneRect.left - stickout, volButtonY, volButtonW, volButtonH);
       canvas.drawRRect(RRect.fromRectAndRadius(rect, r), paint);
 
       volButtonY += volButtonH;
@@ -192,13 +191,13 @@ class PhoneShapes {
 
       // volume bottom
       rect = Rect.fromLTWH(
-          phoneRect.left - stickout, volButtonY, volButtonW, volButtonH);
+          params.phoneRect.left - stickout, volButtonY, volButtonW, volButtonH);
       canvas.drawRRect(RRect.fromRectAndRadius(rect, r), paint);
 
       // power button
-      volButtonY = phoneRect.top + 563;
+      volButtonY = params.phoneRect.top + 563;
       rect = Rect.fromLTWH(
-        phoneRect.right - (volButtonW - stickout),
+        params.phoneRect.right - (volButtonW - stickout),
         volButtonY,
         volButtonW,
         volButtonH * 1.5,
@@ -295,26 +294,25 @@ class PhoneShapes {
     @required Canvas canvas,
     @required PhoneType type,
     @required double centerX,
-    @required Rect screenshotRect,
-    @required double topBezelHeight,
-    @required double phoneFrameWidth,
-    @required double bottomBezelHeight,
+    @required ScreenshotParams params,
   }) {
     switch (type) {
       case PhoneType.iPhone11:
         drawNotch(
+          params: params,
           canvas: canvas,
           appleNotch: true,
           centerX: centerX,
-          startY: screenshotRect.top,
+          startY: params.screenshotRect.top,
         );
         break;
       case PhoneType.onePlus7t:
         drawNotch(
+          params: params,
           canvas: canvas,
           appleNotch: false,
           centerX: centerX,
-          startY: screenshotRect.top,
+          startY: params.screenshotRect.top,
         );
         break;
       case PhoneType.iPadPro:
@@ -322,16 +320,16 @@ class PhoneShapes {
           radius: 12,
           canvas: canvas,
           centerX: centerX,
-          centerY: screenshotRect.top - (phoneFrameWidth / 2),
+          centerY: params.screenshotRect.top - (params.phoneFrameWidth / 2),
         );
         break;
       case PhoneType.iPad:
         drawTopBezelAppleTablet(
           canvas: canvas,
           centerX: centerX,
-          centerY:
-              screenshotRect.top - ((topBezelHeight + phoneFrameWidth) / 2),
-          startY: screenshotRect.top - topBezelHeight,
+          centerY: params.screenshotRect.top -
+              ((params.topBezelHeight + params.phoneFrameWidth) / 2),
+          startY: params.screenshotRect.top - params.topBezelHeight,
         );
 
         // home button
@@ -339,17 +337,17 @@ class PhoneShapes {
           radius: 62,
           canvas: canvas,
           centerX: centerX,
-          centerY: screenshotRect.bottom +
-              ((bottomBezelHeight + phoneFrameWidth) / 2),
+          centerY: params.screenshotRect.bottom +
+              ((params.bottomBezelHeight + params.phoneFrameWidth) / 2),
         );
         break;
       case PhoneType.iPhone5:
         drawTopBezelApplePhone(
           canvas: canvas,
           centerX: centerX,
-          centerY:
-              screenshotRect.top - ((topBezelHeight + phoneFrameWidth) / 2),
-          startY: screenshotRect.top - topBezelHeight,
+          centerY: params.screenshotRect.top -
+              ((params.topBezelHeight + params.phoneFrameWidth) / 2),
+          startY: params.screenshotRect.top - params.topBezelHeight,
         );
 
         // home button
@@ -357,8 +355,8 @@ class PhoneShapes {
           radius: 68,
           canvas: canvas,
           centerX: centerX,
-          centerY: screenshotRect.bottom +
-              ((bottomBezelHeight + phoneFrameWidth) / 2),
+          centerY: params.screenshotRect.bottom +
+              ((params.bottomBezelHeight + params.phoneFrameWidth) / 2),
         );
         break;
       default:

@@ -122,9 +122,11 @@ class _ThemeEditorWidgetState extends State<ThemeEditorWidget> {
           trailing: ThemeButton(
             title: 'Change Font',
             onPressed: () {
-              Navigator.of(context).pushNamed(
-                '/fonts',
-              );
+              Navigator.of(context).push<void>(MaterialPageRoute(
+                builder: (context) {
+                  return GoogleFontsScreen();
+                },
+              ));
             },
           ),
           title: Text(

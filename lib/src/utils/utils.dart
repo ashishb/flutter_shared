@@ -204,7 +204,7 @@ class Utils {
 
     if (isNotEmpty(dateString)) {
       try {
-        DateTime theDate = parseDate(dateString);
+        DateTime theDate = parseDate(dateString + 'Z');
 
         if (theDate != null) {
           // added for medcreds, their dates need utc

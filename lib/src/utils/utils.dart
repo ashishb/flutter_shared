@@ -195,8 +195,6 @@ class Utils {
     return '';
   }
 
-  // sometimes you get a weird date format that crashes
-  // not a perfect solution, but enough for now
   static String formatLocalDateString(String dateString) {
     String result;
 
@@ -206,9 +204,12 @@ class Utils {
 
     if (isNotEmpty(dateString)) {
       try {
-        final DateTime theDate = parseDate(dateString);
+        DateTime theDate = parseDate(dateString);
 
         if (theDate != null) {
+          // added for medcreds, their dates need utc
+          theDate = theDate.toUtc();
+
           result = formatLocalDateTime(date: theDate);
         }
       } catch (err) {
@@ -224,6 +225,8 @@ class Utils {
     return result ?? '';
   }
 
+  // sometimes you get a weird date format that crashes
+  // not a perfect solution, but enough for now
   static DateTime parseDate(String dateString) {
     if (isNotEmpty(dateString)) {
       DateTime theDate;

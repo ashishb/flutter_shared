@@ -204,15 +204,18 @@ class Utils {
 
     if (isNotEmpty(dateString)) {
       try {
-        DateTime theDate = parseDate(dateString + 'Z');
+        DateTime theDate = parseDate(dateString);
 
         if (theDate != null) {
           // added for medcreds, their dates need utc
-          print(theDate);
-          print(theDate.isUtc);
-
-          theDate = theDate.toUtc();
-          print(theDate);
+          theDate = DateTime.utc(
+            theDate.year,
+            theDate.month,
+            theDate.day,
+            theDate.hour,
+            theDate.minute,
+            theDate.second,
+          );
 
           result = formatLocalDateTime(date: theDate);
         }

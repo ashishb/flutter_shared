@@ -208,7 +208,11 @@ class Utils {
 
         if (theDate != null) {
           // added for medcreds, their dates need utc
+          print(theDate);
+          print(theDate.isUtc);
+
           theDate = theDate.toUtc();
+          print(theDate);
 
           result = formatLocalDateTime(date: theDate);
         }

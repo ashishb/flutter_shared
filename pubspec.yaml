@@ -40,7 +40,8 @@ dependencies:
   crypto: ^2.1.5
   hex: ^0.1.2
   path: ^1.7.0
-  bonsoir: ^0.1.2+1
+  bonsoir: 
+    git: git://github.com/Skyost/Bonsoir
 
   flutter_colorpicker:
     git: git://github.com/sgehrman/flutter_colorpicker

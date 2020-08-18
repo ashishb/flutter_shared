@@ -35,25 +35,32 @@ class _DigitState extends State<Digit> with SingleTickerProviderStateMixin {
 
   bool haveData = false;
 
-  final Animatable<Offset> _slideDownDetails = Tween<Offset>(
+  final Animatable<Offset> _slideUpTween = Tween<Offset>(
     begin: const Offset(0.0, -1.0),
     end: Offset.zero,
   );
-  Animation<Offset> _slideDownAnimation;
+  Animation<Offset> _slideUpAnimation;
 
-  final Animatable<Offset> _slideDownDetails2 = Tween<Offset>(
+  final Animatable<Offset> _slideDownTween = Tween<Offset>(
     begin: const Offset(0.0, 0.0),
     end: const Offset(0.0, 1.0),
   );
-  Animation<Offset> _slideDownAnimation2;
+  Animation<Offset> _slideDownAnimation;
+
+  final Animatable<double> _opacityTween = Tween<double>(
+    begin: 0,
+    end: 1,
+  );
+  Animation<double> _opacityAnimation;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 450));
-    _slideDownAnimation = _controller.drive(_slideDownDetails);
-    _slideDownAnimation2 = _controller.drive(_slideDownDetails2);
+    _slideUpAnimation = _controller.drive(_slideUpTween);
+    _slideDownAnimation = _controller.drive(_slideDownTween);
+    _opacityAnimation = _controller.drive(_opacityTween);
 
     startStreams();
   }
@@ -127,35 +134,39 @@ class _DigitState extends State<Digit> with SingleTickerProviderStateMixin {
       child: AnimatedBuilder(
         animation: _controller,
         builder: (context, w) {
+          print(_opacityAnimation.value);
           return Stack(
             fit: StackFit.passthrough,
             children: <Widget>[
               if (haveData)
                 FractionalTranslation(
                   translation: (widget.slideDirection == SlideDirection.down)
-                      ? _slideDownAnimation.value
-                      : -_slideDownAnimation.value,
+                      ? _slideUpAnimation.value
+                      : -_slideUpAnimation.value,
                   child: ClipRect(
                     clipper: ClipHalfRect(
-                      percentage: _slideDownAnimation.value.dy,
-                      isUp: true,
+                      percentage: _slideUpAnimation.value.dy,
+                      isUp: false,
                       slideDirection: widget.slideDirection,
                     ),
-                    child: Text(
-                      '$_nextValue',
-                      textAlign: TextAlign.center,
-                      textScaleFactor: 1.0,
-                      style: widget.textStyle,
+                    child: Opacity(
+                      opacity: _opacityAnimation.value,
+                      child: Text(
+                        '$_nextValue',
+                        textAlign: TextAlign.center,
+                        textScaleFactor: 1.0,
+                        style: widget.textStyle,
+                      ),
                     ),
                   ),
                 ),
               FractionalTranslation(
                 translation: (widget.slideDirection == SlideDirection.down)
-                    ? _slideDownAnimation2.value
-                    : -_slideDownAnimation2.value,
+                    ? _slideDownAnimation.value
+                    : -_slideDownAnimation.value,
                 child: ClipRect(
                   clipper: ClipHalfRect(
-                    percentage: _slideDownAnimation2.value.dy,
+                    percentage: _slideDownAnimation.value.dy,
                     isUp: false,
                     slideDirection: widget.slideDirection,
                   ),

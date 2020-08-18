@@ -134,7 +134,6 @@ class _DigitState extends State<Digit> with SingleTickerProviderStateMixin {
       child: AnimatedBuilder(
         animation: _controller,
         builder: (context, w) {
-          print(_opacityAnimation.value);
           return Stack(
             fit: StackFit.passthrough,
             children: <Widget>[

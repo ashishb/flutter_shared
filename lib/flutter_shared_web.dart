@@ -57,6 +57,7 @@ export 'src/widgets/draggable_scrollbar.dart';
 export 'src/widgets/dropstack/drop_stack.dart';
 export 'src/widgets/dropstack/drop_stack_button.dart';
 export 'src/widgets/file_info.dart';
+export 'src/widgets/gradient_text.dart';
 export 'src/widgets/image/image_viewer.dart';
 export 'src/widgets/image/super_image.dart';
 export 'src/widgets/image/super_image_source.dart';

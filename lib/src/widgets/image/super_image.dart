@@ -4,6 +4,7 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 import 'package:flutter_shared/src/widgets/image/super_image_source.dart';
+import 'package:flutter_shared/src/widgets/transparent_route.dart';
 
 class SuperImage extends StatelessWidget {
   const SuperImage(
@@ -78,7 +79,7 @@ class SuperImage extends StatelessWidget {
 
           result = GestureDetector(
             onTap: () {
-              Navigator.of(context).push(InvisibleMaterialPageRoute<void>(
+              Navigator.of(context).push(TransparentPageRoute<void>(
                 builder: (BuildContext context) => ImageViewer(
                   index: index,
                   swiperItems: swiperItems,
@@ -147,26 +148,5 @@ class SuperImage extends StatelessWidget {
     }
 
     return NothingWidget();
-  }
-}
-
-class InvisibleMaterialPageRoute<T> extends TransparentMaterialPageRoute<T> {
-  InvisibleMaterialPageRoute({
-    @required Widget Function(BuildContext) builder,
-    RouteSettings settings,
-    bool maintainState = true,
-    bool fullscreenDialog = false,
-  }) : super(
-          builder: builder,
-          maintainState: maintainState,
-          settings: settings,
-          fullscreenDialog: fullscreenDialog,
-        );
-
-  @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
-    // animation disabled
-    return child;
   }
 }

@@ -117,4 +117,14 @@ class Dates {
 
     return null;
   }
+
+  static String fileNameWithDate() {
+    String filename = DateFormat.yMd().add_jms().format(DateTime.now());
+    filename = filename.replaceAll(':', '-');
+    filename = filename.replaceAll('.', '-');
+    filename = filename.replaceAll(' ', '-');
+    filename = filename.replaceAll('/', '-');
+
+    return filename;
+  }
 }

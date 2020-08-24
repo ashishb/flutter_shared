@@ -6,7 +6,13 @@ extension StringUtils on String {
     return startsWith('assets/');
   }
 
-  String get firstChar => substring(0, 1);
+  String get firstChar {
+    if (Utils.isNotEmpty(this)) {
+      return substring(0, 1);
+    }
+
+    return '';
+  }
 
   String fromCamelCase() {
     String displayName = '';

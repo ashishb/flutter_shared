@@ -72,4 +72,17 @@ extension StringUtils on String {
 
     return this;
   }
+
+  String removePrefix(String prefix) {
+    // don't remove last '/' if path is '/'
+    if (this != prefix) {
+      if (Utils.isNotEmpty(prefix)) {
+        if (startsWith(prefix)) {
+          return substring(prefix.length);
+        }
+      }
+    }
+
+    return this;
+  }
 }

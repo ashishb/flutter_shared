@@ -1,10 +1,21 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
 class SystemDirectories {
+  static String fileNameWithDate() {
+    String filename = DateFormat.yMd().add_jms().format(DateTime.now());
+    filename = filename.replaceAll(':', '-');
+    filename = filename.replaceAll('.', '-');
+    filename = filename.replaceAll(' ', '-');
+    filename = filename.replaceAll('/', '-');
+
+    return filename;
+  }
+
   static Future<String> get documentsPath async {
     String result;
 

@@ -154,7 +154,8 @@ class DateTimeFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return FormField<DateTime>(
       validator: validator,
-      autovalidate: autovalidate,
+      autovalidateMode:
+          autovalidate ? AutovalidateMode.always : AutovalidateMode.disabled,
       initialValue: initialValue,
       onSaved: onSaved,
       enabled: enabled,

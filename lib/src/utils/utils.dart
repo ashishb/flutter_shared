@@ -233,7 +233,7 @@ class Utils {
           : null,
     );
 
-    Scaffold.of(context).showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   static Future<void> showCopiedToast(BuildContext context) async {
@@ -440,7 +440,7 @@ class NothingWidget extends StatelessWidget {
     // return SizedBox(width: 0, height: 0);
 
     // error message says this takes up as little space as possible
-    return Container(width: 0, height: 0);
+    return const SizedBox(width: 0, height: 0);
   }
 }
 

@@ -9,7 +9,7 @@ class DialogButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 40,
       width: 130,
       child: OutlineButton(

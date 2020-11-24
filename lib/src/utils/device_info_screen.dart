@@ -175,7 +175,7 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
               index: index,
               darkMode: darkMode,
             ),
-            leading: Container(
+            leading: const SizedBox(
               height: 50,
               width: 5,
             ),

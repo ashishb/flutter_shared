@@ -62,7 +62,7 @@ class DateTimeFormField extends StatelessWidget {
         await showModalBottomSheet<void>(
           context: context,
           builder: (BuildContext builder) {
-            return Container(
+            return SizedBox(
               height: MediaQuery.of(context).size.height / 4,
               child: CupertinoDatePicker(
                 mode: CupertinoDatePickerMode.date,
@@ -95,7 +95,7 @@ class DateTimeFormField extends StatelessWidget {
         await showModalBottomSheet<void>(
           context: context,
           builder: (BuildContext builder) {
-            return Container(
+            return SizedBox(
               height: MediaQuery.of(context).size.height / 4,
               child: CupertinoDatePicker(
                 mode: CupertinoDatePickerMode.time,
@@ -135,7 +135,7 @@ class DateTimeFormField extends StatelessWidget {
         await showModalBottomSheet<void>(
           context: context,
           builder: (BuildContext builder) {
-            return Container(
+            return SizedBox(
               height: MediaQuery.of(context).size.height / 4,
               child: CupertinoDatePicker(
                 onDateTimeChanged: (DateTime dateTime) =>

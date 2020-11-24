@@ -85,7 +85,7 @@ class _DropStackButtonState extends State<DropStackButton>
           await dropStack.drop(
               context: context, directory: widget.directory, topOnly: true);
 
-          _animationController?.reverse();
+          await _animationController?.reverse();
         },
       ));
     }
@@ -100,7 +100,7 @@ class _DropStackButtonState extends State<DropStackButton>
         await dropStack.drop(
             context: context, directory: widget.directory, topOnly: false);
 
-        _animationController?.reverse();
+        await _animationController?.reverse();
       },
     ));
 

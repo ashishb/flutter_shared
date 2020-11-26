@@ -51,6 +51,7 @@ export 'src/widgets/browser_header.dart';
 export 'src/widgets/browser_status_bar.dart';
 export 'src/widgets/checkerboard_container.dart';
 export 'src/widgets/colored_button.dart';
+export 'src/widgets/date_picker.dart';
 export 'src/widgets/datetime_form_field.dart';
 export 'src/widgets/dialog_button.dart';
 export 'src/widgets/draggable_scrollbar.dart';

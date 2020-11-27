@@ -72,7 +72,9 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
         style: TextStyle(
           color: entry.value == null
               ? Colors.grey
-              : Utils.isDarkMode(context) ? Colors.white : Colors.black,
+              : Utils.isDarkMode(context)
+                  ? Colors.white
+                  : Colors.black,
         ),
       );
     }
@@ -156,6 +158,12 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
         entry.value.toString(),
         style: const TextStyle(color: Colors.purple),
       ));
+    } else if (entry.value is DateTime) {
+      return Expanded(
+          child: Text(
+        entry.value.toString(),
+        style: const TextStyle(color: Colors.purple),
+      ));
     } else if (entry.value is double) {
       return Expanded(
         child: Text(
@@ -222,6 +230,8 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
       return 'double';
     } else if (content is List) {
       return 'List';
+    } else if (content is DateTime) {
+      return 'DateTime';
     }
     return 'Object';
   }

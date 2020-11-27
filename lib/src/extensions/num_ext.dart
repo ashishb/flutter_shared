@@ -24,6 +24,17 @@ extension ExtendedInt on int {
 
     return '${(this / math.pow(k, i)).toStringAsFixed(dm)} ${sizes[i]}';
   }
+
+  String formatCentsAsDollars() {
+    if (this == 0) {
+      return '\$0';
+    }
+
+    final val = this / 100;
+    final showCents = this % 100 != 0;
+
+    return showCents ? '\$${val.toStringAsFixed(2)}' : '\$$val';
+  }
 }
 
 extension ExtendedNum on num {

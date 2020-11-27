@@ -9,7 +9,7 @@ class DatePicker extends StatefulWidget {
     this.selectableDayPredicate,
     Key key,
     this.width = 60,
-    this.height = 80,
+    this.height = 100,
     this.controller,
     this.selectionColor = AppColors.defaultSelectionColor,
     this.daysCount = 60,
@@ -58,7 +58,7 @@ class _DatePickerState extends State<DatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: widget.height,
       child: ListView.builder(
         itemCount: widget.daysCount,

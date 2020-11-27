@@ -127,6 +127,8 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
       return false;
     } else if (content is double) {
       return false;
+    } else if (content is DateTime) {
+      return false;
     } else if (content is List) {
       return true;
     }
@@ -162,7 +164,7 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
       return Expanded(
           child: Text(
         entry.value.toString(),
-        style: const TextStyle(color: Colors.purple),
+        style: const TextStyle(color: Colors.teal),
       ));
     } else if (entry.value is double) {
       return Expanded(
@@ -212,6 +214,8 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
     } else if (content is String) {
       return false;
     } else if (content is bool) {
+      return false;
+    } else if (content is DateTime) {
       return false;
     } else if (content is double) {
       return false;

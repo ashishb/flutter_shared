@@ -33,7 +33,7 @@ extension ExtendedInt on int {
     final val = this / 100;
     final showCents = this % 100 != 0;
 
-    return showCents ? '\$${val.toStringAsFixed(2)}' : '\$$val';
+    return showCents ? '\$${val.toStringAsFixed(2)}' : '\$${val.toInt()}';
   }
 }
 

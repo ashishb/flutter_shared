@@ -82,26 +82,29 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
 
   List<Widget> _getList() {
     final List<Widget> list = [];
-    for (final entry in widget.jsonObj.entries) {
-      final bool ex = isExtensible(entry.value);
-      final bool ink = isInkWell(entry.value);
-      list.add(
-        Row(
-          children: <Widget>[
-            _ex(ex, entry),
-            _exAndInk(ex, ink, entry),
-            const Text(
-              ':',
-              style: TextStyle(color: Colors.grey),
-            ),
-            const SizedBox(width: 3),
-            getValueWidget(entry)
-          ],
-        ),
-      );
-      list.add(const SizedBox(height: 4));
-      if (openFlag[entry.key] ?? false) {
-        list.add(getContentWidget(entry.value));
+
+    if (widget.jsonObj != null) {
+      for (final entry in widget.jsonObj.entries) {
+        final bool ex = isExtensible(entry.value);
+        final bool ink = isInkWell(entry.value);
+        list.add(
+          Row(
+            children: <Widget>[
+              _ex(ex, entry),
+              _exAndInk(ex, ink, entry),
+              const Text(
+                ':',
+                style: TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(width: 3),
+              getValueWidget(entry)
+            ],
+          ),
+        );
+        list.add(const SizedBox(height: 4));
+        if (openFlag[entry.key] ?? false) {
+          list.add(getContentWidget(entry.value));
+        }
       }
     }
     return list;

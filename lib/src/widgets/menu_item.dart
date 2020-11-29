@@ -14,7 +14,12 @@ class MenuItem extends StatelessWidget {
           padding: const EdgeInsets.only(right: 12.0),
           child: icon,
         ),
-        Text(name),
+        Flexible(
+          child: Text(
+            name,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
       ],
     );
   }

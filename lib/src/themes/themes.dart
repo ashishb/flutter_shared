@@ -55,6 +55,7 @@ class AppTheme {
       popupMenuTheme: popupMenuTheme,
       primaryColorBrightness: Brightness.dark,
       bottomAppBarTheme: _bottomBarTheme(darkMode),
+      bottomNavigationBarTheme: _bottomNavBarTheme(darkMode),
       textTheme: _textTheme(darkMode),
       iconTheme: iconTheme,
       accentColor: params.accentColor,
@@ -222,5 +223,13 @@ class AppTheme {
     return BottomAppBarTheme(
       color: darkMode ? Colors.white : Colors.black,
     );
+  }
+
+  BottomNavigationBarThemeData _bottomNavBarTheme(bool darkMode) {
+    return BottomNavigationBarThemeData(
+        selectedItemColor: darkMode ? Colors.white : Colors.black,
+        unselectedItemColor: Colors.grey,
+        backgroundColor:
+            Utils.darken(ThemeSetManager().currentTheme.backgroundColor, .04));
   }
 }

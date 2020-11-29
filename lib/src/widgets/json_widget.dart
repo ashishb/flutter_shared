@@ -70,11 +70,7 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
       return Text(
         entry.key as String,
         style: TextStyle(
-          color: entry.value == null
-              ? Colors.grey
-              : Utils.isDarkMode(context)
-                  ? Colors.white
-                  : Colors.black,
+          color: Utils.isDarkMode(context) ? Colors.white : Colors.black,
         ),
       );
     }
@@ -149,31 +145,31 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
       return Expanded(
           child: Text(
         entry.value.toString(),
-        style: const TextStyle(color: Colors.teal),
+        style: const TextStyle(color: Colors.grey),
       ));
     } else if (entry.value is String) {
       return Expanded(
           child: Text(
         '"${entry.value}"',
-        style: const TextStyle(color: Colors.redAccent),
+        style: const TextStyle(color: Colors.grey),
       ));
     } else if (entry.value is bool) {
       return Expanded(
           child: Text(
         entry.value.toString(),
-        style: const TextStyle(color: Colors.purple),
+        style: const TextStyle(color: Colors.grey),
       ));
     } else if (entry.value is DateTime) {
       return Expanded(
           child: Text(
         entry.value.toString(),
-        style: const TextStyle(color: Colors.teal),
+        style: const TextStyle(color: Colors.grey),
       ));
     } else if (entry.value is double) {
       return Expanded(
         child: Text(
           entry.value.toString(),
-          style: const TextStyle(color: Colors.teal),
+          style: const TextStyle(color: Colors.grey),
         ),
       );
     } else if (entry.value is List) {
@@ -361,25 +357,25 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
       return Expanded(
           child: Text(
         content.toString(),
-        style: const TextStyle(color: Colors.teal),
+        style: const TextStyle(color: Colors.grey),
       ));
     } else if (content is String) {
       return Expanded(
           child: Text(
         '"$content"',
-        style: const TextStyle(color: Colors.redAccent),
+        style: const TextStyle(color: Colors.grey),
       ));
     } else if (content is bool) {
       return Expanded(
           child: Text(
         content.toString(),
-        style: const TextStyle(color: Colors.purple),
+        style: const TextStyle(color: Colors.grey),
       ));
     } else if (content is double) {
       return Expanded(
           child: Text(
         content.toString(),
-        style: const TextStyle(color: Colors.teal),
+        style: const TextStyle(color: Colors.grey),
       ));
     } else if (content is List) {
       if (content.isEmpty) {

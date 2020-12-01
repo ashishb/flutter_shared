@@ -55,7 +55,7 @@ class AppTheme {
       popupMenuTheme: popupMenuTheme,
       primaryColorBrightness: Brightness.dark,
       bottomAppBarTheme: _bottomBarTheme(darkMode),
-      bottomNavigationBarTheme: _bottomNavBarTheme(darkMode),
+      bottomNavigationBarTheme: _bottomNavBarTheme(appColor),
       textTheme: _textTheme(darkMode),
       iconTheme: iconTheme,
       accentColor: params.accentColor,
@@ -81,17 +81,18 @@ class AppTheme {
 
     if (darkMode) {
       return baseTheme.copyWith(
-        brightness: Brightness.dark,
-        accentColorBrightness: Brightness.dark,
-        appBarTheme: _appBarTheme(true, params),
-        buttonTheme: _buttonTheme(true),
-      );
+          brightness: Brightness.dark,
+          accentColorBrightness: Brightness.dark,
+          appBarTheme: _appBarTheme(true, params),
+          buttonTheme: _buttonTheme(true),
+          textButtonTheme: _textButtonTheme(true));
     }
     return baseTheme.copyWith(
       brightness: Brightness.light,
       accentColorBrightness: Brightness.light,
       appBarTheme: _appBarTheme(params.darkModeAppBarText, params),
       buttonTheme: _buttonTheme(params.darkModeForButtonText),
+      textButtonTheme: _textButtonTheme(params.darkModeForButtonText),
     );
   }
 
@@ -205,6 +206,15 @@ class AppTheme {
     return result;
   }
 
+  TextButtonThemeData _textButtonTheme(bool darkMode) {
+    TextButtonThemeData startTheme = ThemeData.light().textButtonTheme;
+    if (darkMode) {
+      startTheme = ThemeData.dark().textButtonTheme;
+    }
+
+    return TextButtonThemeData(style: startTheme.style);
+  }
+
   AppBarTheme _appBarTheme(bool darkMode, ColorParams params) {
     return AppBarTheme(
       color: darkMode ? params.barColorDark : params.barColor,
@@ -225,11 +235,12 @@ class AppTheme {
     );
   }
 
-  BottomNavigationBarThemeData _bottomNavBarTheme(bool darkMode) {
+  BottomNavigationBarThemeData _bottomNavBarTheme(Color itemColor) {
     return BottomNavigationBarThemeData(
-        selectedItemColor: darkMode ? Colors.white : Colors.black,
-        unselectedItemColor: Colors.grey,
-        backgroundColor:
-            Utils.darken(ThemeSetManager().currentTheme.backgroundColor, .04));
+      selectedItemColor: itemColor,
+      unselectedItemColor: itemColor,
+      elevation: 8,
+      backgroundColor: ThemeSetManager().currentTheme.backgroundColor,
+    );
   }
 }

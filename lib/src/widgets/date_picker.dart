@@ -81,6 +81,7 @@ class _DatePickerState extends State<DatePicker> {
             date: date,
             width: widget.width,
             locale: widget.locale,
+            selectionColor: widget.selectionColor,
             isSelected: isSelected,
             onDateSelected: (selectedDate) {
               if (widget.onDateChange != null) {
@@ -154,6 +155,7 @@ class _DateWidget extends StatelessWidget {
     this.width,
     this.onDateSelected,
     this.locale,
+    this.selectionColor,
   });
 
   final double width;
@@ -162,6 +164,7 @@ class _DateWidget extends StatelessWidget {
   final bool isSelected;
   final DateSelectionCallback onDateSelected;
   final String locale;
+  final Color selectionColor;
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +181,7 @@ class _DateWidget extends StatelessWidget {
         margin: const EdgeInsets.all(3.0),
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(8.0)),
-          color: isSelected ? Colors.pink[300] : Colors.transparent,
+          color: isSelected ? selectionColor : Colors.transparent,
         ),
         child: Padding(
           padding: const EdgeInsets.all(8),

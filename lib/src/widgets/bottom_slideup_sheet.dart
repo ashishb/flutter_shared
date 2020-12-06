@@ -11,6 +11,7 @@ abstract class SliderContent {
   bool enableCopyButton();
   double get initialChildSize;
   Color backgroundColor(BuildContext context);
+  Color barrierColor(BuildContext context);
 }
 
 const BorderRadius _borderRadius = BorderRadius.only(
@@ -25,6 +26,7 @@ class BottomSlideupSheet {
   }) {
     return showModalBottomSheet<void>(
       backgroundColor: sliderContent.backgroundColor(context),
+      barrierColor: sliderContent.barrierColor(context),
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: _borderRadius,

@@ -13,7 +13,7 @@ class BrowserHeader extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: bottom ?? 14, top: top ?? 24),
       child: Text(
-        header,
+        header.toUpperCase(),
         style: ThemeSetManager.header(context),
       ),
     );

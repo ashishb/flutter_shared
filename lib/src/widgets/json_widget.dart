@@ -270,7 +270,7 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
   @override
   void initState() {
     super.initState();
-    openFlag = List(widget.jsonArray.length);
+    openFlag = List.filled(widget.jsonArray.length, false);
   }
 
   Widget _ex(bool ex, int i) {

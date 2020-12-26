@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:barcode_image/barcode_image.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_shared/flutter_shared.dart';
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_extend/share_extend.dart';
 import 'package:image/image.dart' as img;
@@ -140,11 +140,13 @@ class _ThemeEditorWidgetState extends State<ThemeEditorWidget> {
             if (Utils.isMobile)
               ThemeButton(
                 onPressed: () async {
-                  final ScanResult result = await BarcodeScanner.scan();
+                  final String barcodeScanRes =
+                      await FlutterBarcodeScanner.scanBarcode(
+                          '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
 
-                  if (Utils.isNotEmpty(result.rawContent)) {
+                  if (Utils.isNotEmpty(barcodeScanRes)) {
                     final ThemeSet newTheme = ThemeSet.fromMap(
-                        json.decode(result.rawContent) as Map<String, dynamic>);
+                        json.decode(barcodeScanRes) as Map<String, dynamic>);
 
                     ThemeSetManager.saveTheme(newTheme, scanned: true);
                   }

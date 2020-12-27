@@ -431,6 +431,28 @@ class Utils {
       align: Alignment.topCenter,
     ); //popup a text toast;
   }
+
+  static String enumToString(Object enumItem) {
+    if (enumItem == null) {
+      return '';
+    }
+
+    return describeEnum(enumItem);
+  }
+
+  static T enumFromString<T>(
+    List<T> enumValues,
+    String value,
+  ) {
+    if (value == null || enumValues == null) {
+      return null;
+    }
+
+    return enumValues.singleWhere(
+        (enumItem) =>
+            enumToString(enumItem)?.toLowerCase() == value?.toLowerCase(),
+        orElse: () => null);
+  }
 }
 
 class NothingWidget extends StatelessWidget {

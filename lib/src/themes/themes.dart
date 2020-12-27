@@ -65,6 +65,11 @@ class AppTheme {
       dialogBackgroundColor: ThemeSetManager().currentTheme.backgroundColor,
       sliderTheme: sliderTheme,
       floatingActionButtonTheme: floatingActionButtonTheme,
+      colorScheme: _colorScheme(
+        darkMode: darkMode,
+        primary: appColor,
+        secondary: params.accentColor,
+      ),
       inputDecorationTheme: InputDecorationTheme(
         enabledBorder: UnderlineInputBorder(
           borderSide:
@@ -76,16 +81,15 @@ class AppTheme {
         ),
         hintStyle:
             TextStyle(color: ThemeSetManager().currentTheme.textAccentColor),
+        labelStyle:
+            TextStyle(color: ThemeSetManager().currentTheme.textAccentColor),
+        helperStyle:
+            TextStyle(color: ThemeSetManager().currentTheme.textAccentColor),
       ),
     );
 
     if (darkMode) {
       return baseTheme.copyWith(
-        colorScheme: _colorScheme(
-          darkMode: darkMode,
-          primary: appColor,
-          secondary: params.accentColor,
-        ),
         brightness: Brightness.dark,
         accentColorBrightness: Brightness.dark,
         appBarTheme: _appBarTheme(true, params),
@@ -96,11 +100,6 @@ class AppTheme {
       );
     }
     return baseTheme.copyWith(
-      colorScheme: _colorScheme(
-        darkMode: darkMode,
-        primary: appColor,
-        secondary: params.accentColor,
-      ),
       brightness: Brightness.light,
       accentColorBrightness: Brightness.light,
       appBarTheme: _appBarTheme(params.darkModeAppBarText, params),

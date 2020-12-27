@@ -81,23 +81,33 @@ class AppTheme {
 
     if (darkMode) {
       return baseTheme.copyWith(
+        colorScheme: _colorScheme(
+          darkMode: darkMode,
+          primary: appColor,
+          secondary: params.accentColor,
+        ),
         brightness: Brightness.dark,
         accentColorBrightness: Brightness.dark,
         appBarTheme: _appBarTheme(true, params),
         buttonTheme: _buttonTheme(true),
         textButtonTheme: _textButtonTheme(true),
         elevatedButtonTheme: _elevatedButtonTheme(true),
-        cardColor: Colors.white30,
+        cardTheme: const CardTheme(color: Colors.white30),
       );
     }
     return baseTheme.copyWith(
+      colorScheme: _colorScheme(
+        darkMode: darkMode,
+        primary: appColor,
+        secondary: params.accentColor,
+      ),
       brightness: Brightness.light,
       accentColorBrightness: Brightness.light,
       appBarTheme: _appBarTheme(params.darkModeAppBarText, params),
       buttonTheme: _buttonTheme(params.darkModeForButtonText),
       textButtonTheme: _textButtonTheme(params.darkModeForButtonText),
       elevatedButtonTheme: _elevatedButtonTheme(params.darkModeForButtonText),
-      cardColor: Colors.white30,
+      cardTheme: const CardTheme(color: Colors.white30),
     );
   }
 
@@ -206,6 +216,20 @@ class AppTheme {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),
+    );
+
+    return result;
+  }
+
+  ColorScheme _colorScheme({bool darkMode, Color primary, Color secondary}) {
+    ColorScheme scheme = ThemeData.light().colorScheme;
+    if (darkMode) {
+      scheme = ThemeData.dark().colorScheme;
+    }
+
+    final result = scheme.copyWith(
+      primary: primary,
+      secondary: secondary,
     );
 
     return result;

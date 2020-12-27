@@ -81,11 +81,14 @@ class AppTheme {
 
     if (darkMode) {
       return baseTheme.copyWith(
-          brightness: Brightness.dark,
-          accentColorBrightness: Brightness.dark,
-          appBarTheme: _appBarTheme(true, params),
-          buttonTheme: _buttonTheme(true),
-          textButtonTheme: _textButtonTheme(true));
+        brightness: Brightness.dark,
+        accentColorBrightness: Brightness.dark,
+        appBarTheme: _appBarTheme(true, params),
+        buttonTheme: _buttonTheme(true),
+        textButtonTheme: _textButtonTheme(true),
+        elevatedButtonTheme: _elevatedButtonTheme(true),
+        cardColor: Colors.white30,
+      );
     }
     return baseTheme.copyWith(
       brightness: Brightness.light,
@@ -93,6 +96,8 @@ class AppTheme {
       appBarTheme: _appBarTheme(params.darkModeAppBarText, params),
       buttonTheme: _buttonTheme(params.darkModeForButtonText),
       textButtonTheme: _textButtonTheme(params.darkModeForButtonText),
+      elevatedButtonTheme: _elevatedButtonTheme(params.darkModeForButtonText),
+      cardColor: Colors.white30,
     );
   }
 
@@ -204,6 +209,15 @@ class AppTheme {
     );
 
     return result;
+  }
+
+  ElevatedButtonThemeData _elevatedButtonTheme(bool darkMode) {
+    ElevatedButtonThemeData startTheme = ThemeData.light().elevatedButtonTheme;
+    if (darkMode) {
+      startTheme = ThemeData.dark().elevatedButtonTheme;
+    }
+
+    return ElevatedButtonThemeData(style: startTheme.style);
   }
 
   TextButtonThemeData _textButtonTheme(bool darkMode) {

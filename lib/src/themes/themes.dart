@@ -107,7 +107,7 @@ class AppTheme {
       buttonTheme: _buttonTheme(params.darkModeForButtonText),
       textButtonTheme: _textButtonTheme(params.darkModeForButtonText),
       elevatedButtonTheme: _elevatedButtonTheme(params.darkModeForButtonText),
-      cardTheme: const CardTheme(color: Colors.white30),
+      cardTheme: const CardTheme(color: Colors.white),
     );
   }
 
@@ -227,9 +227,17 @@ class AppTheme {
       scheme = ThemeData.dark().colorScheme;
     }
 
+    Color buttonContentColor;
+    final ThemeSet themeSet = ThemeSetManager().currentTheme;
+    if (themeSet != null) {
+      buttonContentColor = themeSet.buttonContentColor;
+    }
+
     final result = scheme.copyWith(
       primary: primary,
       secondary: secondary,
+      onPrimary: buttonContentColor,
+      brightness: darkMode ? Brightness.dark : Brightness.light,
     );
 
     return result;

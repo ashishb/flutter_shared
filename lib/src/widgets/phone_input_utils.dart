@@ -3,7 +3,7 @@ import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
 class PhoneInputUtils {
-  static List inputFormatters() {
+  static List<TextInputFormatter> inputFormatters() {
     return <TextInputFormatter>[
       // forces the first character to be 1 for country code
       TextInputFormatter.withFunction(

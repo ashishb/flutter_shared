@@ -14,6 +14,14 @@ extension StringUtils on String {
     return '';
   }
 
+  String get capitalize {
+    if (Utils.isEmpty(this)) {
+      return this;
+    }
+
+    return this[0].toUpperCase() + substring(1);
+  }
+
   String fromCamelCase() {
     String displayName = '';
     bool lastUpper = false;

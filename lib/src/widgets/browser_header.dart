@@ -39,3 +39,40 @@ class CenteredHeader extends StatelessWidget {
     );
   }
 }
+
+class ActionHeader extends StatelessWidget {
+  const ActionHeader({
+    this.title,
+    @required this.onTap,
+    @required this.iconData,
+    this.top = 0,
+    this.bottom = 0,
+  });
+
+  final String title;
+  final IconData iconData;
+  final void Function() onTap;
+  final double top;
+  final double bottom;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: bottom, top: top),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              title.toUpperCase(),
+              style: ThemeSetManager.header(context),
+            ),
+          ),
+          IconButton(
+            icon: Icon(iconData, color: Theme.of(context).primaryColor),
+            onPressed: onTap,
+          )
+        ],
+      ),
+    );
+  }
+}

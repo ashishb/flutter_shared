@@ -68,7 +68,7 @@ class ActionHeader extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: Icon(iconData, color: Theme.of(context).primaryColor),
+            icon: Icon(iconData, color: ThemeSetManager.header(context).color),
             onPressed: onTap,
           )
         ],

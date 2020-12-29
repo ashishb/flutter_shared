@@ -96,7 +96,7 @@ class AppTheme {
         buttonTheme: _buttonTheme(true),
         textButtonTheme: _textButtonTheme(true),
         elevatedButtonTheme: _elevatedButtonTheme(true),
-        cardTheme: const CardTheme(color: Colors.white30),
+        cardTheme: const CardTheme(color: Colors.white12),
       );
     }
     return baseTheme.copyWith(

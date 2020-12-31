@@ -81,5 +81,6 @@ export 'src/widgets/svg_asset.dart';
 export 'src/widgets/svg_image.dart';
 export 'src/widgets/theme_button.dart';
 export 'src/widgets/title_detail_row.dart';
+export 'src/widgets/transparent_appBar_theme.dart';
 export 'src/widgets/transparent_route.dart';
 export 'src/widgets/video_player_widget.dart';

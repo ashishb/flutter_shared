@@ -28,7 +28,7 @@ class StadiumButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 12,
-          horizontal: 16.0,
+          horizontal: 18.0,
         ),
         child: Text(
           title.toUpperCase(),

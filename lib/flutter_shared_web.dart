@@ -76,6 +76,7 @@ export 'src/widgets/phone_input_utils.dart';
 export 'src/widgets/preview_dialog.dart';
 export 'src/widgets/slide_down_clock/slide_countdown_clock.dart';
 export 'src/widgets/slide_down_clock/slide_direction.dart';
+export 'src/widgets/stadium_button.dart';
 export 'src/widgets/stadium_tag.dart';
 export 'src/widgets/svg_asset.dart';
 export 'src/widgets/svg_image.dart';

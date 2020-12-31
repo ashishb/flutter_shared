@@ -1,5 +1,11 @@
 library flutter_shared_web;
 
+export 'src/backgrounds/gradient_background.dart';
+export 'src/backgrounds/node_background.dart';
+export 'src/backgrounds/particle_background.dart';
+export 'src/backgrounds/star_field/star_field.dart';
+export 'src/backgrounds/star_field/star_field_background.dart';
+export 'src/backgrounds/wave_background.dart';
 export 'src/dialogs/alert_dialog.dart';
 export 'src/dialogs/confirm_dialog.dart';
 export 'src/dialogs/string_dialog.dart';

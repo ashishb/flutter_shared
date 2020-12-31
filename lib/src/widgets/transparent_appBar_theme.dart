@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 
 class TransparentAppBarTheme extends StatelessWidget {
-  const TransparentAppBarTheme({this.child});
+  const TransparentAppBarTheme({
+    @required this.child,
+  });
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final newAppBar =
-        Theme.of(context).appBarTheme.copyWith(color: Colors.transparent);
+    final theme = Theme.of(context);
 
-    final newTheme = Theme.of(context).copyWith(
-      appBarTheme: newAppBar,
-    );
+    ThemeData newTheme;
+
+    // disable if elevation is set
+    if (theme.appBarTheme.elevation == 0) {
+      final newAppBar = theme.appBarTheme.copyWith(
+        color: Colors.transparent,
+      );
+
+      newTheme = theme.copyWith(
+        appBarTheme: newAppBar,
+      );
+    }
 
     return Theme(
       data: newTheme,

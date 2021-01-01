@@ -34,7 +34,7 @@ class StadiumButton extends StatelessWidget {
           horizontal: 14.0,
         ),
         child: Text(
-          title ?? '',
+          (title ?? '').toUpperCase(),
           textAlign: TextAlign.center,
           style: const TextStyle(
             fontSize: 16,

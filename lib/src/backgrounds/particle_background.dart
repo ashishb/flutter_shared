@@ -77,10 +77,9 @@ class ParticleModel {
   MultiTween<AniProps> tween;
 
   double size;
-  // AnimationProgress animationProgress;
   Random random;
   double rando;
-  AnimationTimer timer;
+  AnimationTimer timer = AnimationTimer();
 
   void restart({Duration time = Duration.zero}) {
     final startPosition = Offset(-0.2 + 1.4 * random.nextDouble(), 1.2);
@@ -99,7 +98,7 @@ class ParticleModel {
           duration,
           Curves.easeIn);
 
-    timer = AnimationTimer(duration);
+    timer.restart(duration);
 
     rando = random.nextDouble();
     size = 0.1 + rando * 0.5;

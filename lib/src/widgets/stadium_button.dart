@@ -30,8 +30,8 @@ class StadiumButton extends StatelessWidget {
       onPressed: onPressed,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: 8,
-          horizontal: 16.0,
+          vertical: 6,
+          horizontal: 14.0,
         ),
         child: Text(
           title ?? '',

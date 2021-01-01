@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_shared/src/backgrounds/animation_timer.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
 
@@ -149,16 +150,4 @@ class ParticlePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
-}
-
-class AnimationTimer {
-  AnimationTimer(this.duration) {
-    startTime = DateTime.now().duration();
-  }
-  Duration duration;
-  Duration startTime;
-
-  double progress(Duration now) {
-    return ((now - startTime) / duration).clamp(0.0, 1.0).toDouble();
-  }
 }

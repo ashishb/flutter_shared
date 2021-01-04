@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
 
   barcode_widget: ^1.5.0
-  bonsoir: ^0.1.2+2
+  bonsoir: 0.1.2+2
   bot_toast: ^3.0.5
   characters: ^1.0.0
   crypto: ^2.1.5

@@ -4,6 +4,6 @@
     "titleBar.inactiveBackground": "#7209a0",
     "titleBar.activeBackground": "#7209a0"
   },
-  "dart.previewNewCompletionPlaceholders": true,
+  "explorer.compactFolders": false,
   "workbench.editor.limit.enabled": true,
 }

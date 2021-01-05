@@ -21,6 +21,9 @@ class _ThemeEditorWidgetState extends State<ThemeEditorWidget> {
   void _showQRCodeDialog(BuildContext context) {
     final String jsonStr = json.encode(ThemeSetManager().currentTheme.toMap());
 
+    // here on purpose so we can easily grab the json if we want
+    print(jsonStr);
+
     final List<Widget> children = [
       BarcodeWidget(
         height: 300,

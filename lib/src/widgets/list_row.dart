@@ -7,6 +7,7 @@ class ListRow extends StatelessWidget {
     this.trailing,
     this.title,
     this.subtitle,
+    this.subWidget,
     this.onTap,
     this.onLongPress,
     this.color,
@@ -18,6 +19,7 @@ class ListRow extends StatelessWidget {
   final Widget trailing;
   final String title;
   final String subtitle;
+  final Widget subWidget;
   final void Function() onTap;
   final void Function() onLongPress;
   final Color color;
@@ -60,14 +62,18 @@ class ListRow extends StatelessWidget {
       );
     }
 
+    if (subWidget != null) {
+      titleChildren.add(subWidget);
+    }
+
     final List<Widget> rowChildren = [];
 
     if (leading != null) {
       rowChildren.add(leading);
+      rowChildren.add(const SizedBox(width: 14));
     }
 
     rowChildren.addAll([
-      const SizedBox(width: 14),
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -80,7 +80,7 @@ class _ThemeColorEditorScreenState extends State<ThemeColorEditorScreen> {
               ThemeButton(
                 title: 'Sample Button',
                 onPressed: () {
-                  // sdf
+                  changeColorHsv(HSVColor.fromColor(themeSet.primaryColor));
                 },
               )
             ],

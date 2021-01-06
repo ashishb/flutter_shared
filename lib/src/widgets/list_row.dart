@@ -12,19 +12,21 @@ class ListRow extends StatelessWidget {
     this.onLongPress,
     this.color,
     this.padding,
-    this.titleColor,
+    this.titleStyle,
+    this.subtitleStyle,
   });
 
   final Widget leading;
   final Widget trailing;
   final String title;
   final String subtitle;
+  final TextStyle titleStyle;
+  final TextStyle subtitleStyle;
   final Widget subWidget;
   final void Function() onTap;
   final void Function() onLongPress;
   final Color color;
   final EdgeInsetsGeometry padding;
-  final Color titleColor;
 
   static Color backgroundForIndex({
     @required int index,
@@ -41,9 +43,9 @@ class ListRow extends StatelessWidget {
     final List<Widget> titleChildren = [
       Text(
         title ?? '',
-        overflow: TextOverflow.fade,
+        overflow: TextOverflow.ellipsis,
         softWrap: false, // keeps title on one line
-        style: Theme.of(context).textTheme.subtitle1,
+        style: titleStyle ?? Theme.of(context).textTheme.subtitle1,
         maxLines: 2,
       ),
     ];
@@ -54,9 +56,9 @@ class ListRow extends StatelessWidget {
       titleChildren.add(
         Text(
           subtitle,
-          overflow: TextOverflow.fade,
+          overflow: TextOverflow.ellipsis,
           softWrap: false, // keeps title on one line
-          style: Theme.of(context).textTheme.caption,
+          style: subtitleStyle ?? Theme.of(context).textTheme.caption,
           maxLines: 2,
         ),
       );

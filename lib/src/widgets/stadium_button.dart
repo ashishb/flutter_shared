@@ -17,6 +17,9 @@ class StadiumButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
+        textStyle: const TextStyle(
+          fontSize: 14,
+        ),
         minimumSize: Size(minWidth, 0),
         primary: raisedStyle ? Colors.white : Theme.of(context).primaryColor,
         onSurface: Colors.grey,
@@ -30,15 +33,12 @@ class StadiumButton extends StatelessWidget {
       onPressed: onPressed,
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          vertical: 6,
+          vertical: 2,
           horizontal: 14.0,
         ),
         child: Text(
           title ?? '',
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 16,
-          ),
         ),
       ),
     );

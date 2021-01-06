@@ -4,6 +4,17 @@ import 'package:flutter_shared/flutter_shared.dart';
 class BrowserHeader extends StatelessWidget {
   const BrowserHeader(this.header, {this.top, this.bottom});
 
+  const BrowserHeader.noPadding(
+    this.header,
+  )   : top = 0,
+        bottom = 0;
+
+  const BrowserHeader.equalPadding(
+    this.header,
+    double padding,
+  )   : top = padding,
+        bottom = padding;
+
   final String header;
   final double top;
   final double bottom;

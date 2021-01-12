@@ -40,15 +40,26 @@ class AnimationVal {
 
     paintCircle = Paint()
       ..color = Colors.blue.withOpacity(max(.05, opac))
-      ..isAntiAlias = true
-      ..strokeCap = StrokeCap.round
-      ..strokeJoin = StrokeJoin.round
-      ..strokeWidth = 1;
+      ..isAntiAlias = true;
+
+    const gradient = RadialGradient(
+      colors: [
+        Colors.transparent,
+        Colors.red,
+      ],
+    );
+
+    gradientPaint = Paint();
+    gradientPaint.shader = gradient.createShader(Rect.fromCircle(
+      center: Offset.zero,
+      radius: radius,
+    ));
   }
 
   final Animation<Offset> animation;
   double radius;
   Paint paintCircle;
+  Paint gradientPaint;
 }
 
 class _NodeBackgroundAnimationState extends State<NodeBackgroundAnimation>
@@ -154,15 +165,27 @@ class BackgroundPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (int i = 0; i < animations.length; i++) {
-      canvas.drawCircle(getOffset(animations[i].animation, size),
-          animations[i].radius, animations[i].paintCircle);
+      canvas.drawCircle(
+        getOffset(animations[i].animation, size),
+        animations[i].radius,
+        animations[i].paintCircle,
+      );
+      // canvas.drawCircle(
+      //   getOffset(animations[i].animation, size),
+      //   animations[i].radius,
+      //   animations[i].gradientPaint,
+      // );
+
+      final Rect rect = Rect.fromCircle(
+        center: getOffset(animations[i].animation, size),
+        radius: animations[i].radius,
+      );
 
       if (image != null) {
         paintImage(
           canvas: canvas,
           image: image,
-          rect: Rect.fromCircle(
-              center: getOffset(animations[i].animation, size), radius: 12),
+          rect: rect,
         );
       }
     }

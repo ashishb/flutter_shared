@@ -58,6 +58,8 @@ class ActionHeader extends StatelessWidget {
     @required this.iconData,
     this.top = 0,
     this.bottom = 0,
+    this.textStyle,
+    this.iconSize,
   });
 
   final String title;
@@ -65,6 +67,16 @@ class ActionHeader extends StatelessWidget {
   final void Function() onTap;
   final double top;
   final double bottom;
+  final TextStyle textStyle;
+  final double iconSize;
+
+  TextStyle _textStyle(BuildContext context) {
+    if (textStyle != null) {
+      return textStyle;
+    }
+
+    return ThemeSetManager.header(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +87,12 @@ class ActionHeader extends StatelessWidget {
           Expanded(
             child: Text(
               title.toUpperCase(),
-              style: ThemeSetManager.header(context),
+              style: _textStyle(context),
             ),
           ),
           IconButton(
-            icon: Icon(iconData, color: ThemeSetManager.header(context).color),
+            iconSize: iconSize,
+            icon: Icon(iconData, color: _textStyle(context).color),
             onPressed: onTap,
           )
         ],

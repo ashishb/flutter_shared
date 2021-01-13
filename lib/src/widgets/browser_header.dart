@@ -59,7 +59,7 @@ class ActionHeader extends StatelessWidget {
     this.top = 0,
     this.bottom = 0,
     this.textStyle,
-    this.iconSize,
+    this.iconSize = 20,
   });
 
   final String title;
@@ -91,6 +91,7 @@ class ActionHeader extends StatelessWidget {
             ),
           ),
           IconButton(
+            constraints: BoxConstraints.tight(const Size(32, 32)),
             iconSize: iconSize,
             icon: Icon(iconData, color: _textStyle(context).color),
             onPressed: onTap,

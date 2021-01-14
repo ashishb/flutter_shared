@@ -149,7 +149,6 @@ class AppTheme {
 
     final result = startTheme.copyWith(
       button: TextStyle(
-        fontWeight: FontWeight.bold,
         color: buttonContentColor,
       ),
 

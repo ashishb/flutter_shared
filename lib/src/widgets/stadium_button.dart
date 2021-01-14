@@ -17,9 +17,6 @@ class StadiumButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
-        textStyle: const TextStyle(
-          fontSize: 14,
-        ),
         minimumSize: Size(minWidth, 0),
         primary: raisedStyle ? Colors.white : Theme.of(context).primaryColor,
         onSurface: Colors.grey,

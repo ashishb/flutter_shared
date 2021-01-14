@@ -338,6 +338,14 @@ class Utils {
     );
   }
 
+  static void hideKeyboard(BuildContext context) {
+    final currentFocus = FocusScope.of(context);
+
+    if (!currentFocus.hasPrimaryFocus && currentFocus.hasFocus) {
+      FocusManager.instance.primaryFocus.unfocus();
+    }
+  }
+
   // 4 -> 04,
   static String twoDigits(num n) {
     if (n >= 10 || n <= -10) {

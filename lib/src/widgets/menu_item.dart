@@ -16,7 +16,7 @@ class MenuItem extends StatelessWidget {
         ),
         Flexible(
           child: Text(
-            name,
+            name ?? '',
             overflow: TextOverflow.ellipsis,
           ),
         ),

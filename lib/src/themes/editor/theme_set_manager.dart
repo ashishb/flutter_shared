@@ -8,7 +8,10 @@ class ThemeSetManager {
     return _instance ??= ThemeSetManager._();
   }
   ThemeSetManager._() {
-    _currentTheme = Preferences().themeSet ?? ThemeSet.defaultSet();
+    _currentTheme = ThemeSet.defaultSet();
+
+    // SNG disabled for beta testing
+    // _currentTheme = Preferences().themeSet ?? ThemeSet.defaultSet();
   }
   static ThemeSetManager _instance;
 

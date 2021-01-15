@@ -45,13 +45,8 @@ class AppTheme {
       color: ThemeSetManager().currentTheme.backgroundColor,
     );
 
-    final CardTheme cardTheme = CardTheme(
-      color: ThemeSetManager().currentTheme.backgroundColor,
-    );
-
     final baseTheme = ThemeData(
       scaffoldBackgroundColor: ThemeSetManager().currentTheme.backgroundColor,
-      cardTheme: cardTheme,
       popupMenuTheme: popupMenuTheme,
       primaryColorBrightness: Brightness.dark,
       bottomAppBarTheme: _bottomBarTheme(darkMode),
@@ -96,7 +91,10 @@ class AppTheme {
         buttonTheme: _buttonTheme(true),
         textButtonTheme: _textButtonTheme(true),
         elevatedButtonTheme: _elevatedButtonTheme(true),
-        cardTheme: const CardTheme(color: Colors.white12),
+        cardTheme: const CardTheme(
+          color: Color.fromRGBO(255, 255, 255, .05),
+          elevation: 0,
+        ),
       );
     }
     return baseTheme.copyWith(
@@ -106,6 +104,9 @@ class AppTheme {
       buttonTheme: _buttonTheme(params.darkModeForButtonText),
       textButtonTheme: _textButtonTheme(params.darkModeForButtonText),
       elevatedButtonTheme: _elevatedButtonTheme(params.darkModeForButtonText),
+      // cardTheme: CardTheme(
+      //   color: ThemeSetManager().currentTheme.backgroundColor,
+      // ),
       cardTheme: const CardTheme(color: Colors.white),
     );
   }

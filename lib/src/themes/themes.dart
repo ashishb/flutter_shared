@@ -198,7 +198,7 @@ class AppTheme {
       headline6: TextStyle(
         color: params.getBarTextColor(darkMode: darkMode),
         fontSize: 18,
-        fontWeight: FontWeight.bold,
+        // fontWeight: FontWeight.bold,
       ),
     );
 

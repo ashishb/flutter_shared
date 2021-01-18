@@ -46,6 +46,10 @@ dependencies:
   flutter_barcode_scanner: ^1.0.2
   flare_flutter: ^2.0.6
 
+  flutter_archive:
+    git: git://github.com/sgehrman/flutter_archive
+    # path: ../forks/flutter_archive
+
   barcode_image:
     git:
       url: git://github.com/sgehrman/dart_barcode

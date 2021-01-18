@@ -164,6 +164,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_archive:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "6aeed6f4b6deb877947e96b2f8edf67af5bdb1cc"
+      url: "git://github.com/sgehrman/flutter_archive"
+    source: git
+    version: "0.1.4"
   flutter_barcode_scanner:
     dependency: "direct main"
     description:

@@ -40,18 +40,22 @@ class ListRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> titleChildren = [
-      Text(
-        title ?? '',
+    final List<Widget> titleChildren = [];
+
+    if (Utils.isNotEmpty(title)) {
+      titleChildren.add(Text(
+        title,
         overflow: TextOverflow.ellipsis,
         softWrap: false, // keeps title on one line
         style: titleStyle ?? Theme.of(context).textTheme.subtitle1,
         maxLines: 2,
-      ),
-    ];
+      ));
+    }
 
     if (Utils.isNotEmpty(subtitle)) {
-      titleChildren.add(const SizedBox(height: 2));
+      if (Utils.isNotEmpty(title)) {
+        titleChildren.add(const SizedBox(height: 2));
+      }
 
       titleChildren.add(
         Text(

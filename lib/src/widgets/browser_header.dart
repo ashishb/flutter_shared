@@ -60,6 +60,7 @@ class ActionHeader extends StatelessWidget {
     this.bottom = 0,
     this.textStyle,
     this.iconSize = 20,
+    this.upperCase = true,
   });
 
   final String title;
@@ -69,12 +70,17 @@ class ActionHeader extends StatelessWidget {
   final double bottom;
   final TextStyle textStyle;
   final double iconSize;
+  final bool upperCase;
 
   TextStyle _textStyle(BuildContext context) {
     if (textStyle != null) {
       return textStyle;
     }
 
+    return ActionHeader.defaultTextStyle(context);
+  }
+
+  static TextStyle defaultTextStyle(BuildContext context) {
     return ThemeSetManager.header(context);
   }
 
@@ -86,7 +92,7 @@ class ActionHeader extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              title.toUpperCase(),
+              upperCase ? title.toUpperCase() : title,
               style: _textStyle(context),
             ),
           ),

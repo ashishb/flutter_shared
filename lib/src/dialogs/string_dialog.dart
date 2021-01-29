@@ -88,14 +88,14 @@ class __DialogContentsState extends State<_DialogContents> {
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           child: Text(widget.cancelButtonName,
               style: TextStyle(color: Theme.of(context).accentColor)),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.of(context).pop(_textController.text);
           },

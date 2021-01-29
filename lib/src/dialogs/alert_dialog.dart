@@ -22,7 +22,7 @@ Future<void> showAlertDialog({
         ),
       ),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },

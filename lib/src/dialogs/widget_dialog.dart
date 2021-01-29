@@ -29,7 +29,7 @@ Future<bool> showWidgetDialog({
       actions: <Widget>[
         Visibility(
           visible: showCancel,
-          child: FlatButton(
+          child: TextButton(
             onPressed: () {
               Navigator.of(context).pop(false);
             },
@@ -37,7 +37,7 @@ Future<bool> showWidgetDialog({
                 style: TextStyle(color: Theme.of(context).accentColor)),
           ),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.of(context).pop(true);
           },

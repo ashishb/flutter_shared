@@ -31,14 +31,14 @@ Future<bool> showConfirmDialog({
           ),
         ),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.of(context).pop(false);
             },
             child: Text(cancelButtonName,
                 style: TextStyle(color: Theme.of(context).accentColor)),
           ),
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.of(context).pop(true);
             },

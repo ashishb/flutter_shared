@@ -21,6 +21,17 @@ class StrUtils {
     return prettyprint;
   }
 
+  static String toPrettyList(List list, {bool print = false}) {
+    const JsonEncoder encoder = JsonEncoder.withIndent('  ');
+    final String prettyprint = encoder.convert(list);
+
+    if (print) {
+      debugPrint(prettyprint, wrapWidth: 555);
+    }
+
+    return prettyprint;
+  }
+
   // returns '' if null
   static String trim(String inString) {
     if (inString == null) {

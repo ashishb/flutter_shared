@@ -97,6 +97,7 @@ class ActionHeader extends StatelessWidget {
             ),
           ),
           IconButton(
+            padding: EdgeInsets.zero,
             constraints: BoxConstraints.tight(const Size(32, 32)),
             iconSize: iconSize,
             // icon: Icon(iconData, color: _textStyle(context).color),

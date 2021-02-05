@@ -93,10 +93,13 @@ class ActionHeader extends StatelessWidget {
     final textStyle = Theme.of(context).textTheme.caption;
 
     if (Utils.isNotEmpty(subtitle)) {
-      subWidget = Text(
-        'Assign Interviewers',
-        style: textStyle.copyWith(
-          color: textStyle.color.withOpacity(.5),
+      subWidget = Padding(
+        padding: const EdgeInsets.only(left: 2.0),
+        child: Text(
+          'Assign Interviewers',
+          style: textStyle.copyWith(
+            color: textStyle.color.withOpacity(.5),
+          ),
         ),
       );
     }
@@ -106,6 +109,7 @@ class ActionHeader extends StatelessWidget {
         children: [
           Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   upperCase ? title.toUpperCase() : title,

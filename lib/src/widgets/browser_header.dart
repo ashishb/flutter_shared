@@ -96,7 +96,7 @@ class ActionHeader extends StatelessWidget {
       subWidget = Padding(
         padding: const EdgeInsets.only(left: 2.0),
         child: Text(
-          'Assign Interviewers',
+          subtitle,
           style: textStyle.copyWith(
             color: textStyle.color.withOpacity(.5),
           ),

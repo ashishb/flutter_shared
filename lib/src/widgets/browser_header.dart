@@ -17,10 +17,10 @@ class BrowserHeader extends StatelessWidget {
 
   const BrowserHeader.equalPadding(
     this.header,
-    double padding,
-  )   : top = padding,
-        bottom = padding,
-        subtitle = '';
+    double padding, {
+    this.subtitle,
+  })  : top = padding,
+        bottom = padding;
 
   final String header;
   final double top;

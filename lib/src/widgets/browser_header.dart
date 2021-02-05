@@ -2,30 +2,59 @@ import 'package:flutter/material.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
 class BrowserHeader extends StatelessWidget {
-  const BrowserHeader(this.header, {this.top, this.bottom});
+  const BrowserHeader(
+    this.header, {
+    this.top,
+    this.bottom,
+    this.subtitle,
+  });
 
   const BrowserHeader.noPadding(
-    this.header,
-  )   : top = 0,
+    this.header, {
+    this.subtitle,
+  })  : top = 0,
         bottom = 0;
 
   const BrowserHeader.equalPadding(
     this.header,
     double padding,
   )   : top = padding,
-        bottom = padding;
+        bottom = padding,
+        subtitle = '';
 
   final String header;
   final double top;
   final double bottom;
+  final String subtitle;
 
   @override
   Widget build(BuildContext context) {
+    Widget subWidget;
+    final textStyle = Theme.of(context).textTheme.caption;
+
+    if (Utils.isNotEmpty(subtitle)) {
+      subWidget = Padding(
+        padding: const EdgeInsets.only(left: 2.0),
+        child: Text(
+          subtitle,
+          style: textStyle.copyWith(
+            color: textStyle.color.withOpacity(.5),
+          ),
+        ),
+      );
+    }
+
     return Padding(
       padding: EdgeInsets.only(bottom: bottom ?? 14, top: top ?? 24),
-      child: Text(
-        header.toUpperCase(),
-        style: ThemeSetManager.header(context),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            header.toUpperCase(),
+            style: ThemeSetManager.header(context),
+          ),
+          subWidget,
+        ],
       ),
     );
   }

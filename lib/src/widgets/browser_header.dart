@@ -61,6 +61,7 @@ class ActionHeader extends StatelessWidget {
     this.textStyle,
     this.iconSize = 20,
     this.upperCase = true,
+    this.subtitle,
   });
 
   final String title;
@@ -71,6 +72,7 @@ class ActionHeader extends StatelessWidget {
   final TextStyle textStyle;
   final double iconSize;
   final bool upperCase;
+  final String subtitle;
 
   TextStyle _textStyle(BuildContext context) {
     if (textStyle != null) {
@@ -86,14 +88,31 @@ class ActionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget subWidget = NothingWidget();
+
+    final textStyle = Theme.of(context).textTheme.caption;
+
+    if (Utils.isNotEmpty(subtitle)) {
+      subWidget = Text(
+        'Assign Interviewers',
+        style: textStyle.copyWith(
+          color: textStyle.color.withOpacity(.5),
+        ),
+      );
+    }
     return Padding(
       padding: EdgeInsets.only(bottom: bottom, top: top),
       child: Row(
         children: [
           Expanded(
-            child: Text(
-              upperCase ? title.toUpperCase() : title,
-              style: _textStyle(context),
+            child: Column(
+              children: [
+                Text(
+                  upperCase ? title.toUpperCase() : title,
+                  style: _textStyle(context),
+                ),
+                subWidget,
+              ],
             ),
           ),
           IconButton(

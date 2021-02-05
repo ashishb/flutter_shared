@@ -106,6 +106,7 @@ class ActionHeader extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: bottom, top: top),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Column(

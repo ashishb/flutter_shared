@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
 class WaveBackground extends StatelessWidget {
-  const WaveBackground({@required this.child});
+  const WaveBackground({
+    @required this.child,
+    @required this.color,
+  });
 
   final Widget child;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -19,16 +23,19 @@ class WaveBackground extends StatelessWidget {
         onBottom(AnimatedWave(
           height: baseHeight + 160.0,
           speed: 1.0,
+          color: color,
         )),
         onBottom(AnimatedWave(
           height: baseHeight + 100,
           speed: 0.9,
           offset: pi,
+          color: color,
         )),
         onBottom(AnimatedWave(
           height: baseHeight + 200,
           speed: 1.2,
           offset: pi / 2,
+          color: color,
         )),
         Positioned.fill(child: child),
       ],
@@ -44,11 +51,17 @@ class WaveBackground extends StatelessWidget {
 }
 
 class AnimatedWave extends StatelessWidget {
-  const AnimatedWave({this.height, this.speed, this.offset = 0.0});
+  const AnimatedWave({
+    @required this.height,
+    @required this.speed,
+    @required this.color,
+    this.offset = 0.0,
+  });
 
   final double height;
   final double speed;
   final double offset;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +74,7 @@ class AnimatedWave extends StatelessWidget {
           tween: Tween(begin: 0.0, end: 2 * pi),
           builder: (context, _, value) {
             return CustomPaint(
-              foregroundPainter: CurvePainter(value + offset),
+              foregroundPainter: CurvePainter(value + offset, color),
             );
           },
         ),
@@ -71,13 +84,14 @@ class AnimatedWave extends StatelessWidget {
 }
 
 class CurvePainter extends CustomPainter {
-  CurvePainter(this.value);
+  CurvePainter(this.value, this.color);
 
   final double value;
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
-    final white = Paint()..color = Colors.blue.withAlpha(60);
+    final white = Paint()..color = color;
     final path = Path();
 
     final y1 = sin(value);

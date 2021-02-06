@@ -6,16 +6,20 @@ import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
 
 class ParticleBackground extends StatelessWidget {
-  const ParticleBackground({@required this.child});
+  const ParticleBackground({
+    @required this.child,
+    @required this.color,
+  });
 
   final Widget child;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
         // Positioned.fill(child: AnimatedBackground()),
-        const Positioned.fill(child: Particles(30)),
+        Positioned.fill(child: Particles(30, color)),
         Positioned.fill(child: child),
       ],
     );
@@ -23,9 +27,13 @@ class ParticleBackground extends StatelessWidget {
 }
 
 class Particles extends StatefulWidget {
-  const Particles(this.numberOfParticles);
+  const Particles(
+    this.numberOfParticles,
+    this.color,
+  );
 
   final int numberOfParticles;
+  final Color color;
 
   @override
   _ParticlesState createState() => _ParticlesState();
@@ -55,7 +63,7 @@ class _ParticlesState extends State<Particles> {
         _simulateParticles(time);
 
         return CustomPaint(
-          painter: ParticlePainter(particles, time),
+          painter: ParticlePainter(particles, time, widget.color),
         );
       },
     );
@@ -112,10 +120,11 @@ class ParticleModel {
 }
 
 class ParticlePainter extends CustomPainter {
-  ParticlePainter(this.particles, this.time);
+  ParticlePainter(this.particles, this.time, this.color);
 
-  List<ParticleModel> particles;
-  Duration time;
+  final List<ParticleModel> particles;
+  final Duration time;
+  final Color color;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -133,10 +142,7 @@ class ParticlePainter extends CustomPainter {
       final paint = Paint()
         ..shader = RadialGradient(
           radius: 5,
-          colors: [
-            Colors.blue.withAlpha(alpha ~/ 5),
-            Colors.blue.withAlpha(alpha)
-          ],
+          colors: [color.withAlpha(alpha ~/ 5), color.withAlpha(alpha)],
           stops: const [0, .4],
         ).createShader(Rect.fromCenter(
             center: position,

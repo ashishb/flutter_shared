@@ -29,7 +29,7 @@ class BrowserHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget subWidget;
+    Widget subWidget = NothingWidget();
     final textStyle = Theme.of(context).textTheme.caption;
 
     if (Utils.isNotEmpty(subtitle)) {

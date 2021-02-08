@@ -233,7 +233,9 @@ class Utils {
           : null,
     );
 
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    // this only works on dev channel, switch this later
+    // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    Scaffold.of(context).showSnackBar(snackBar);
   }
 
   static Future<void> showCopiedToast(BuildContext context) async {

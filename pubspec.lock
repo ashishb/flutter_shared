@@ -111,12 +111,10 @@ packages:
   extended_image:
     dependency: "direct main"
     description:
-      path: "."
-      ref: dev
-      resolved-ref: "7cf821eac3514521ffd34621caa4175f1ee679c0"
-      url: "git://github.com/fluttercandies/extended_image"
-    source: git
-    version: "1.5.0-dev"
+      name: extended_image
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.5.0"
   extended_image_library:
     dependency: transitive
     description:

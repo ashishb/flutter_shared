@@ -55,11 +55,11 @@ dependencies:
       url: git://github.com/sgehrman/dart_barcode
       path: image
 
-  # extended_image: ^1.3.0
-  extended_image:
-    git:
-      url: git://github.com/fluttercandies/extended_image
-      ref: dev
+  extended_image: ^1.5.0
+  # extended_image:
+  #   git:
+  #     url: git://github.com/fluttercandies/extended_image
+  #     ref: dev
 
   flutter_colorpicker:
     git: git://github.com/sgehrman/flutter_colorpicker

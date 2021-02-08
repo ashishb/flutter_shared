@@ -24,7 +24,7 @@ dependencies:
   simple_animations: ^2.5.0
 
   flutter_parsed_text: ^1.2.5
-  flutter_svg: ^0.19.2+1
+  flutter_svg: ^0.19.1
   google_fonts: ^1.1.2
   hex: ^0.1.2
   hive: ^1.4.4+1
@@ -69,7 +69,7 @@ dependencies:
     git: git://github.com/sgehrman/ShareExtend
 
 dev_dependencies:
-  lint: ^1.5.1
+  lint: ^1.0.0
 
 flutter:
   uses-material-design: true

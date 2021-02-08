@@ -143,7 +143,7 @@ class ActionHeader extends StatelessWidget {
               children: [
                 Padding(
                   // padding makes it align with icon
-                  padding: const EdgeInsets.only(top: 12.0),
+                  padding: const EdgeInsets.only(top: 6.0),
                   child: Text(
                     upperCase ? title.toUpperCase() : title,
                     style: _textStyle(context),

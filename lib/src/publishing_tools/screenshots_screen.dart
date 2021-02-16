@@ -121,7 +121,6 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
                     selectedItem: selectedScreenshotItem,
                   ),
                   CheckboxListTile(
-                    contentPadding: EdgeInsets.zero,
                     value: _showBackground,
                     title: const Text('Show Background'),
                     onChanged: (x) {

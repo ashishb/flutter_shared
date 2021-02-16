@@ -254,6 +254,16 @@ class Utils {
     return completer.future;
   }
 
+  static Future<ui.Image> loadImageFromPath(String imagePath) async {
+    final File file = File(imagePath);
+
+    final Completer<ui.Image> completer = Completer();
+    ui.decodeImageFromList(file.readAsBytesSync(), (ui.Image img) {
+      return completer.complete(img);
+    });
+    return completer.future;
+  }
+
   // ===========================================
   // Misc
 

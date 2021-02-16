@@ -32,7 +32,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
   void initState() {
     super.initState();
 
-    Utils.loadUiImage(widget.imagePath).then((ui.Image image) {
+    Utils.loadImageFromPath(widget.imagePath).then((ui.Image image) {
       uiImage = image;
       setState(() {});
     });

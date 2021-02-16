@@ -9,10 +9,10 @@ import 'package:flutter_shared/src/publishing_tools/screenshot_menu.dart';
 
 class ScreenshotsScreen extends StatefulWidget {
   const ScreenshotsScreen({
-    @required this.imageUrl,
+    @required this.imagePath,
   });
 
-  final String imageUrl;
+  final String imagePath;
 
   @override
   _ScreenshotsScreenState createState() => _ScreenshotsScreenState();
@@ -26,14 +26,14 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
   ScreenshotMenuItem selectedScreenshotItem =
       ScreenshotMenuItem(filename: 'default', title: 'Select Title');
 
-  ui.Image assetImage;
+  ui.Image uiImage;
 
   @override
   void initState() {
     super.initState();
 
-    Utils.loadUiImage(widget.imageUrl).then((ui.Image image) {
-      assetImage = image;
+    Utils.loadUiImage(widget.imagePath).then((ui.Image image) {
+      uiImage = image;
       setState(() {});
     });
   }
@@ -41,7 +41,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
   void _onPreviewPressed() {
     setState(() {
       _image = maker.createImage(
-          assetImage, selectedScreenshotItem.title, selectedItem.type,
+          uiImage, selectedScreenshotItem.title, selectedItem.type,
           showBackground: _showBackground);
     });
   }
@@ -57,7 +57,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
 
     if (Utils.isNotEmpty(fileName)) {
       try {
-        final ui.Image assetImage = await Utils.loadUiImage(widget.imageUrl);
+        final ui.Image assetImage = await Utils.loadUiImage(widget.imagePath);
 
         final CaptureResult capture = await maker.createImage(
           assetImage,

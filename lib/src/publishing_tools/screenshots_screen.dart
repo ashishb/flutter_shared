@@ -35,6 +35,8 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
     Utils.loadImageFromPath(widget.imagePath).then((ui.Image image) {
       uiImage = image;
       setState(() {});
+
+      refreshPreview();
     });
   }
 
@@ -44,6 +46,13 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
           uiImage, selectedScreenshotItem.title, selectedItem.type,
           showBackground: _showBackground);
     });
+  }
+
+  Future<void> refreshPreview() async {
+    // delay since we could modify a state var that won't be synced until next refresh
+    await Future.delayed(Duration.zero, () {});
+
+    _onPreviewPressed();
   }
 
   Future<void> _saveClicked() async {
@@ -95,6 +104,8 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
                       setState(() {
                         selectedItem = item;
                       });
+
+                      refreshPreview();
                     },
                     selectedItem: selectedItem,
                   ),
@@ -104,6 +115,8 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
                       setState(() {
                         selectedScreenshotItem = item;
                       });
+
+                      refreshPreview();
                     },
                     selectedItem: selectedScreenshotItem,
                   ),
@@ -115,6 +128,8 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
                       setState(() {
                         _showBackground = x;
                       });
+
+                      refreshPreview();
                     },
                   ),
                   const SizedBox(height: 10),

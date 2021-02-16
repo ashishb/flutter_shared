@@ -248,8 +248,8 @@ class ScreenshotMaker {
     @required PhoneType type,
     @required Size imageSize,
     @required bool showBackground,
-    Color phoneColor,
-    Color phoneFrameColor,
+    Color phoneColor = Colors.black,
+    Color phoneFrameColor = Colors.black,
   }) {
     final double imageAspectRatio = imageSize.width / imageSize.height;
 

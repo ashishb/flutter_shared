@@ -60,6 +60,7 @@ export 'src/widgets/colored_button.dart';
 export 'src/widgets/date_picker.dart';
 export 'src/widgets/datetime_form_field.dart';
 export 'src/widgets/dialog_button.dart';
+export 'src/widgets/double_thumbs_control.dart';
 export 'src/widgets/draggable_scrollbar.dart';
 export 'src/widgets/dropstack/drop_stack.dart';
 export 'src/widgets/dropstack/drop_stack_button.dart';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/widgets/thumb_widget.dart';
 
 class DoubleThumbsControl extends StatefulWidget {
   const DoubleThumbsControl({
@@ -18,47 +17,11 @@ class DoubleThumbsControl extends StatefulWidget {
 
 class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
   Widget _thumb(int index) {
-    const Color outlinedColor = Color.fromRGBO(150, 150, 150, 1);
-    int groupValue;
-
-    if (widget.value != null) {
-      groupValue = widget.value;
-    } else {
-      groupValue = null;
-    }
-
-    IconData icon;
-    IconData outlinedIcon;
-
-    Color iconColor;
-    const double iconSize = 24;
-    const double xOffset = 6;
-    const double yOffset = 1;
-
-    if (index < 2) {
-      icon = FontAwesome.thumbs_down;
-      outlinedIcon = FontAwesome.thumbs_down;
-
-      iconColor = Colors.red[600];
-    } else {
-      icon = FontAwesome.thumbs_up;
-      outlinedIcon = FontAwesome.thumbs_up;
-
-      iconColor = Colors.green;
-    }
-
-    final isDouble = index == 0 || index == 3;
-
-    Color firstIconColor = groupValue == index ? iconColor : outlinedColor;
-    if (isDouble) {
-      firstIconColor = Utils.darken(firstIconColor, .15);
-    }
-
     return InkWell(
       onTap: () {
         int newResult;
 
-        if (groupValue != index) {
+        if (widget.value != index) {
           newResult = index;
         }
 
@@ -66,57 +29,61 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
 
         setState(() {});
       },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Icon(
-              groupValue == index ? icon : outlinedIcon,
-              color: firstIconColor,
-              size: iconSize,
-            ),
-            // white shadow
-            Visibility(
-              visible: isDouble,
-              child: Positioned(
-                right: xOffset - 1,
-                bottom: yOffset,
-                child: Icon(
-                  groupValue == index ? icon : outlinedIcon,
-                  color: Colors.white54,
-                  size: iconSize,
-                ),
-              ),
-            ),
-            Visibility(
-              visible: isDouble,
-              child: Positioned(
-                right: xOffset,
-                bottom: yOffset,
-                child: Icon(
-                  groupValue == index ? icon : outlinedIcon,
-                  color: groupValue == index ? iconColor : outlinedColor,
-                  size: iconSize,
-                ),
-              ),
-            ),
-          ],
-        ),
+      child: ThumbWidget(
+        index: index,
+        groupValue: widget.value,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
+    String textResult = '';
+
+    switch (widget.value) {
+      case 0:
+        textResult = 'Strong No';
+        break;
+      case 1:
+        textResult = 'No';
+        break;
+      case 2:
+        textResult = 'Yes';
+        break;
+      case 3:
+        textResult = 'Strong Yes';
+        break;
+    }
+
+    return Column(
       children: [
-        _thumb(0),
-        _thumb(1),
-        const SizedBox(width: 12),
-        _thumb(2),
-        _thumb(3),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _thumb(0),
+            _thumb(1),
+            _thumb(2),
+            _thumb(3),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Decision: ',
+                style: Theme.of(context).textTheme.caption,
+              ),
+              Text(
+                textResult ?? '',
+                style: Theme.of(context).textTheme.caption.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

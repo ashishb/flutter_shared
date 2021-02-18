@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
 class DoubleThumbsControl extends StatefulWidget {
@@ -17,7 +18,7 @@ class DoubleThumbsControl extends StatefulWidget {
 
 class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
   Widget _thumb(int index) {
-    const Color outlinedColor = Color.fromRGBO(222, 222, 222, 1);
+    const Color outlinedColor = Color.fromRGBO(150, 150, 150, 1);
     int groupValue;
 
     if (widget.value != null) {
@@ -26,24 +27,22 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
       groupValue = null;
     }
 
-    IconData icon = index < 2 ? Icons.thumb_down : Icons.thumb_up;
-    IconData outlinedIcon = index < 2 ? Icons.thumb_down : Icons.thumb_up;
+    IconData icon;
+    IconData outlinedIcon;
 
     Color iconColor;
-    double iconSize = 24;
-    double xOffset = 4;
-    double yOffset = 1;
+    const double iconSize = 24;
+    const double xOffset = 6;
+    const double yOffset = 1;
 
     if (index < 2) {
-      icon = Icons.thumb_down;
-      outlinedIcon = Icons.thumb_down;
-      xOffset *= -1;
-      yOffset *= -1;
+      icon = FontAwesome.thumbs_down;
+      outlinedIcon = FontAwesome.thumbs_down;
 
       iconColor = Colors.red[600];
     } else {
-      icon = Icons.thumb_up;
-      outlinedIcon = Icons.thumb_up;
+      icon = FontAwesome.thumbs_up;
+      outlinedIcon = FontAwesome.thumbs_up;
 
       iconColor = Colors.green;
     }
@@ -52,9 +51,7 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
 
     Color firstIconColor = groupValue == index ? iconColor : outlinedColor;
     if (isDouble) {
-      firstIconColor = Utils.darken(firstIconColor, .05);
-
-      iconSize += 4;
+      firstIconColor = Utils.darken(firstIconColor, .15);
     }
 
     return InkWell(
@@ -83,11 +80,11 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
             Visibility(
               visible: isDouble,
               child: Positioned(
-                right: index == 0 ? xOffset + 1 : xOffset - 1,
+                right: xOffset - 1,
                 bottom: yOffset,
                 child: Icon(
                   groupValue == index ? icon : outlinedIcon,
-                  color: Colors.white60,
+                  color: Colors.white54,
                   size: iconSize,
                 ),
               ),
@@ -117,6 +114,7 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
       children: [
         _thumb(0),
         _thumb(1),
+        const SizedBox(width: 12),
         _thumb(2),
         _thumb(3),
       ],

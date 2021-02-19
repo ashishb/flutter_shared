@@ -83,14 +83,15 @@ class CenteredHeader extends StatelessWidget {
 class ActionHeader extends StatelessWidget {
   const ActionHeader({
     this.title,
-    @required this.onTap,
-    @required this.iconData,
+    this.onTap,
+    this.iconData,
     this.top = 0,
     this.bottom = 0,
     this.textStyle,
     this.iconSize = 20,
     this.upperCase = true,
     this.subtitle,
+    this.action,
   });
 
   final String title;
@@ -102,6 +103,7 @@ class ActionHeader extends StatelessWidget {
   final double iconSize;
   final bool upperCase;
   final String subtitle;
+  final Widget action;
 
   TextStyle _textStyle(BuildContext context) {
     if (textStyle != null) {
@@ -153,14 +155,16 @@ class ActionHeader extends StatelessWidget {
               ],
             ),
           ),
-          IconButton(
-            padding: EdgeInsets.zero,
-            constraints: BoxConstraints.tight(const Size(32, 32)),
-            iconSize: iconSize,
-            // icon: Icon(iconData, color: _textStyle(context).color),
-            icon: Icon(iconData, color: Theme.of(context).accentColor),
-            onPressed: onTap,
-          )
+          if (iconData != null)
+            IconButton(
+              padding: EdgeInsets.zero,
+              constraints: BoxConstraints.tight(const Size(32, 32)),
+              iconSize: iconSize,
+              // icon: Icon(iconData, color: _textStyle(context).color),
+              icon: Icon(iconData, color: Theme.of(context).accentColor),
+              onPressed: onTap,
+            ),
+          if (action != null) action,
         ],
       ),
     );

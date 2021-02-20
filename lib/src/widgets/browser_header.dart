@@ -33,13 +33,10 @@ class BrowserHeader extends StatelessWidget {
     final textStyle = Theme.of(context).textTheme.caption;
 
     if (Utils.isNotEmpty(subtitle)) {
-      subWidget = Padding(
-        padding: const EdgeInsets.only(left: 2.0),
-        child: Text(
-          subtitle,
-          style: textStyle.copyWith(
-            color: textStyle.color.withOpacity(.5),
-          ),
+      subWidget = Text(
+        subtitle,
+        style: textStyle.copyWith(
+          color: textStyle.color.withOpacity(.5),
         ),
       );
     }

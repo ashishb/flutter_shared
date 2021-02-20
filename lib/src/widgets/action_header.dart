@@ -57,12 +57,9 @@ class ActionHeader extends StatelessWidget {
     if (subWidget != null) {
       subtitleWidget = subWidget;
     } else if (Utils.isNotEmpty(subtitle)) {
-      subtitleWidget = Padding(
-        padding: const EdgeInsets.only(left: 2.0),
-        child: Text(
-          subtitle,
-          style: defaultSubtitleStyle(context),
-        ),
+      subtitleWidget = Text(
+        subtitle,
+        style: defaultSubtitleStyle(context),
       );
     }
     return Padding(

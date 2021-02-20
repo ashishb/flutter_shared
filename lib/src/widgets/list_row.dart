@@ -14,7 +14,8 @@ class ListRow extends StatelessWidget {
     this.padding,
     this.titleStyle,
     this.subtitleStyle,
-    this.maxLines = 2,
+    this.maxSubtitleLines = 2,
+    this.maxTitleLines = 2,
   });
 
   final Widget leading;
@@ -28,7 +29,8 @@ class ListRow extends StatelessWidget {
   final void Function() onLongPress;
   final Color color;
   final EdgeInsetsGeometry padding;
-  final int maxLines;
+  final int maxSubtitleLines;
+  final int maxTitleLines;
 
   static Color backgroundForIndex({
     @required int index,
@@ -50,22 +52,23 @@ class ListRow extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         softWrap: false, // keeps title on one line
         style: titleStyle ?? Theme.of(context).textTheme.subtitle1,
-        maxLines: maxLines,
+        maxLines: maxTitleLines,
       ));
     }
 
-    if (Utils.isNotEmpty(subtitle)) {
-      if (Utils.isNotEmpty(title)) {
-        titleChildren.add(const SizedBox(height: 2));
-      }
+    // space between title and subtitle
+    if (subWidget != null || Utils.isNotEmpty(subtitle)) {
+      titleChildren.add(const SizedBox(height: 2));
+    }
 
+    if (Utils.isNotEmpty(subtitle)) {
       titleChildren.add(
         Text(
           subtitle,
           overflow: TextOverflow.ellipsis,
           softWrap: false, // keeps title on one line
           style: subtitleStyle ?? Theme.of(context).textTheme.caption,
-          maxLines: maxLines,
+          maxLines: maxSubtitleLines,
         ),
       );
     }

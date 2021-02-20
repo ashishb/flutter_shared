@@ -49,7 +49,8 @@ extension StringUtils on String {
 
     if (Utils.isNotEmpty(result)) {
       if (result.length > max) {
-        result = '${result.substring(0, max)}...';
+        // we trim to get rid of newlines at end
+        result = '${result.substring(0, max).trim()}...';
       }
     }
 
@@ -61,7 +62,9 @@ extension StringUtils on String {
 
     if (Utils.isNotEmpty(result)) {
       if (result.length > max) {
-        result = '...${result.substring(result.length - max, result.length)}';
+        // we trim to get rid of newlines at end
+        result =
+            '...${result.substring(result.length - max, result.length).trim()}';
       }
     }
 

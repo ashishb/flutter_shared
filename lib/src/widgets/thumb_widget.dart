@@ -16,7 +16,7 @@ class ThumbWidget extends StatelessWidget {
   final double opacity;
 
   Widget _thumb(int index) {
-    final Color outlinedColor = Color.fromRGBO(150, 150, 150, opacity);
+    const Color outlinedColor = Color.fromRGBO(150, 150, 150, 1);
 
     IconData icon;
     IconData outlinedIcon;
@@ -31,13 +31,13 @@ class ThumbWidget extends StatelessWidget {
       icon = FontAwesome.thumbs_down;
       outlinedIcon = FontAwesome.thumbs_down;
 
-      iconColor = Colors.red[800].withOpacity(opacity);
+      iconColor = Colors.red[800];
     } else {
       icon = FontAwesome.thumbs_up;
       outlinedIcon = FontAwesome.thumbs_up;
       yOffset *= -1;
 
-      iconColor = Colors.green[800].withOpacity(opacity);
+      iconColor = Colors.green[800];
     }
 
     final isDouble = index == 0 || index == 3;
@@ -92,6 +92,9 @@ class ThumbWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _thumb(index);
+    return Opacity(
+      opacity: opacity,
+      child: _thumb(index),
+    );
   }
 }

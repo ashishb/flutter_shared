@@ -2,25 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
-class ThumbWidget extends StatefulWidget {
+class ThumbWidget extends StatelessWidget {
   const ThumbWidget({
     @required this.index,
-    @required this.groupValue,
+    @required this.selectedIndex,
   });
 
   final int index; // 0-3
-  final int groupValue; // 0-3
+  final int selectedIndex; // 0-3
 
-  @override
-  _ThumbWidgetState createState() => _ThumbWidgetState();
-}
-
-class _ThumbWidgetState extends State<ThumbWidget> {
   Widget _thumb(int index) {
     const Color outlinedColor = Color.fromRGBO(150, 150, 150, 1);
 
     IconData icon;
     IconData outlinedIcon;
+
+    final bool isSelected = selectedIndex == index;
 
     Color iconColor;
     const double iconSize = 24;
@@ -41,8 +38,7 @@ class _ThumbWidgetState extends State<ThumbWidget> {
 
     final isDouble = index == 0 || index == 3;
 
-    Color firstIconColor =
-        widget.groupValue == index ? iconColor : outlinedColor;
+    Color firstIconColor = isSelected ? iconColor : outlinedColor;
     if (isDouble) {
       firstIconColor = Utils.darken(
         firstIconColor,
@@ -55,7 +51,7 @@ class _ThumbWidgetState extends State<ThumbWidget> {
         clipBehavior: Clip.none,
         children: [
           Icon(
-            widget.groupValue == index ? icon : outlinedIcon,
+            isSelected ? icon : outlinedIcon,
             color: firstIconColor,
             size: iconSize,
           ),
@@ -66,7 +62,7 @@ class _ThumbWidgetState extends State<ThumbWidget> {
               right: xOffset - 1,
               bottom: yOffset,
               child: Icon(
-                widget.groupValue == index ? icon : outlinedIcon,
+                isSelected ? icon : outlinedIcon,
                 color: Colors.white54,
                 size: iconSize,
               ),
@@ -78,8 +74,8 @@ class _ThumbWidgetState extends State<ThumbWidget> {
               right: xOffset,
               bottom: yOffset,
               child: Icon(
-                widget.groupValue == index ? icon : outlinedIcon,
-                color: widget.groupValue == index ? iconColor : outlinedColor,
+                isSelected ? icon : outlinedIcon,
+                color: isSelected ? iconColor : outlinedColor,
                 size: iconSize,
               ),
             ),
@@ -91,6 +87,6 @@ class _ThumbWidgetState extends State<ThumbWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return _thumb(widget.index);
+    return _thumb(index);
   }
 }

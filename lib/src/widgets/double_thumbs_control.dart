@@ -31,7 +31,7 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
       },
       child: ThumbWidget(
         index: index,
-        groupValue: widget.value,
+        selectedIndex: widget.value,
       ),
     );
   }

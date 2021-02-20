@@ -52,6 +52,7 @@ export 'src/utils/sort_menu_button.dart';
 export 'src/utils/stack.dart';
 export 'src/utils/string_utils.dart';
 export 'src/utils/utils.dart';
+export 'src/widgets/action_header.dart';
 export 'src/widgets/bottom_navbar/bottom_navbar.dart';
 export 'src/widgets/bottom_slideup_sheet.dart';
 export 'src/widgets/browser_header.dart';

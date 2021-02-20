@@ -47,6 +47,7 @@ export 'src/utils/browser_prefs.dart';
 export 'src/utils/dates.dart';
 export 'src/utils/debouncer.dart';
 export 'src/utils/preferences.dart';
+export 'src/utils/rect_clipper.dart';
 export 'src/utils/sort_menu_button.dart';
 export 'src/utils/stack.dart';
 export 'src/utils/string_utils.dart';

@@ -6,10 +6,12 @@ class ThumbWidget extends StatelessWidget {
   const ThumbWidget({
     @required this.index,
     @required this.selectedIndex,
+    this.iconSize = 24,
   });
 
   final int index; // 0-3
   final int selectedIndex; // 0-3
+  final double iconSize;
 
   Widget _thumb(int index) {
     const Color outlinedColor = Color.fromRGBO(150, 150, 150, 1);
@@ -20,29 +22,27 @@ class ThumbWidget extends StatelessWidget {
     final bool isSelected = selectedIndex == index;
 
     Color iconColor;
-    const double iconSize = 24;
-    const double xOffset = 6;
-    const double yOffset = 1;
+    const double xOffset = 5;
+    double yOffset = 1;
 
     if (index < 2) {
       icon = FontAwesome.thumbs_down;
       outlinedIcon = FontAwesome.thumbs_down;
 
-      iconColor = Colors.red[600];
+      iconColor = Colors.red[800];
     } else {
       icon = FontAwesome.thumbs_up;
       outlinedIcon = FontAwesome.thumbs_up;
+      yOffset *= -1;
 
-      iconColor = Colors.green;
+      iconColor = Colors.green[800];
     }
 
     final isDouble = index == 0 || index == 3;
 
     Color firstIconColor = isSelected ? iconColor : outlinedColor;
     if (isDouble) {
-      firstIconColor = Utils.darken(
-        firstIconColor,
-      );
+      firstIconColor = Utils.darken(firstIconColor, .05);
     }
 
     return Padding(
@@ -61,10 +61,13 @@ class ThumbWidget extends StatelessWidget {
             child: Positioned(
               right: xOffset - 1,
               bottom: yOffset,
-              child: Icon(
-                isSelected ? icon : outlinedIcon,
-                color: Colors.white54,
-                size: iconSize,
+              child: ClipRect(
+                clipper: const RectClipper(),
+                child: Icon(
+                  isSelected ? icon : outlinedIcon,
+                  color: Colors.black54,
+                  size: iconSize,
+                ),
               ),
             ),
           ),

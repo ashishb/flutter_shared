@@ -7,14 +7,16 @@ class ThumbWidget extends StatelessWidget {
     @required this.index,
     @required this.selectedIndex,
     this.iconSize = 24,
+    this.opacity = 1,
   });
 
   final int index; // 0-3
   final int selectedIndex; // 0-3
   final double iconSize;
+  final double opacity;
 
   Widget _thumb(int index) {
-    const Color outlinedColor = Color.fromRGBO(150, 150, 150, 1);
+    final Color outlinedColor = Color.fromRGBO(150, 150, 150, opacity);
 
     IconData icon;
     IconData outlinedIcon;
@@ -29,13 +31,13 @@ class ThumbWidget extends StatelessWidget {
       icon = FontAwesome.thumbs_down;
       outlinedIcon = FontAwesome.thumbs_down;
 
-      iconColor = Colors.red[800];
+      iconColor = Colors.red[800].withOpacity(opacity);
     } else {
       icon = FontAwesome.thumbs_up;
       outlinedIcon = FontAwesome.thumbs_up;
       yOffset *= -1;
 
-      iconColor = Colors.green[800];
+      iconColor = Colors.green[800].withOpacity(opacity);
     }
 
     final isDouble = index == 0 || index == 3;

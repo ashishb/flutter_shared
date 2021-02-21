@@ -5,11 +5,13 @@ class DoubleThumbsControl extends StatefulWidget {
   const DoubleThumbsControl({
     @required this.value,
     @required this.onChanged,
+    this.showText = true,
   });
 
   // or null if not set
   final int value; // 0-3
   final ValueChanged<int> onChanged;
+  final bool showText;
 
   @override
   _DoubleThumbsControlState createState() => _DoubleThumbsControlState();
@@ -66,22 +68,25 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
             _thumb(3),
           ],
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Decision: ',
-                style: Theme.of(context).textTheme.caption,
-              ),
-              Text(
-                textResult ?? '',
-                style: Theme.of(context).textTheme.caption.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-              ),
-            ],
+        Visibility(
+          visible: widget.showText,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Decision: ',
+                  style: Theme.of(context).textTheme.caption,
+                ),
+                Text(
+                  textResult ?? '',
+                  style: Theme.of(context).textTheme.caption.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+              ],
+            ),
           ),
         ),
       ],

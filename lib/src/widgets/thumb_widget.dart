@@ -6,7 +6,7 @@ class ThumbWidget extends StatelessWidget {
   const ThumbWidget({
     @required this.index,
     @required this.selectedIndex,
-    this.iconSize = 24,
+    this.iconSize = 32,
     this.opacity = 1,
   });
 

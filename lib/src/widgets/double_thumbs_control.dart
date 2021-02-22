@@ -62,10 +62,22 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            _thumb(0),
-            _thumb(1),
-            _thumb(2),
-            _thumb(3),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _thumb(0),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _thumb(1),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _thumb(2),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: _thumb(3),
+            ),
           ],
         ),
         Visibility(

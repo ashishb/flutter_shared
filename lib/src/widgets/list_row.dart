@@ -51,7 +51,7 @@ class ListRow extends StatelessWidget {
         title,
         overflow: TextOverflow.ellipsis,
         softWrap: false, // keeps title on one line
-        style: titleStyle ?? Theme.of(context).textTheme.subtitle1,
+        style: titleStyle ?? Theme.of(context).textTheme.bodyText2,
         maxLines: maxTitleLines,
       ));
     }

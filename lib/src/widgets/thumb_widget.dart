@@ -48,7 +48,8 @@ class ThumbWidget extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      // leave space since double icons grow leftward
+      padding: EdgeInsets.only(left: xOffset),
       child: Stack(
         clipBehavior: Clip.none,
         children: [

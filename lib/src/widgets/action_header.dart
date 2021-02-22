@@ -41,10 +41,10 @@ class ActionHeader extends StatelessWidget {
   }
 
   static TextStyle defaultSubtitleStyle(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.caption;
+    TextStyle textStyle = Theme.of(context).textTheme.caption;
 
-    textStyle.copyWith(
-      color: textStyle.color.withOpacity(.5),
+    textStyle = textStyle.copyWith(
+      color: textStyle.color.withOpacity(.6),
     );
 
     return textStyle;

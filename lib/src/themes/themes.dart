@@ -54,7 +54,9 @@ class AppTheme {
       textTheme: _textTheme(darkMode),
       iconTheme: iconTheme,
       accentColor: params.accentColor,
-      dividerColor: params.accentColor.withOpacity(.5),
+      dividerColor: darkMode
+          ? Colors.white24
+          : Colors.black26, // params.accentColor.withOpacity(.5),
       primaryColor: appColor,
       toggleableActiveColor: appColor,
       dialogBackgroundColor: ThemeSetManager().currentTheme.backgroundColor,
@@ -129,7 +131,7 @@ class AppTheme {
       textColor = Colors.white;
     }
 
-    Color subtitleColor = Utils.darken(textColor, .2);
+    Color subtitleColor = Utils.darken(textColor);
     Color headerTextColor = Colors.grey;
     Color buttonContentColor = Colors.white;
 
@@ -175,7 +177,7 @@ class AppTheme {
       headline4: TextStyle(
         color: headerTextColor,
         fontWeight: FontWeight.bold,
-        fontSize: 16.0,
+        fontSize: 17.0,
       ),
 
       // Google fonts list and others

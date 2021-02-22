@@ -30,14 +30,11 @@ class BrowserHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget subWidget = NothingWidget();
-    final textStyle = Theme.of(context).textTheme.caption;
 
     if (Utils.isNotEmpty(subtitle)) {
       subWidget = Text(
         subtitle,
-        style: textStyle.copyWith(
-          color: textStyle.color.withOpacity(.5),
-        ),
+        style: ActionHeader.defaultSubtitleStyle(context),
       );
     }
 
@@ -48,7 +45,7 @@ class BrowserHeader extends StatelessWidget {
         children: [
           Text(
             header.toUpperCase(),
-            style: ThemeSetManager.header(context),
+            style: ActionHeader.defaultTextStyle(context),
           ),
           subWidget,
         ],

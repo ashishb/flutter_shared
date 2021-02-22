@@ -24,7 +24,7 @@ class ThumbWidget extends StatelessWidget {
     final bool isSelected = selectedIndex == index;
 
     Color iconColor;
-    const double xOffset = 5;
+    final double xOffset = (iconSize / 5).roundToDouble();
     double yOffset = 1;
 
     if (index < 2) {

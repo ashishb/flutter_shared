@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
 class JsonViewerScreen extends StatelessWidget {
@@ -12,6 +13,20 @@ class JsonViewerScreen extends StatelessWidget {
   final String title;
   final VoidCallback onDelete;
 
+  Widget _copyButton(BuildContext context) {
+    return IconButton(
+      onPressed: () {
+        final String jsonStr = StrUtils.toPrettyString(map);
+        Clipboard.setData(ClipboardData(text: jsonStr));
+
+        Utils.showCopiedToast(context);
+      },
+      icon: const Icon(
+        Icons.content_copy,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> actions = [];
@@ -24,6 +39,9 @@ class JsonViewerScreen extends StatelessWidget {
         ),
       ];
     }
+
+    actions.add(_copyButton(context));
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title),

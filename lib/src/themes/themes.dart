@@ -187,7 +187,7 @@ class AppTheme {
 
       // used for listTile subtitle
       caption: startTheme.bodyText1.copyWith(
-        fontSize: 14.0,
+        fontSize: 15.0,
         color: subtitleColor,
       ),
     );

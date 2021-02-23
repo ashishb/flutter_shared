@@ -165,12 +165,10 @@ packages:
   flutter_archive:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "6aeed6f4b6deb877947e96b2f8edf67af5bdb1cc"
-      url: "git://github.com/sgehrman/flutter_archive"
-    source: git
-    version: "0.1.4"
+      name: flutter_archive
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   flutter_barcode_scanner:
     dependency: "direct main"
     description:

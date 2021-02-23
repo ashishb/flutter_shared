@@ -21,16 +21,21 @@ class ZipArchive {
     if (serverFile.isDirectory) {
       final dataDir = Directory(serverFile.path);
       try {
-        await FlutterArchive.zipDirectory(sourceDir: dataDir, zipFile: zipFile);
+        await ZipFile.createFromDirectory(
+          sourceDir: dataDir,
+          zipFile: zipFile,
+          includeBaseDirectory: true,
+        );
       } catch (e) {
         print(e);
       }
     } else {
       try {
-        await FlutterArchive.zipFiles(
-            sourceDir: Directory(serverFile.directoryPath),
-            files: [File(serverFile.path)],
-            zipFile: zipFile);
+        await ZipFile.createFromFiles(
+          sourceDir: Directory(serverFile.directoryPath),
+          files: [File(serverFile.path)],
+          zipFile: zipFile,
+        );
       } catch (e) {
         print(e);
       }
@@ -51,7 +56,8 @@ class ZipArchive {
     tmpDir.createSync();
 
     try {
-      await FlutterArchive.unzip(zipFile: zipFile, destinationDir: tmpDir);
+      await ZipFile.extractToDirectory(
+          zipFile: zipFile, destinationDir: tmpDir);
 
       for (final entity in tmpDir.listSync()) {
         final bool isDirectory = entity is Directory;

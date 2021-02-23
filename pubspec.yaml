@@ -24,7 +24,7 @@ dependencies:
   simple_animations: ^2.5.1
 
   flutter_parsed_text: ^1.2.5
-  flutter_svg: ^0.19.2+1
+  flutter_svg: ^0.20.0-nullsafety.3
   google_fonts: ^1.1.2
   hex: ^0.1.2
   hive: ^1.4.4+1
@@ -46,7 +46,7 @@ dependencies:
   flutter_barcode_scanner: ^1.0.2
   flare_flutter: ^2.0.6
   flutter_archive: ^2.0.2
-  extended_image: ^1.6.0
+  extended_image: ^1.6.0-dev
 
   barcode_image:
     git:
@@ -64,8 +64,6 @@ dev_dependencies:
   lint: ^1.0.0
 
 dependency_overrides:
-  extended_image: 1.6.0-dev
-  flutter_svg: 0.20.0-nullsafety.3
   xml: ^4.2.0
 
 flutter:

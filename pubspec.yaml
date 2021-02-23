@@ -46,7 +46,7 @@ dependencies:
   flutter_barcode_scanner: ^1.0.2
   flare_flutter: ^2.0.6
   flutter_archive: ^2.0.2
-  extended_image: ^1.5.0
+  extended_image: ^1.6.0
 
   barcode_image:
     git:

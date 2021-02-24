@@ -41,7 +41,10 @@ class _ThumbsUpControlState extends State<ThumbsUpControl> {
             setState(() {});
           },
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 14,
+            ),
             child: ThumbWidget(
               selectedIndex: groupValue == 1 ? 2 : 10,
               index: 2,
@@ -61,7 +64,10 @@ class _ThumbsUpControlState extends State<ThumbsUpControl> {
             setState(() {});
           },
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 14,
+            ),
             child: ThumbWidget(
               selectedIndex: groupValue == 0 ? 1 : 10,
               index: 1,

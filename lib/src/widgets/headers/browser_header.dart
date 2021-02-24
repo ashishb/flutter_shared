@@ -32,9 +32,10 @@ class BrowserHeader extends StatelessWidget {
     Widget subWidget = NothingWidget();
 
     if (Utils.isNotEmpty(subtitle)) {
-      subWidget = Text(
+      subWidget = ExpandableText(
         subtitle,
         style: ActionHeader.defaultSubtitleStyle(context),
+        maxLength: 220,
       );
     }
 
@@ -49,26 +50,6 @@ class BrowserHeader extends StatelessWidget {
           ),
           subWidget,
         ],
-      ),
-    );
-  }
-}
-
-class CenteredHeader extends StatelessWidget {
-  const CenteredHeader(this.header, {this.top, this.bottom});
-
-  final String header;
-  final double top;
-  final double bottom;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: bottom ?? 4, top: top ?? 10),
-      child: Text(
-        header,
-        textAlign: TextAlign.center,
-        style: ThemeSetManager.header(context),
       ),
     );
   }

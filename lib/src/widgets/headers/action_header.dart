@@ -43,10 +43,6 @@ class ActionHeader extends StatelessWidget {
   static TextStyle defaultSubtitleStyle(BuildContext context) {
     final TextStyle textStyle = Theme.of(context).textTheme.caption;
 
-    // textStyle = textStyle.copyWith(
-    //   color: textStyle.color.withOpacity(.6),
-    // );
-
     return textStyle;
   }
 
@@ -57,9 +53,10 @@ class ActionHeader extends StatelessWidget {
     if (subWidget != null) {
       subtitleWidget = subWidget;
     } else if (Utils.isNotEmpty(subtitle)) {
-      subtitleWidget = Text(
+      subtitleWidget = ExpandableText(
         subtitle,
         style: defaultSubtitleStyle(context),
+        maxLength: 220,
       );
     }
     return Padding(

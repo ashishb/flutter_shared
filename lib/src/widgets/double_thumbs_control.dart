@@ -83,18 +83,15 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
         Visibility(
           visible: widget.showText,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 4.0),
+            padding: const EdgeInsets.symmetric(vertical: 12.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Decision: ',
-                  style: Theme.of(context).textTheme.caption,
-                ),
-                Text(
                   textResult ?? '',
                   style: Theme.of(context).textTheme.caption.copyWith(
                         fontWeight: FontWeight.bold,
+                        fontSize: 32,
                       ),
                 ),
               ],

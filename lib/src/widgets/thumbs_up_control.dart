@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shared/src/widgets/thumb_widget.dart';
 
 class ThumbsUpControl extends StatefulWidget {
   const ThumbsUpControl({
@@ -24,10 +25,6 @@ class _ThumbsUpControlState extends State<ThumbsUpControl> {
       groupValue = null;
     }
 
-    final Color iconColor = Theme.of(context).primaryColor;
-    final Color upColor = Colors.green[300];
-    final Color downColor = Colors.red[300];
-
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -45,9 +42,9 @@ class _ThumbsUpControlState extends State<ThumbsUpControl> {
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              groupValue == 1 ? Icons.thumb_up : Icons.thumb_up_outlined,
-              color: groupValue == 1 ? upColor : iconColor,
+            child: ThumbWidget(
+              selectedIndex: groupValue == 1 ? 2 : 10,
+              index: 2,
             ),
           ),
         ),
@@ -65,9 +62,9 @@ class _ThumbsUpControlState extends State<ThumbsUpControl> {
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              groupValue == 0 ? Icons.thumb_down : Icons.thumb_down_outlined,
-              color: groupValue == 0 ? downColor : iconColor,
+            child: ThumbWidget(
+              selectedIndex: groupValue == 0 ? 1 : 10,
+              index: 1,
             ),
           ),
         )

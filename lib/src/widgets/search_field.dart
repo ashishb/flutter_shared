@@ -41,40 +41,31 @@ class _SearchFieldState extends State<SearchField> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 10.0,
-        bottom: 6.0,
-        left: 20.0,
-        right: 20.0,
-      ),
-      child: TextField(
-        controller: _searchControllerConns,
-        decoration: InputDecoration(
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(
-              width: 2,
-              color: Theme.of(context).primaryColorLight,
-            ),
+    return TextField(
+      controller: _searchControllerConns,
+      decoration: InputDecoration(
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            width: 2,
+            color: Theme.of(context).primaryColorLight,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
-            borderSide: BorderSide(
-              width: 2,
-              color:
-                  Utils.isDarkMode(context) ? Colors.white24 : Colors.black12,
-            ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            width: 2,
+            color: Utils.isDarkMode(context) ? Colors.white24 : Colors.black12,
           ),
-          labelText: 'Search',
-          suffixIcon: IconButton(
-            icon: Utils.isNotEmpty(_searchControllerConns.text)
-                ? const Icon(Icons.close)
-                : const Icon(Icons.search),
-            onPressed: () {
-              _searchControllerConns.text = '';
-            },
-          ),
+        ),
+        labelText: 'Search',
+        suffixIcon: IconButton(
+          icon: Utils.isNotEmpty(_searchControllerConns.text)
+              ? const Icon(Icons.close)
+              : const Icon(Icons.search),
+          onPressed: () {
+            _searchControllerConns.text = '';
+          },
         ),
       ),
     );

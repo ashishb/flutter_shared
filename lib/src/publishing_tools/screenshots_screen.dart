@@ -80,7 +80,8 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
         print(e);
       }
 
-      Utils.showToast(
+      Utils.showSnackbar(
+        context,
         'Generate Complete',
       );
     }

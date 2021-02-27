@@ -175,6 +175,34 @@ class Utils {
     return isAndroid || isIOS;
   }
 
+  static bool get isDesktop {
+    return isMacOS || isLinux || isWindows;
+  }
+
+  static bool get isMacOS {
+    // Platform not available on web
+    if (isWeb) {
+      return false;
+    }
+    return Platform.isMacOS;
+  }
+
+  static bool get isLinux {
+    // Platform not available on web
+    if (isWeb) {
+      return false;
+    }
+    return Platform.isLinux;
+  }
+
+  static bool get isWindows {
+    // Platform not available on web
+    if (isWeb) {
+      return false;
+    }
+    return Platform.isWindows;
+  }
+
   static bool get isWeb {
     // Platform not available on web
     // but this constant is the current work around

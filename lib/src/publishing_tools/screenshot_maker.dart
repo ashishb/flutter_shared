@@ -5,10 +5,10 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_shared/src/publishing_tools/screenshot_params.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 import 'package:flutter_shared/src/publishing_tools/phone_menu.dart';
 import 'package:flutter_shared/src/publishing_tools/phone_shapes.dart';
+import 'package:flutter_shared/src/publishing_tools/size_menu.dart';
 
 class CaptureResult {
   const CaptureResult(this.data, this.width, this.height);
@@ -20,8 +20,12 @@ class CaptureResult {
 
 class ScreenshotMaker {
   Future<CaptureResult> createImage(
-      ui.Image assetImage, String title, PhoneType type,
-      {bool showBackground = true}) async {
+    ui.Image assetImage,
+    String title,
+    PhoneType type, {
+    bool showBackground = true,
+    SizeType resultImageSize,
+  }) async {
     final Size imageSize = Size(
       assetImage.width.toDouble(),
       assetImage.height.toDouble(),
@@ -54,6 +58,7 @@ class ScreenshotMaker {
     return _pictureToResults(
       pictureRecorder: pictureRecorder,
       imageSize: imageSize,
+      resultImageSize: resultImageSize,
       rect: p.resultRect,
       drawBackground: showBackground,
     );
@@ -117,6 +122,7 @@ class ScreenshotMaker {
   Future<CaptureResult> _pictureToResults({
     ui.PictureRecorder pictureRecorder,
     Size imageSize,
+    SizeType resultImageSize,
     Rect rect,
     bool drawBackground = false,
   }) async {
@@ -124,8 +130,8 @@ class ScreenshotMaker {
     final ui.Image image =
         await pic.toImage(rect.width.toInt(), rect.height.toInt());
 
-    final ui.Image resizedImage =
-        await _resizeImage(image, imageSize, drawBackground: drawBackground);
+    final ui.Image resizedImage = await _resizeImage(image, imageSize,
+        drawBackground: drawBackground, resultImageSize: resultImageSize);
 
     final data = await resizedImage.toByteData(format: ui.ImageByteFormat.png);
     final buffer = data.buffer.asUint8List();
@@ -180,15 +186,33 @@ class ScreenshotMaker {
   }
 
   Future<ui.Image> _resizeImage(ui.Image image, Size size,
-      {bool drawBackground = true}) async {
+      {bool drawBackground = true, SizeType resultImageSize}) async {
     final pictureRecorder = ui.PictureRecorder();
     final canvas = Canvas(pictureRecorder);
 
-    // enforce 2:1 Google play max aspect ratio
     Size newSize = size;
-    final double aspectRatio = size.width / size.height;
-    if (aspectRatio < .5) {
-      newSize = Size(size.height / 2, size.height);
+
+    if (resultImageSize != null) {
+      switch (resultImageSize) {
+        case SizeType.ios_1242_2208:
+          newSize = const Size(1242, 2208);
+          break;
+        case SizeType.ios_1284_2778:
+          newSize = const Size(1284, 2778);
+          break;
+        case SizeType.ios_2832_2048:
+          newSize = const Size(2832, 2048);
+          break;
+        case SizeType.imageSize:
+          {
+            // enforce 2:1 Google play max aspect ratio
+            final double aspectRatio = size.width / size.height;
+            if (aspectRatio < .5) {
+              newSize = Size(size.height / 2, size.height);
+            }
+          }
+          break;
+      }
     }
 
     final Rect rect = Offset.zero & newSize;

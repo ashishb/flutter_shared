@@ -6,6 +6,7 @@ import 'package:flutter_shared/flutter_shared.dart';
 import 'package:flutter_shared/src/publishing_tools/phone_menu.dart';
 import 'package:flutter_shared/src/publishing_tools/screenshot_maker.dart';
 import 'package:flutter_shared/src/publishing_tools/screenshot_menu.dart';
+import 'package:flutter_shared/src/publishing_tools/size_menu.dart';
 
 class ScreenshotsScreen extends StatefulWidget {
   const ScreenshotsScreen({
@@ -23,6 +24,9 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
   Future<CaptureResult> _image;
   PhoneMenuItem selectedItem = PhoneMenuItem.items[0];
   bool _showBackground = false;
+  SizeMenuItem sizeMenuItem =
+      SizeMenuItem(title: 'Image Size', type: SizeType.imageSize);
+
   ScreenshotMenuItem selectedScreenshotItem =
       ScreenshotMenuItem(filename: 'default', title: 'Select Title');
 
@@ -40,19 +44,19 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
     });
   }
 
-  void _onPreviewPressed() {
-    setState(() {
-      _image = maker.createImage(
-          uiImage, selectedScreenshotItem.title, selectedItem.type,
-          showBackground: _showBackground);
-    });
-  }
-
   Future<void> refreshPreview() async {
     // delay since we could modify a state var that won't be synced until next refresh
     await Future.delayed(Duration.zero, () {});
 
-    _onPreviewPressed();
+    setState(() {
+      _image = maker.createImage(
+        uiImage,
+        selectedScreenshotItem.title,
+        selectedItem.type,
+        showBackground: _showBackground,
+        resultImageSize: sizeMenuItem.type,
+      );
+    });
   }
 
   Future<void> _saveClicked() async {
@@ -73,6 +77,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
           selectedScreenshotItem.title,
           selectedItem.type,
           showBackground: _showBackground,
+          resultImageSize: sizeMenuItem.type,
         );
 
         await maker.saveToFile(fileName, capture);
@@ -136,9 +141,15 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      ColoredButton(
-                        onPressed: _onPreviewPressed,
-                        title: 'Preview',
+                      SizeMenu(
+                        onItemSelected: (SizeMenuItem item) {
+                          setState(() {
+                            sizeMenuItem = item;
+                          });
+
+                          refreshPreview();
+                        },
+                        selectedItem: sizeMenuItem,
                       ),
                       const SizedBox(width: 12),
                       ColoredButton(

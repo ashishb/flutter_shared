@@ -92,6 +92,8 @@ class FileSystem {
       final Directory dir = await getExternalStorageDirectory();
       result = dir.path;
     } else {
+      // linux, windows, macOs
+
       final Directory dir = await getApplicationDocumentsDirectory();
       result = dir.path;
     }
@@ -108,7 +110,7 @@ class FileSystem {
       final Directory dir = await getApplicationDocumentsDirectory();
 
       result = dir.path;
-    } else {
+    } else if (Utils.isAndroid) {
       final Directory dir = await getExternalStorageDirectory();
       result = dir.path;
 
@@ -122,6 +124,9 @@ class FileSystem {
           result = docsPath;
         }
       }
+    } else {
+      // linux, windows, macOs
+      result = await documentsPath;
     }
 
     return result;
@@ -150,7 +155,7 @@ class FileSystem {
     if (Utils.isIOS) {
       final Directory directory = await getLibraryDirectory();
       result = directory.path;
-    } else {
+    } else if (Utils.isAndroid) {
       // on Android this give us a data directory
       final Directory directory = await getApplicationDocumentsDirectory();
       result = directory.path;
@@ -160,6 +165,10 @@ class FileSystem {
       if (serverFile.name == 'app_flutter') {
         result = serverFile.directoryPath;
       }
+    } else {
+      // linux, windows, macOs
+      final Directory directory = await getApplicationSupportDirectory();
+      result = directory.path;
     }
 
     return result;

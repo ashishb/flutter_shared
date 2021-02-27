@@ -88,8 +88,11 @@ class FileSystem {
       final Directory dir = await getApplicationDocumentsDirectory();
 
       result = dir.path;
-    } else {
+    } else if (Utils.isAndroid) {
       final Directory dir = await getExternalStorageDirectory();
+      result = dir.path;
+    } else {
+      final Directory dir = await getApplicationDocumentsDirectory();
       result = dir.path;
     }
 

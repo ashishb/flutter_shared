@@ -216,24 +216,8 @@ class ScreenshotMaker {
     return result;
   }
 
-  Future<String> get documentsPath async {
-    String result;
-
-    if (Utils.isIOS) {
-      // on Android this give us a data directory for some odd reason
-      final Directory dir = await getApplicationDocumentsDirectory();
-
-      result = dir.path;
-    } else {
-      final Directory dir = await getExternalStorageDirectory();
-      result = dir.path;
-    }
-
-    return result;
-  }
-
   Future<void> saveToFile(String filename, CaptureResult capture) async {
-    String path = await documentsPath;
+    String path = await FileSystem.documentsPath;
     path = '$path/${filename}_screenshot.png';
 
     print('saved to: $path');

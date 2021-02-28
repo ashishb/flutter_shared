@@ -5,9 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
 class ScreenshotMenuItem {
-  ScreenshotMenuItem({this.title, this.filename});
+  ScreenshotMenuItem({this.title = kNoTextTitle, this.filename = 'no-title'});
   String title;
   String filename;
+
+  static const kNoTextTitle = 'No Title';
+
+  String get displayTitle => title == kNoTextTitle ? '' : title;
 
   static Future<List<ScreenshotMenuItem>> get items async {
     final List<ScreenshotMenuItem> result = [];
@@ -19,6 +23,8 @@ class ScreenshotMenuItem {
 
     final dataList = List<Map>.from(jsonMap['data'] as List);
 
+    // add no title choice
+    result.add(ScreenshotMenuItem());
     for (final x in dataList) {
       result.add(ScreenshotMenuItem(
           title: x['title'] as String, filename: x['filename'] as String));

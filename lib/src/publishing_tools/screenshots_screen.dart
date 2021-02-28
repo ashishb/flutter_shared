@@ -23,12 +23,11 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
   ScreenshotMaker maker = ScreenshotMaker();
   Future<CaptureResult> _image;
   PhoneMenuItem selectedItem = PhoneMenuItem.items[0];
-  bool _showBackground = false;
+  bool _showBackground = true;
   SizeMenuItem sizeMenuItem =
       SizeMenuItem(title: 'Image Size', type: SizeType.imageSize);
 
-  ScreenshotMenuItem selectedScreenshotItem =
-      ScreenshotMenuItem(filename: 'default', title: 'Select Title');
+  ScreenshotMenuItem selectedScreenshotItem = ScreenshotMenuItem();
 
   ui.Image uiImage;
 
@@ -51,7 +50,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
     setState(() {
       _image = maker.createImage(
         uiImage,
-        selectedScreenshotItem.title,
+        selectedScreenshotItem.displayTitle,
         selectedItem.type,
         showBackground: _showBackground,
         resultImageSize: sizeMenuItem.type,
@@ -75,7 +74,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
 
         final CaptureResult capture = await maker.createImage(
           assetImage,
-          selectedScreenshotItem.title,
+          selectedScreenshotItem.displayTitle,
           selectedItem.type,
           showBackground: _showBackground,
           resultImageSize: sizeMenuItem.type,
@@ -93,6 +92,101 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
     }
   }
 
+  Widget _topToolbar() {
+    return Row(
+      children: [
+        PhoneMenu(
+          onItemSelected: (PhoneMenuItem item) {
+            setState(() {
+              selectedItem = item;
+            });
+
+            refreshPreview();
+          },
+          selectedItem: selectedItem,
+        ),
+        ScreenshotMenu(
+          onItemSelected: (ScreenshotMenuItem item) {
+            setState(() {
+              selectedScreenshotItem = item;
+            });
+
+            refreshPreview();
+          },
+          selectedItem: selectedScreenshotItem,
+        ),
+        SizeMenu(
+          onItemSelected: (SizeMenuItem item) {
+            setState(() {
+              sizeMenuItem = item;
+            });
+
+            refreshPreview();
+          },
+          selectedItem: sizeMenuItem,
+        ),
+      ],
+    );
+  }
+
+  Widget _saveBar() {
+    return Row(
+      children: <Widget>[
+        Flexible(
+          child: CheckboxListTile(
+            value: _showBackground,
+            controlAffinity: ListTileControlAffinity.leading,
+            title: const Text('Show Background'),
+            onChanged: (x) {
+              setState(() {
+                _showBackground = x;
+              });
+
+              refreshPreview();
+            },
+          ),
+        ),
+        const SizedBox(width: 12),
+        ColoredButton(
+          onPressed: _saveClicked,
+          title: 'Save',
+        ),
+        const SizedBox(width: 16),
+      ],
+    );
+  }
+
+  List<Widget> _imagePreview(AsyncSnapshot<CaptureResult> snapshot) {
+    if (snapshot.connectionState == ConnectionState.waiting) {
+      return const [
+        Center(
+          child: CircularProgressIndicator(),
+        )
+      ];
+    }
+
+    if (snapshot.hasData) {
+      return [
+        Text(
+          '${snapshot.data.width} x ${snapshot.data.height}',
+          textAlign: TextAlign.center,
+        ),
+        Container(
+          margin: const EdgeInsets.all(2.0),
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey.shade300, width: 2.0),
+          ),
+          child: Image.memory(
+            snapshot.data.data,
+            // scale: MediaQuery.of(context).devicePixelRatio,
+          ),
+        ),
+      ];
+    }
+
+    return [NothingWidget()];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,80 +200,10 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
             child: Center(
               child: Column(
                 children: <Widget>[
-                  PhoneMenu(
-                    onItemSelected: (PhoneMenuItem item) {
-                      setState(() {
-                        selectedItem = item;
-                      });
-
-                      refreshPreview();
-                    },
-                    selectedItem: selectedItem,
-                  ),
+                  _topToolbar(),
                   const SizedBox(height: 10),
-                  ScreenshotMenu(
-                    onItemSelected: (ScreenshotMenuItem item) {
-                      setState(() {
-                        selectedScreenshotItem = item;
-                      });
-
-                      refreshPreview();
-                    },
-                    selectedItem: selectedScreenshotItem,
-                  ),
-                  CheckboxListTile(
-                    value: _showBackground,
-                    title: const Text('Show Background'),
-                    onChanged: (x) {
-                      setState(() {
-                        _showBackground = x;
-                      });
-
-                      refreshPreview();
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizeMenu(
-                        onItemSelected: (SizeMenuItem item) {
-                          setState(() {
-                            sizeMenuItem = item;
-                          });
-
-                          refreshPreview();
-                        },
-                        selectedItem: sizeMenuItem,
-                      ),
-                      const SizedBox(width: 12),
-                      ColoredButton(
-                        onPressed: _saveClicked,
-                        title: 'Save',
-                      ),
-                    ],
-                  ),
-                  if (snapshot.connectionState == ConnectionState.waiting)
-                    const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  else if (snapshot.hasData) ...[
-                    Text(
-                      '${snapshot.data.width} x ${snapshot.data.height}',
-                      textAlign: TextAlign.center,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.all(2.0),
-                      decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Colors.grey.shade300, width: 2.0),
-                      ),
-                      child: Image.memory(
-                        snapshot.data.data,
-                        // scale: MediaQuery.of(context).devicePixelRatio,
-                      ),
-                    ),
-                  ],
+                  _saveBar(),
+                  ..._imagePreview(snapshot),
                 ],
               ),
             ),

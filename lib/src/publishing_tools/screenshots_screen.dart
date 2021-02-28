@@ -70,7 +70,8 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
 
     if (Utils.isNotEmpty(fileName)) {
       try {
-        final ui.Image assetImage = await Utils.loadUiImage(widget.imagePath);
+        final ui.Image assetImage =
+            await Utils.loadImageFromPath(widget.imagePath);
 
         final CaptureResult capture = await maker.createImage(
           assetImage,

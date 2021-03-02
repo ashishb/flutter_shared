@@ -24,6 +24,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
   Future<CaptureResult> _image;
   PhoneMenuItem selectedItem = PhoneMenuItem.items[0];
   bool _showBackground = true;
+  String _title;
   SizeMenuItem sizeMenuItem =
       SizeMenuItem(title: 'Image Size', type: SizeType.imageSize);
 
@@ -50,7 +51,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
     setState(() {
       _image = maker.createImage(
         uiImage,
-        selectedScreenshotItem.displayTitle,
+        _title ?? selectedScreenshotItem.displayTitle,
         selectedItem.type,
         showBackground: _showBackground,
         resultImageSize: sizeMenuItem.type,
@@ -74,7 +75,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
 
         final CaptureResult capture = await maker.createImage(
           assetImage,
-          selectedScreenshotItem.displayTitle,
+          _title ?? selectedScreenshotItem.displayTitle,
           selectedItem.type,
           showBackground: _showBackground,
           resultImageSize: sizeMenuItem.type,
@@ -114,6 +115,27 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
             refreshPreview();
           },
           selectedItem: selectedScreenshotItem,
+        ),
+        ElevatedButton(
+          onPressed: () async {
+            final result = await showStringDialog(
+              context: context,
+              keyboardType: TextInputType.multiline,
+              title: 'Enter Title',
+              message: 'You can hit return to add lines',
+              minLines: 2,
+              maxLines: 6,
+            );
+
+            if (result != null) {
+              _title = result;
+
+              setState(() {});
+
+              await refreshPreview();
+            }
+          },
+          child: const Text('Title'),
         ),
         SizeMenu(
           onItemSelected: (SizeMenuItem item) {

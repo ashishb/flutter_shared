@@ -9,6 +9,8 @@ Future<String> showStringDialog({
   String defaultName = '',
   TextInputType keyboardType = TextInputType.text,
   bool barrierDismissible = true,
+  int minLines = 1,
+  int maxLines = 1,
 }) async {
   return showDialog<String>(
     context: context,
@@ -21,6 +23,8 @@ Future<String> showStringDialog({
         defaultName: defaultName,
         cancelButtonName: cancelButtonName,
         keyboardType: keyboardType,
+        minLines: minLines,
+        maxLines: maxLines,
       );
     },
   );
@@ -34,6 +38,8 @@ class _DialogContents extends StatefulWidget {
     this.cancelButtonName = 'Cancel',
     this.defaultName = '',
     this.keyboardType = TextInputType.text,
+    this.minLines,
+    this.maxLines,
   });
 
   final String title;
@@ -42,6 +48,8 @@ class _DialogContents extends StatefulWidget {
   final String okButtonName;
   final String cancelButtonName;
   final TextInputType keyboardType;
+  final int minLines;
+  final int maxLines;
 
   @override
   __DialogContentsState createState() => __DialogContentsState();
@@ -82,6 +90,8 @@ class __DialogContentsState extends State<_DialogContents> {
                 keyboardType: widget.keyboardType ?? TextInputType.text,
                 autofocus: true,
                 controller: _textController,
+                minLines: widget.minLines,
+                maxLines: widget.minLines,
               ),
             ],
           ),

@@ -200,8 +200,8 @@ class ScreenshotMaker {
         case SizeType.ios_1284_2778:
           newSize = const Size(1284, 2778);
           break;
-        case SizeType.ios_2832_2048:
-          newSize = const Size(2832, 2048);
+        case SizeType.ios_2048_2732:
+          newSize = const Size(2048, 2732);
           break;
         case SizeType.imageSize:
           {

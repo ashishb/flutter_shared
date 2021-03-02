@@ -5,7 +5,7 @@ enum SizeType {
   imageSize,
   ios_1284_2778,
   ios_1242_2208,
-  ios_2832_2048,
+  ios_2048_2732,
 }
 
 class SizeMenuItem {
@@ -17,7 +17,7 @@ class SizeMenuItem {
     SizeMenuItem(title: 'Image Size', type: SizeType.imageSize),
     SizeMenuItem(title: '6.5 1284x2778', type: SizeType.ios_1284_2778),
     SizeMenuItem(title: '5.5 1242x2208', type: SizeType.ios_1242_2208),
-    SizeMenuItem(title: '12.9 2832x2048', type: SizeType.ios_2832_2048),
+    SizeMenuItem(title: '12.9 2048x2732', type: SizeType.ios_2048_2732),
   ];
 }
 

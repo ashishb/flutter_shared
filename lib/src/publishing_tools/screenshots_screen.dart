@@ -22,7 +22,7 @@ class ScreenshotsScreen extends StatefulWidget {
 class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
   ScreenshotMaker maker = ScreenshotMaker();
   Future<CaptureResult> _image;
-  PhoneMenuItem selectedItem = PhoneMenuItem.items[0];
+  PhoneMenuItem selectedItem = PhoneMenuItem.items[1];
   bool _showBackground = true;
   String _title;
   SizeMenuItem sizeMenuItem =

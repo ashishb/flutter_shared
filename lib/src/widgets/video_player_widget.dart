@@ -75,7 +75,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (_controller.value.initialized) {
+    if (_controller.value.isInitialized) {
       return AspectRatio(
         aspectRatio: _controller.value.aspectRatio,
         child: Stack(

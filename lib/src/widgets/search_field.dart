@@ -12,6 +12,8 @@ class SearchField extends StatefulWidget {
 
 class _SearchFieldState extends State<SearchField> {
   TextEditingController _searchControllerConns;
+  final NoKeyboardEditableTextFocusNode _focusNode =
+      NoKeyboardEditableTextFocusNode();
 
   @override
   void initState() {
@@ -42,7 +44,14 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      focusNode: NoKeyboardEditableTextFocusNode(),
+      focusNode: _focusNode,
+      onTap: () {
+        if (!_focusNode.enable) {
+          _focusNode.enable = true;
+
+          setState(() {});
+        }
+      },
       controller: _searchControllerConns,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
@@ -74,10 +83,22 @@ class _SearchFieldState extends State<SearchField> {
 }
 
 class NoKeyboardEditableTextFocusNode extends FocusNode {
+  bool enable = false;
+
   @override
-  bool get hasFocus => false;
+  bool get hasFocus {
+    if (enable) {
+      return super.hasFocus;
+    }
+    return false;
+  }
+
   @override
   bool consumeKeyboardToken() {
+    if (enable) {
+      return super.consumeKeyboardToken();
+    }
+
     return false;
   }
 }

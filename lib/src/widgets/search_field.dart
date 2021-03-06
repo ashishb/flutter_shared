@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/utils/utils.dart';
+import 'package:flutter_shared/src/widgets/must_tap_focus_node.dart';
 
 class SearchField extends StatefulWidget {
   const SearchField(this.onChange);
@@ -12,8 +13,7 @@ class SearchField extends StatefulWidget {
 
 class _SearchFieldState extends State<SearchField> {
   TextEditingController _searchControllerConns;
-  final NoKeyboardEditableTextFocusNode _focusNode =
-      NoKeyboardEditableTextFocusNode();
+  final MustTapFocusNode _focusNode = MustTapFocusNode();
 
   @override
   void initState() {
@@ -79,26 +79,5 @@ class _SearchFieldState extends State<SearchField> {
         ),
       ),
     );
-  }
-}
-
-class NoKeyboardEditableTextFocusNode extends FocusNode {
-  bool enable = false;
-
-  @override
-  bool get hasFocus {
-    if (enable) {
-      return super.hasFocus;
-    }
-    return false;
-  }
-
-  @override
-  bool consumeKeyboardToken() {
-    if (enable) {
-      return super.consumeKeyboardToken();
-    }
-
-    return false;
   }
 }

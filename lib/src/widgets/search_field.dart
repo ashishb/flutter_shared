@@ -42,6 +42,7 @@ class _SearchFieldState extends State<SearchField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      focusNode: NoKeyboardEditableTextFocusNode(),
       controller: _searchControllerConns,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(
@@ -69,5 +70,14 @@ class _SearchFieldState extends State<SearchField> {
         ),
       ),
     );
+  }
+}
+
+class NoKeyboardEditableTextFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
+  @override
+  bool consumeKeyboardToken() {
+    return false;
   }
 }

@@ -20,6 +20,7 @@ class _SearchFieldState extends State<SearchField> {
 
     _focusNode = FocusNode();
     _focusNode.addListener(_listener);
+    _focusNode.skipTraversal = true;
 
     _searchControllerConns = TextEditingController();
 
@@ -27,9 +28,7 @@ class _SearchFieldState extends State<SearchField> {
   }
 
   void _listener() {
-    if (!_focusNode.hasFocus) {
-      _focusNode.consumeKeyboardToken();
-    }
+    print(_focusNode.toString());
   }
 
   @override

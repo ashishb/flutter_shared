@@ -5,22 +5,8 @@ import 'package:flutter/material.dart';
 // the text field and puts up the keyboard.  This is annoying.
 
 class MustTapFocusNode extends FocusNode {
-  bool enable = false;
-
   @override
-  bool get hasFocus {
-    if (enable) {
-      return super.hasFocus;
-    }
-    return false;
-  }
-
-  @override
-  bool consumeKeyboardToken() {
-    if (enable) {
-      return super.consumeKeyboardToken();
-    }
-
-    return false;
+  bool get skipTraversal {
+    return true;
   }
 }

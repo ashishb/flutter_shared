@@ -45,13 +45,6 @@ class _SearchFieldState extends State<SearchField> {
   Widget build(BuildContext context) {
     return TextField(
       focusNode: _focusNode,
-      onTap: () {
-        if (!_focusNode.enable) {
-          _focusNode.enable = true;
-
-          setState(() {});
-        }
-      },
       controller: _searchControllerConns,
       decoration: InputDecoration(
         focusedBorder: OutlineInputBorder(

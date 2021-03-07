@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shared/src/utils/utils.dart';
-import 'package:flutter_shared/src/widgets/must_tap_focus_node.dart';
 
 class SearchField extends StatefulWidget {
   const SearchField(this.onChange);
@@ -13,20 +12,30 @@ class SearchField extends StatefulWidget {
 
 class _SearchFieldState extends State<SearchField> {
   TextEditingController _searchControllerConns;
-  final MustTapFocusNode _focusNode = MustTapFocusNode();
+  FocusNode _focusNode;
 
   @override
   void initState() {
     super.initState();
+
+    _focusNode = FocusNode();
+    _focusNode.addListener(_listener);
 
     _searchControllerConns = TextEditingController();
 
     _setup();
   }
 
+  void _listener() {
+    if (!_focusNode.hasFocus) {
+      _focusNode.consumeKeyboardToken();
+    }
+  }
+
   @override
   void dispose() {
     _searchControllerConns.dispose();
+    _focusNode.removeListener(_listener);
 
     super.dispose();
   }

@@ -80,8 +80,6 @@ class _SearchFieldState extends State<SearchField> {
         ),
         labelText: 'Search',
         suffixIcon: IconButton(
-          constraints: BoxConstraints.tight(const Size(32, 32)),
-          padding: EdgeInsets.zero,
           icon: Utils.isNotEmpty(_searchControllerConns.text)
               ? const Icon(Icons.close)
               : const Icon(Icons.search),

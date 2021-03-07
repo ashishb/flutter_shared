@@ -116,7 +116,7 @@ class _SheetList extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 _tabDecoration(context),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
                 _buttonBar(context),
                 Expanded(
                   child: _listView(context, controller),

@@ -29,6 +29,7 @@ class _SearchFieldState extends State<SearchField> {
 
   void _listener() {
     if (!_focusNode.hasFocus) {
+      _focusNode.removeListener(_listener);
       _focusNode = null;
 
       _focusNode = FocusNode();

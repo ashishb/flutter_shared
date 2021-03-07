@@ -28,7 +28,15 @@ class _SearchFieldState extends State<SearchField> {
   }
 
   void _listener() {
-    print(_focusNode.toString());
+    if (!_focusNode.hasFocus) {
+      _focusNode = null;
+
+      _focusNode = FocusNode();
+      _focusNode.addListener(_listener);
+      _focusNode.skipTraversal = true;
+
+      setState(() {});
+    }
   }
 
   @override

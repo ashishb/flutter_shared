@@ -21,11 +21,11 @@ const BorderRadius _borderRadius = BorderRadius.only(
 );
 
 class BottomSlideupSheet {
-  static Future<void> show({
+  static Future<T> show<T>({
     BuildContext context,
     SliderContent sliderContent,
   }) {
-    return showModalBottomSheet<void>(
+    return showModalBottomSheet<T>(
       backgroundColor: sliderContent.backgroundColor(context),
       barrierColor: sliderContent.barrierColor(context),
       isScrollControlled: true,

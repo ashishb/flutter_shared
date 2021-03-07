@@ -9,7 +9,7 @@ class ActionHeader extends StatelessWidget {
     this.top = 0,
     this.bottom = 0,
     this.textStyle,
-    this.iconSize = 20,
+    this.iconSize = 24,
     this.upperCase = true,
     this.subtitle,
     this.subWidget,

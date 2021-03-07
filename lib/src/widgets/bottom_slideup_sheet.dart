@@ -12,6 +12,7 @@ abstract class SliderContent {
   double get initialChildSize;
   Color backgroundColor(BuildContext context);
   Color barrierColor(BuildContext context);
+  Widget listView(BuildContext context, ScrollController controller);
 }
 
 const BorderRadius _borderRadius = BorderRadius.only(
@@ -84,6 +85,20 @@ class _SheetList extends StatelessWidget {
     );
   }
 
+  Widget _listView(BuildContext context, ScrollController controller) {
+    final Widget listview = sliderContent.listView(context, controller);
+
+    if (listview != null) {
+      return listview;
+    }
+
+    return ListView.builder(
+      controller: controller,
+      itemBuilder: sliderContent.itemBuilder,
+      itemCount: sliderContent.itemCount(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -105,11 +120,7 @@ class _SheetList extends StatelessWidget {
                 const SizedBox(height: 12),
                 _buttonBar(context),
                 Expanded(
-                  child: ListView.builder(
-                    controller: controller,
-                    itemBuilder: sliderContent.itemBuilder,
-                    itemCount: sliderContent.itemCount(),
-                  ),
+                  child: _listView(context, controller),
                 ),
               ],
             ),

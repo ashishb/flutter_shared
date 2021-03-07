@@ -15,7 +15,6 @@ class ListRow extends StatelessWidget {
     this.titleStyle,
     this.subtitleStyle,
     this.maxSubtitleLines = 2,
-    this.maxTitleLines = 2,
   });
 
   final Widget leading;
@@ -30,7 +29,6 @@ class ListRow extends StatelessWidget {
   final Color color;
   final EdgeInsetsGeometry padding;
   final int maxSubtitleLines;
-  final int maxTitleLines;
 
   static Color backgroundForIndex({
     @required int index,
@@ -52,7 +50,6 @@ class ListRow extends StatelessWidget {
         overflow: TextOverflow.ellipsis,
         softWrap: false, // keeps title on one line
         style: titleStyle ?? Theme.of(context).textTheme.bodyText2,
-        maxLines: maxTitleLines,
       ));
     }
 

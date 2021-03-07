@@ -102,8 +102,7 @@ class _SheetList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:
-          const EdgeInsets.only(bottom: 20, top: 12.0, right: 20, left: 20),
+      padding: const EdgeInsets.only(top: 12.0, right: 20, left: 20),
       child: DraggableScrollableSheet(
         expand: false,
         initialChildSize: sliderContent.initialChildSize,

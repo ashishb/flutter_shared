@@ -55,8 +55,8 @@ class AppTheme {
       iconTheme: iconTheme,
       accentColor: params.accentColor,
       dividerColor: darkMode
-          ? Colors.white24
-          : Colors.black26, // params.accentColor.withOpacity(.5),
+          ? Colors.white12
+          : Colors.black12, // params.accentColor.withOpacity(.5),
       primaryColor: appColor,
       toggleableActiveColor: appColor,
       dialogBackgroundColor: ThemeSetManager().currentTheme.backgroundColor,

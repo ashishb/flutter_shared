@@ -106,7 +106,6 @@ class _ImageSwiperState extends State<ImageViewer>
       initialScale: initialScale,
       maxScale: 10.0,
       animationMaxScale: 10.0,
-      cacheGesture: false,
     );
   }
 

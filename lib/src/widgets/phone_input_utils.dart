@@ -10,12 +10,20 @@ class PhoneInputUtils {
           (TextEditingValue oldValue, TextEditingValue newValue) {
         String newText = newValue.text;
 
+        TextSelection selection = newValue.selection;
+
         if (Utils.isNotEmpty(newText) && newText.length == 1) {
           if (newText[0] != '1' && newText[0] != '+') {
             newText = '1$newText';
+
+            selection = TextSelection.collapsed(offset: selection.end + 1);
           }
         }
-        return newValue.copyWith(text: newText);
+
+        return newValue.copyWith(
+          text: newText,
+          selection: selection,
+        );
       }),
       PhoneInputFormatter(
         onCountrySelected: (PhoneCountryData countryData) =>

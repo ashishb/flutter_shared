@@ -76,13 +76,13 @@ class _ParticlesState extends State<Particles> {
   }
 }
 
-enum AniProps { x, y }
+enum _AniProps { x, y }
 
 class ParticleModel {
   ParticleModel(this.random) {
     restart();
   }
-  MultiTween<AniProps> tween;
+  MultiTween<_AniProps> tween;
 
   double size;
   Random random;
@@ -94,14 +94,14 @@ class ParticleModel {
     final endPosition = Offset(-0.2 + 1.4 * random.nextDouble(), -0.2);
     final duration = Duration(milliseconds: 10000 + random.nextInt(20000));
 
-    tween = MultiTween<AniProps>()
+    tween = MultiTween<_AniProps>()
       ..add(
-          AniProps.x,
+          _AniProps.x,
           Tween<double>(begin: startPosition.dx, end: endPosition.dx),
           duration,
           Curves.easeInOutSine)
       ..add(
-          AniProps.y,
+          _AniProps.y,
           Tween<double>(begin: startPosition.dy, end: endPosition.dy),
           duration,
           Curves.easeIn);
@@ -133,8 +133,8 @@ class ParticlePainter extends CustomPainter {
       final animation = particle.tween.transform(progress);
 
       final position = Offset(
-        animation.get<double>(AniProps.x) * size.width,
-        animation.get<double>(AniProps.y) * size.height,
+        animation.get<double>(_AniProps.x) * size.width,
+        animation.get<double>(_AniProps.y) * size.height,
       );
 
       final int alpha = 30 + (50 * particle.rando).toInt();

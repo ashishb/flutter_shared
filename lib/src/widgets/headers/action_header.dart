@@ -68,13 +68,9 @@ class ActionHeader extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  // padding makes it align with icon
-                  padding: const EdgeInsets.only(top: 6.0),
-                  child: Text(
-                    upperCase ? title.toUpperCase() : title,
-                    style: _textStyle(context),
-                  ),
+                Text(
+                  upperCase ? title.toUpperCase() : title,
+                  style: _textStyle(context),
                 ),
                 subtitleWidget,
               ],

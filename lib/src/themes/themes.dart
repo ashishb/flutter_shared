@@ -106,10 +106,10 @@ class AppTheme {
       buttonTheme: _buttonTheme(params.darkModeForButtonText),
       textButtonTheme: _textButtonTheme(params.darkModeForButtonText),
       elevatedButtonTheme: _elevatedButtonTheme(params.darkModeForButtonText),
-      // cardTheme: CardTheme(
-      //   color: ThemeSetManager().currentTheme.backgroundColor,
-      // ),
-      cardTheme: const CardTheme(color: Colors.white),
+      cardTheme: const CardTheme(
+        color: Color.fromRGBO(0, 0, 0, .05),
+        elevation: 0,
+      ),
     );
   }
 

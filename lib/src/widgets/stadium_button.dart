@@ -19,10 +19,12 @@ class StadiumButton extends StatelessWidget {
   Widget build(BuildContext context) {
     double vertical = 2;
     double horizontal = 14.0;
+    double fontSize = 14;
 
     if (large) {
-      vertical = 6;
+      vertical = 8;
       horizontal = 16.0;
+      fontSize = 16;
     }
 
     return TextButton(
@@ -46,6 +48,9 @@ class StadiumButton extends StatelessWidget {
         child: Text(
           title ?? '',
           textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: fontSize,
+          ),
         ),
       ),
     );

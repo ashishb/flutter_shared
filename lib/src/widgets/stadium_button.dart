@@ -6,15 +6,25 @@ class StadiumButton extends StatelessWidget {
     @required this.onPressed,
     this.raisedStyle = true,
     this.minWidth = 0,
+    this.large = false,
   });
 
   final String title;
   final bool raisedStyle;
   final VoidCallback onPressed;
   final double minWidth;
+  final bool large;
 
   @override
   Widget build(BuildContext context) {
+    double vertical = 2;
+    double horizontal = 14.0;
+
+    if (large) {
+      vertical = 6;
+      horizontal = 16.0;
+    }
+
     return TextButton(
       style: TextButton.styleFrom(
         minimumSize: Size(minWidth, 0),
@@ -29,9 +39,9 @@ class StadiumButton extends StatelessWidget {
       ),
       onPressed: onPressed,
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 2,
-          horizontal: 14.0,
+        padding: EdgeInsets.symmetric(
+          vertical: vertical,
+          horizontal: horizontal,
         ),
         child: Text(
           title ?? '',

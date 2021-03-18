@@ -130,4 +130,17 @@ class Dates {
 
     return filename;
   }
+
+  static String timeOnly({
+    @required DateTime date,
+  }) {
+    if (date != null) {
+      final DateFormat formatter = DateFormat('h:mma');
+
+      return formatter.format(date.toLocal());
+    }
+
+    // don't want to crash Text, return '' instead of null
+    return '';
+  }
 }

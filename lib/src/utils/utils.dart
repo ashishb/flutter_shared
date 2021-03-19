@@ -461,6 +461,10 @@ class Utils {
       return input.isNotEmpty;
     }
 
+    if (input is Map) {
+      return input.isNotEmpty;
+    }
+
     print('### isNotEmpty called on ${input.runtimeType}');
 
     return false;

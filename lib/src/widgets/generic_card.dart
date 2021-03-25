@@ -106,7 +106,7 @@ class GenericCard extends StatelessWidget {
       child: const Icon(
         Icons.more_vert,
         size: 19,
-        color: Colors.white70,
+        // color: Colors.white70,
       ),
     );
   }

@@ -4,7 +4,7 @@ import 'package:flutter_shared/flutter_shared.dart';
 import 'package:flutter_shared/src/widgets/primary_title.dart';
 
 const double kBorderRadius = 12;
-const double kSmallBorderRadius = 6;
+const double kSmallBorderRadius = 8;
 
 class GenericCard extends StatelessWidget {
   const GenericCard({
@@ -113,6 +113,13 @@ class GenericCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double horizontal = 16.0;
+    double vertical = 14;
+    if (small) {
+      horizontal = 12.0;
+      vertical = 10;
+    }
+
     return Stack(
       children: [
         BaseCard(
@@ -122,9 +129,9 @@ class GenericCard extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 14,
+                padding: EdgeInsets.symmetric(
+                  horizontal: horizontal,
+                  vertical: vertical,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

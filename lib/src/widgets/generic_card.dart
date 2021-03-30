@@ -14,6 +14,7 @@ class GenericCard extends StatelessWidget {
     this.onEdit,
     this.minHeight = 100,
     this.title,
+    this.titleAction,
     this.showChevron = false,
     this.small = false,
     this.action,
@@ -28,13 +29,14 @@ class GenericCard extends StatelessWidget {
   final bool showChevron;
   final bool small;
   final Widget action;
+  final Widget titleAction;
 
   Widget _titleBar(BuildContext context) {
     if (Utils.isEmpty(title)) {
       return NothingWidget();
     }
 
-    return PrimaryTitle(title: title);
+    return PrimaryTitle(title: title, action: titleAction);
   }
 
   List<PopupMenuEntry<String>> _addMenuSeparators(

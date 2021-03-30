@@ -19,7 +19,6 @@ dependencies:
   crypto: ^3.0.0
   device_info: ^2.0.0
   email_validator: ^2.0.1
-  flutter_icons: ^1.1.0
   simple_animations: ^3.0.2
 
   flutter_parsed_text: ^2.1.0
@@ -46,11 +45,18 @@ dependencies:
   flutter_archive: ^3.0.0
   extended_image: ^4.0.0
   barcode_image: ^2.0.0
-  share_extend: ^1.1.9
   dotted_border: ^2.0.0-nullsafety.0
 
   flutter_multi_formatter: ^2.0.2
   flutter_colorpicker: ^0.4.0
+
+  share_extend:
+    git: git://github.com/finroly/ShareExtend.git
+
+  flutter_icons:
+    git:
+      url: git://github.com/adarsh-technocrat/flutter-icons.git
+      branch: null-safety-migration
 
   open_file:
     git: git://github.com/crazecoder/open_file

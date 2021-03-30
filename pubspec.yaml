@@ -26,7 +26,7 @@ dependencies:
   flutter_svg: ^0.21.0-nullsafety.0
   google_fonts: ^2.0.0
   hex: ^0.2.0
-  hive: ^2.0.0
+  hive: ^2.0.1
   hive_flutter: ^1.0.0
   http: ^0.13.1
   image: ^3.0.1
@@ -39,17 +39,17 @@ dependencies:
   provider: ^5.0.0
   random_string: ^2.2.0-nullsafety
   shared_preferences: ^2.0.4
-  url_launcher: ^6.0.2
-  video_player: ^2.0.2
+  url_launcher: ^6.0.3
+  video_player: ^2.1.0
   flutter_barcode_scanner: ^2.0.0-nullsafety.0
-  flare_flutter: ^3.0.0-nullsafety.0
+  flare_flutter: ^3.0.0
   flutter_archive: ^3.0.0
-  extended_image: ^3.0.0
+  extended_image: ^4.0.0
   barcode_image: ^2.0.0
   share_extend: ^1.1.9
   dotted_border: ^2.0.0-nullsafety.0
 
-  flutter_multi_formatter: ^2.0.1
+  flutter_multi_formatter: ^2.0.2
   flutter_colorpicker: ^0.4.0
 
   open_file:

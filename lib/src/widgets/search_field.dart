@@ -28,6 +28,8 @@ class _SearchFieldState extends State<SearchField> {
   }
 
   void _listener() {
+    // this focus node was added to prevent auto focus when the window is refocused
+    // The keyboard comes up and is annoying even when the tab for this is off screen
     if (!_focusNode.hasFocus) {
       _focusNode.removeListener(_listener);
       _focusNode = null;

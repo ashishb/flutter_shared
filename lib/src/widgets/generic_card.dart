@@ -10,6 +10,7 @@ class GenericCard extends StatelessWidget {
   const GenericCard({
     @required this.children,
     this.onTap,
+    this.onLongPress,
     this.onDelete,
     this.onEdit,
     this.minHeight = 100,
@@ -22,6 +23,7 @@ class GenericCard extends StatelessWidget {
 
   final List<Widget> children;
   final VoidCallback onTap;
+  final VoidCallback onLongPress;
   final VoidCallback onDelete;
   final VoidCallback onEdit;
   final double minHeight;
@@ -128,6 +130,7 @@ class GenericCard extends StatelessWidget {
           small: small,
           minHeight: minHeight,
           onTap: onTap,
+          onLongPress: onLongPress,
           child: Column(
             children: [
               Padding(
@@ -256,6 +259,7 @@ class BaseCard extends StatelessWidget {
   const BaseCard({
     @required this.child,
     @required this.onTap,
+    this.onLongPress,
     this.minHeight = 100,
     this.fill = true,
     this.small = false,
@@ -263,6 +267,7 @@ class BaseCard extends StatelessWidget {
 
   final Widget child;
   final VoidCallback onTap;
+  final VoidCallback onLongPress;
   final double minHeight;
   final bool fill;
   final bool small;
@@ -281,6 +286,7 @@ class BaseCard extends StatelessWidget {
         constraints: BoxConstraints(minHeight: minHeight),
         child: InkWell(
           onTap: onTap,
+          onLongPress: onLongPress,
           child: child,
         ),
       ),

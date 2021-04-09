@@ -457,7 +457,8 @@ class Utils {
       return input.isNotEmpty;
     }
 
-    if (input is List) {
+    // iterable includes List
+    if (input is Iterable) {
       return input.isNotEmpty;
     }
 

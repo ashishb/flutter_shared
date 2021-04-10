@@ -39,22 +39,24 @@ class ColoredButton extends StatelessWidget {
     disabledColor = Utils.lighten(disabledColor);
 
     if (icon != null) {
-      return FlatButton.icon(
+      return TextButton.icon(
+        style: TextButton.styleFrom(
+          backgroundColor: color ?? Theme.of(context).primaryColor,
+          textStyle: TextStyle(color: textColor ?? Colors.white),
+          padding: padding,
+        ),
+        onPressed: disabled ? null : onPressed,
         label: buttonLabel(),
         icon: icon,
-        color: color ?? Theme.of(context).primaryColor,
-        disabledColor: disabledColor,
-        textColor: textColor ?? Colors.white,
-        onPressed: disabled ? null : onPressed,
-        padding: padding,
       );
     }
-    return FlatButton(
-      color: color ?? Theme.of(context).primaryColor,
-      disabledColor: disabledColor,
-      textColor: textColor ?? Colors.white,
+    return TextButton(
+      style: TextButton.styleFrom(
+        backgroundColor: color ?? Theme.of(context).primaryColor,
+        textStyle: TextStyle(color: textColor ?? Colors.white),
+        padding: padding,
+      ),
       onPressed: disabled ? null : onPressed,
-      padding: padding,
       child: buttonLabel(),
     );
   }

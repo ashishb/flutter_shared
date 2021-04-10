@@ -42,7 +42,7 @@ class ColoredButton extends StatelessWidget {
       return TextButton.icon(
         style: TextButton.styleFrom(
           backgroundColor: color ?? Theme.of(context).primaryColor,
-          textStyle: TextStyle(color: textColor ?? Colors.white),
+          primary: textColor ?? Colors.white,
           padding: padding,
         ),
         onPressed: disabled ? null : onPressed,
@@ -53,7 +53,7 @@ class ColoredButton extends StatelessWidget {
     return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: color ?? Theme.of(context).primaryColor,
-        textStyle: TextStyle(color: textColor ?? Colors.white),
+        primary: textColor ?? Colors.white,
         padding: padding,
       ),
       onPressed: disabled ? null : onPressed,

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:flutter_shared/src/widgets/ttext.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -252,7 +253,12 @@ class Utils {
       {bool error = false, String action, void Function() onPressed}) {
     final snackBar = SnackBar(
       backgroundColor: error ? Colors.red : null,
-      content: Text(message),
+      content: TText(
+        message,
+        style: TextStyle(
+          color: error ? Colors.white : null,
+        ),
+      ),
       action: action != null
           ? SnackBarAction(
               label: action,

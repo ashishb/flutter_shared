@@ -25,7 +25,7 @@ dependencies:
   flutter_svg: ^0.21.0+1
   google_fonts: ^2.0.0
   hex: ^0.2.0
-  hive: ^2.0.1
+  hive: ^2.0.3
   hive_flutter: ^1.0.0
   http: ^0.13.1
   image: ^3.0.1

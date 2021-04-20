@@ -39,40 +39,6 @@ class Utils {
     return stringBuffer.toString();
   }
 
-  static Future<List<String>> jsonAssets(
-      BuildContext context, String directoryName,
-      [String filename]) async {
-    final bundle = DefaultAssetBundle.of(context);
-    String matchFilename = '';
-
-    if (filename != null && filename.isNotEmpty) {
-      matchFilename = filename;
-    }
-
-    final manifestContent = await bundle.loadString('AssetManifest.json');
-
-    final Map<String, dynamic> manifestMap =
-        json.decode(manifestContent) as Map<String, dynamic>;
-
-    final List<String> paths = manifestMap.keys
-        .where((String key) => key.contains(directoryName))
-        .where((String key) => key.contains(matchFilename))
-        .where((String key) => key.contains('.json'))
-        .toList();
-
-    final List<String> result = <String>[];
-
-    for (final String p in paths) {
-      final contents = await bundle.loadString(p);
-
-      // debugPrint(contents, wrapWidth: 555);
-
-      result.add(contents);
-    }
-
-    return result;
-  }
-
   static void showLicenses(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute<void>(

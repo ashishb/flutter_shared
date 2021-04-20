@@ -17,38 +17,41 @@ class FileSystem {
   // set to true during statup. We could use different starting paths if not granted
   static bool storagePermissionGranted = false;
 
-  static Future<List<String>> jsonAssets(
-      BuildContext context, String directoryName,
-      [String filename]) async {
+  static Future<String> jsonAssets({
+    @required BuildContext context,
+    @required String directoryName,
+    @required String filename,
+  }) async {
     final bundle = DefaultAssetBundle.of(context);
-    String matchFilename = '';
-
-    if (filename != null && filename.isNotEmpty) {
-      matchFilename = filename;
-    }
 
     final manifestContent = await bundle.loadString('AssetManifest.json');
 
     final Map<String, dynamic> manifestMap =
         json.decode(manifestContent) as Map<String, dynamic>;
 
-    final List<String> paths = manifestMap.keys
-        .where((String key) => key.contains(directoryName))
-        .where((String key) => key.contains(matchFilename))
-        .where((String key) => key.contains('.json'))
-        .toList();
+    final List<String> paths = manifestMap.keys.where((String path) {
+      final dirPath = p.split(p.dirname(path));
 
-    final List<String> result = <String>[];
+      if (Utils.isNotEmpty(dirPath)) {
+        return directoryName == dirPath.last;
+      }
 
-    for (final String p in paths) {
-      final contents = await bundle.loadString(p);
+      return false;
+    }).where((String path) {
+      return p.basename(path) == filename;
+    }).toList();
+
+    if (paths.length == 1) {
+      final contents = await bundle.loadString(paths[0]);
 
       // debugPrint(contents, wrapWidth: 555);
 
-      result.add(contents);
+      return contents;
     }
 
-    return result;
+    print('jsonAssets: not found');
+
+    return null;
   }
 
   static Future<void> printAssets(BuildContext context,

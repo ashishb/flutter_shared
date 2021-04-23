@@ -78,6 +78,13 @@ class Debouncer {
           if (!_disposed) {
             try {
               print('CALLIJG  $action');
+              print(action.runtimeType);
+              print(action.call);
+
+              if (action == null) {
+                print('NULLLLLL');
+              }
+
               await action();
             } catch (err) {
               print(err);

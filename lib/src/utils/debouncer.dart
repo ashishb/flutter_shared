@@ -15,28 +15,36 @@ class Debouncer {
       if (debug) {
         print('## debouncer already running');
       }
+    } else {
+      print('## debouncer running');
+
+      _timer = Timer(
+        Duration(milliseconds: milliseconds),
+        () {
+          _timer.cancel();
+          _timer = null;
+
+          action();
+
+          if (debug) {
+            print('## debouncer done');
+          }
+        },
+      );
     }
-
-    _timer ??= Timer(
-      Duration(milliseconds: milliseconds),
-      () {
-        _timer.cancel();
-        _timer = null;
-
-        action();
-
-        if (debug) {
-          print('## debouncer done');
-        }
-      },
-    );
   }
 
   void runImmediate(VoidCallback action) {
-    if (_timer == null) {
+    if (_timer != null) {
+      if (debug) {
+        print('## debouncer already running');
+      }
+    } else {
       action();
 
-      _timer ??= Timer(
+      print('## debouncer running');
+
+      _timer = Timer(
         Duration(milliseconds: milliseconds),
         () {
           _timer.cancel();
@@ -47,10 +55,6 @@ class Debouncer {
           }
         },
       );
-    } else {
-      if (debug) {
-        print('## debouncer already running');
-      }
     }
   }
 }

@@ -15,7 +15,7 @@ class Debouncer {
   }
 
   void _debugLog(String message) {
-    const debug = true;
+    const debug = false;
 
     if (debug) {
       print(message);

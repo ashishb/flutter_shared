@@ -9,19 +9,24 @@ class Debouncer {
   VoidCallback action;
   Timer _timer;
   bool _disposed = false;
-  static const debug = true;
 
   void dispose() {
     _disposed = true;
   }
 
+  void _debugLog(String message) {
+    const debug = false;
+
+    if (debug) {
+      print(message);
+    }
+  }
+
   void run(VoidCallback action) {
     if (_timer != null) {
-      if (debug) {
-        print('## debouncer already running');
-      }
+      _debugLog('## debouncer already running');
     } else {
-      print('## debouncer running');
+      _debugLog('## debouncer running');
 
       _timer = Timer(
         Duration(milliseconds: milliseconds),
@@ -32,9 +37,7 @@ class Debouncer {
           if (!_disposed) {
             action();
 
-            if (debug) {
-              print('## debouncer done');
-            }
+            _debugLog('## debouncer done');
           }
         },
       );
@@ -43,14 +46,12 @@ class Debouncer {
 
   void runImmediate(VoidCallback action) {
     if (_timer != null) {
-      if (debug) {
-        print('## debouncer already running');
-      }
+      _debugLog('## debouncer already running');
     } else {
       if (!_disposed) {
-        action();
+        _debugLog('## debouncer running');
 
-        print('## debouncer running');
+        action();
 
         _timer = Timer(
           Duration(milliseconds: milliseconds),
@@ -58,9 +59,7 @@ class Debouncer {
             _timer.cancel();
             _timer = null;
 
-            if (debug) {
-              print('## debouncer done');
-            }
+            _debugLog('## debouncer done');
           },
         );
       }

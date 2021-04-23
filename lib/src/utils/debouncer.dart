@@ -15,7 +15,7 @@ class Debouncer {
   }
 
   void _debugLog(String message) {
-    const debug = false;
+    const debug = true;
 
     if (debug) {
       print(message);
@@ -63,6 +63,34 @@ class Debouncer {
           },
         );
       }
+    }
+  }
+
+  void runAndAwait(Future<void> Function() action) {
+    if (_timer != null) {
+      _debugLog('## debouncer already running');
+    } else {
+      _debugLog('## debouncer running');
+
+      _timer = Timer(
+        Duration(milliseconds: milliseconds),
+        () async {
+          if (!_disposed) {
+            try {
+              await action();
+            } catch (err) {
+              print(err);
+            }
+
+            _debugLog('## debouncer done');
+          } else {
+            _debugLog('## debouncer already disposed');
+          }
+
+          _timer.cancel();
+          _timer = null;
+        },
+      );
     }
   }
 }

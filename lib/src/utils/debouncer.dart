@@ -77,6 +77,7 @@ class Debouncer {
         () async {
           if (!_disposed) {
             try {
+              print('CALLIJG  $action');
               await action();
             } catch (err) {
               print(err);

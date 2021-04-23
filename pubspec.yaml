@@ -22,7 +22,7 @@ dependencies:
   simple_animations: ^3.0.2
 
   flutter_parsed_text: ^2.1.0
-  flutter_svg: ^0.21.0+1
+  flutter_svg: ^0.22.0
   google_fonts: ^2.0.0
   hex: ^0.2.0
   hive: ^2.0.4

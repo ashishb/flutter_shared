@@ -212,12 +212,12 @@ class AddCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color cardColor = Theme.of(context).cardTheme.color.withOpacity(.1);
 
-    double strokeWidth = 4;
+    double strokeWidth = 5;
     List<double> dashPattern = [12, 10];
     double iconSize = 38;
 
     if (small) {
-      strokeWidth = 3;
+      strokeWidth = 4;
       dashPattern = [8, 8];
       iconSize = 24;
     }

@@ -258,7 +258,7 @@ class AddCard extends StatelessWidget {
 class BaseCard extends StatelessWidget {
   const BaseCard({
     @required this.child,
-    @required this.onTap,
+    this.onTap,
     this.onLongPress,
     this.minHeight = 100,
     this.fill = true,

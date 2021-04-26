@@ -476,6 +476,38 @@ class Utils {
             enumToString(enumItem)?.toLowerCase() == value?.toLowerCase(),
         orElse: () => null);
   }
+
+  static dynamic removeNulls(dynamic params) {
+    if (params is Map) {
+      final result = <dynamic, dynamic>{};
+
+      params.forEach((dynamic key, dynamic value) {
+        final dynamic val = removeNulls(value);
+        if (val != null) {
+          result[key] = val;
+        }
+      });
+
+      if (Utils.isNotEmpty(result)) {
+        return result;
+      }
+    } else if (params is List) {
+      final result = <dynamic>[];
+
+      for (final val in params) {
+        final dynamic v = removeNulls(val);
+        if (v != null) {
+          result.add(v);
+        }
+      }
+
+      if (Utils.isNotEmpty(result)) {
+        return result;
+      }
+    }
+
+    return params;
+  }
 }
 
 class NothingWidget extends StatelessWidget {

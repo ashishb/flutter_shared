@@ -284,7 +284,7 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
 
   Widget _ex(bool ex, int i) {
     if (ex) {
-      return (openFlag[i] ?? false)
+      final icon = (openFlag[i] ?? false)
           ? const Icon(
               Icons.arrow_drop_down,
               size: arrowIconSize,
@@ -293,6 +293,15 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
               Icons.arrow_right,
               size: arrowIconSize,
             );
+
+      return InkWell(
+        onTap: () {
+          setState(() {
+            openFlag[i] = !(openFlag[i] ?? false);
+          });
+        },
+        child: icon,
+      );
     } else {
       return const Icon(
         Icons.arrow_right,

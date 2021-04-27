@@ -4,6 +4,7 @@ import 'package:flutter_shared/src/widgets/form_builder/form_params.dart';
 
 class FieldBuilder {
   static List<Widget> fields({
+    @required BuildContext context,
     @required FormBuilderParams builderParams,
     @required bool autovalidate,
     bool outlinedBorders = false,
@@ -22,6 +23,7 @@ class FieldBuilder {
           }
 
           result.add(stringField(
+            context: context,
             mapKey: mapKey,
             formParam: formParam,
             autovalidate: autovalidate,
@@ -40,6 +42,7 @@ class FieldBuilder {
   }
 
   static Widget stringField({
+    @required BuildContext context,
     @required String mapKey,
     @required FormParam formParam,
     @required bool autovalidate,
@@ -48,13 +51,19 @@ class FieldBuilder {
     final border = outlinedBorders
         ? OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
-            borderSide: const BorderSide(color: Colors.white10))
+            borderSide: BorderSide(
+                color: Utils.isDarkMode(context)
+                    ? Colors.white10
+                    : Colors.black12))
         : null;
 
     final focusedBorder = outlinedBorders
         ? OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
-            borderSide: const BorderSide(color: Colors.white54))
+            borderSide: BorderSide(
+                color: Utils.isDarkMode(context)
+                    ? Colors.white54
+                    : Colors.black45))
         : null;
 
     final errorBorder = outlinedBorders

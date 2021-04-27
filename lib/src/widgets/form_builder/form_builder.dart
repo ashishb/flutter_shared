@@ -127,6 +127,7 @@ class _FormBuilderState extends State<FormBuilder> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           ...FieldBuilder.fields(
+            context: context,
             outlinedBorders: widget.outlinedBorders,
             autovalidate: _autovalidate,
             builderParams: widget.params,

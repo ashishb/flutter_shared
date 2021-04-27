@@ -1,0 +1,107 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_shared/flutter_shared.dart';
+
+class FormParam {
+  FormParam({
+    @required this.formData,
+    @required this.builderParams,
+    @required this.mapKey,
+  });
+
+  final Map<String, dynamic> formData;
+  final FormBuilderParams builderParams;
+
+  String mapKey;
+  Type type = String;
+  bool req = false;
+  bool hide = false;
+  bool separateLabel = false;
+  TextInputType keyboard = TextInputType.text;
+
+  int minLines;
+  int maxLines;
+  bool enableSuggestions = false;
+  bool autocorrect = false;
+
+  void setLines(int min) {
+    minLines = min;
+    maxLines = min * 4;
+  }
+
+  Widget createWidget() {
+    return builderParams.createWidget(mapKey);
+  }
+
+  String label() {
+    final label = formData['$mapKey-label'] as String;
+
+    if (Utils.isNotEmpty(label)) {
+      return label;
+    }
+
+    return mapKey.fromCamelCase();
+  }
+}
+
+class FormBuilderParams extends ChangeNotifier {
+  FormBuilderParams({
+    @required this.map,
+    this.saveNotifier,
+  }) {
+    map.keys.forEach((mapKey) {
+      formParams[mapKey] =
+          FormParam(formData: map, builderParams: this, mapKey: mapKey);
+    });
+  }
+
+  Map<String, FormParam> formParams = {};
+  final Map<String, dynamic> map;
+  ValueNotifier<bool> saveNotifier;
+
+  Widget createWidget(String key) {
+    return null;
+  }
+
+  void filter() {
+    map.keys.forEach((key) {
+      switch (key) {
+        case 'id':
+        case 'userId':
+          formParams[key].hide = true;
+          break;
+        case 'name':
+          formParams[key].req = true;
+
+          formParams[key].enableSuggestions = true;
+          formParams[key].autocorrect = true;
+          break;
+        case 'notes':
+        case 'description':
+        case 'bio':
+        case 'text':
+        case 'question':
+          formParams[key].setLines(3);
+
+          formParams[key].enableSuggestions = true;
+          formParams[key].autocorrect = true;
+
+          // multiline allows newlines
+          formParams[key].keyboard = TextInputType.multiline;
+          break;
+        case 'email':
+          // formParams[key].req = true;
+          formParams[key].keyboard = TextInputType.emailAddress;
+          break;
+        case 'phone':
+          // formParams[key].req = true;
+          formParams[key].keyboard = TextInputType.phone;
+          break;
+        case 'address':
+          formParams[key].keyboard = TextInputType.streetAddress;
+          break;
+        default:
+          break;
+      }
+    });
+  }
+}

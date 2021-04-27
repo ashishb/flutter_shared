@@ -33,7 +33,7 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
 
   Widget _ex(bool ex, MapEntry entry) {
     if (ex) {
-      return (openFlag[entry.key] ?? false)
+      final icon = (openFlag[entry.key] ?? false)
           ? const Icon(
               Icons.arrow_drop_down,
               size: arrowIconSize,
@@ -42,6 +42,15 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
               Icons.arrow_right,
               size: arrowIconSize,
             );
+
+      return InkWell(
+        onTap: () {
+          setState(() {
+            openFlag[entry.key as String] = !(openFlag[entry.key] ?? false);
+          });
+        },
+        child: icon,
+      );
     } else {
       return const Icon(
         Icons.arrow_right,

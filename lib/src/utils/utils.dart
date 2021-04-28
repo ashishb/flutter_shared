@@ -477,6 +477,7 @@ class Utils {
         orElse: () => null);
   }
 
+  // removes null value, empty strings, empty lists, empty maps
   static dynamic removeNulls(dynamic params) {
     if (params is Map) {
       final result = <dynamic, dynamic>{};
@@ -491,6 +492,8 @@ class Utils {
       if (Utils.isNotEmpty(result)) {
         return result;
       }
+
+      return null;
     } else if (params is List) {
       final result = <dynamic>[];
 
@@ -504,8 +507,15 @@ class Utils {
       if (Utils.isNotEmpty(result)) {
         return result;
       }
-    }
 
+      return null;
+    } else if (params is String) {
+      if (Utils.isNotEmpty(params)) {
+        return params;
+      }
+
+      return null;
+    }
     return params;
   }
 }

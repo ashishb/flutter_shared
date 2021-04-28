@@ -9,11 +9,21 @@ Future<bool> showWidgetDialog({
   String okButtonName = 'OK',
   String cancelButtonName = 'Cancel',
   bool barrierDismissible = true,
+  EdgeInsets buttonPadding,
+  EdgeInsets insetPadding,
+  EdgeInsets titlePadding,
+  EdgeInsets actionsPadding,
+  EdgeInsets contentPadding,
 }) {
   return showDialog<bool>(
     context: context,
     barrierDismissible: barrierDismissible,
     builder: (context) => AlertDialog(
+      buttonPadding: buttonPadding,
+      insetPadding: insetPadding,
+      titlePadding: titlePadding,
+      actionsPadding: actionsPadding,
+      contentPadding: contentPadding,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),

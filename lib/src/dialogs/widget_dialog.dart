@@ -12,7 +12,7 @@ Future<bool> showWidgetDialog({
   EdgeInsets buttonPadding,
   EdgeInsets insetPadding,
   EdgeInsets titlePadding,
-  EdgeInsets actionsPadding,
+  EdgeInsets actionsPadding = EdgeInsets.zero,
   EdgeInsets contentPadding = const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
 }) {
   return showDialog<bool>(

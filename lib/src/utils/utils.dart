@@ -448,8 +448,8 @@ class Utils {
   }
 
   static void successSnackbar({
-    String title,
-    String message,
+    @required String title,
+    @required String message,
     bool error = false,
   }) {
     Get.snackbar<void>(

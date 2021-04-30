@@ -5,6 +5,7 @@ import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter_shared/src/widgets/ttext.dart';
+import 'package:get/get.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_parsed_text/flutter_parsed_text.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:bot_toast/bot_toast.dart';
 
 // Some globals I may want to experiment with
 
@@ -447,12 +447,18 @@ class Utils {
     return !isNotEmpty(input);
   }
 
-  static void showToast(String message) {
-    BotToast.showSimpleNotification(
-      title: message,
+  static void successSnackbar({
+    String message,
+    bool error = false,
+  }) {
+    Get.snackbar<void>(
+      message,
+      null,
+      snackPosition: SnackPosition.TOP,
       duration: const Duration(seconds: 3),
-      align: Alignment.topCenter,
-    ); //popup a text toast;
+      colorText: Colors.white,
+      backgroundColor: error ? Colors.red[800] : Colors.green[800],
+    );
   }
 
   static String enumToString(Object enumItem) {

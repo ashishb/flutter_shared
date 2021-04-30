@@ -218,11 +218,11 @@ class Utils {
   static void showSnackbar(BuildContext context, String message,
       {bool error = false, String action, void Function() onPressed}) {
     final snackBar = SnackBar(
-      backgroundColor: error ? Colors.red : null,
+      backgroundColor: error ? Colors.red[700] : Colors.green[800],
       content: TText(
         message,
-        style: TextStyle(
-          color: error ? Colors.white : null,
+        style: const TextStyle(
+          color: Colors.white,
         ),
       ),
       action: action != null

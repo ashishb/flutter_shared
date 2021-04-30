@@ -448,14 +448,14 @@ class Utils {
   }
 
   static void successSnackbar({
+    String title,
     String message,
     bool error = false,
   }) {
     Get.snackbar<void>(
+      title,
       message,
-      'message here',
       snackPosition: SnackPosition.TOP,
-      duration: const Duration(seconds: 3),
       colorText: Colors.white,
       backgroundColor: error ? Colors.red[800] : Colors.green[800],
     );

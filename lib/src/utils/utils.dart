@@ -453,7 +453,7 @@ class Utils {
   }) {
     Get.snackbar<void>(
       message,
-      null,
+      'message here',
       snackPosition: SnackPosition.TOP,
       duration: const Duration(seconds: 3),
       colorText: Colors.white,

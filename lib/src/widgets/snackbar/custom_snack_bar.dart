@@ -18,42 +18,44 @@ class CustomSnackBar extends StatefulWidget {
 class _CustomSnackBarState extends State<CustomSnackBar> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 80,
-      decoration: BoxDecoration(
-        color: widget.error ? Colors.red[800] : Colors.green[800],
-        borderRadius: const BorderRadius.all(Radius.circular(12)),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black26,
-            offset: Offset(0.0, 8.0),
-            spreadRadius: 1,
-            blurRadius: 30,
-          ),
-        ],
-      ),
-      width: double.infinity,
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                widget.title ?? '',
-                style: const TextStyle(color: Colors.white),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Text(
-                widget.message ?? '',
-                style: const TextStyle(color: Colors.white),
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-              ),
-            ],
+    return Material(
+      type: MaterialType.transparency,
+      child: Container(
+        decoration: BoxDecoration(
+          color: widget.error ? Colors.red[800] : Colors.green[800],
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black26,
+              offset: Offset(0.0, 8.0),
+              spreadRadius: 1,
+              blurRadius: 30,
+            ),
+          ],
+        ),
+        width: double.infinity,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  widget.title ?? '',
+                  style: const TextStyle(color: Colors.white),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                Text(
+                  widget.message ?? '',
+                  style: const TextStyle(color: Colors.white),
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -13,6 +13,7 @@ Future<void> showTopSnackBar(
 }) async {
   overlayState ??= Overlay.of(context);
   OverlayEntry overlayEntry;
+
   overlayEntry = OverlayEntry(
     builder: (context) {
       return TopSnackBar(
@@ -27,10 +28,13 @@ Future<void> showTopSnackBar(
     },
   );
 
-  overlayState?.insert(overlayEntry);
+  if (overlayState != null) {
+    overlayState.insert(overlayEntry);
+  } else {
+    print('showTopSnackBar: No overlay state');
+  }
 }
 
-/// Widget that controls all animations
 class TopSnackBar extends StatefulWidget {
   const TopSnackBar({
     @required this.child,

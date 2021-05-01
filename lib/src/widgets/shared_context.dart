@@ -11,3 +11,15 @@ class SharedContext {
   // must set this and get this
   BuildContext context;
 }
+
+class SharedContextWidget extends StatelessWidget {
+  const SharedContextWidget({@required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    SharedContext().context = context;
+    return Container();
+  }
+}

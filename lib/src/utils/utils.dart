@@ -4,8 +4,10 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:flutter_shared/src/widgets/shared_context.dart';
+import 'package:flutter_shared/src/widgets/snackbar/custom_snack_bar.dart';
+import 'package:flutter_shared/src/widgets/snackbar/top_snack_bar.dart';
 import 'package:flutter_shared/src/widgets/ttext.dart';
-import 'package:get/get.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -452,14 +454,18 @@ class Utils {
     @required String message,
     bool error = false,
   }) {
-    Get.snackbar<void>(
-      title,
-      message,
-      animationDuration: const Duration(milliseconds: 500),
-      snackPosition: SnackPosition.TOP,
-      colorText: Colors.white,
-      backgroundColor: error ? Colors.red[800] : Colors.green[800],
-    );
+    final BuildContext context = SharedContext().context;
+
+    if (context != null) {
+      showTopSnackBar(
+        context,
+        CustomSnackBar(
+          title: title,
+          message: message,
+          error: error,
+        ),
+      );
+    }
   }
 
   static String enumToString(Object enumItem) {

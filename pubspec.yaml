@@ -19,7 +19,6 @@ dependencies:
   device_info: ^2.0.0
   email_validator: ^2.0.1
   simple_animations: ^3.0.2
-  get: ^4.1.4
   flutter_parsed_text: ^2.1.0
   flutter_svg: ^0.22.0
   google_fonts: ^2.0.0

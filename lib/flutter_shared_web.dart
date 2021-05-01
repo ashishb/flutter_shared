@@ -85,6 +85,7 @@ export 'src/widgets/phone_input_utils.dart';
 export 'src/widgets/preview_dialog.dart';
 export 'src/widgets/primary_title.dart';
 export 'src/widgets/search_field.dart';
+export 'src/widgets/shared_context.dart';
 export 'src/widgets/slide_down_clock/slide_countdown_clock.dart';
 export 'src/widgets/slide_down_clock/slide_direction.dart';
 export 'src/widgets/stadium_button.dart';

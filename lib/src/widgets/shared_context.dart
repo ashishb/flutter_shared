@@ -20,6 +20,6 @@ class SharedContextWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SharedContext().context = context;
-    return Container();
+    return child;
   }
 }

@@ -455,6 +455,7 @@ class Utils {
     Get.snackbar<void>(
       title,
       message,
+      animationDuration: const Duration(milliseconds: 500),
       snackPosition: SnackPosition.TOP,
       colorText: Colors.white,
       backgroundColor: error ? Colors.red[800] : Colors.green[800],

@@ -217,14 +217,14 @@ packages:
       name: flutter_multi_formatter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.3"
   flutter_parsed_text:
     dependency: "direct main"
     description:
       name: flutter_parsed_text
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.2.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -283,7 +283,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.1"
+    version: "0.13.3"
   http_client_helper:
     dependency: transitive
     description:
@@ -366,7 +366,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "6391bf5236229f8028faaddda8e55c790c10138e"
+      resolved-ref: b1b9cebfd1304512374a3c867a1656b3fbec6d0e
       url: "git://github.com/crazecoder/open_file"
     source: git
     version: "3.1.0"
@@ -546,7 +546,7 @@ packages:
       name: simple_animations
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.3"
+    version: "3.1.1"
   sky_engine:
     dependency: transitive
     description: flutter

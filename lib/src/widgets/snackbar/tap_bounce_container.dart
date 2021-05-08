@@ -18,7 +18,7 @@ class _TapBounceContainerState extends State<TapBounceContainer>
   double _scale;
   AnimationController _controller;
 
-  final animationDuration = const Duration(milliseconds: 200);
+  final animationDuration = const Duration(milliseconds: 150);
 
   @override
   void initState() {

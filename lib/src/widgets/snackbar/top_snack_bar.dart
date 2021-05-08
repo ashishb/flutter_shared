@@ -9,6 +9,7 @@ Future<void> showTopSnackBar(
   Duration displayDuration = const Duration(milliseconds: 3000),
   double additionalTopPadding = 16.0,
   VoidCallback onTap,
+  bool onTop = false,
   OverlayState overlayState,
 }) async {
   overlayState ??= Overlay.of(context);
@@ -17,6 +18,7 @@ Future<void> showTopSnackBar(
   overlayEntry = OverlayEntry(
     builder: (context) {
       return TopSnackBar(
+        onTop: onTop,
         onDismissed: () => overlayEntry.remove(),
         showOutAnimationDuration: showOutAnimationDuration,
         hideOutAnimationDuration: hideOutAnimationDuration,
@@ -44,6 +46,7 @@ class TopSnackBar extends StatefulWidget {
     @required this.displayDuration,
     @required this.additionalTopPadding,
     this.onTap,
+    this.onTop = false,
   });
 
   final Widget child;
@@ -53,6 +56,8 @@ class TopSnackBar extends StatefulWidget {
   final Duration displayDuration;
   final double additionalTopPadding;
   final VoidCallback onTap;
+  final bool onTop;
+
   @override
   _TopSnackBarState createState() => _TopSnackBarState();
 }
@@ -115,7 +120,8 @@ class _TopSnackBarState extends State<TopSnackBar>
     return AnimatedPositioned(
       duration: widget.hideOutAnimationDuration * 1.5,
       curve: Curves.linearToEaseOut,
-      top: topPosition,
+      top: widget.onTop ? topPosition : null,
+      bottom: !widget.onTop ? topPosition : null,
       left: 16,
       right: 16,
       child: SlideTransition(

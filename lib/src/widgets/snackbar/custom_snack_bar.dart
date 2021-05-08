@@ -42,12 +42,12 @@ class _CustomSnackBarState extends State<CustomSnackBar> {
               Icon(widget.error ? Feather.alert_triangle : Feather.check_circle,
                   color: Colors.white, size: 36),
               const SizedBox(width: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Flexible(
-                    child: Text(
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
                       widget.title ?? '',
                       style: const TextStyle(
                           color: Colors.white,
@@ -55,16 +55,14 @@ class _CustomSnackBarState extends State<CustomSnackBar> {
                           fontSize: 18),
                       overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                  Flexible(
-                    child: Text(
+                    Text(
                       widget.message ?? '',
                       style: const TextStyle(color: Colors.white, fontSize: 14),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

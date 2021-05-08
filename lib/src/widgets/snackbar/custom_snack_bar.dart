@@ -53,7 +53,6 @@ class _CustomSnackBarState extends State<CustomSnackBar> {
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 18),
-                      textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
@@ -61,7 +60,6 @@ class _CustomSnackBarState extends State<CustomSnackBar> {
                     child: Text(
                       widget.message ?? '',
                       style: const TextStyle(color: Colors.white, fontSize: 14),
-                      textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),

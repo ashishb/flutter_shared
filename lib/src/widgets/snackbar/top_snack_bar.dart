@@ -83,7 +83,7 @@ class _TopSnackBarState extends State<TopSnackBar>
     );
 
     final Tween<Offset> offsetTween = Tween<Offset>(
-      begin: const Offset(0.0, -1.0),
+      begin: Offset(0.0, widget.onTop ? -1.0 : 1.0),
       end: const Offset(0.0, 0.0),
     );
 

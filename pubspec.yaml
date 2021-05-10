@@ -44,6 +44,7 @@ dependencies:
   extended_image: ^4.0.1
   barcode_image: ^2.0.0
   dotted_border: ^2.0.0
+  flutter_keyboard_visibility: ^5.0.1
 
   flutter_multi_formatter: ^2.0.3
   flutter_colorpicker: ^0.4.0

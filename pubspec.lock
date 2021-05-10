@@ -133,14 +133,14 @@ packages:
       name: extended_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.1"
+    version: "4.1.0"
   extended_image_library:
     dependency: transitive
     description:
       name: extended_image_library
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.1.0"
   extension:
     dependency: transitive
     description:
@@ -211,6 +211,27 @@ packages:
       url: "git://github.com/adarsh-technocrat/flutter-icons.git"
     source: git
     version: "1.1.1-nullsafety.0"
+  flutter_keyboard_visibility:
+    dependency: "direct main"
+    description:
+      name: flutter_keyboard_visibility
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.1"
+  flutter_keyboard_visibility_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_keyboard_visibility_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
+  flutter_keyboard_visibility_web:
+    dependency: transitive
+    description:
+      name: flutter_keyboard_visibility_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   flutter_multi_formatter:
     dependency: "direct main"
     description:
@@ -366,10 +387,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: b1b9cebfd1304512374a3c867a1656b3fbec6d0e
+      resolved-ref: "2f448f94663b3dfabf40880908a21965d1627e1e"
       url: "git://github.com/crazecoder/open_file"
     source: git
-    version: "3.1.0"
+    version: "3.2.1"
   package_info:
     dependency: "direct main"
     description:
@@ -390,14 +411,14 @@ packages:
       name: path_drawing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.0"
+    version: "0.5.1"
   path_parsing:
     dependency: transitive
     description:
       name: path_parsing
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.1"
   path_provider:
     dependency: "direct main"
     description:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_shared/src/widgets/snackbar/tap_bounce_container.dart';
 
 Future<void> showTopSnackBar(
@@ -9,7 +10,6 @@ Future<void> showTopSnackBar(
   Duration displayDuration = const Duration(milliseconds: 3000),
   double additionalTopPadding = 16.0,
   VoidCallback onTap,
-  bool onTop = false,
   OverlayState overlayState,
 }) async {
   overlayState ??= Overlay.of(context);
@@ -17,15 +17,21 @@ Future<void> showTopSnackBar(
 
   overlayEntry = OverlayEntry(
     builder: (context) {
-      return TopSnackBar(
-        onTop: onTop,
-        onDismissed: () => overlayEntry.remove(),
-        showOutAnimationDuration: showOutAnimationDuration,
-        hideOutAnimationDuration: hideOutAnimationDuration,
-        displayDuration: displayDuration,
-        additionalTopPadding: additionalTopPadding,
-        onTap: onTap,
-        child: child,
+      // looks weird on top of keyboard, and normally I want it on bottom
+      // so only show on top if keyboard is visible
+      return KeyboardVisibilityBuilder(
+        builder: (context, isKeyboardVisible) {
+          return TopSnackBar(
+            onTop: isKeyboardVisible,
+            onDismissed: () => overlayEntry.remove(),
+            showOutAnimationDuration: showOutAnimationDuration,
+            hideOutAnimationDuration: hideOutAnimationDuration,
+            displayDuration: displayDuration,
+            additionalTopPadding: additionalTopPadding,
+            onTap: onTap,
+            child: child,
+          );
+        },
       );
     },
   );

@@ -5,9 +5,9 @@ import 'package:flutter_shared/src/widgets/snackbar/tap_bounce_container.dart';
 Future<void> showTopSnackBar(
   BuildContext context,
   Widget child, {
-  Duration showOutAnimationDuration = const Duration(milliseconds: 1200),
-  Duration hideOutAnimationDuration = const Duration(milliseconds: 550),
-  Duration displayDuration = const Duration(milliseconds: 3000),
+  Duration showOutAnimationDuration = const Duration(milliseconds: 1000),
+  Duration hideOutAnimationDuration = const Duration(milliseconds: 500),
+  Duration displayDuration = const Duration(milliseconds: 2000),
   double additionalTopPadding = 16.0,
   VoidCallback onTap,
   OverlayState overlayState,

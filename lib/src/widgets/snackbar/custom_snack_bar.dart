@@ -23,7 +23,9 @@ class _CustomSnackBarState extends State<CustomSnackBar> {
       type: MaterialType.transparency,
       child: Container(
         decoration: BoxDecoration(
-          color: widget.error ? Colors.red[800] : Colors.green[800],
+          color: widget.error
+              ? Colors.red[800].withOpacity(.9)
+              : Colors.green[800].withOpacity(.9),
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           boxShadow: const [
             BoxShadow(

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_shared/flutter_shared.dart';
 
 Future<String> showStringDialog({
   @required BuildContext context,
   @required String title,
-  @required String message,
+  String message,
   String okButtonName = 'OK',
   String cancelButtonName = 'Cancel',
   String defaultName = '',
@@ -33,7 +34,7 @@ Future<String> showStringDialog({
 class _DialogContents extends StatefulWidget {
   const _DialogContents({
     @required this.title,
-    @required this.message,
+    this.message,
     this.okButtonName = 'OK',
     this.cancelButtonName = 'Cancel',
     this.defaultName = '',
@@ -72,6 +73,14 @@ class __DialogContentsState extends State<_DialogContents> {
     super.dispose();
   }
 
+  List<Widget> _message() {
+    if (Utils.isNotEmpty(widget.message)) {
+      return [Text(widget.message), const SizedBox(height: 10)];
+    }
+
+    return [];
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -84,8 +93,7 @@ class __DialogContentsState extends State<_DialogContents> {
         child: SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              Text(widget.message),
-              const SizedBox(height: 10),
+              ..._message(),
               TextField(
                 keyboardType: widget.keyboardType ?? TextInputType.text,
                 autofocus: true,

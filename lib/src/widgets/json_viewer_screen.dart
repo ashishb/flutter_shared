@@ -13,6 +13,26 @@ class JsonViewerScreen extends StatelessWidget {
   final String title;
   final VoidCallback onDelete;
 
+  static Future<void> show({
+    @required BuildContext context,
+    @required Map<String, dynamic> map,
+    @required String title,
+    VoidCallback onDelete,
+  }) async {
+    return Navigator.of(context).push<void>(
+      MaterialPageRoute(
+        builder: (context) {
+          return JsonViewerScreen(
+            map: map,
+            title: title,
+            onDelete: onDelete,
+          );
+        },
+        fullscreenDialog: true,
+      ),
+    );
+  }
+
   Widget _copyButton(BuildContext context) {
     return IconButton(
       onPressed: () {

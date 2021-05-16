@@ -1207,8 +1207,6 @@ TextTheme themeWithGoogleFont(String fontName, TextTheme theme) {
       return GoogleFonts.muktaMalarTextTheme(theme);
     case 'muktaVaaniTextTheme':
       return GoogleFonts.muktaVaaniTextTheme(theme);
-    case 'muliTextTheme':
-      return GoogleFonts.muliTextTheme(theme);
     case 'mysteryQuestTextTheme':
       return GoogleFonts.mysteryQuestTextTheme(theme);
     case 'ntrTextTheme':

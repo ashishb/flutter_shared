@@ -75,6 +75,9 @@ class FieldBuilder {
     return Container(
       margin: EdgeInsets.only(bottom: outlinedBorders ? 16 : 10),
       child: TextFormField(
+        textCapitalization: (mapKey != 'email' && mapKey != 'password')
+            ? TextCapitalization.sentences
+            : TextCapitalization.none,
         keyboardType: formParam.keyboard,
         textInputAction: (formParam.maxLines == null || formParam.maxLines == 1)
             ? TextInputAction.next

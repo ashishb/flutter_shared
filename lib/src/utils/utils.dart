@@ -4,9 +4,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
-import 'package:flutter_shared/src/widgets/shared_context.dart';
-import 'package:flutter_shared/src/widgets/snackbar/custom_snack_bar.dart';
-import 'package:flutter_shared/src/widgets/snackbar/top_snack_bar.dart';
+import 'package:flutter_shared/src/widgets/shared_snack_bar.dart';
 import 'package:flutter_shared/src/widgets/ttext.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/foundation.dart';
@@ -454,20 +452,11 @@ class Utils {
     @required String message,
     bool error = false,
   }) {
-    final BuildContext context = SharedContext().context;
-
-    if (context != null) {
-      showTopSnackBar(
-        context,
-        CustomSnackBar(
-          title: title,
-          message: message,
-          error: error,
-        ),
-      );
-    } else {
-      print('no context');
-    }
+    SharedSnackBars().show(
+      title: title,
+      message: message,
+      error: error,
+    );
   }
 
   static String enumToString(Object enumItem) {

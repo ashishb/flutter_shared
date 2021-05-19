@@ -78,28 +78,25 @@ class SharedSnackBar extends StatefulWidget {
     final Completer<bool> result = Completer<bool>();
 
     if (overlayState != null) {
-      // looks weird on top of keyboard, and normally I want it on bottom
-      // so only show on top if keyboard is visible
-      final keyboardVisibilityController = KeyboardVisibilityController();
-      final bool keyboardVisible = keyboardVisibilityController.isVisible;
-
-      print('keyboardVisible');
-      print(keyboardVisible);
       OverlayEntry overlayEntry;
 
       overlayEntry = OverlayEntry(
         builder: (context) {
-          return SharedSnackBar(
-            onTop: keyboardVisible,
-            onDismissed: () {
-              overlayEntry.remove();
-              result.complete(true);
+          return KeyboardVisibilityBuilder(
+            builder: (context, isKeyboardVisible) {
+              return SharedSnackBar(
+                onTop: isKeyboardVisible,
+                onDismissed: () {
+                  overlayEntry.remove();
+                  result.complete(true);
+                },
+                showOutAnimationDuration: showOutAnimationDuration,
+                hideOutAnimationDuration: hideOutAnimationDuration,
+                displayDuration: displayDuration,
+                additionalTopPadding: additionalTopPadding,
+                child: child,
+              );
             },
-            showOutAnimationDuration: showOutAnimationDuration,
-            hideOutAnimationDuration: hideOutAnimationDuration,
-            displayDuration: displayDuration,
-            additionalTopPadding: additionalTopPadding,
-            child: child,
           );
         },
       );

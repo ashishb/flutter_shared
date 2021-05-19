@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
 class SharedSnackBars {
@@ -82,21 +81,18 @@ class SharedSnackBar extends StatefulWidget {
 
       overlayEntry = OverlayEntry(
         builder: (context) {
-          return KeyboardVisibilityBuilder(
-            builder: (context, isKeyboardVisible) {
-              return SharedSnackBar(
-                onTop: isKeyboardVisible,
-                onDismissed: () {
-                  overlayEntry.remove();
-                  result.complete(true);
-                },
-                showOutAnimationDuration: showOutAnimationDuration,
-                hideOutAnimationDuration: hideOutAnimationDuration,
-                displayDuration: displayDuration,
-                additionalTopPadding: additionalTopPadding,
-                child: child,
-              );
+          return SharedSnackBar(
+            // this means the keyboard is visible
+            onTop: MediaQuery.of(context).viewInsets.bottom != 0,
+            onDismissed: () {
+              overlayEntry.remove();
+              result.complete(true);
             },
+            showOutAnimationDuration: showOutAnimationDuration,
+            hideOutAnimationDuration: hideOutAnimationDuration,
+            displayDuration: displayDuration,
+            additionalTopPadding: additionalTopPadding,
+            child: child,
           );
         },
       );

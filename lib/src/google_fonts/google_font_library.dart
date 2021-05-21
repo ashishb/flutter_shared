@@ -1,7 +1,7 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
-TextTheme themeWithGoogleFont(String fontName, TextTheme theme) {
+TextTheme themeWithGoogleFont(String? fontName, TextTheme theme) {
   switch (fontName) {
     case 'aBeeZeeTextTheme':
       return GoogleFonts.aBeeZeeTextTheme(theme);

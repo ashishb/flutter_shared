@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-Future<T> showSimpleDialog<T>({
-  @required BuildContext context,
-  @required String title,
-  @required List<Widget> children,
+Future<T?> showSimpleDialog<T>({
+  required BuildContext context,
+  required String title,
+  required List<Widget> children,
   bool barrierDismissible = true,
 }) {
   return showGeneralDialog<T>(

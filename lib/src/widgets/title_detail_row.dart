@@ -8,9 +8,9 @@ class TitleDetailRow extends StatelessWidget {
     this.oneLine = false,
   });
 
-  final String title;
-  final String detail;
-  final double fontSize;
+  final String? title;
+  final String? detail;
+  final double? fontSize;
   final bool oneLine;
 
   @override

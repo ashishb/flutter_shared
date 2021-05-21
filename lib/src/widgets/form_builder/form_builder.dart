@@ -5,8 +5,8 @@ import 'package:flutter_shared/src/widgets/form_builder/form_params.dart';
 
 class FormBuilder extends StatefulWidget {
   const FormBuilder({
-    @required this.params,
-    @required this.onSubmit,
+    required this.params,
+    required this.onSubmit,
     this.outlinedBorders = false,
   });
 
@@ -55,8 +55,8 @@ class _FormBuilderState extends State<FormBuilder> {
   }
 
   void _save() {
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
 
       final success = widget.onSubmit(widget.params);
       if (success == true) {
@@ -99,10 +99,11 @@ class _FormBuilderState extends State<FormBuilder> {
       return NothingWidget();
     }
 
+    // ignore: dead_code
     return TextButton(
       onPressed: () {
-        if (_formKey.currentState.validate()) {
-          _formKey.currentState.save();
+        if (_formKey.currentState!.validate()) {
+          _formKey.currentState!.save();
 
           Navigator.of(context).push<void>(MaterialPageRoute(
             builder: (context) {

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class MenuItem extends StatelessWidget {
   const MenuItem({this.name, this.icon});
 
-  final String name;
-  final Icon icon;
+  final String? name;
+  final Icon? icon;
 
   @override
   Widget build(BuildContext context) {

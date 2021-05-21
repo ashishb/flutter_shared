@@ -3,14 +3,14 @@ import 'package:flutter_shared/src/widgets/thumb_widget.dart';
 
 class DoubleThumbsControl extends StatefulWidget {
   const DoubleThumbsControl({
-    @required this.value,
-    @required this.onChanged,
+    required this.value,
+    required this.onChanged,
     this.showText = true,
   });
 
   // or null if not set
   final int value; // 0-3
-  final ValueChanged<int> onChanged;
+  final ValueChanged<int?> onChanged;
   final bool showText;
 
   @override
@@ -21,7 +21,7 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
   Widget _thumb(int index) {
     return InkWell(
       onTap: () {
-        int newResult;
+        int? newResult;
 
         if (widget.value != index) {
           newResult = index;
@@ -88,8 +88,8 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  textResult ?? '',
-                  style: Theme.of(context).textTheme.caption.copyWith(
+                  textResult,
+                  style: Theme.of(context).textTheme.caption!.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 32,
                       ),

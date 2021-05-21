@@ -19,7 +19,7 @@ class ThemeEditorWidget extends StatefulWidget {
 
 class _ThemeEditorWidgetState extends State<ThemeEditorWidget> {
   void _showQRCodeDialog(BuildContext context) {
-    final String jsonStr = json.encode(ThemeSetManager().currentTheme.toMap());
+    final String jsonStr = json.encode(ThemeSetManager().currentTheme!.toMap());
 
     // here on purpose so we can easily grab the json if we want
     print(jsonStr);
@@ -66,7 +66,7 @@ class _ThemeEditorWidgetState extends State<ThemeEditorWidget> {
         .replaceFirst('TextTheme', '')
         .fromCamelCase();
 
-    final ThemeSet theme = ThemeSetManager().currentTheme;
+    final ThemeSet? theme = ThemeSetManager().currentTheme;
 
     const colorFields = ThemeSetColor.values;
 
@@ -87,7 +87,7 @@ class _ThemeEditorWidgetState extends State<ThemeEditorWidget> {
             itemCount: colorFields.length,
             itemBuilder: (context, index) {
               return ListRow(
-                title: theme.nameForField(colorFields[index]),
+                title: theme!.nameForField(colorFields[index]),
                 leading: Container(
                   height: 40,
                   width: 40,
@@ -108,14 +108,14 @@ class _ThemeEditorWidgetState extends State<ThemeEditorWidget> {
         ),
         const SizedBox(height: 6),
         SwitchListTile(
-          value: ThemeSetManager().lightBackground,
+          value: ThemeSetManager().lightBackground!,
           onChanged: (bool newValue) {
             ThemeSetManager().lightBackground = newValue;
           },
           title: const Text('Light Background'),
         ),
         SwitchListTile(
-          value: ThemeSetManager().integratedAppBar,
+          value: ThemeSetManager().integratedAppBar!,
           onChanged: (bool newValue) {
             ThemeSetManager().integratedAppBar = newValue;
           },
@@ -177,6 +177,6 @@ class ThemeColorData {
     this.color,
   });
 
-  final String name;
-  final Color color;
+  final String? name;
+  final Color? color;
 }

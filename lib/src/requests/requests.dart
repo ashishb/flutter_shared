@@ -23,7 +23,7 @@ class Response {
 
   bool get success => !hasError;
 
-  Uri get url => _rawResponse.request.url;
+  Uri get url => _rawResponse.request!.url;
 
   void throwForStatus() {
     if (!success) {
@@ -80,7 +80,7 @@ class Requests {
     final Map<String, String> cookies = {};
     for (final String key in responseHeaders.keys) {
       if (Common.equalsIgnoreCase(key, 'set-cookie')) {
-        final String cookie = responseHeaders[key];
+        final String cookie = responseHeaders[key]!;
         cookie.split(',').forEach((String one) {
           one
               .split(';')
@@ -97,7 +97,7 @@ class Requests {
   }
 
   static Future<Map<String, String>> _constructRequestHeaders(
-      String hostname, Map<String, String> customHeaders) async {
+      String hostname, Map<String, String>? customHeaders) async {
     final cookies = await getStoredCookies(hostname);
     final String cookie =
         cookies.keys.map((key) => '$key=${cookies[key]}').join('; ');
@@ -113,7 +113,7 @@ class Requests {
   static Future<Map<String, String>> getStoredCookies(String hostname) async {
     try {
       final String hostnameHash = Common.hashStringSHA256(hostname);
-      final String cookiesJson =
+      final String? cookiesJson =
           await Common.storageGet('cookies-$hostnameHash');
 
       if (cookiesJson != null) {
@@ -137,7 +137,7 @@ class Requests {
 
   static Future clearStoredCookies(String hostname) async {
     final String hostnameHash = Common.hashStringSHA256(hostname);
-    await Common.storageSet('cookies-$hostnameHash', null);
+    await Common.storageRemove('cookies-$hostnameHash');
   }
 
   static String getHostname(String url) {
@@ -166,9 +166,9 @@ class Requests {
   }
 
   static Future<Response> head(String url,
-      {Map<String, String> headers,
-      Map<String, dynamic> queryParameters,
-      int port,
+      {Map<String, String>? headers,
+      Map<String, dynamic>? queryParameters,
+      int? port,
       RequestBodyEncoding bodyEncoding = defaultBodyEncoding,
       int timeoutSeconds = defaultTimeoutSeconds,
       bool persistCookies = true,
@@ -187,9 +187,9 @@ class Requests {
   }
 
   static Future<Response> get(String url,
-      {Map<String, String> headers,
-      Map<String, dynamic> queryParameters,
-      int port,
+      {Map<String, String>? headers,
+      Map<String, dynamic>? queryParameters,
+      int? port,
       RequestBodyEncoding bodyEncoding = defaultBodyEncoding,
       int timeoutSeconds = defaultTimeoutSeconds,
       bool persistCookies = true,
@@ -208,11 +208,11 @@ class Requests {
   }
 
   static Future<Response> patch(String url,
-      {Map<String, String> headers,
-      int port,
-      Map<String, dynamic> json,
+      {Map<String, String>? headers,
+      int? port,
+      Map<String, dynamic>? json,
       dynamic body,
-      Map<String, dynamic> queryParameters,
+      Map<String, dynamic>? queryParameters,
       RequestBodyEncoding bodyEncoding = defaultBodyEncoding,
       int timeoutSeconds = defaultTimeoutSeconds,
       bool persistCookies = true,
@@ -233,11 +233,11 @@ class Requests {
   }
 
   static Future<Response> delete(String url,
-      {Map<String, String> headers,
-      Map<String, dynamic> json,
+      {Map<String, String>? headers,
+      Map<String, dynamic>? json,
       dynamic body,
-      Map<String, dynamic> queryParameters,
-      int port,
+      Map<String, dynamic>? queryParameters,
+      int? port,
       RequestBodyEncoding bodyEncoding = defaultBodyEncoding,
       int timeoutSeconds = defaultTimeoutSeconds,
       bool persistCookies = true,
@@ -258,12 +258,12 @@ class Requests {
   }
 
   static Future<Response> post(String url,
-      {Map<String, dynamic> json,
-      int port,
-      Map<String, dynamic> body,
-      Map<String, dynamic> queryParameters,
+      {Map<String, dynamic>? json,
+      int? port,
+      Map<String, dynamic>? body,
+      Map<String, dynamic>? queryParameters,
       RequestBodyEncoding bodyEncoding = defaultBodyEncoding,
-      Map<String, String> headers,
+      Map<String, String>? headers,
       int timeoutSeconds = defaultTimeoutSeconds,
       bool persistCookies = true,
       bool verify = true}) {
@@ -284,12 +284,12 @@ class Requests {
 
   static Future<Response> put(
     String url, {
-    int port,
-    Map<String, dynamic> json,
+    int? port,
+    Map<String, dynamic>? json,
     dynamic body,
-    Map<String, dynamic> queryParameters,
+    Map<String, dynamic>? queryParameters,
     RequestBodyEncoding bodyEncoding = defaultBodyEncoding,
-    Map<String, String> headers,
+    Map<String, String>? headers,
     int timeoutSeconds = defaultTimeoutSeconds,
     bool persistCookies = true,
     bool verify = true,
@@ -315,16 +315,16 @@ class Requests {
     dynamic json,
     dynamic body,
     RequestBodyEncoding bodyEncoding = defaultBodyEncoding,
-    Map<String, dynamic> queryParameters,
-    int port,
-    Map<String, String> headers,
+    Map<String, dynamic>? queryParameters,
+    int? port,
+    Map<String, String>? headers,
     int timeoutSeconds = defaultTimeoutSeconds,
     bool persistCookies = true,
     bool verify = true,
   }) async {
     dynamic localBody = body;
     RequestBodyEncoding localBodyEncoding = bodyEncoding;
-    Map<String, String> localHeaders = headers;
+    Map<String, String>? localHeaders = headers;
 
     http.Client client;
     if (!verify) {
@@ -346,7 +346,7 @@ class Requests {
 
     final String hostname = getHostname(url);
     localHeaders = await _constructRequestHeaders(hostname, localHeaders);
-    String requestBody;
+    String? requestBody;
 
     if (localBody != null && json != null) {
       throw ArgumentError("cannot use both 'json' and 'body' choose only one.");
@@ -366,7 +366,7 @@ class Requests {
     }
 
     if (localBody != null) {
-      String contentTypeHeader;
+      String? contentTypeHeader;
 
       switch (localBodyEncoding) {
         case RequestBodyEncoding.json:
@@ -389,7 +389,7 @@ class Requests {
       }
     }
 
-    Future future;
+    late Future future;
 
     switch (method) {
       case HttpMethod.get:
@@ -422,8 +422,7 @@ class Requests {
     dynamic response = await future.timeout(Duration(seconds: timeoutSeconds));
 
     if (response is http.StreamedResponse) {
-      response =
-          await http.Response.fromStream(response as http.StreamedResponse);
+      response = await http.Response.fromStream(response);
     }
 
     return _handleHttpResponse(

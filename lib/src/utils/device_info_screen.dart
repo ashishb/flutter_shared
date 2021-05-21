@@ -13,7 +13,7 @@ class DeviceInfoScreen extends StatefulWidget {
 
 class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-  List<Map<String, dynamic>> _dataList = <Map<String, dynamic>>[];
+  List<Map<String, dynamic>>? _dataList = <Map<String, dynamic>>[];
 
   @override
   void initState() {
@@ -22,8 +22,8 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
   }
 
   Future<void> initPlatformState() async {
-    Map<String, dynamic> deviceData;
-    List<Map<String, dynamic>> deviceInfo;
+    late Map<String, dynamic> deviceData;
+    List<Map<String, dynamic>>? deviceInfo;
 
     try {
       if (Platform.isAndroid) {
@@ -48,10 +48,9 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
   }
 
   int _rankForItem(Map map) {
-    switch (map['key'] as String) {
+    switch (map['key'] as String?) {
       case 'product':
         return 0;
-        break;
       case 'model':
       case 'brand':
       case 'device':
@@ -60,10 +59,8 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
       case 'manufacturer':
       case 'release':
         return 1;
-        break;
       default:
         return 10000;
-        break;
     }
   }
 
@@ -156,13 +153,13 @@ class _DeviceInfoScreenState extends State<DeviceInfoScreen> {
       ),
       body: ListView.separated(
         physics: const BouncingScrollPhysics(),
-        itemCount: _dataList.length,
+        itemCount: _dataList!.length,
         separatorBuilder: (context, index) {
           return const Divider(height: 1);
         },
         itemBuilder: (context, index) {
           final bool darkMode = Utils.isDarkMode(context);
-          final Map<String, dynamic> map = _dataList[index];
+          final Map<String, dynamic> map = _dataList![index];
 
           String value = map['value'].toString();
 

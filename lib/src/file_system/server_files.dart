@@ -5,7 +5,7 @@ import 'package:flutter_shared/flutter_shared.dart';
 import 'package:flutter_shared/src/file_system/standard_directories.dart';
 
 class ServerFiles {
-  static ServerFile serverFileForPath(String path, {bool verify = false}) {
+  static ServerFile? serverFileForPath(String path, {bool verify = false}) {
     final bool isDirectory = FileSystemEntity.isDirectorySync(path);
 
     bool valid = true;

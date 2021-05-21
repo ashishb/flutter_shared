@@ -5,7 +5,7 @@ class StadiumTag extends StatelessWidget {
     this.tag,
   });
 
-  final String tag;
+  final String? tag;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class StadiumTag extends StatelessWidget {
             horizontal: 14.0,
           ),
           child: Text(
-            tag,
+            tag!,
             style: const TextStyle(
               fontSize: 16,
             ),

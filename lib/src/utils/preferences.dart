@@ -7,12 +7,12 @@ class Preferences extends ChangeNotifier {
   }
 
   Preferences._() {
-    prefs.listenable().addListener(() {
+    prefs.listenable()!.addListener(() {
       notifyListeners();
     });
   }
 
-  static Preferences _instance;
+  static Preferences? _instance;
 
   HiveBox get prefs {
     return HiveBox.prefsBox;
@@ -22,59 +22,59 @@ class Preferences extends ChangeNotifier {
     prefs.clear();
   }
 
-  static String get loginEmail =>
-      HiveBox.prefsBox.get('loginEmail', defaultValue: null) as String;
-  static set loginEmail(String email) =>
+  static String? get loginEmail =>
+      HiveBox.prefsBox.get('loginEmail', defaultValue: null) as String?;
+  static set loginEmail(String? email) =>
       HiveBox.prefsBox.put('loginEmail', email);
 
-  static String get loginName =>
-      HiveBox.prefsBox.get('loginName', defaultValue: null) as String;
-  static set loginName(String email) =>
+  static String? get loginName =>
+      HiveBox.prefsBox.get('loginName', defaultValue: null) as String?;
+  static set loginName(String? email) =>
       HiveBox.prefsBox.put('loginName', email);
 
-  static String get loginPhone =>
-      HiveBox.prefsBox.get('loginPhone', defaultValue: null) as String;
-  static set loginPhone(String phone) =>
+  static String? get loginPhone =>
+      HiveBox.prefsBox.get('loginPhone', defaultValue: null) as String?;
+  static set loginPhone(String? phone) =>
       HiveBox.prefsBox.put('loginPhone', phone);
 
-  bool get showPerformanceOverlay =>
-      prefs.get('perfOverlay', defaultValue: false) as bool;
+  bool? get showPerformanceOverlay =>
+      prefs.get('perfOverlay', defaultValue: false) as bool?;
 
-  set showPerformanceOverlay(bool value) {
+  set showPerformanceOverlay(bool? value) {
     if (showPerformanceOverlay != value) {
       prefs.put('perfOverlay', value);
     }
   }
 
-  bool get showCheckerboardImages =>
-      prefs.get('checkerboardImages', defaultValue: false) as bool;
+  bool? get showCheckerboardImages =>
+      prefs.get('checkerboardImages', defaultValue: false) as bool?;
 
-  set showCheckerboardImages(bool value) {
+  set showCheckerboardImages(bool? value) {
     if (showCheckerboardImages != value) {
       prefs.put('checkerboardImages', value);
     }
   }
 
-  bool get showCheckerboardLayers =>
-      prefs.get('checkerboardLayers', defaultValue: false) as bool;
+  bool? get showCheckerboardLayers =>
+      prefs.get('checkerboardLayers', defaultValue: false) as bool?;
 
-  set showCheckerboardLayers(bool value) {
+  set showCheckerboardLayers(bool? value) {
     if (showCheckerboardLayers != value) {
       prefs.put('checkerboardLayers', value);
     }
   }
 
-  List<String> getFavoriteGoogleFonts() => List<String>.from(
+  List<String?> getFavoriteGoogleFonts() => List<String?>.from(
       prefs.get('favoriteGoogleFonts', defaultValue: <String>[]) as List);
 
-  void setFavoriteGoogleFonts(List<String> value) {
+  void setFavoriteGoogleFonts(List<String?> value) {
     if (getFavoriteGoogleFonts() != value) {
       prefs.put('favoriteGoogleFonts', value);
     }
   }
 
-  ThemeSet get themeSet {
-    final jsonMap = prefs.get('themeSet') as Map;
+  ThemeSet? get themeSet {
+    final jsonMap = prefs.get('themeSet') as Map?;
 
     if (jsonMap != null) {
       final ThemeSet themeSet =
@@ -87,7 +87,7 @@ class Preferences extends ChangeNotifier {
   }
 
   // pass null to delete pref
-  set themeSet(ThemeSet newTheme) {
+  set themeSet(ThemeSet? newTheme) {
     if (newTheme == null) {
       prefs.delete('themeSet');
     } else {
@@ -97,7 +97,7 @@ class Preferences extends ChangeNotifier {
     }
   }
 
-  List<ThemeSet> get themeSets {
+  List<ThemeSet>? get themeSets {
     final dynamic pref = prefs.get('themeSets');
 
     if (pref != null) {
@@ -115,7 +115,7 @@ class Preferences extends ChangeNotifier {
   }
 
   // pass null to delete
-  set themeSets(List<ThemeSet> newThemes) {
+  set themeSets(List<ThemeSet>? newThemes) {
     if (newThemes == null) {
       prefs.delete('themeSets');
     } else {
@@ -125,7 +125,7 @@ class Preferences extends ChangeNotifier {
     }
   }
 
-  List<ServerFile> get favorites {
+  List<ServerFile>? get favorites {
     final dynamic pref = prefs.get('favorites');
 
     if (pref != null) {
@@ -143,7 +143,7 @@ class Preferences extends ChangeNotifier {
   }
 
   // pass null to delete
-  set favorites(List<ServerFile> favs) {
+  set favorites(List<ServerFile>? favs) {
     if (favs == null) {
       prefs.delete('favorites');
     } else {

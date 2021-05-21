@@ -1,8 +1,5 @@
 import 'package:flutter_shared/src/utils/utils.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Dates {
   static String formatDateString(String iso) {
@@ -11,7 +8,7 @@ class Dates {
     return formatDateTime(date);
   }
 
-  static String formatDateTime(DateTime date) {
+  static String formatDateTime(DateTime? date) {
     if (date != null) {
       final DateTime now = DateTime.now();
       final DateTime yDay = now.subtract(const Duration(days: 1));
@@ -32,7 +29,7 @@ class Dates {
 
   // if date is in UTC, use this to get local
   static String formatLocalDateTime({
-    @required DateTime date,
+    required DateTime? date,
     bool addDay = false,
   }) {
     if (date != null) {
@@ -52,7 +49,7 @@ class Dates {
   }
 
   static String formatLocalDateString(String dateString) {
-    String result;
+    String? result;
 
     if (dateString == 'Invalid DateTime') {
       return '';
@@ -60,7 +57,7 @@ class Dates {
 
     if (Utils.isNotEmpty(dateString)) {
       try {
-        DateTime theDate = parseDate(dateString);
+        DateTime? theDate = parseDate(dateString);
 
         if (theDate != null) {
           // added for medcreds, their dates need utc
@@ -92,9 +89,9 @@ class Dates {
 
   // sometimes you get a weird date format that crashes
   // not a perfect solution, but enough for now
-  static DateTime parseDate(String dateString) {
+  static DateTime? parseDate(String dateString) {
     if (Utils.isNotEmpty(dateString)) {
-      DateTime theDate;
+      DateTime? theDate;
 
       try {
         theDate = DateTime.parse(dateString);
@@ -132,7 +129,7 @@ class Dates {
   }
 
   static String timeOnly({
-    @required DateTime date,
+    required DateTime? date,
   }) {
     if (date != null) {
       final DateFormat formatter = DateFormat('h:mma');

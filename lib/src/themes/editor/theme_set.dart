@@ -15,24 +15,24 @@ enum ThemeSetColor {
 
 class ThemeSet {
   const ThemeSet({
-    @required this.name,
-    @required this.primaryColor,
-    @required this.accentColor,
-    @required this.backgroundColor,
-    @required this.textAccentColor,
-    @required this.textColor,
-    @required this.headerTextColor,
-    @required this.buttonContentColor,
-    @required this.fontName,
-    @required this.integratedAppBar,
-    @required this.dividerLines,
-    @required this.lightBackground,
+    required this.name,
+    required this.primaryColor,
+    required this.accentColor,
+    required this.backgroundColor,
+    required this.textAccentColor,
+    required this.textColor,
+    required this.headerTextColor,
+    required this.buttonContentColor,
+    required this.fontName,
+    required this.integratedAppBar,
+    required this.dividerLines,
+    required this.lightBackground,
   });
 
   factory ThemeSet.defaultSet() {
     if (Utils.isNotEmpty(_appDefaultSet)) {
       return ThemeSet.fromMap(
-          Map<String, dynamic>.from(json.decode(_appDefaultSet) as Map));
+          Map<String, dynamic>.from(json.decode(_appDefaultSet!) as Map));
     }
 
     return ThemeSet(
@@ -53,7 +53,7 @@ class ThemeSet {
 
   factory ThemeSet.fromMap(Map<String, dynamic> map) {
     return ThemeSet(
-      name: map['name'] as String,
+      name: map['name'] as String?,
       primaryColor: _colorFromInt(map['primaryColor']),
       accentColor: _colorFromInt(map['accentColor']),
       headerTextColor: _colorFromInt(map['headerTextColor']),
@@ -61,18 +61,18 @@ class ThemeSet {
       textAccentColor: _colorFromInt(map['textAccentColor']),
       textColor: _colorFromInt(map['textColor']),
       buttonContentColor: _colorFromInt(map['buttonContentColor']),
-      fontName: map['fontName'] as String,
-      integratedAppBar: map['integratedAppBar'] as bool,
-      dividerLines: map['dividerLines'] as bool,
-      lightBackground: map['lightBackground'] as bool,
+      fontName: map['fontName'] as String?,
+      integratedAppBar: map['integratedAppBar'] as bool?,
+      dividerLines: map['dividerLines'] as bool?,
+      lightBackground: map['lightBackground'] as bool?,
     );
   }
 
   // the app sets this at startup if they don't like the hard coded default
-  static String _appDefaultSet;
+  static String? _appDefaultSet;
   static set appsDefaultSet(String set) => _appDefaultSet = set;
 
-  static Color _colorFromInt(dynamic color) {
+  static Color? _colorFromInt(dynamic color) {
     if (color != null && color is int) {
       return Color(color);
     }
@@ -97,26 +97,26 @@ class ThemeSet {
     };
   }
 
-  final String name;
-  final Color primaryColor;
-  final Color accentColor;
-  final Color headerTextColor;
-  final Color textColor;
-  final Color buttonContentColor;
-  final Color textAccentColor;
-  final Color backgroundColor;
+  final String? name;
+  final Color? primaryColor;
+  final Color? accentColor;
+  final Color? headerTextColor;
+  final Color? textColor;
+  final Color? buttonContentColor;
+  final Color? textAccentColor;
+  final Color? backgroundColor;
 
-  final String fontName;
-  final bool integratedAppBar;
-  final bool dividerLines;
-  final bool lightBackground;
+  final String? fontName;
+  final bool? integratedAppBar;
+  final bool? dividerLines;
+  final bool? lightBackground;
 
   @override
   String toString() {
     return toMap().toString();
   }
 
-  Color colorForField(ThemeSetColor field) {
+  Color? colorForField(ThemeSetColor field) {
     switch (field) {
       case ThemeSetColor.primaryColor:
         return primaryColor;
@@ -136,10 +136,10 @@ class ThemeSet {
   }
 
   ThemeSet copyWith({
-    String name,
-    String fontName,
-    bool integratedAppBar,
-    bool lightBackground,
+    String? name,
+    String? fontName,
+    bool? integratedAppBar,
+    bool? lightBackground,
   }) {
     return ThemeSet(
       name: name ?? this.name,

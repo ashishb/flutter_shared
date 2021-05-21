@@ -6,7 +6,7 @@ import 'package:flutter_shared/src/widgets/dropstack/overlay_container.dart';
 import 'package:provider/provider.dart';
 
 class DropStackButton extends StatefulWidget {
-  const DropStackButton({@required this.directory});
+  const DropStackButton({required this.directory});
   final ServerFile directory;
 
   @override
@@ -15,8 +15,8 @@ class DropStackButton extends StatefulWidget {
 
 class _DropStackButtonState extends State<DropStackButton>
     with SingleTickerProviderStateMixin {
-  Animation<double> _animation;
-  AnimationController _animationController;
+  late Animation<double> _animation;
+  AnimationController? _animationController;
 
   void _statusListener(AnimationStatus status) {
     switch (status) {
@@ -38,18 +38,18 @@ class _DropStackButtonState extends State<DropStackButton>
       duration: const Duration(milliseconds: 200),
     );
 
-    _animationController.addStatusListener(_statusListener);
+    _animationController!.addStatusListener(_statusListener);
 
     final curvedAnimation =
-        CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
+        CurvedAnimation(curve: Curves.easeInOut, parent: _animationController!);
 
     _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
   }
 
   @override
   void dispose() {
-    _animationController.removeStatusListener(_statusListener);
-    _animationController.dispose();
+    _animationController!.removeStatusListener(_statusListener);
+    _animationController!.dispose();
     _animationController = null;
 
     super.dispose();
@@ -135,13 +135,13 @@ class _DropStackButtonState extends State<DropStackButton>
     bool reverseOnly = false,
   }) {
     if (reverseOnly) {
-      if (_animationController.isCompleted) {
-        _animationController.reverse();
+      if (_animationController!.isCompleted) {
+        _animationController!.reverse();
       }
     } else {
-      _animationController.isCompleted
-          ? _animationController.reverse()
-          : _animationController.forward();
+      _animationController!.isCompleted
+          ? _animationController!.reverse()
+          : _animationController!.forward();
     }
   }
 

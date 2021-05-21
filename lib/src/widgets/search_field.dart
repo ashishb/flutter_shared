@@ -11,16 +11,16 @@ class SearchField extends StatefulWidget {
 }
 
 class _SearchFieldState extends State<SearchField> {
-  TextEditingController _searchControllerConns;
-  FocusNode _focusNode;
+  TextEditingController? _searchControllerConns;
+  FocusNode? _focusNode;
 
   @override
   void initState() {
     super.initState();
 
     _focusNode = FocusNode();
-    _focusNode.addListener(_listener);
-    _focusNode.skipTraversal = true;
+    _focusNode!.addListener(_listener);
+    _focusNode!.skipTraversal = true;
 
     _searchControllerConns = TextEditingController();
 
@@ -30,13 +30,13 @@ class _SearchFieldState extends State<SearchField> {
   void _listener() {
     // this focus node was added to prevent auto focus when the window is refocused
     // The keyboard comes up and is annoying even when the tab for this is off screen
-    if (!_focusNode.hasFocus) {
-      _focusNode.removeListener(_listener);
+    if (!_focusNode!.hasFocus) {
+      _focusNode!.removeListener(_listener);
       _focusNode = null;
 
       _focusNode = FocusNode();
-      _focusNode.addListener(_listener);
-      _focusNode.skipTraversal = true;
+      _focusNode!.addListener(_listener);
+      _focusNode!.skipTraversal = true;
 
       setState(() {});
     }
@@ -44,18 +44,18 @@ class _SearchFieldState extends State<SearchField> {
 
   @override
   void dispose() {
-    _searchControllerConns.dispose();
-    _focusNode.removeListener(_listener);
+    _searchControllerConns!.dispose();
+    _focusNode!.removeListener(_listener);
 
     super.dispose();
   }
 
   void _setup() {
-    _searchControllerConns.addListener(() {
-      if (_searchControllerConns.text.isEmpty) {
+    _searchControllerConns!.addListener(() {
+      if (_searchControllerConns!.text.isEmpty) {
         widget.onChange('');
       } else {
-        widget.onChange(_searchControllerConns.text.toLowerCase());
+        widget.onChange(_searchControllerConns!.text.toLowerCase());
       }
     });
   }
@@ -82,11 +82,11 @@ class _SearchFieldState extends State<SearchField> {
         ),
         labelText: 'Search',
         suffixIcon: IconButton(
-          icon: Utils.isNotEmpty(_searchControllerConns.text)
+          icon: Utils.isNotEmpty(_searchControllerConns!.text)
               ? const Icon(Icons.close)
               : const Icon(Icons.search),
           onPressed: () {
-            _searchControllerConns.text = '';
+            _searchControllerConns!.text = '';
           },
         ),
       ),

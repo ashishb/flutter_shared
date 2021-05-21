@@ -10,8 +10,8 @@ class SvgAsset extends StatelessWidget {
   });
 
   final String assetPath;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final BoxFit fit;
 
   @override

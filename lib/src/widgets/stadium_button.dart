@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class StadiumButton extends StatelessWidget {
   const StadiumButton({
-    @required this.title,
-    @required this.onPressed,
+    required this.title,
+    required this.onPressed,
     this.raisedStyle = true,
     this.minWidth = 0,
     this.large = false,

@@ -4,9 +4,9 @@ import 'package:flutter/painting.dart';
 
 extension ExtendedCanvas on Canvas {
   void drawPetals({
-    @required Color color,
-    @required Color highlightColor,
-    @required double radius,
+    required Color color,
+    required Color highlightColor,
+    required double radius,
     int petals = 14,
     double xPetalWeightDivisor = 2.0,
     double yPetalWeightDivisor = 2.0,
@@ -45,10 +45,10 @@ extension ExtendedCanvas on Canvas {
   }
 
   void _drawPetal({
-    @required Paint paint,
-    @required double radius,
-    @required double xPetalWeightDivisor,
-    @required double yPetalWeightDivisor,
+    required Paint paint,
+    required double radius,
+    required double xPetalWeightDivisor,
+    required double yPetalWeightDivisor,
   }) {
     final path = Path();
 

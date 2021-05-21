@@ -5,12 +5,12 @@ import 'package:flutter_shared/flutter_shared.dart';
 
 class RotatingRainbowText extends StatefulWidget {
   const RotatingRainbowText({
-    @required this.text,
+    required this.text,
     this.textStyle,
   });
 
   final String text;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   @override
   _RotatingRainbowTextState createState() => _RotatingRainbowTextState();
@@ -18,7 +18,7 @@ class RotatingRainbowText extends StatefulWidget {
 
 class _RotatingRainbowTextState extends State<RotatingRainbowText>
     with TickerProviderStateMixin {
-  AnimationController controller;
+  late AnimationController controller;
 
   @override
   void initState() {
@@ -58,20 +58,20 @@ class _RotatingRainbowTextState extends State<RotatingRainbowText>
 
 class _ColorizeAnimatedText extends StatelessWidget {
   const _ColorizeAnimatedText({
-    @required this.text,
-    @required this.textStyle,
-    @required this.animation,
+    required this.text,
+    required this.textStyle,
+    required this.animation,
   });
 
   final String text;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final Animation<double> animation;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: animation,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return GradientText.rainbow(
           text,
           textStyle: textStyle,

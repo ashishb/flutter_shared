@@ -9,10 +9,10 @@ class PhoneShapes {
   static Paint dotPaint = Paint()..color = cameraColor;
 
   static void drawTopBezelApplePhone({
-    @required Canvas canvas,
-    @required double centerX,
-    @required double centerY,
-    @required double startY,
+    required Canvas canvas,
+    required double centerX,
+    required double centerY,
+    required double startY,
   }) {
     // speaker
     final RRect speakerRRect =
@@ -36,10 +36,10 @@ class PhoneShapes {
   }
 
   static void drawTopBezelAppleTablet({
-    @required Canvas canvas,
-    @required double centerX,
-    @required double centerY,
-    @required double startY,
+    required Canvas canvas,
+    required double centerX,
+    required double centerY,
+    required double startY,
   }) {
     // camera dot
     drawFramedCircle(
@@ -51,10 +51,10 @@ class PhoneShapes {
   }
 
   static void drawFramedCircle({
-    @required Canvas canvas,
-    @required double centerX,
-    @required double centerY,
-    @required double radius,
+    required Canvas canvas,
+    required double centerX,
+    required double centerY,
+    required double radius,
   }) {
     // camera dot
     final Paint camPaint = Paint();
@@ -78,9 +78,9 @@ class PhoneShapes {
   }
 
   static RRect drawSpeaker({
-    Canvas canvas,
-    double centerX,
-    double startY,
+    required Canvas canvas,
+    required double centerX,
+    required double startY,
   }) {
     const speakerHalfW = 78;
     final RRect speakerRRect = RRect.fromLTRBR(
@@ -107,11 +107,11 @@ class PhoneShapes {
   }
 
   static void drawNotch({
-    @required ScreenshotParams params,
-    @required Canvas canvas,
-    @required bool appleNotch,
-    @required double centerX,
-    @required double startY,
+    required ScreenshotParams params,
+    required Canvas canvas,
+    required bool appleNotch,
+    required double centerX,
+    required double startY,
   }) {
     final Paint notchPaint = Paint();
     notchPaint.color = params.phoneColor;
@@ -291,10 +291,10 @@ class PhoneShapes {
   }
 
   static void drawPhoneNotch({
-    @required Canvas canvas,
-    @required PhoneType type,
-    @required double centerX,
-    @required ScreenshotParams params,
+    required Canvas canvas,
+    required PhoneType? type,
+    required double centerX,
+    required ScreenshotParams params,
   }) {
     switch (type) {
       case PhoneType.iPhone11:

@@ -28,7 +28,7 @@ class BrowserSortMenuButton extends StatelessWidget {
 
     menuItems.add(CheckedPopupMenuItem<BrowserSortMenuItem>(
       value: foldersFirst,
-      checked: BrowserPrefs.sortFoldersFirst,
+      checked: BrowserPrefs.sortFoldersFirst!,
       child: MenuItem(
         name: foldersFirst.name,
       ),
@@ -41,7 +41,7 @@ class BrowserSortMenuButton extends StatelessWidget {
     );
     menuItems.add(CheckedPopupMenuItem<BrowserSortMenuItem>(
       value: ascendingItem,
-      checked: BrowserPrefs.sortAscending,
+      checked: BrowserPrefs.sortAscending!,
       child: MenuItem(
         name: ascendingItem.name,
       ),
@@ -54,7 +54,7 @@ class BrowserSortMenuButton extends StatelessWidget {
     for (final item in items) {
       menuItems.add(CheckedPopupMenuItem<BrowserSortMenuItem>(
         value: item,
-        checked: item.sortType.id == BrowserPrefs.sortType,
+        checked: item.sortType!.id == BrowserPrefs.sortType,
         child: MenuItem(
           name: item.name,
         ),
@@ -71,11 +71,11 @@ class BrowserSortMenuButton extends StatelessWidget {
         },
         onSelected: (selected) {
           if (selected.itemType == SortMenuItemType.foldersFirstItem) {
-            BrowserPrefs.sortFoldersFirst = !BrowserPrefs.sortFoldersFirst;
+            BrowserPrefs.sortFoldersFirst = !BrowserPrefs.sortFoldersFirst!;
           } else if (selected.itemType == SortMenuItemType.ascendingItem) {
-            BrowserPrefs.sortAscending = !BrowserPrefs.sortAscending;
+            BrowserPrefs.sortAscending = !BrowserPrefs.sortAscending!;
           } else {
-            BrowserPrefs.sortType = selected.sortType.id;
+            BrowserPrefs.sortType = selected.sortType!.id;
           }
         },
         child: const Icon(Icons.sort),
@@ -86,8 +86,8 @@ class BrowserSortMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box>(
-      valueListenable: HiveBox.prefsBox.listenable(),
-      builder: (BuildContext context, Box<dynamic> prefsBox, Widget _) {
+      valueListenable: HiveBox.prefsBox.listenable()!,
+      builder: (BuildContext context, Box<dynamic> prefsBox, Widget? _) {
         return _popupMenu(context);
       },
     );
@@ -102,11 +102,11 @@ enum SortMenuItemType {
 
 class BrowserSortMenuItem {
   BrowserSortMenuItem({
-    @required this.itemType,
-    @required this.name,
-    @required this.sortType,
+    required this.itemType,
+    required this.name,
+    required this.sortType,
   });
   String name;
-  SortTypes sortType;
+  SortTypes? sortType;
   SortMenuItemType itemType;
 }

@@ -3,11 +3,11 @@ import 'package:flutter_shared/flutter_shared.dart';
 
 class CheckerboardContainer extends Container {
   CheckerboardContainer({
-    Color color,
-    BoxConstraints constraints,
-    EdgeInsetsGeometry padding,
-    EdgeInsetsGeometry margin,
-    Widget child,
+    Color? color,
+    BoxConstraints? constraints,
+    EdgeInsetsGeometry? padding,
+    EdgeInsetsGeometry? margin,
+    Widget? child,
   }) : super(
           constraints: constraints,
           padding: padding,
@@ -36,15 +36,15 @@ class CheckerboardContainer extends Container {
 class CheckerboardPainter extends CustomPainter {
   const CheckerboardPainter({this.darkMode});
 
-  final bool darkMode;
+  final bool? darkMode;
 
   @override
   void paint(Canvas canvas, Size size) {
     final rect = Offset.zero & size;
     canvas.clipRect(rect);
 
-    final Color fillColor = darkMode ? Colors.black : Colors.white;
-    final Color blockColor = darkMode
+    final Color fillColor = darkMode! ? Colors.black : Colors.white;
+    final Color blockColor = darkMode!
         ? const Color.fromRGBO(255, 255, 255, .08)
         : const Color.fromRGBO(0, 0, 0, .08);
 

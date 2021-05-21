@@ -3,7 +3,7 @@ import 'package:flutter_shared/src/backgrounds/star_field/star_field.dart';
 import 'package:flutter_shared/src/backgrounds/star_field/star_field_painter.dart';
 
 class StarfieldBackground extends StatelessWidget {
-  const StarfieldBackground({@required this.child});
+  const StarfieldBackground({required this.child});
 
   final Widget child;
 
@@ -36,8 +36,8 @@ class StarFieldContainingStatefulWidget extends StatefulWidget {
 
 class StarFieldState extends State<StarFieldContainingStatefulWidget>
     with SingleTickerProviderStateMixin {
-  Animation<double> animation;
-  AnimationController controller;
+  Animation<double>? animation;
+  late AnimationController controller;
   final MainScreenViewModel viewModel =
       MainScreenViewModel(600, StarField(600));
 

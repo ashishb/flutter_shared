@@ -5,8 +5,8 @@ class CenteredHeader extends StatelessWidget {
   const CenteredHeader(this.header, {this.top, this.bottom});
 
   final String header;
-  final double top;
-  final double bottom;
+  final double? top;
+  final double? bottom;
 
   @override
   Widget build(BuildContext context) {

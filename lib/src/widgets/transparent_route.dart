@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class TransparentPageRoute<T> extends TransparentMaterialPageRoute<T> {
   TransparentPageRoute({
-    @required WidgetBuilder builder,
-    RouteSettings settings,
+    required WidgetBuilder builder,
+    RouteSettings? settings,
     bool maintainState = true,
     bool fullscreenDialog = false,
   }) : super(
@@ -25,8 +25,8 @@ class TransparentPageRoute<T> extends TransparentMaterialPageRoute<T> {
 // perfectly, fix later
 class TransparentMaterialPageRoute<T> extends MaterialPageRoute<T> {
   TransparentMaterialPageRoute({
-    @required WidgetBuilder builder,
-    RouteSettings settings,
+    required WidgetBuilder builder,
+    RouteSettings? settings,
     bool maintainState = true,
     bool fullscreenDialog = false,
   }) : super(

@@ -4,23 +4,23 @@ import 'package:flutter_shared/flutter_shared.dart';
 class ThemeButton extends StatelessWidget {
   const ThemeButton({
     this.title,
-    @required this.onPressed,
+    required this.onPressed,
     this.icon,
     this.disabled = false,
     this.padding,
     this.fontSize,
   });
 
-  final String title;
+  final String? title;
   final void Function() onPressed;
-  final Icon icon;
+  final Icon? icon;
   final bool disabled;
-  final double fontSize;
-  final EdgeInsets padding;
+  final double? fontSize;
+  final EdgeInsets? padding;
 
   Widget buttonLabel() {
     return Text(
-      title,
+      title!,
       textAlign: TextAlign.center,
       style: TextStyle(fontSize: fontSize),
     );
@@ -30,9 +30,9 @@ class ThemeButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Color disabledColor = Theme.of(context).primaryColor;
 
-    final ThemeSet themeSet = ThemeSetManager().currentTheme;
+    final ThemeSet? themeSet = ThemeSetManager().currentTheme;
 
-    Color textColor;
+    Color? textColor;
     if (themeSet != null) {
       textColor = themeSet.buttonContentColor;
     }
@@ -48,7 +48,7 @@ class ThemeButton extends StatelessWidget {
         ),
         onPressed: disabled ? null : onPressed,
         label: buttonLabel(),
-        icon: icon,
+        icon: icon!,
       );
     }
     return TextButton(

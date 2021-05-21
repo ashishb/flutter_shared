@@ -23,9 +23,9 @@ class BrowserHeader extends StatelessWidget {
         bottom = padding;
 
   final String header;
-  final double top;
-  final double bottom;
-  final String subtitle;
+  final double? top;
+  final double? bottom;
+  final String? subtitle;
 
   @override
   Widget build(BuildContext context) {

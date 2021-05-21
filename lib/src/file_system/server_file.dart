@@ -19,8 +19,8 @@ enum ServerFileType {
 
 class ServerFile {
   ServerFile({
-    @required String path,
-    @required this.isDirectory,
+    required String path,
+    required this.isDirectory,
     this.directoryCount,
   }) {
     // remove trailing slash Directory.path and File.path return / at end
@@ -30,13 +30,13 @@ class ServerFile {
   factory ServerFile.fromMap(Map<String, dynamic> map) {
     final result = ServerFile(
       path: map['path'] as String,
-      isDirectory: map['isDirectory'] as bool,
-      directoryCount: map['directoryCount'] as int,
+      isDirectory: map['isDirectory'] as bool?,
+      directoryCount: map['directoryCount'] as int?,
     );
 
-    result._length = map['length'] as int;
+    result._length = map['length'] as int?;
 
-    final mod = map['lastModified'] as String;
+    final mod = map['lastModified'] as String?;
     if (mod != null) {
       result._lastModified = DateTime.parse(mod);
     }
@@ -44,22 +44,22 @@ class ServerFile {
     return result;
   }
 
-  String path;
-  final bool isDirectory;
-  final int directoryCount;
-  String _name;
-  String _directoryPath;
-  String _directoryName;
-  String _extension;
-  String _lowerCaseName;
-  ServerFileType _type;
-  bool _hidden;
-  DateTime _lastAccessed;
-  DateTime _lastModified;
-  int _length;
-  String _modeString;
+  String? path;
+  final bool? isDirectory;
+  final int? directoryCount;
+  String? _name;
+  String? _directoryPath;
+  String? _directoryName;
+  String? _extension;
+  String? _lowerCaseName;
+  ServerFileType? _type;
+  bool? _hidden;
+  DateTime? _lastAccessed;
+  DateTime? _lastModified;
+  int? _length;
+  String? _modeString;
 
-  bool get isFile => !isDirectory;
+  bool get isFile => !isDirectory!;
   bool get isImage => type == ServerFileType.image;
   bool get isAudio => type == ServerFileType.audio;
   bool get isVideo => type == ServerFileType.video;
@@ -68,15 +68,15 @@ class ServerFile {
   bool get isPng => extension == '.png';
   bool get isSvg => extension == '.svg';
   bool get isArchive => type == ServerFileType.archive;
-  String get name => _name ??= p.basename(path);
+  String get name => _name ??= p.basename(path!);
   String get lowerCaseName => _lowerCaseName ??= name.toLowerCase();
   bool get hidden => _hidden ??= name.startsWith('.');
-  String get directoryPath => _directoryPath ??= p.dirname(path);
+  String get directoryPath => _directoryPath ??= p.dirname(path!);
   String get directoryName => _directoryName ??= p.basename(directoryPath);
 
   // String get extension => _extension ??= p.extension(path).toLowerCase();
   // Wondering if this is faster than above
-  String get extension {
+  String? get extension {
     if (_extension == null) {
       final int lastDot = name.lastIndexOf('.', name.length - 1);
       if (lastDot != -1) {
@@ -100,7 +100,7 @@ class ServerFile {
   }
 
   // mobile/desktop only
-  DateTime get lastAccessed {
+  DateTime? get lastAccessed {
     if (_lastAccessed != null) {
       return _lastAccessed;
     }
@@ -110,7 +110,7 @@ class ServerFile {
     // uses dart:io, not for web
     if (!Utils.isWeb) {
       if (isFile) {
-        _lastAccessed = File(path).lastAccessedSync();
+        _lastAccessed = File(path!).lastAccessedSync();
       }
     }
 
@@ -123,7 +123,7 @@ class ServerFile {
     _lastModified = null;
   }
 
-  String get modeString {
+  String? get modeString {
     if (_modeString != null) {
       return _modeString;
     }
@@ -131,9 +131,9 @@ class ServerFile {
     String modeStr;
 
     if (isFile) {
-      modeStr = File(path).statSync().modeString();
-    } else if (isDirectory) {
-      modeStr = Directory(path).statSync().modeString();
+      modeStr = File(path!).statSync().modeString();
+    } else if (isDirectory!) {
+      modeStr = Directory(path!).statSync().modeString();
     } else {
       modeStr = 'wtfwtfwtf';
     }
@@ -145,7 +145,7 @@ class ServerFile {
   }
 
   // mobile/desktop only
-  DateTime get lastModified {
+  DateTime? get lastModified {
     if (_lastModified != null) {
       return _lastModified;
     }
@@ -157,9 +157,9 @@ class ServerFile {
     // uses dart:io, not for web
     if (!Utils.isWeb) {
       if (isFile) {
-        _lastModified = File(path).lastModifiedSync();
+        _lastModified = File(path!).lastModifiedSync();
       } else {
-        _lastModified = Directory(path).statSync().modified;
+        _lastModified = Directory(path!).statSync().modified;
       }
     }
 
@@ -167,7 +167,7 @@ class ServerFile {
   }
 
   // mobile/desktop only
-  int get length {
+  int? get length {
     if (_length != null) {
       return _length;
     }
@@ -177,7 +177,7 @@ class ServerFile {
     if (isFile) {
       // uses dart:io, not for web
       if (!Utils.isWeb) {
-        _length = File(path).lengthSync();
+        _length = File(path!).lengthSync();
       }
     }
     return _length;
@@ -204,16 +204,16 @@ class ServerFile {
     return false;
   }
 
-  ServerFileType get type {
+  ServerFileType? get type {
     if (_type == null) {
       if (Utils.isNotEmpty(extension)) {
-        String noDot = extension;
+        String noDot = extension!;
 
         if (noDot.length > 1) {
-          noDot = extension.substring(1);
+          noDot = extension!.substring(1);
         }
 
-        final String mimeType = mimeFromExtension(noDot);
+        final String? mimeType = mimeFromExtension(noDot);
 
         if (mimeType != null) {
           switch (mimeType.split('/')[0]) {
@@ -270,7 +270,7 @@ class ServerFile {
 
   bool get isReadOnly {
     bool result = true;
-    final String mode = modeString;
+    final String? mode = modeString;
 
     if (mode != null) {
       if (mode.length == 9) {
@@ -297,12 +297,12 @@ class ServerFile {
     return result;
   }
 
-  Icon icon({double size}) {
+  Icon icon({double? size}) {
     IconData iconData;
 
     Color color = Colors.cyan;
 
-    if (isDirectory) {
+    if (isDirectory!) {
       iconData = FontAwesome5.folder;
       color = Colors.blue;
     } else if (isArchive) {
@@ -331,7 +331,7 @@ class ServerFile {
 
   @override
   String toString() {
-    return path;
+    return path!;
   }
 
   @override

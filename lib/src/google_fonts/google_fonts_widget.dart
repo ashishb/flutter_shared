@@ -11,15 +11,15 @@ import 'package:flutter_shared/src/widgets/theme_button.dart';
 class _FontObj {
   _FontObj({this.name, this.displayName, this.fav, this.firstChar});
 
-  final String name;
-  final String displayName;
-  final String firstChar;
-  bool fav;
+  final String? name;
+  final String? displayName;
+  final String? firstChar;
+  bool? fav;
 }
 
 class GoogleFontsWidget extends StatefulWidget {
   const GoogleFontsWidget({
-    Key key,
+    Key? key,
     this.showNext = false,
   }) : super(key: key);
 
@@ -39,7 +39,7 @@ class GoogleFontsWidgetState extends State<GoogleFontsWidget> {
 
   static List<_FontObj> _buildFontList() {
     final List<String> gFonts = googleFonts();
-    final List<String> favs = Preferences().getFavoriteGoogleFonts();
+    final List<String?> favs = Preferences().getFavoriteGoogleFonts();
 
     final result = <_FontObj>[];
 
@@ -59,7 +59,7 @@ class GoogleFontsWidgetState extends State<GoogleFontsWidget> {
     return result;
   }
 
-  Widget _contents(Color normalColor, String currentFont) {
+  Widget _contents(Color? normalColor, String currentFont) {
     return DraggableScrollbar(
       backgroundColor: Theme.of(context).primaryColor,
       labelTextBuilder: (double offset) {
@@ -68,7 +68,7 @@ class GoogleFontsWidgetState extends State<GoogleFontsWidget> {
         index = min(index, _fontList.length - 1);
 
         return Text(
-          _fontList[index].firstChar,
+          _fontList[index].firstChar!,
           style: const TextStyle(color: Colors.white, fontSize: 24),
         );
       },
@@ -101,8 +101,8 @@ class GoogleFontsWidgetState extends State<GoogleFontsWidget> {
                         child: Padding(
                           padding: const EdgeInsets.only(left: 12.0),
                           child: Text(
-                            fontObj.displayName,
-                            style: theme.headline6.copyWith(
+                            fontObj.displayName!,
+                            style: theme.headline6!.copyWith(
                               color: fontObj.name == currentFont
                                   ? Theme.of(context).primaryColor
                                   : null,
@@ -114,13 +114,13 @@ class GoogleFontsWidgetState extends State<GoogleFontsWidget> {
                         iconSize: 18,
                         onPressed: () {
                           setState(() {
-                            fontObj.fav = !fontObj.fav;
+                            fontObj.fav = !fontObj.fav!;
 
                             // save in prefs
-                            final List<String> favs =
+                            final List<String?> favs =
                                 Preferences().getFavoriteGoogleFonts();
 
-                            if (fontObj.fav) {
+                            if (fontObj.fav!) {
                               favs.add(fontObj.name);
                             } else {
                               favs.remove(fontObj.name);
@@ -129,7 +129,7 @@ class GoogleFontsWidgetState extends State<GoogleFontsWidget> {
                             Preferences().setFavoriteGoogleFonts(favs);
                           });
                         },
-                        icon: fontObj.fav
+                        icon: fontObj.fav!
                             ? const Icon(
                                 Icons.favorite,
                                 color: Colors.red,
@@ -204,7 +204,7 @@ class GoogleFontsWidgetState extends State<GoogleFontsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final Color normalColor = Theme.of(context).textTheme.bodyText2.color;
+    final Color? normalColor = Theme.of(context).textTheme.bodyText2!.color;
     final String currentFont = ThemeSetManager().googleFont;
 
     if (widget.showNext) {

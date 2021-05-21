@@ -13,9 +13,9 @@ class Bonjour extends ChangeNotifier {
   final int port;
   final String serviceName;
 
-  BonsoirService broadcastService;
-  BonsoirBroadcast broadcast;
-  BonsoirDiscovery discovery;
+  BonsoirService? broadcastService;
+  late BonsoirBroadcast broadcast;
+  BonsoirDiscovery? discovery;
   final List<ResolvedBonsoirService> _resolvedServices = [];
 
   List<NetworkClient> get clients {
@@ -35,7 +35,7 @@ class Bonjour extends ChangeNotifier {
       port: port,
     );
 
-    broadcast = BonsoirBroadcast(service: broadcastService);
+    broadcast = BonsoirBroadcast(service: broadcastService!);
     await broadcast.ready;
     await broadcast.start();
   }
@@ -50,10 +50,10 @@ class Bonjour extends ChangeNotifier {
     }
 
     discovery = BonsoirDiscovery(type: serviceType);
-    await discovery.ready;
-    await discovery.start();
+    await discovery!.ready;
+    await discovery!.start();
 
-    discovery.eventStream.listen((event) {
+    discovery!.eventStream!.listen((event) {
       if (event.type == BonsoirDiscoveryEventType.DISCOVERY_SERVICE_RESOLVED) {
         final ResolvedBonsoirService service =
             event.service as ResolvedBonsoirService;
@@ -66,7 +66,7 @@ class Bonjour extends ChangeNotifier {
         _resolvedServices.remove(event.service);
         notifyListeners();
 
-        print('Service lost : ${event.service.toJson()}');
+        print('Service lost : ${event.service!.toJson()}');
       }
     });
   }

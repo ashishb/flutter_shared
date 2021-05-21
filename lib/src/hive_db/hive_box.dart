@@ -15,9 +15,9 @@ class HiveBox<T> {
 
   String name;
   int _refCount = 0;
-  Box<T> _box;
+  Box<T>? _box;
 
-  ValueListenable<Box<T>> listenable() {
+  ValueListenable<Box<T>>? listenable() {
     assert(_box != null, 'Box is closed: $name');
 
     return _box?.listenable();
@@ -47,7 +47,7 @@ class HiveBox<T> {
     }
   }
 
-  int get length {
+  int? get length {
     assert(_box != null, 'Box is closed: $name');
 
     return _box?.length;
@@ -59,43 +59,43 @@ class HiveBox<T> {
     _box?.add(data);
   }
 
-  T getAt(int index) {
+  T? getAt(int index) {
     assert(_box != null, 'Box is closed: $name');
 
     return _box?.getAt(index);
   }
 
-  Future<void> put(String key, T data) {
+  Future<void>? put(String key, T data) {
     assert(_box != null, 'Box is closed: $name');
 
     return _box?.put(key, data);
   }
 
-  T get(String key, {T defaultValue}) {
+  T? get(String key, {T? defaultValue}) {
     assert(_box != null, 'Box is closed: $name');
 
     return _box?.get(key, defaultValue: defaultValue);
   }
 
-  List<T> getAll() {
+  List<T>? getAll() {
     assert(_box != null, 'Box is closed: $name');
 
-    return _box?.values?.toList();
+    return _box?.values.toList();
   }
 
-  Future<void> deleteAt(int index) async {
+  Future<void>? deleteAt(int index) async {
     assert(_box != null, 'Box is closed: $name');
 
     return _box?.deleteAt(index);
   }
 
-  Future<void> clear() async {
+  Future<int?> clear() async {
     assert(_box != null, 'Box is closed: $name');
 
     return _box?.clear();
   }
 
-  Future<void> delete(String key) async {
+  Future<void>? delete(String key) async {
     assert(_box != null, 'Box is closed: $name');
 
     return _box?.delete(key);

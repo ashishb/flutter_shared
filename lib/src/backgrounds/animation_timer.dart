@@ -4,15 +4,15 @@ import 'package:supercharged/supercharged.dart';
 class AnimationTimer {
   static final random = math.Random();
 
-  Duration _duration;
-  Duration _startTime;
+  late Duration _duration;
+  Duration? _startTime;
 
   void restart(Duration duration) {
     Duration now = DateTime.now().duration();
     bool scatter = _startTime == null;
 
     if (!scatter) {
-      scatter = (now - _startTime) > duration * 2;
+      scatter = (now - _startTime!) > duration * 2;
     }
 
     if (scatter) {
@@ -24,7 +24,7 @@ class AnimationTimer {
   }
 
   double _progress(Duration now) {
-    return (now - _startTime) / _duration;
+    return (now - _startTime!) / _duration;
   }
 
   double progress(Duration now) {

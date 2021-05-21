@@ -17,7 +17,7 @@ extension MapCasting on Map {
     return '';
   }
 
-  Map<K, V> mapVal<K, V>(String key) {
+  Map<K, V>? mapVal<K, V>(String key) {
     final dynamic result = this[key];
 
     if (result == null) {
@@ -30,7 +30,7 @@ extension MapCasting on Map {
       if (mapResult is! Map<K, V>) {
         mapResult = Map<K, V>.from(mapResult);
       }
-      return mapResult as Map<K, V>;
+      return mapResult;
     } else {
       print('mapVal: not map $result');
     }
@@ -86,7 +86,7 @@ extension MapCasting on Map {
     return false;
   }
 
-  List<T> listVal<T>(String key) {
+  List<T>? listVal<T>(String key) {
     final dynamic result = this[key];
 
     if (result == null) {
@@ -99,7 +99,7 @@ extension MapCasting on Map {
       if (listResult is! List<T>) {
         listResult = List<T>.from(listResult);
       }
-      return listResult as List<T>;
+      return listResult;
     } else {
       print('listVal: not List $result');
     }

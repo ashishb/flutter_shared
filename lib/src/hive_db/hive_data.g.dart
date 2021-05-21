@@ -17,9 +17,9 @@ class HiveDataAdapter extends TypeAdapter<HiveData> {
       for (var i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return HiveData(
-      name: fields[0] as String,
-      json: fields[2] as String,
-      date: fields[1] as DateTime,
+      name: fields[0] as String?,
+      json: fields[2] as String?,
+      date: fields[1] as DateTime?,
     );
   }
 

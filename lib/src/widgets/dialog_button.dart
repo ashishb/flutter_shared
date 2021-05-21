@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class DialogButton extends StatelessWidget {
   const DialogButton({this.onPressed, this.title, this.filled = false});
 
-  final VoidCallback onPressed;
-  final String title;
+  final VoidCallback? onPressed;
+  final String? title;
   final bool filled;
 
   @override
@@ -23,7 +23,7 @@ class DialogButton extends StatelessWidget {
         ),
         onPressed: onPressed,
         child: Text(
-          title,
+          title!,
           style: TextStyle(
             color: filled ? Colors.white : Theme.of(context).accentColor,
           ),

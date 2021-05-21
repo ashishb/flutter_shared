@@ -4,20 +4,20 @@ import 'package:flutter_shared/flutter_shared.dart';
 
 class JsonViewerScreen extends StatelessWidget {
   const JsonViewerScreen({
-    @required this.map,
-    @required this.title,
+    required this.map,
+    required this.title,
     this.onDelete,
   });
 
   final Map<String, dynamic> map;
   final String title;
-  final VoidCallback onDelete;
+  final VoidCallback? onDelete;
 
   static Future<void> show({
-    @required BuildContext context,
-    @required Map<String, dynamic> map,
-    @required String title,
-    VoidCallback onDelete,
+    required BuildContext context,
+    required Map<String, dynamic> map,
+    required String title,
+    VoidCallback? onDelete,
   }) async {
     return Navigator.of(context).push<void>(
       MaterialPageRoute(

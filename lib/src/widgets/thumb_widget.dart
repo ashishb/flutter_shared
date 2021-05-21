@@ -4,8 +4,8 @@ import 'package:flutter_shared/flutter_shared.dart';
 
 class ThumbWidget extends StatelessWidget {
   const ThumbWidget({
-    @required this.index,
-    @required this.selectedIndex,
+    required this.index,
+    required this.selectedIndex,
     this.iconSize = 32,
     this.opacity = 1,
   });
@@ -23,7 +23,7 @@ class ThumbWidget extends StatelessWidget {
 
     final bool isSelected = selectedIndex == index;
 
-    Color iconColor;
+    Color? iconColor;
     final double xOffset = (iconSize / 5).roundToDouble();
     double yOffset = 1;
 
@@ -42,9 +42,9 @@ class ThumbWidget extends StatelessWidget {
 
     final isDouble = index == 0 || index == 3;
 
-    Color firstIconColor = isSelected ? iconColor : outlinedColor;
+    Color? firstIconColor = isSelected ? iconColor : outlinedColor;
     if (isDouble) {
-      firstIconColor = Utils.darken(firstIconColor, .05);
+      firstIconColor = Utils.darken(firstIconColor!, .05);
     }
 
     return Padding(

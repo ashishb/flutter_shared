@@ -16,19 +16,19 @@ class ActionHeader extends StatelessWidget {
     this.action,
   });
 
-  final String title;
-  final IconData iconData;
-  final void Function() onTap;
+  final String? title;
+  final IconData? iconData;
+  final void Function()? onTap;
   final double top;
   final double bottom;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final double iconSize;
   final bool upperCase;
-  final String subtitle;
-  final Widget action;
-  final Widget subWidget;
+  final String? subtitle;
+  final Widget? action;
+  final Widget? subWidget;
 
-  TextStyle _textStyle(BuildContext context) {
+  TextStyle? _textStyle(BuildContext context) {
     if (textStyle != null) {
       return textStyle;
     }
@@ -36,19 +36,19 @@ class ActionHeader extends StatelessWidget {
     return ActionHeader.defaultTextStyle(context);
   }
 
-  static TextStyle defaultTextStyle(BuildContext context) {
+  static TextStyle? defaultTextStyle(BuildContext context) {
     return ThemeSetManager.header(context);
   }
 
-  static TextStyle defaultSubtitleStyle(BuildContext context) {
-    final TextStyle textStyle = Theme.of(context).textTheme.caption;
+  static TextStyle? defaultSubtitleStyle(BuildContext context) {
+    final TextStyle? textStyle = Theme.of(context).textTheme.caption;
 
     return textStyle;
   }
 
   @override
   Widget build(BuildContext context) {
-    Widget subtitleWidget = NothingWidget();
+    Widget? subtitleWidget = NothingWidget();
 
     if (subWidget != null) {
       subtitleWidget = subWidget;
@@ -72,11 +72,11 @@ class ActionHeader extends StatelessWidget {
                   // padding makes it align with icon
                   padding: const EdgeInsets.only(top: 6.0),
                   child: Text(
-                    upperCase ? title.toUpperCase() : title,
+                    upperCase ? title!.toUpperCase() : title!,
                     style: _textStyle(context),
                   ),
                 ),
-                subtitleWidget,
+                subtitleWidget!,
               ],
             ),
           ),
@@ -89,7 +89,7 @@ class ActionHeader extends StatelessWidget {
               icon: Icon(iconData, color: Theme.of(context).accentColor),
               onPressed: onTap,
             ),
-          if (action != null) action,
+          if (action != null) action!,
         ],
       ),
     );

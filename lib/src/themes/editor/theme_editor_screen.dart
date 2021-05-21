@@ -3,7 +3,7 @@ import 'package:flutter_shared/flutter_shared.dart';
 
 class ThemeEditorScreen extends StatelessWidget {
   Widget _body(BuildContext context) {
-    final List<ThemeSet> themes = Preferences().themeSets;
+    final List<ThemeSet>? themes = Preferences().themeSets;
 
     if (Utils.isEmpty(themes)) {
       return const Center(
@@ -12,7 +12,7 @@ class ThemeEditorScreen extends StatelessWidget {
     }
 
     return ListView.separated(
-      itemCount: themes.length,
+      itemCount: themes!.length,
       separatorBuilder: (context, index) => const Divider(
         height: 1,
       ),
@@ -22,7 +22,7 @@ class ThemeEditorScreen extends StatelessWidget {
           trailing: IconButton(
             icon: const Icon(Icons.clear),
             onPressed: () async {
-              final bool result = await showConfirmDialog(
+              final bool? result = await showConfirmDialog(
                 context: context,
                 title: 'Delete Theme?',
                 message:

@@ -10,7 +10,7 @@ import 'package:flutter_shared/src/publishing_tools/size_menu.dart';
 
 class ScreenshotsScreen extends StatefulWidget {
   const ScreenshotsScreen({
-    @required this.imagePath,
+    required this.imagePath,
   });
 
   final String imagePath;
@@ -21,16 +21,16 @@ class ScreenshotsScreen extends StatefulWidget {
 
 class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
   ScreenshotMaker maker = ScreenshotMaker();
-  Future<CaptureResult> _image;
+  Future<CaptureResult>? _image;
   PhoneMenuItem selectedItem = PhoneMenuItem.items[1];
-  bool _showBackground = true;
-  String _title;
+  bool? _showBackground = true;
+  String? _title;
   SizeMenuItem sizeMenuItem =
       SizeMenuItem(title: 'Image Size', type: SizeType.imageSize);
 
   ScreenshotMenuItem selectedScreenshotItem = ScreenshotMenuItem();
 
-  ui.Image uiImage;
+  late ui.Image uiImage;
 
   @override
   void initState() {
@@ -53,7 +53,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
         uiImage,
         _title ?? selectedScreenshotItem.displayTitle,
         selectedItem.type,
-        showBackground: _showBackground,
+        showBackground: _showBackground!,
         resultImageSize: sizeMenuItem.type,
       );
     });
@@ -61,7 +61,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
 
   Future<void> _saveClicked() async {
     // ask user for file name
-    final String fileName = await showStringDialog(
+    final String? fileName = await showStringDialog(
       context: context,
       title: 'Filename',
       message: 'Choose a file name',
@@ -77,7 +77,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
           assetImage,
           _title ?? selectedScreenshotItem.displayTitle,
           selectedItem.type,
-          showBackground: _showBackground,
+          showBackground: _showBackground!,
           resultImageSize: sizeMenuItem.type,
         );
 
@@ -190,7 +190,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
     if (snapshot.hasData) {
       return [
         Text(
-          '${snapshot.data.width} x ${snapshot.data.height}',
+          '${snapshot.data!.width} x ${snapshot.data!.height}',
           textAlign: TextAlign.center,
         ),
         Container(
@@ -199,7 +199,7 @@ class _ScreenshotsScreenState extends State<ScreenshotsScreen> {
             border: Border.all(color: Colors.grey.shade300, width: 2.0),
           ),
           child: Image.memory(
-            snapshot.data.data,
+            snapshot.data!.data,
             // scale: MediaQuery.of(context).devicePixelRatio,
           ),
         ),

@@ -12,7 +12,7 @@ class SvgImage extends StatefulWidget {
 }
 
 class _SvgImageState extends State<SvgImage> {
-  String svgString;
+  String? svgString;
   bool failed = false;
 
   @override
@@ -29,7 +29,7 @@ class _SvgImageState extends State<SvgImage> {
 
       if (mounted) {
         setState(() {
-          svgString = response?.body;
+          svgString = response.body;
         });
       }
     } catch (error) {
@@ -43,7 +43,7 @@ class _SvgImageState extends State<SvgImage> {
   Widget build(BuildContext context) {
     if (svgString != null) {
       return SvgPicture.string(
-        svgString,
+        svgString!,
         semanticsLabel: svgString,
         placeholderBuilder: (BuildContext context) =>
             const Center(child: CircularProgressIndicator()),

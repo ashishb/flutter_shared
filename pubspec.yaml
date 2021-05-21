@@ -6,7 +6,7 @@ homepage: distantfutu.re
 publish_to: "none"
 
 environment:
-  sdk: ">=2.11.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
@@ -59,6 +59,7 @@ dependencies:
 
   open_file:
     git: git://github.com/crazecoder/open_file
+  collection: ^1.15.0-nullsafety.4
 
 dev_dependencies:
   lint: ^1.5.3

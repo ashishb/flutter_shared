@@ -4,9 +4,9 @@ import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
 class ThemeColorEditorScreen extends StatefulWidget {
-  const ThemeColorEditorScreen({@required this.themeSet, @required this.field});
+  const ThemeColorEditorScreen({required this.themeSet, required this.field});
 
-  final ThemeSet themeSet;
+  final ThemeSet? themeSet;
   final ThemeSetColor field;
 
   @override
@@ -14,8 +14,8 @@ class ThemeColorEditorScreen extends StatefulWidget {
 }
 
 class _ThemeColorEditorScreenState extends State<ThemeColorEditorScreen> {
-  HSVColor currentColor;
-  ThemeSet themeSet;
+  late HSVColor currentColor;
+  ThemeSet? themeSet;
 
   @override
   void initState() {
@@ -24,7 +24,7 @@ class _ThemeColorEditorScreenState extends State<ThemeColorEditorScreen> {
     themeSet = widget.themeSet;
 
     // color picker crashes if you send nil.  An invalid themeset might have null colors from bad scan etc.
-    final Color color = themeSet.colorForField(widget.field) ?? Colors.black;
+    final Color color = themeSet!.colorForField(widget.field) ?? Colors.black;
     currentColor = HSVColor.fromColor(color);
   }
 
@@ -33,7 +33,7 @@ class _ThemeColorEditorScreenState extends State<ThemeColorEditorScreen> {
       currentColor = hsvColor;
 
       final Color color = hsvColor.toColor();
-      themeSet = themeSet.copyWithColor(widget.field, color);
+      themeSet = themeSet!.copyWithColor(widget.field, color);
 
       ThemeSetManager().currentTheme = themeSet;
     });
@@ -42,7 +42,7 @@ class _ThemeColorEditorScreenState extends State<ThemeColorEditorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(themeSet.nameForField(widget.field))),
+      appBar: AppBar(title: Text(themeSet!.nameForField(widget.field))),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -80,7 +80,7 @@ class _ThemeColorEditorScreenState extends State<ThemeColorEditorScreen> {
               ThemeButton(
                 title: 'Sample Button',
                 onPressed: () {
-                  changeColorHsv(HSVColor.fromColor(themeSet.primaryColor));
+                  changeColorHsv(HSVColor.fromColor(themeSet!.primaryColor!));
                 },
               )
             ],

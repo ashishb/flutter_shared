@@ -3,8 +3,8 @@ import 'package:flutter_shared/flutter_shared.dart';
 
 class ThemeSetButton extends StatelessWidget {
   const ThemeSetButton({
-    @required this.themeSets,
-    @required this.onItemSelected,
+    required this.themeSets,
+    required this.onItemSelected,
   });
 
   final void Function(ThemeSet) onItemSelected;
@@ -69,7 +69,7 @@ class ThemeSetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeSet currentTheme = ThemeSetManager().currentTheme;
+    final ThemeSet? currentTheme = ThemeSetManager().currentTheme;
 
     return Stack(
       children: [
@@ -95,10 +95,10 @@ class ThemeSetButton extends StatelessWidget {
                 IconButton(
                   visualDensity: VisualDensity.compact,
                   onPressed: () async {
-                    final String name = await showStringDialog(
+                    final String? name = await showStringDialog(
                         context: context,
                         title: 'Name Theme',
-                        defaultName: currentTheme.name,
+                        defaultName: currentTheme!.name,
                         message: 'Give the theme a unique name.');
 
                     if (Utils.isNotEmpty(name)) {

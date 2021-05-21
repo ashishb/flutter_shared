@@ -4,8 +4,8 @@ import 'package:flutter_shared/flutter_shared.dart';
 
 class BrowserStatusBar extends StatelessWidget {
   const BrowserStatusBar({
-    @required this.status,
-    @required this.callback,
+    required this.status,
+    required this.callback,
     this.locked,
     this.web = false,
   });
@@ -13,7 +13,7 @@ class BrowserStatusBar extends StatelessWidget {
   final String status;
   final void Function(String action) callback;
   final bool web;
-  final bool locked;
+  final bool? locked;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class BrowserStatusBar extends StatelessWidget {
             Positioned.fill(
               child: Center(
                 child: Text(
-                  status ?? '',
+                  status,
                   style: const TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                 ),
@@ -77,7 +77,7 @@ class BrowserStatusBar extends StatelessWidget {
           Positioned.fill(
             child: Center(
               child: Text(
-                status ?? '',
+                status,
                 textAlign: TextAlign.center,
               ),
             ),

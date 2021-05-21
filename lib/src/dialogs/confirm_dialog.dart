@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
-Future<bool> showConfirmDialog({
-  @required BuildContext context,
-  @required String title,
-  String message,
+Future<bool?> showConfirmDialog({
+  required BuildContext context,
+  required String title,
+  String? message,
   List<Widget> children = const <Widget>[],
   String okButtonName = 'OK',
   String cancelButtonName = 'Cancel',
@@ -24,7 +24,7 @@ Future<bool> showConfirmDialog({
           child: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                if (Utils.isNotEmpty(message)) Text(message),
+                if (Utils.isNotEmpty(message)) Text(message!),
                 ...children,
               ],
             ),

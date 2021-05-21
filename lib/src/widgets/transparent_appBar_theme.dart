@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TransparentAppBarTheme extends StatelessWidget {
   const TransparentAppBarTheme({
-    @required this.child,
+    required this.child,
   });
 
   final Widget child;

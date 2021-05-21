@@ -13,14 +13,21 @@ class Common {
     await sharedPreferences.setString(key, value);
   }
 
-  static Future<String> storageGet(String key) async {
+  static Future<void> storageRemove(String key) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+
+    await sharedPreferences.remove(key);
+  }
+
+  static Future<String?> storageGet(String key) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     return sharedPreferences.getString(key);
   }
 
   static bool equalsIgnoreCase(String string1, String string2) {
-    return string1?.toLowerCase() == string2?.toLowerCase();
+    return string1.toLowerCase() == string2.toLowerCase();
   }
 
   static String toJson(dynamic object) {

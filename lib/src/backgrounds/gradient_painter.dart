@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class GradientPainter extends CustomPainter {
   GradientPainter({
-    @required this.value,
-    @required this.startColor,
-    @required this.endColor,
+    required this.value,
+    required this.startColor,
+    required this.endColor,
   });
 
   final double value;
@@ -17,6 +17,7 @@ class GradientPainter extends CustomPainter {
     const bool fullScreen = false;
 
     // covert the appbar and status bar
+    // ignore: dead_code
     if (fullScreen) {
       rect = Rect.fromLTRB(rect.left, rect.top - 100, rect.right, rect.bottom);
     }
@@ -28,8 +29,8 @@ class GradientPainter extends CustomPainter {
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
-        sColor,
-        eColor,
+        sColor!,
+        eColor!,
       ],
     );
 

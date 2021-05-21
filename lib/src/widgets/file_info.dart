@@ -22,7 +22,7 @@ class FileInfo extends StatefulWidget {
 }
 
 class _FileInfoState extends State<FileInfo> {
-  Uint8List _pdfImageData;
+  Uint8List? _pdfImageData;
 
   @override
   void initState() {
@@ -42,13 +42,13 @@ class _FileInfoState extends State<FileInfo> {
     if (!_onWeb) {
       if (widget.serverFile != null && widget.serverFile.isPdf) {
         // open pdf, make image of first page
-        final document = await PdfDocument.openFile(widget.serverFile.path);
+        final document = await PdfDocument.openFile(widget.serverFile.path!);
         final page = await document.getPage(1);
-        final PdfPageImage pageImage =
+        final PdfPageImage? pageImage =
             await page.render(width: page.width, height: page.height);
 
         setState(() {
-          _pdfImageData = pageImage.bytes;
+          _pdfImageData = pageImage!.bytes;
         });
       }
     }
@@ -68,9 +68,9 @@ class _FileInfoState extends State<FileInfo> {
           child = Image.network(url);
         } else {
           if (_pdfImageData != null) {
-            child = Image.memory(_pdfImageData);
+            child = Image.memory(_pdfImageData!);
           } else {
-            child = Image.file(File(widget.serverFile.path));
+            child = Image.file(File(widget.serverFile.path!));
           }
         }
 

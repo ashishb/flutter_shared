@@ -58,7 +58,7 @@ class _NetworkDiscoveryScreenState extends State<NetworkDiscoveryScreen> {
             title: Text(client.name ?? '(no name)'),
             subtitle: Text(client.url ?? '(no url)'),
             onTap: () {
-              Utils.launchUrl(client.url);
+              Utils.launchUrl(client.url!);
             },
           );
         },

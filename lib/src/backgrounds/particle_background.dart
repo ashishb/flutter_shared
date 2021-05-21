@@ -7,8 +7,8 @@ import 'package:supercharged/supercharged.dart';
 
 class ParticleBackground extends StatelessWidget {
   const ParticleBackground({
-    @required this.child,
-    @required this.color,
+    required this.child,
+    required this.color,
   });
 
   final Widget child;
@@ -82,11 +82,11 @@ class ParticleModel {
   ParticleModel(this.random) {
     restart();
   }
-  MultiTween<_AniProps> tween;
+  late MultiTween<_AniProps> tween;
 
-  double size;
+  late double size;
   Random random;
-  double rando;
+  late double rando;
   AnimationTimer timer = AnimationTimer();
 
   void restart({Duration time = Duration.zero}) {

@@ -10,10 +10,10 @@ class AppTheme {
     this.googleFont,
   });
 
-  bool integratedAppBar;
-  bool darkMode;
-  bool transparentAppBar;
-  String googleFont;
+  bool? integratedAppBar;
+  bool? darkMode;
+  bool? transparentAppBar;
+  String? googleFont;
 
   ThemeData get theme {
     ColorParams params;
@@ -22,7 +22,7 @@ class AppTheme {
         integratedAppBar: integratedAppBar,
         transparentAppBar: transparentAppBar);
 
-    final Color appColor = params.appColor;
+    final Color? appColor = params.appColor;
 
     final sliderTheme = SliderThemeData(
       activeTrackColor: appColor,
@@ -39,53 +39,53 @@ class AppTheme {
     );
 
     final iconTheme =
-        IconThemeData(color: ThemeSetManager().currentTheme.textColor);
+        IconThemeData(color: ThemeSetManager().currentTheme!.textColor);
 
     final popupMenuTheme = PopupMenuThemeData(
-      color: ThemeSetManager().currentTheme.backgroundColor,
+      color: ThemeSetManager().currentTheme!.backgroundColor,
     );
 
     final baseTheme = ThemeData(
-      scaffoldBackgroundColor: ThemeSetManager().currentTheme.backgroundColor,
+      scaffoldBackgroundColor: ThemeSetManager().currentTheme!.backgroundColor,
       popupMenuTheme: popupMenuTheme,
       primaryColorBrightness: Brightness.dark,
-      bottomAppBarTheme: _bottomBarTheme(darkMode),
+      bottomAppBarTheme: _bottomBarTheme(darkMode!),
       bottomNavigationBarTheme: _bottomNavBarTheme(appColor),
-      textTheme: _textTheme(darkMode),
+      textTheme: _textTheme(darkMode!),
       iconTheme: iconTheme,
       accentColor: params.accentColor,
-      dividerColor: darkMode
+      dividerColor: darkMode!
           ? Colors.white12
           : Colors.black12, // params.accentColor.withOpacity(.5),
       primaryColor: appColor,
       toggleableActiveColor: appColor,
-      dialogBackgroundColor: ThemeSetManager().currentTheme.backgroundColor,
+      dialogBackgroundColor: ThemeSetManager().currentTheme!.backgroundColor,
       sliderTheme: sliderTheme,
       floatingActionButtonTheme: floatingActionButtonTheme,
       colorScheme: _colorScheme(
-        darkMode: darkMode,
+        darkMode: darkMode!,
         primary: appColor,
         secondary: params.accentColor,
       ),
       inputDecorationTheme: InputDecorationTheme(
         enabledBorder: UnderlineInputBorder(
           borderSide:
-              BorderSide(color: ThemeSetManager().currentTheme.textAccentColor),
+              BorderSide(color: ThemeSetManager().currentTheme!.textAccentColor!),
         ),
         border: UnderlineInputBorder(
           borderSide:
-              BorderSide(color: ThemeSetManager().currentTheme.textAccentColor),
+              BorderSide(color: ThemeSetManager().currentTheme!.textAccentColor!),
         ),
         hintStyle:
-            TextStyle(color: ThemeSetManager().currentTheme.textAccentColor),
+            TextStyle(color: ThemeSetManager().currentTheme!.textAccentColor),
         labelStyle:
-            TextStyle(color: ThemeSetManager().currentTheme.textAccentColor),
+            TextStyle(color: ThemeSetManager().currentTheme!.textAccentColor),
         helperStyle:
-            TextStyle(color: ThemeSetManager().currentTheme.textAccentColor),
+            TextStyle(color: ThemeSetManager().currentTheme!.textAccentColor),
       ),
     );
 
-    if (darkMode) {
+    if (darkMode!) {
       return baseTheme.copyWith(
         brightness: Brightness.dark,
         accentColorBrightness: Brightness.dark,
@@ -125,17 +125,17 @@ class AppTheme {
   }
 
   TextTheme _textTheme(bool darkMode) {
-    Color textColor = Colors.black;
+    Color? textColor = Colors.black;
 
     if (darkMode) {
       textColor = Colors.white;
     }
 
-    Color subtitleColor = Utils.darken(textColor);
-    Color headerTextColor = Colors.grey;
-    Color buttonContentColor = Colors.white;
+    Color? subtitleColor = Utils.darken(textColor);
+    Color? headerTextColor = Colors.grey;
+    Color? buttonContentColor = Colors.white;
 
-    final ThemeSet themeSet = ThemeSetManager().currentTheme;
+    final ThemeSet? themeSet = ThemeSetManager().currentTheme;
 
     if (themeSet != null) {
       textColor = themeSet.textColor;
@@ -156,19 +156,19 @@ class AppTheme {
       ),
 
       // used for ListTile title in drawer
-      bodyText1: startTheme.bodyText1.copyWith(
+      bodyText1: startTheme.bodyText1!.copyWith(
         fontSize: 17.0,
         color: textColor,
       ),
 
       // used for ListTile subtitle in non-drawer list
-      bodyText2: startTheme.bodyText2.copyWith(
+      bodyText2: startTheme.bodyText2!.copyWith(
         color: textColor,
         fontSize: 16.0,
       ),
 
       // used for control text
-      subtitle1: startTheme.bodyText1.copyWith(
+      subtitle1: startTheme.bodyText1!.copyWith(
         fontSize: 16.0,
         color: textColor,
       ),
@@ -181,12 +181,12 @@ class AppTheme {
       ),
 
       // Google fonts list and others
-      headline6: startTheme.headline6.copyWith(
+      headline6: startTheme.headline6!.copyWith(
         color: textColor,
       ),
 
       // used for listTile subtitle
-      caption: startTheme.bodyText1.copyWith(
+      caption: startTheme.bodyText1!.copyWith(
         fontSize: 15.0,
         color: subtitleColor,
       ),
@@ -222,14 +222,14 @@ class AppTheme {
     return result;
   }
 
-  ColorScheme _colorScheme({bool darkMode, Color primary, Color secondary}) {
+  ColorScheme _colorScheme({required bool darkMode, Color? primary, Color? secondary}) {
     ColorScheme scheme = ThemeData.light().colorScheme;
     if (darkMode) {
       scheme = ThemeData.dark().colorScheme;
     }
 
-    Color buttonContentColor;
-    final ThemeSet themeSet = ThemeSetManager().currentTheme;
+    Color? buttonContentColor;
+    final ThemeSet? themeSet = ThemeSetManager().currentTheme;
     if (themeSet != null) {
       buttonContentColor = themeSet.buttonContentColor;
     }
@@ -282,12 +282,12 @@ class AppTheme {
     );
   }
 
-  BottomNavigationBarThemeData _bottomNavBarTheme(Color itemColor) {
+  BottomNavigationBarThemeData _bottomNavBarTheme(Color? itemColor) {
     return BottomNavigationBarThemeData(
       selectedItemColor: itemColor,
       unselectedItemColor: itemColor,
       elevation: 8,
-      backgroundColor: ThemeSetManager().currentTheme.backgroundColor,
+      backgroundColor: ThemeSetManager().currentTheme!.backgroundColor,
     );
   }
 }

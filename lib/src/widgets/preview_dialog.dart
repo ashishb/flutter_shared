@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-Future<bool> showPreviewDialog({
-  @required BuildContext context,
-  @required List<Widget> children,
-  Color backgroundColor,
+Future<bool?> showPreviewDialog({
+  required BuildContext context,
+  required List<Widget> children,
+  Color? backgroundColor,
 }) {
   return showDialog<bool>(
     context: context,
@@ -21,21 +21,20 @@ Future<bool> showPreviewDialog({
 
 class CDialog extends StatelessWidget {
   const CDialog({
-    Key key,
+    Key? key,
     this.backgroundColor,
     this.insetAnimationDuration = const Duration(milliseconds: 100),
     this.insetAnimationCurve = Curves.decelerate,
     this.clipBehavior = Clip.none,
     this.child,
-  })  : assert(clipBehavior != null),
-        super(key: key);
+  }) : super(key: key);
 
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final Duration insetAnimationDuration;
   final Curve insetAnimationCurve;
   final Clip clipBehavior;
 
-  final Widget child;
+  final Widget? child;
 
   static const RoundedRectangleBorder _defaultDialogShape =
       RoundedRectangleBorder(

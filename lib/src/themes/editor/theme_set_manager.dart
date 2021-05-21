@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
@@ -13,14 +14,14 @@ class ThemeSetManager {
     // SNG disabled for beta testing
     // _currentTheme = Preferences().themeSet ?? ThemeSet.defaultSet();
   }
-  static ThemeSetManager _instance;
+  static ThemeSetManager? _instance;
 
-  ThemeSet _currentTheme;
+  ThemeSet? _currentTheme;
 
   static String get defaultFont => 'robotoTextTheme';
 
-  ThemeSet get currentTheme => _currentTheme;
-  set currentTheme(ThemeSet themeSet) {
+  ThemeSet? get currentTheme => _currentTheme;
+  set currentTheme(ThemeSet? themeSet) {
     _currentTheme = themeSet;
 
     Preferences().themeSet = themeSet;
@@ -31,17 +32,17 @@ class ThemeSetManager {
 
     result.addAll(_defaultSets());
 
-    final List<ThemeSet> fromPrefs = Preferences().themeSets;
+    final List<ThemeSet>? fromPrefs = Preferences().themeSets;
 
     if (Utils.isNotEmpty(fromPrefs)) {
-      result.addAll(fromPrefs);
+      result.addAll(fromPrefs!);
     }
 
     return result;
   }
 
-  static String _uniqueNameForThemeSet(ThemeSet themeSet) {
-    String uniqueName = themeSet.name;
+  static String? _uniqueNameForThemeSet(ThemeSet themeSet) {
+    String? uniqueName = themeSet.name;
 
     for (int i = 1; i < 1000; i++) {
       final bool nameTaken =
@@ -75,9 +76,8 @@ class ThemeSetManager {
       // a scan might have the same name, but different contents, don't want to wipe users set with same name
       if (scanned) {
         // bail out if another theme has same content, but different name
-        final ThemeSet foundTheme = themeSets.firstWhere(
-            (test) => themeSet.contentIsEqual(test),
-            orElse: () => null);
+        final ThemeSet? foundTheme = themeSets.firstWhereOrNull(
+            (test) => themeSet.contentIsEqual(test));
 
         if (foundTheme == null) {
           resultTheme =
@@ -122,28 +122,28 @@ class ThemeSetManager {
     Preferences().themeSets = newSets;
   }
 
-  String get googleFont => _currentTheme.fontName ?? defaultFont;
-  set googleFont(String fontName) {
-    final newTheme = currentTheme.copyWith(fontName: fontName ?? defaultFont);
+  String get googleFont => _currentTheme!.fontName ?? defaultFont;
+  set googleFont(String? fontName) {
+    final newTheme = currentTheme!.copyWith(fontName: fontName ?? defaultFont);
 
     currentTheme = newTheme;
   }
 
-  bool get integratedAppBar => currentTheme.integratedAppBar;
-  set integratedAppBar(bool value) {
-    final newTheme = currentTheme.copyWith(integratedAppBar: value);
+  bool? get integratedAppBar => currentTheme!.integratedAppBar;
+  set integratedAppBar(bool? value) {
+    final newTheme = currentTheme!.copyWith(integratedAppBar: value);
 
     currentTheme = newTheme;
   }
 
-  bool get lightBackground => currentTheme.lightBackground;
-  set lightBackground(bool value) {
-    final newTheme = currentTheme.copyWith(lightBackground: value);
+  bool? get lightBackground => currentTheme!.lightBackground;
+  set lightBackground(bool? value) {
+    final newTheme = currentTheme!.copyWith(lightBackground: value);
 
     currentTheme = newTheme;
   }
 
-  static TextStyle header(BuildContext context) {
+  static TextStyle? header(BuildContext context) {
     return Theme.of(context).textTheme.headline4;
   }
 

@@ -86,7 +86,7 @@ class StarFieldPainter extends CustomPainter {
 
     c = max(c, 50);
 
-    starPaint.color = Color.lerp(Colors.cyan, Colors.pink, d);
+    starPaint.color = Color.lerp(Colors.cyan, Colors.pink, d)!;
     canvas.drawPoints(PointMode.points, [star.screenOffset], starPaint);
   }
 

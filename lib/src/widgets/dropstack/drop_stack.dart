@@ -15,9 +15,9 @@ class DropStack extends ChangeNotifier {
   }
   DropStack._();
 
-  static DropStack _instance;
+  static DropStack? _instance;
   final ListStack<ServerFile> _stack = ListStack<ServerFile>();
-  static DropStackImplementation imp;
+  static DropStackImplementation? imp;
 
   int get count => _stack.length;
   bool get isEmpty => _stack.isEmpty;
@@ -31,7 +31,7 @@ class DropStack extends ChangeNotifier {
 
   bool _inStack(ServerFile serverFile) {
     final list = _stack.list;
-    final String test = serverFile.path;
+    final String? test = serverFile.path;
 
     for (final item in list) {
       if (item.path == test) {
@@ -55,16 +55,16 @@ class DropStack extends ChangeNotifier {
   void _dropFile(
       BuildContext context, ServerFile serverFile, ServerFile directory) {
     if (DropStack.imp != null) {
-      DropStack.imp(context, serverFile, directory);
+      DropStack.imp!(context, serverFile, directory);
     } else {
       print('Set the imp on DropStack');
     }
   }
 
-  Future<bool> _confirmDrop({
-    @required BuildContext context,
-    @required ServerFile directory,
-    @required bool topOnly,
+  Future<bool?> _confirmDrop({
+    required BuildContext context,
+    required ServerFile directory,
+    required bool topOnly,
   }) async {
     final List<Widget> itemsDropping = [];
 
@@ -100,14 +100,14 @@ class DropStack extends ChangeNotifier {
           child: Text(directory.name.preTruncate()),
         ),
         ValueListenableBuilder<Box>(
-          valueListenable: HiveBox.prefsBox.listenable(),
-          builder: (BuildContext context, Box<dynamic> prefsBox, Widget _) {
+          valueListenable: HiveBox.prefsBox.listenable()!,
+          builder: (BuildContext context, Box<dynamic> prefsBox, Widget? _) {
             final color = Theme.of(context).primaryColor;
 
             return Column(
               children: [
                 SwitchListTile(
-                  value: BrowserPrefs.copyOnDrop,
+                  value: BrowserPrefs.copyOnDrop!,
                   activeColor: color,
                   activeTrackColor: Colors.white,
                   inactiveTrackColor: Colors.white,
@@ -116,12 +116,12 @@ class DropStack extends ChangeNotifier {
                   onChanged: (bool newValue) {
                     BrowserPrefs.copyOnDrop = newValue;
                   },
-                  title: Text(BrowserPrefs.copyOnDrop
+                  title: Text(BrowserPrefs.copyOnDrop!
                       ? 'Perform a Copy'
                       : 'Perform a Move'),
                 ),
                 SwitchListTile(
-                  value: BrowserPrefs.replaceOnDrop,
+                  value: BrowserPrefs.replaceOnDrop!,
                   activeColor: color,
                   activeTrackColor: Colors.white,
                   inactiveTrackColor: Colors.white,
@@ -141,20 +141,20 @@ class DropStack extends ChangeNotifier {
   }
 
   Future<void> drop({
-    @required BuildContext context,
-    @required ServerFile directory,
-    @required bool topOnly,
+    required BuildContext context,
+    required ServerFile directory,
+    required bool topOnly,
   }) async {
     if (isNotEmpty) {
-      if (directory != null && directory.isDirectory) {
-        final bool drop = await _confirmDrop(
+      if (directory != null && directory.isDirectory!) {
+        final bool? drop = await _confirmDrop(
             context: context, directory: directory, topOnly: topOnly);
 
         if (drop == true) {
           bool done = false;
 
           while (!done) {
-            final ServerFile serverFile = _stack.pop();
+            final ServerFile? serverFile = _stack.pop();
 
             if (serverFile != null) {
               _dropFile(context, serverFile, directory);

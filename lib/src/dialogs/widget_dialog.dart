@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-Future<bool> showWidgetDialog({
-  @required BuildContext context,
-  @required String title,
-  @required List<Widget> children,
+Future<bool?> showWidgetDialog({
+  required BuildContext context,
+  required String? title,
+  required List<Widget> children,
   bool showCancel = false,
   String okButtonName = 'OK',
   String cancelButtonName = 'Cancel',
   bool barrierDismissible = true,
-  EdgeInsets buttonPadding,
-  EdgeInsets insetPadding,
-  EdgeInsets titlePadding,
+  EdgeInsets? buttonPadding,
+  EdgeInsets? insetPadding,
+  EdgeInsets? titlePadding,
   EdgeInsets actionsPadding = EdgeInsets.zero,
   EdgeInsets contentPadding = const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
 }) {
@@ -20,7 +20,7 @@ Future<bool> showWidgetDialog({
     barrierDismissible: barrierDismissible,
     builder: (context) => AlertDialog(
       buttonPadding: buttonPadding,
-      insetPadding: insetPadding,
+      insetPadding: insetPadding!,
       titlePadding: titlePadding,
       actionsPadding: actionsPadding,
       contentPadding: contentPadding,

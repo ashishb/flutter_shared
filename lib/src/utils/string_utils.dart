@@ -33,7 +33,7 @@ class StrUtils {
   }
 
   // returns '' if null
-  static String trim(String inString) {
+  static String trim(String? inString) {
     if (inString == null) {
       return '';
     }
@@ -41,7 +41,7 @@ class StrUtils {
     return inString.trim();
   }
 
-  static bool isEmailValid(String email) {
+  static bool isEmailValid(String? email) {
     final trimmedEmail = StrUtils.trim(email);
 
     if (trimmedEmail.isEmpty) {

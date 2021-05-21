@@ -10,7 +10,7 @@ class GoogleFontsScreen extends StatelessWidget {
     return IconButton(
       tooltip: 'Use default font',
       onPressed: () {
-        _widgetKey.currentState.useDefault();
+        _widgetKey.currentState!.useDefault();
       },
       icon: const Icon(
         Icons.undo,

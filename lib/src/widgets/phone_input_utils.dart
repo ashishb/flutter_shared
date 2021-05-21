@@ -26,13 +26,13 @@ class PhoneInputUtils {
         );
       }),
       PhoneInputFormatter(
-        onCountrySelected: (PhoneCountryData countryData) =>
+        onCountrySelected: (PhoneCountryData? countryData) =>
             print(countryData?.country),
       ),
     ];
   }
 
-  static String validator(String value) {
+  static String? validator(String value) {
     if (!isPhoneValid(value)) {
       return 'Phone is invalid';
     }

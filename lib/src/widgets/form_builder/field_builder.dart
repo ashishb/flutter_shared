@@ -4,9 +4,9 @@ import 'package:flutter_shared/src/widgets/form_builder/form_params.dart';
 
 class FieldBuilder {
   static List<Widget> fields({
-    @required BuildContext context,
-    @required FormBuilderParams builderParams,
-    @required bool autovalidate,
+    required BuildContext context,
+    required FormBuilderParams builderParams,
+    required bool autovalidate,
     bool outlinedBorders = false,
   }) {
     final List<Widget> result = [];
@@ -14,12 +14,12 @@ class FieldBuilder {
     builderParams.map.keys.forEach((mapKey) {
       final formParams = builderParams.formParams;
 
-      if (!formParams[mapKey].hide) {
-        if (formParams[mapKey].type == String) {
-          final formParam = formParams[mapKey];
+      if (!formParams[mapKey]!.hide) {
+        if (formParams[mapKey]!.type == String) {
+          final formParam = formParams[mapKey]!;
 
           if (formParam.separateLabel) {
-            result.add(Text(formParam.label()));
+            result.add(Text(formParam.label()!));
           }
 
           result.add(stringField(
@@ -30,7 +30,7 @@ class FieldBuilder {
             outlinedBorders: outlinedBorders,
           ));
         } else {
-          final Widget customWidget = formParams[mapKey].createWidget();
+          final Widget? customWidget = formParams[mapKey]!.createWidget();
           if (customWidget != null) {
             result.add(customWidget);
           }
@@ -42,10 +42,10 @@ class FieldBuilder {
   }
 
   static Widget stringField({
-    @required BuildContext context,
-    @required String mapKey,
-    @required FormParam formParam,
-    @required bool autovalidate,
+    required BuildContext context,
+    required String mapKey,
+    required FormParam formParam,
+    required bool autovalidate,
     bool outlinedBorders = false,
   }) {
     final border = outlinedBorders
@@ -69,7 +69,7 @@ class FieldBuilder {
     final errorBorder = outlinedBorders
         ? OutlineInputBorder(
             borderRadius: BorderRadius.circular(6),
-            borderSide: BorderSide(color: Colors.red[300]))
+            borderSide: BorderSide(color: Colors.red[300]!))
         : null;
 
     return Container(
@@ -84,7 +84,7 @@ class FieldBuilder {
             : TextInputAction.done,
         autovalidateMode:
             autovalidate ? AutovalidateMode.always : AutovalidateMode.disabled,
-        initialValue: formParam.formData[mapKey] as String,
+        initialValue: formParam.formData[mapKey] as String?,
         minLines: formParam.minLines,
         maxLines: formParam.maxLines,
         autocorrect: formParam.autocorrect,
@@ -111,7 +111,7 @@ class FieldBuilder {
           }
 
           if (mapKey == 'phone' && Utils.isNotEmpty(v)) {
-            return PhoneInputUtils.validator(v);
+            return PhoneInputUtils.validator(v!);
           }
 
           if (mapKey == 'email' && Utils.isNotEmpty(v)) {
@@ -122,8 +122,8 @@ class FieldBuilder {
 
           return null;
         },
-        onSaved: (String v) {
-          formParam.formData[mapKey] = v.trim();
+        onSaved: (String? v) {
+          formParam.formData[mapKey] = v!.trim();
         },
       ),
     );

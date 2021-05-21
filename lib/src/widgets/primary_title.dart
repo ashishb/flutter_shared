@@ -4,12 +4,12 @@ import 'package:flutter_shared/src/widgets/ttext.dart';
 
 class PrimaryTitle extends StatelessWidget {
   const PrimaryTitle({
-    @required this.title,
+    required this.title,
     this.action,
   });
 
-  final String title;
-  final Widget action;
+  final String? title;
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class PrimaryTitle extends StatelessWidget {
           Expanded(
             child: TText(
               title,
-              style: Theme.of(context).textTheme.bodyText1.copyWith(
+              style: Theme.of(context).textTheme.bodyText1!.copyWith(
                     color: Theme.of(context).primaryColor,
                     fontWeight: FontWeight.bold,
                   ),

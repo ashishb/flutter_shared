@@ -9,7 +9,7 @@ import 'package:flutter_shared/src/widgets/transparent_route.dart';
 class SuperImage extends StatelessWidget {
   const SuperImage(
     this.imageSrc, {
-    Key key,
+    Key? key,
     this.width,
     this.height,
     this.fit = BoxFit.cover,
@@ -18,14 +18,14 @@ class SuperImage extends StatelessWidget {
   }) : super(key: key);
 
   final SuperImageSource imageSrc;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
   final BoxFit fit;
   final bool enableViewer;
-  final List<SuperImageSource> swiperImageSrcs;
+  final List<SuperImageSource>? swiperImageSrcs;
 
-  Widget _loadStateChanged(BuildContext context, ExtendedImageState state) {
-    Widget result;
+  Widget? _loadStateChanged(BuildContext context, ExtendedImageState state) {
+    Widget? result;
 
     switch (state.extendedImageLoadState) {
       case LoadState.loading:
@@ -55,13 +55,13 @@ class SuperImage extends StatelessWidget {
           // );
           final Widget child = state.completedWidget;
 
-          ImageSwiperItem swiperItem;
+          late ImageSwiperItem swiperItem;
           int index = 0;
           final List<ImageSwiperItem> swiperItems = [];
 
           if (swiperImageSrcs != null) {
-            for (int i = 0; i < swiperImageSrcs.length; i++) {
-              final SuperImageSource src = swiperImageSrcs[i];
+            for (int i = 0; i < swiperImageSrcs!.length; i++) {
+              final SuperImageSource src = swiperImageSrcs![i];
 
               final ImageSwiperItem item = ImageSwiperItem(src);
 
@@ -116,16 +116,16 @@ class SuperImage extends StatelessWidget {
   Widget build(BuildContext context) {
     if (imageSrc.isFileImage) {
       return ExtendedImage.file(
-        File(imageSrc.path),
+        File(imageSrc.path!),
         width: width,
         height: height,
         fit: fit,
         loadStateChanged: (state) => _loadStateChanged(context, state),
       );
     } else if (imageSrc.isNetworkImage) {
-      if (imageSrc.url.isAssetUrl) {
+      if (imageSrc.url!.isAssetUrl) {
         return ExtendedImage.asset(
-          imageSrc.url,
+          imageSrc.url!,
           width: width,
           fit: fit,
           loadStateChanged: (state) => _loadStateChanged(context, state),
@@ -133,14 +133,14 @@ class SuperImage extends StatelessWidget {
       }
 
       return ExtendedImage.network(
-        imageSrc.url,
+        imageSrc.url!,
         width: width,
         fit: fit,
         loadStateChanged: (state) => _loadStateChanged(context, state),
       );
     } else if (imageSrc.isMemoryImage) {
       return ExtendedImage.memory(
-        imageSrc.memory,
+        imageSrc.memory!,
         width: width,
         fit: fit,
         loadStateChanged: (state) => _loadStateChanged(context, state),

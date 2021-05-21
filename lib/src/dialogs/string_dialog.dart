@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
-Future<String> showStringDialog({
-  @required BuildContext context,
-  @required String title,
-  String message,
+Future<String?> showStringDialog({
+  required BuildContext context,
+  required String title,
+  String? message,
   String okButtonName = 'OK',
   String cancelButtonName = 'Cancel',
-  String defaultName = '',
+  String? defaultName = '',
   TextInputType keyboardType = TextInputType.text,
   bool barrierDismissible = true,
   int minLines = 1,
@@ -33,7 +33,7 @@ Future<String> showStringDialog({
 
 class _DialogContents extends StatefulWidget {
   const _DialogContents({
-    @required this.title,
+    required this.title,
     this.message,
     this.okButtonName = 'OK',
     this.cancelButtonName = 'Cancel',
@@ -44,20 +44,20 @@ class _DialogContents extends StatefulWidget {
   });
 
   final String title;
-  final String message;
-  final String defaultName;
+  final String? message;
+  final String? defaultName;
   final String okButtonName;
   final String cancelButtonName;
   final TextInputType keyboardType;
-  final int minLines;
-  final int maxLines;
+  final int? minLines;
+  final int? maxLines;
 
   @override
   __DialogContentsState createState() => __DialogContentsState();
 }
 
 class __DialogContentsState extends State<_DialogContents> {
-  TextEditingController _textController;
+  TextEditingController? _textController;
 
   @override
   void initState() {
@@ -68,14 +68,14 @@ class __DialogContentsState extends State<_DialogContents> {
 
   @override
   void dispose() {
-    _textController.dispose();
+    _textController!.dispose();
 
     super.dispose();
   }
 
   List<Widget> _message() {
     if (Utils.isNotEmpty(widget.message)) {
-      return [Text(widget.message), const SizedBox(height: 10)];
+      return [Text(widget.message!), const SizedBox(height: 10)];
     }
 
     return [];
@@ -95,7 +95,7 @@ class __DialogContentsState extends State<_DialogContents> {
             children: <Widget>[
               ..._message(),
               TextField(
-                keyboardType: widget.keyboardType ?? TextInputType.text,
+                keyboardType: widget.keyboardType,
                 autofocus: true,
                 controller: _textController,
                 minLines: widget.minLines,
@@ -115,7 +115,7 @@ class __DialogContentsState extends State<_DialogContents> {
         ),
         TextButton(
           onPressed: () {
-            Navigator.of(context).pop(_textController.text);
+            Navigator.of(context).pop(_textController!.text);
           },
           child: Text(widget.okButtonName,
               style: TextStyle(color: Theme.of(context).primaryColor)),

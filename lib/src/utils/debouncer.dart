@@ -6,8 +6,8 @@ class Debouncer {
   Debouncer({this.milliseconds = 500});
 
   final int milliseconds;
-  VoidCallback action;
-  Timer _timer;
+  VoidCallback? action;
+  Timer? _timer;
   bool _disposed = false;
 
   void dispose() {
@@ -31,7 +31,7 @@ class Debouncer {
       _timer = Timer(
         Duration(milliseconds: milliseconds),
         () {
-          _timer.cancel();
+          _timer!.cancel();
           _timer = null;
 
           if (!_disposed) {
@@ -56,7 +56,7 @@ class Debouncer {
         _timer = Timer(
           Duration(milliseconds: milliseconds),
           () {
-            _timer.cancel();
+            _timer!.cancel();
             _timer = null;
 
             _debugLog('## debouncer done');
@@ -77,9 +77,7 @@ class Debouncer {
         () async {
           if (!_disposed) {
             try {
-              if (action != null) {
-                await action();
-              }
+              await action();
             } catch (err) {
               print(err);
             }
@@ -89,7 +87,7 @@ class Debouncer {
             _debugLog('## debouncer already disposed');
           }
 
-          _timer.cancel();
+          _timer!.cancel();
           _timer = null;
         },
       );

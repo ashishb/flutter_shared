@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class FloatingActionBubble extends AnimatedWidget {
   const FloatingActionBubble({
-    @required this.items,
-    @required this.onPressed,
-    @required this.icon,
-    @required this.title,
-    @required Animation<double> animation,
+    required this.items,
+    required this.onPressed,
+    required this.icon,
+    required this.title,
+    required Animation<double> animation,
     this.tooltip,
   }) : super(listenable: animation);
 
@@ -14,7 +14,7 @@ class FloatingActionBubble extends AnimatedWidget {
   final void Function() onPressed;
   final AnimatedIconData icon;
   final String title;
-  final String tooltip;
+  final String? tooltip;
 
   Animation<double> get _animation => listenable as Animation<double>;
 
@@ -79,13 +79,13 @@ class FloatingActionBubble extends AnimatedWidget {
 
 class ActionBubble {
   const ActionBubble({
-    @required this.title,
+    required this.title,
     this.subtitle,
-    @required this.titleStyle,
-    @required this.iconColor,
-    @required this.bubbleColor,
-    @required this.icon,
-    @required this.onPressed,
+    required this.titleStyle,
+    required this.iconColor,
+    required this.bubbleColor,
+    required this.icon,
+    required this.onPressed,
   });
 
   final IconData icon;
@@ -93,7 +93,7 @@ class ActionBubble {
   final Color bubbleColor;
   final void Function() onPressed;
   final String title;
-  final String subtitle;
+  final String? subtitle;
   final TextStyle titleStyle;
 }
 

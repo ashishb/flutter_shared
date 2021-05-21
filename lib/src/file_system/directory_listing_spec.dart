@@ -1,35 +1,29 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 import 'package:flutter_shared/flutter_shared.dart';
 
 class DirectoryListingSpec {
   DirectoryListingSpec({
-    @required this.serverFile,
-    @required this.recursive,
-    @required this.sortType,
-    @required this.sortAscending,
-    @required this.sortFoldersFirst,
-    @required this.showHidden,
-    @required this.searchHiddenDirs,
-    @required this.directoryCounts,
+    required this.serverFile,
+    required this.recursive,
+    required this.sortType,
+    required this.sortAscending,
+    required this.sortFoldersFirst,
+    required this.showHidden,
+    required this.searchHiddenDirs,
+    required this.directoryCounts,
   });
 
   factory DirectoryListingSpec.fromMap(Map<String, dynamic> map) {
-    if (map == null) {
-      return null;
-    }
-
     return DirectoryListingSpec(
       serverFile: ServerFile.fromMap(map['serverFile'] as Map<String, dynamic>),
-      recursive: map['recursive'] as bool,
-      sortType: map['sortType'] as String,
-      sortAscending: map['sortAscending'] as bool,
-      sortFoldersFirst: map['sortFoldersFirst'] as bool,
-      showHidden: map['showHidden'] as bool,
-      searchHiddenDirs: map['searchHiddenDirs'] as bool,
-      directoryCounts: map['directoryCounts'] as bool,
+      recursive: map['recursive'] as bool?,
+      sortType: map['sortType'] as String?,
+      sortAscending: map['sortAscending'] as bool?,
+      sortFoldersFirst: map['sortFoldersFirst'] as bool?,
+      showHidden: map['showHidden'] as bool?,
+      searchHiddenDirs: map['searchHiddenDirs'] as bool?,
+      directoryCounts: map['directoryCounts'] as bool?,
     );
   }
 
@@ -37,13 +31,13 @@ class DirectoryListingSpec {
       DirectoryListingSpec.fromMap(json.decode(source) as Map<String, dynamic>);
 
   final ServerFile serverFile;
-  final bool recursive;
-  final String sortType;
-  final bool sortAscending;
-  final bool sortFoldersFirst;
-  final bool showHidden;
-  final bool searchHiddenDirs;
-  final bool directoryCounts;
+  final bool? recursive;
+  final String? sortType;
+  final bool? sortAscending;
+  final bool? sortFoldersFirst;
+  final bool? showHidden;
+  final bool? searchHiddenDirs;
+  final bool? directoryCounts;
 
   bool shouldRebuildForNewSpec(DirectoryListingSpec otherSpec) {
     return sortType != otherSpec.sortType ||
@@ -54,14 +48,14 @@ class DirectoryListingSpec {
   }
 
   DirectoryListingSpec copyWith({
-    ServerFile serverFile,
-    bool recursive,
-    String sortType,
-    bool sortFoldersFirst,
-    bool sortAscending,
-    bool showHidden,
-    bool searchHiddenDirs,
-    bool directoryCounts,
+    ServerFile? serverFile,
+    bool? recursive,
+    String? sortType,
+    bool? sortFoldersFirst,
+    bool? sortAscending,
+    bool? showHidden,
+    bool? searchHiddenDirs,
+    bool? directoryCounts,
   }) {
     return DirectoryListingSpec(
       serverFile: serverFile ?? this.serverFile,
@@ -77,7 +71,7 @@ class DirectoryListingSpec {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'serverFile': serverFile?.toMap(),
+      'serverFile': serverFile.toMap(),
       'recursive': recursive,
       'sortType': sortType,
       'sortFoldersFirst': sortFoldersFirst,

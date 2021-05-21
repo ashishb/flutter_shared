@@ -6,7 +6,7 @@ class DynamicTheme with ChangeNotifier {
     _themeSet = ThemeSetManager().currentTheme;
 
     Preferences().addListener(() {
-      final ThemeSet newTheme = ThemeSetManager().currentTheme;
+      final ThemeSet? newTheme = ThemeSetManager().currentTheme;
       if (_themeSet != newTheme) {
         _themeSet = newTheme;
         _appTheme = null;
@@ -16,9 +16,9 @@ class DynamicTheme with ChangeNotifier {
     });
   }
 
-  ThemeSet _themeSet;
+  ThemeSet? _themeSet;
 
-  AppTheme _appTheme;
+  AppTheme? _appTheme;
 
   ThemeData get theme => appTheme().theme;
   ThemeData get darkTheme => appTheme(darkMode: true).theme;
@@ -35,9 +35,9 @@ class DynamicTheme with ChangeNotifier {
 
   AppTheme appTheme({bool transparentAppBar = false, bool darkMode = false}) {
     if (_appTheme != null) {
-      if (_appTheme.darkMode != darkMode) {
+      if (_appTheme!.darkMode != darkMode) {
         _appTheme = null;
-      } else if (transparentAppBar != _appTheme.transparentAppBar) {
+      } else if (transparentAppBar != _appTheme!.transparentAppBar) {
         _appTheme = null;
       }
     }

@@ -11,8 +11,8 @@ enum PhoneType {
 
 class PhoneMenuItem {
   PhoneMenuItem({this.title, this.type});
-  String title;
-  PhoneType type;
+  String? title;
+  PhoneType? type;
 
   static List<PhoneMenuItem> items = <PhoneMenuItem>[
     PhoneMenuItem(title: 'One Plus 7t', type: PhoneType.onePlus7t),
@@ -26,8 +26,8 @@ class PhoneMenuItem {
 class PhoneMenu extends StatelessWidget {
   const PhoneMenu({this.onItemSelected, this.selectedItem});
 
-  final void Function(PhoneMenuItem) onItemSelected;
-  final PhoneMenuItem selectedItem;
+  final void Function(PhoneMenuItem)? onItemSelected;
+  final PhoneMenuItem? selectedItem;
 
   Widget _menuButton(BuildContext context) {
     final Widget button = SizedBox(
@@ -38,7 +38,7 @@ class PhoneMenu extends StatelessWidget {
           children: <Widget>[
             Flexible(
               child: Text(
-                selectedItem.title,
+                selectedItem!.title!,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -72,7 +72,7 @@ class PhoneMenu extends StatelessWidget {
         return menuItems;
       },
       onSelected: (selected) {
-        onItemSelected(selected);
+        onItemSelected!(selected);
       },
       child: button,
     );

@@ -21,9 +21,9 @@ const BorderRadius _borderRadius = BorderRadius.only(
 );
 
 class BottomSlideupSheet {
-  static Future<T> show<T>({
-    BuildContext context,
-    SliderContent sliderContent,
+  static Future<T?> show<T>({
+    required BuildContext context,
+    required SliderContent sliderContent,
   }) {
     return showModalBottomSheet<T>(
       backgroundColor: sliderContent.backgroundColor(context),
@@ -42,11 +42,11 @@ class BottomSlideupSheet {
 
 class _SheetList extends StatelessWidget {
   const _SheetList({
-    Key key,
+    Key? key,
     this.sliderContent,
   }) : super(key: key);
 
-  final SliderContent sliderContent;
+  final SliderContent? sliderContent;
 
   Widget _tabDecoration(BuildContext context) {
     return Container(
@@ -64,10 +64,10 @@ class _SheetList extends StatelessWidget {
   Widget _buttonBar(BuildContext context) {
     Widget copyButton = NothingWidget();
 
-    if (sliderContent.enableCopyButton()) {
+    if (sliderContent!.enableCopyButton()) {
       copyButton = InkWell(
         onTap: () {
-          final String jsonStr = sliderContent.stringForCopy();
+          final String jsonStr = sliderContent!.stringForCopy();
           Clipboard.setData(ClipboardData(text: jsonStr));
 
           Utils.showCopiedToast(context);
@@ -79,14 +79,14 @@ class _SheetList extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        sliderContent.buttonBarBuilder(context),
+        sliderContent!.buttonBarBuilder(context),
         copyButton,
       ],
     );
   }
 
   Widget _listView(BuildContext context, ScrollController controller) {
-    final Widget listview = sliderContent.listView(context, controller);
+    final Widget listview = sliderContent!.listView(context, controller);
 
     if (listview != null) {
       return listview;
@@ -94,8 +94,8 @@ class _SheetList extends StatelessWidget {
 
     return ListView.builder(
       controller: controller,
-      itemBuilder: sliderContent.itemBuilder,
-      itemCount: sliderContent.itemCount(),
+      itemBuilder: sliderContent!.itemBuilder,
+      itemCount: sliderContent!.itemCount(),
     );
   }
 
@@ -105,7 +105,7 @@ class _SheetList extends StatelessWidget {
       padding: const EdgeInsets.only(top: 12.0, right: 20, left: 20),
       child: DraggableScrollableSheet(
         expand: false,
-        initialChildSize: sliderContent.initialChildSize,
+        initialChildSize: sliderContent!.initialChildSize,
         maxChildSize: .9,
         minChildSize: .2,
         builder: (BuildContext context, ScrollController controller) {

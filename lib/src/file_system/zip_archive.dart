@@ -18,8 +18,8 @@ class ZipArchive {
 
     final zipFile = File(outputName);
 
-    if (serverFile.isDirectory) {
-      final dataDir = Directory(serverFile.path);
+    if (serverFile.isDirectory!) {
+      final dataDir = Directory(serverFile.path!);
       try {
         await ZipFile.createFromDirectory(
           sourceDir: dataDir,
@@ -33,7 +33,7 @@ class ZipArchive {
       try {
         await ZipFile.createFromFiles(
           sourceDir: Directory(serverFile.directoryPath),
-          files: [File(serverFile.path)],
+          files: [File(serverFile.path!)],
           zipFile: zipFile,
         );
       } catch (e) {
@@ -45,7 +45,7 @@ class ZipArchive {
   }
 
   static Future<void> decompress(ServerFile serverFile) async {
-    final zipFile = File(serverFile.path);
+    final zipFile = File(serverFile.path!);
     final destinationDir = Directory(serverFile.directoryPath);
 
     // decompress into a tmp folder, then move the contents out renaming if needed to avoid conflicts
@@ -63,7 +63,7 @@ class ZipArchive {
         final bool isDirectory = entity is Directory;
 
         if (isDirectory) {
-          final Directory dir = entity as Directory;
+          final Directory dir = entity;
 
           final String newPath =
               Utils.uniqueDirName(p.basename(dir.path), destinationDir.path);

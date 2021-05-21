@@ -2,9 +2,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 Future<void> showAlertDialog({
-  @required BuildContext context,
-  @required String title,
-  @required String message,
+  required BuildContext context,
+  required String title,
+  required String message,
   bool barrierDismissible = true,
 }) {
   return showDialog<void>(

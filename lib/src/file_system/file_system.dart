@@ -17,10 +17,10 @@ class FileSystem {
   // set to true during statup. We could use different starting paths if not granted
   static bool storagePermissionGranted = false;
 
-  static Future<String> jsonAssets({
-    @required BuildContext context,
-    @required String directoryName,
-    @required String filename,
+  static Future<String?> jsonAssets({
+    required BuildContext context,
+    required String directoryName,
+    required String filename,
   }) async {
     final bundle = DefaultAssetBundle.of(context);
 
@@ -55,11 +55,11 @@ class FileSystem {
   }
 
   static Future<void> printAssets(BuildContext context,
-      {String directoryName, String ext}) async {
+      {String? directoryName, String? ext}) async {
     String matchDir = '';
     String matchExt = '';
 
-    if (directoryName != null && ext.isNotEmpty) {
+    if (directoryName != null && ext!.isNotEmpty) {
       matchDir = directoryName;
     }
 
@@ -92,7 +92,8 @@ class FileSystem {
 
       result = dir.path;
     } else if (Utils.isAndroid) {
-      final Directory dir = await getExternalStorageDirectory();
+      final Directory dir =
+          await (getExternalStorageDirectory() as FutureOr<Directory>);
       result = dir.path;
     } else {
       // linux, windows, macOs
@@ -114,7 +115,8 @@ class FileSystem {
 
       result = dir.path;
     } else if (Utils.isAndroid) {
-      final Directory dir = await getExternalStorageDirectory();
+      final Directory dir =
+          await (getExternalStorageDirectory() as FutureOr<Directory>);
       result = dir.path;
 
       String docsPath = _removeAndroidJunk(dir.path);
@@ -164,7 +166,7 @@ class FileSystem {
       result = directory.path;
 
       // appends app_flutter for some reason, remove that
-      final ServerFile serverFile = ServerFiles.serverFileForPath(result);
+      final ServerFile serverFile = ServerFiles.serverFileForPath(result)!;
       if (serverFile.name == 'app_flutter') {
         result = serverFile.directoryPath;
       }
@@ -177,7 +179,7 @@ class FileSystem {
     return result;
   }
 
-  static Future<String> get tmpDirectoryPath async {
+  static Future<String?> get tmpDirectoryPath async {
     if (Utils.isNotEmpty(_pathCache['tmp'])) {
       return _pathCache['tmp'];
     }
@@ -195,7 +197,7 @@ class FileSystem {
   }
 
   // iOS only
-  static Future<String> get libraryDirectoryPath async {
+  static Future<String?> get libraryDirectoryPath async {
     if (Utils.isIOS) {
       final Directory directory = await getLibraryDirectory();
 
@@ -208,12 +210,13 @@ class FileSystem {
   // Android only
   static Future<List<String>> get externalCacheDirectoryPaths async {
     if (Utils.isAndroid) {
-      final List<Directory> directories = await getExternalCacheDirectories();
+      final List<Directory> directories =
+          await (getExternalCacheDirectories() as FutureOr<List<Directory>>);
 
       return directories.map((dir) => dir.path).toList();
     }
 
-    return null;
+    return [];
   }
 
   static String _removeAndroidJunk(String path) {
@@ -231,7 +234,8 @@ class FileSystem {
   static Future<List<String>> get externalStorageDirectoryPaths async {
     if (Utils.isAndroid) {
       // Android only call
-      final List<Directory> directories = await getExternalStorageDirectories();
+      final List<Directory> directories =
+          await (getExternalStorageDirectories() as FutureOr<List<Directory>>);
 
       // add data directory
       // directories.add(Directory(await dataDirectoryPath));
@@ -253,9 +257,10 @@ class FileSystem {
   }
 
   // Desktop only
-  static Future<String> get downloadsDirectoryPath async {
+  static Future<String?> get downloadsDirectoryPath async {
     if (!Utils.isMobile) {
-      final Directory directory = await getDownloadsDirectory();
+      final Directory directory =
+          await (getDownloadsDirectory() as FutureOr<Directory>);
 
       return directory.path;
     }
@@ -329,21 +334,21 @@ class FileSystem {
   }
 
   static void delete(ServerFile serverFile) {
-    if (serverFile.isDirectory) {
-      final Directory dir = Directory(serverFile.path);
+    if (serverFile.isDirectory!) {
+      final Directory dir = Directory(serverFile.path!);
 
       dir.deleteSync(recursive: true);
     } else {
-      final File file = File(serverFile.path);
+      final File file = File(serverFile.path!);
 
       file.deleteSync();
     }
   }
 
   static void rename(String path, String name) {
-    final serverFile = ServerFiles.serverFileForPath(path);
+    final serverFile = ServerFiles.serverFileForPath(path)!;
 
-    if (serverFile.isDirectory) {
+    if (serverFile.isDirectory!) {
       final Directory dir = Directory(path);
 
       dir.renameSync(p.join(p.dirname(dir.path), name));
@@ -364,30 +369,30 @@ class FileSystem {
   }
 
   static FileStat stat(String path) {
-    final serverFile = ServerFiles.serverFileForPath(path);
+    final serverFile = ServerFiles.serverFileForPath(path)!;
     FileStat stat;
 
-    if (serverFile.isDirectory) {
-      final Directory dir = Directory(serverFile.path);
+    if (serverFile.isDirectory!) {
+      final Directory dir = Directory(serverFile.path!);
       stat = dir.statSync();
     } else {
-      final File dir = File(serverFile.path);
+      final File dir = File(serverFile.path!);
       stat = dir.statSync();
     }
 
     return stat;
   }
 
-  static String getMime(String path) {
+  static String? getMime(String path) {
     return mime(path);
   }
 
-  static Future<List<ServerFile>> getStorageList() async {
+  static Future<List<ServerFile?>> getStorageList() async {
     final List<String> dirs = await externalStorageDirectoryPaths;
-    final List<ServerFile> result = <ServerFile>[];
+    final List<ServerFile?> result = <ServerFile?>[];
 
     for (final String path in dirs) {
-      final ServerFile file = ServerFiles.serverFileForPath(path);
+      final ServerFile? file = ServerFiles.serverFileForPath(path);
 
       result.add(file);
     }

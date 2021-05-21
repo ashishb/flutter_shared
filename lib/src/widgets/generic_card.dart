@@ -8,7 +8,7 @@ const double kSmallBorderRadius = 8;
 
 class GenericCard extends StatelessWidget {
   const GenericCard({
-    @required this.children,
+    required this.children,
     this.onTap,
     this.onLongPress,
     this.onDelete,
@@ -22,16 +22,16 @@ class GenericCard extends StatelessWidget {
   });
 
   final List<Widget> children;
-  final VoidCallback onTap;
-  final VoidCallback onLongPress;
-  final VoidCallback onDelete;
-  final VoidCallback onEdit;
+  final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
+  final VoidCallback? onDelete;
+  final VoidCallback? onEdit;
   final double minHeight;
-  final String title;
+  final String? title;
   final bool showChevron;
   final bool small;
-  final Widget action;
-  final Widget titleAction;
+  final Widget? action;
+  final Widget? titleAction;
 
   Widget _titleBar(BuildContext context) {
     if (Utils.isEmpty(title)) {
@@ -97,12 +97,12 @@ class GenericCard extends StatelessWidget {
         switch (selected) {
           case 'edit':
             if (onEdit != null) {
-              onEdit();
+              onEdit!();
             }
             break;
           case 'delete':
             if (onDelete != null) {
-              onDelete();
+              onDelete!();
             }
             break;
         }
@@ -159,7 +159,7 @@ class GenericCard extends StatelessWidget {
           child: Positioned(
             right: 8,
             top: 12,
-            child: action,
+            child: action!,
           ),
         ),
         Visibility(
@@ -199,7 +199,7 @@ class CardDivider extends StatelessWidget {
 
 class AddCard extends StatelessWidget {
   const AddCard({
-    @required this.onTap,
+    required this.onTap,
     this.minHeight = 80,
     this.small = false,
   });
@@ -210,7 +210,7 @@ class AddCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color cardColor = Theme.of(context).cardTheme.color.withOpacity(.1);
+    final Color cardColor = Theme.of(context).cardTheme.color!.withOpacity(.1);
 
     double strokeWidth = 5;
     List<double> dashPattern = [12, 10];
@@ -257,7 +257,7 @@ class AddCard extends StatelessWidget {
 
 class BaseCard extends StatelessWidget {
   const BaseCard({
-    @required this.child,
+    required this.child,
     this.onTap,
     this.onLongPress,
     this.minHeight = 100,
@@ -266,8 +266,8 @@ class BaseCard extends StatelessWidget {
   });
 
   final Widget child;
-  final VoidCallback onTap;
-  final VoidCallback onLongPress;
+  final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
   final double minHeight;
   final bool fill;
   final bool small;

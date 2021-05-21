@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 
 typedef ScrollThumbBuilder = Widget Function(
   Color backgroundColor,
-  Animation<double> thumbAnimation,
-  Animation<double> labelAnimation, {
-  Text labelText,
+  Animation<double>? thumbAnimation,
+  Animation<double>? labelAnimation, {
+  Text? labelText,
 });
 
 typedef LabelTextBuilder = Text Function(double offsetY);
@@ -20,9 +20,9 @@ const widthScrollThumb = heightScrollThumb * 0.6;
 
 class DraggableScrollbar extends StatefulWidget {
   DraggableScrollbar({
-    Key key,
-    @required this.child,
-    @required this.controller,
+    Key? key,
+    required this.child,
+    required this.controller,
     this.backgroundColor = Colors.white,
     this.padding,
     this.scrollbarAnimationDuration = const Duration(milliseconds: 300),
@@ -35,20 +35,20 @@ class DraggableScrollbar extends StatefulWidget {
   final BoxScrollView child;
   final ScrollThumbBuilder scrollThumbBuilder;
   final Color backgroundColor;
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry? padding;
   final Duration scrollbarAnimationDuration;
   final Duration scrollbarTimeToFade;
-  final LabelTextBuilder labelTextBuilder;
+  final LabelTextBuilder? labelTextBuilder;
   final ScrollController controller;
 
   @override
   _DraggableScrollbarState createState() => _DraggableScrollbarState();
 
   static Widget buildScrollThumbAndLabel({
-    @required Widget scrollThumb,
-    @required Animation<double> thumbAnimation,
-    @required Animation<double> labelAnimation,
-    @required Text labelText,
+    required Widget scrollThumb,
+    required Animation<double>? thumbAnimation,
+    required Animation<double>? labelAnimation,
+    required Text? labelText,
   }) {
     final scrollThumbAndLabel = labelText == null
         ? scrollThumb
@@ -73,9 +73,9 @@ class DraggableScrollbar extends StatefulWidget {
   static ScrollThumbBuilder _thumbSemicircleBuilder() {
     return (
       Color backgroundColor,
-      Animation<double> thumbAnimation,
-      Animation<double> labelAnimation, {
-      Text labelText,
+      Animation<double>? thumbAnimation,
+      Animation<double>? labelAnimation, {
+      Text? labelText,
     }) {
       final scrollThumb = Material(
         elevation: 4.0,
@@ -106,11 +106,11 @@ class DraggableScrollbar extends StatefulWidget {
 
 class ScrollLabel extends StatelessWidget {
   const ScrollLabel({
-    @required this.child,
-    @required this.animation,
+    required this.child,
+    required this.animation,
   });
 
-  final Animation<double> animation;
+  final Animation<double>? animation;
   final Text child;
 
   static const BoxConstraints constraints =
@@ -119,7 +119,7 @@ class ScrollLabel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeTransition(
-      opacity: animation,
+      opacity: animation!,
       child: Container(
         margin: const EdgeInsets.only(right: 22.0),
         child: Material(
@@ -138,15 +138,15 @@ class ScrollLabel extends StatelessWidget {
 
 class _DraggableScrollbarState extends State<DraggableScrollbar>
     with TickerProviderStateMixin {
-  double _barOffset;
-  double _viewOffset;
-  bool _isDragInProcess;
+  late double _barOffset;
+  late double _viewOffset;
+  late bool _isDragInProcess;
 
-  AnimationController _thumbAnimationController;
-  Animation<double> _thumbAnimation;
-  AnimationController _labelAnimationController;
-  Animation<double> _labelAnimation;
-  Timer _fadeoutTimer;
+  late AnimationController _thumbAnimationController;
+  Animation<double>? _thumbAnimation;
+  late AnimationController _labelAnimationController;
+  Animation<double>? _labelAnimation;
+  Timer? _fadeoutTimer;
 
   @override
   void initState() {
@@ -183,17 +183,17 @@ class _DraggableScrollbarState extends State<DraggableScrollbar>
     super.dispose();
   }
 
-  double get barMaxScrollExtent => context.size.height - heightScrollThumb;
+  double get barMaxScrollExtent => context.size!.height - heightScrollThumb;
   double get barMinScrollExtent => 0.0;
   double get viewMaxScrollExtent => widget.controller.position.maxScrollExtent;
   double get viewMinScrollExtent => widget.controller.position.minScrollExtent;
 
   @override
   Widget build(BuildContext context) {
-    Text labelText;
+    Text? labelText;
 
     if (widget.labelTextBuilder != null && _isDragInProcess) {
-      labelText = widget.labelTextBuilder(
+      labelText = widget.labelTextBuilder!(
         _viewOffset + _barOffset + heightScrollThumb / 2,
       );
     }
@@ -243,7 +243,7 @@ class _DraggableScrollbarState extends State<DraggableScrollbar>
     setState(() {
       if (notification is ScrollUpdateNotification) {
         _barOffset += getBarDelta(
-          notification.scrollDelta,
+          notification.scrollDelta!,
           barMaxScrollExtent,
           viewMaxScrollExtent,
         );
@@ -255,7 +255,7 @@ class _DraggableScrollbarState extends State<DraggableScrollbar>
           _barOffset = barMaxScrollExtent;
         }
 
-        _viewOffset += notification.scrollDelta;
+        _viewOffset += notification.scrollDelta!;
         if (_viewOffset < widget.controller.position.minScrollExtent) {
           _viewOffset = widget.controller.position.minScrollExtent;
         }
@@ -348,26 +348,26 @@ class _DraggableScrollbarState extends State<DraggableScrollbar>
 
 class SlideFadeTransition extends StatelessWidget {
   const SlideFadeTransition({
-    Key key,
-    @required this.animation,
-    @required this.child,
+    Key? key,
+    required this.animation,
+    required this.child,
   }) : super(key: key);
 
-  final Animation<double> animation;
+  final Animation<double>? animation;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: animation,
-      builder: (context, child) => animation.value == 0.0 ? Container() : child,
+      animation: animation!,
+      builder: (context, child) => animation!.value == 0.0 ? Container() : child!,
       child: SlideTransition(
         position: Tween(
           begin: const Offset(0.3, 0.0),
           end: const Offset(0.0, 0.0),
-        ).animate(animation),
+        ).animate(animation!),
         child: FadeTransition(
-          opacity: animation,
+          opacity: animation!,
           child: child,
         ),
       ),

@@ -6,14 +6,14 @@ class SharedContext {
   }
   SharedContext._();
 
-  static SharedContext _instance;
+  static SharedContext? _instance;
 
   // must set this and get this
-  BuildContext context;
+  BuildContext? context;
 }
 
 class SharedContextWidget extends StatelessWidget {
-  const SharedContextWidget({@required this.child});
+  const SharedContextWidget({required this.child});
 
   final Widget child;
 

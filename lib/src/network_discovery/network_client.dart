@@ -6,12 +6,12 @@ class NetworkClient {
     this.name,
   });
 
-  final String url;
-  final String name;
+  final String? url;
+  final String? name;
 
   NetworkClient copyWith({
-    String url,
-    String name,
+    String? url,
+    String? name,
   }) {
     return NetworkClient(
       url: url ?? this.url,
@@ -26,21 +26,21 @@ class NetworkClient {
     };
   }
 
-  static NetworkClient fromMap(Map<String, dynamic> map) {
+  static NetworkClient? fromMap(Map<String, dynamic>? map) {
     if (map == null) {
       return null;
     }
 
     return NetworkClient(
-      url: map['url'] as String,
-      name: map['name'] as String,
+      url: map['url'] as String?,
+      name: map['name'] as String?,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  static NetworkClient fromJson(String source) =>
-      fromMap(json.decode(source) as Map<String, dynamic>);
+  static NetworkClient? fromJson(String source) =>
+      fromMap(json.decode(source) as Map<String, dynamic>?);
 
   @override
   String toString() => 'NetworkClient(url: $url, name: $name)';

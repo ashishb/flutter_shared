@@ -17,22 +17,22 @@ class ListRow extends StatelessWidget {
     this.maxSubtitleLines = 2,
   });
 
-  final Widget leading;
-  final Widget trailing;
-  final String title;
-  final String subtitle;
-  final TextStyle titleStyle;
-  final TextStyle subtitleStyle;
-  final Widget subWidget;
-  final void Function() onTap;
-  final void Function() onLongPress;
-  final Color color;
-  final EdgeInsetsGeometry padding;
+  final Widget? leading;
+  final Widget? trailing;
+  final String? title;
+  final String? subtitle;
+  final TextStyle? titleStyle;
+  final TextStyle? subtitleStyle;
+  final Widget? subWidget;
+  final void Function()? onTap;
+  final void Function()? onLongPress;
+  final Color? color;
+  final EdgeInsetsGeometry? padding;
   final int maxSubtitleLines;
 
-  static Color backgroundForIndex({
-    @required int index,
-    @required bool darkMode,
+  static Color? backgroundForIndex({
+    required int index,
+    required bool darkMode,
   }) {
     final Color c = darkMode
         ? Colors.white.withOpacity(.02)
@@ -42,11 +42,11 @@ class ListRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> titleChildren = [];
+    final List<Widget?> titleChildren = [];
 
     if (Utils.isNotEmpty(title)) {
       titleChildren.add(Text(
-        title,
+        title!,
         overflow: TextOverflow.ellipsis,
         softWrap: false, // keeps title on one line
         style: titleStyle ?? Theme.of(context).textTheme.bodyText2,
@@ -61,7 +61,7 @@ class ListRow extends StatelessWidget {
     if (Utils.isNotEmpty(subtitle)) {
       titleChildren.add(
         Text(
-          subtitle,
+          subtitle!,
           overflow: TextOverflow.ellipsis,
           softWrap: false, // keeps title on one line
           style: subtitleStyle ?? Theme.of(context).textTheme.caption,
@@ -74,7 +74,7 @@ class ListRow extends StatelessWidget {
       titleChildren.add(subWidget);
     }
 
-    final List<Widget> rowChildren = [];
+    final List<Widget?> rowChildren = [];
 
     if (leading != null) {
       rowChildren.add(leading);
@@ -86,7 +86,7 @@ class ListRow extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: titleChildren,
+          children: titleChildren as List<Widget>,
         ),
       ),
     ]);
@@ -103,7 +103,7 @@ class ListRow extends StatelessWidget {
         child: Padding(
           padding: padding ?? EdgeInsets.zero,
           child: Row(
-            children: rowChildren,
+            children: rowChildren as List<Widget>,
           ),
         ),
       ),

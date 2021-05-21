@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class GradientText extends StatelessWidget {
   const GradientText(
     this.text, {
-    @required this.gradient,
+    required this.gradient,
     this.textStyle,
   });
 
   factory GradientText.rainbow(String text,
-      {GradientTransform transform, TextStyle textStyle}) {
+      {GradientTransform? transform, TextStyle? textStyle}) {
     final gradient = LinearGradient(
       colors: const <Color>[
         Colors.red,
@@ -37,7 +37,7 @@ class GradientText extends StatelessWidget {
   }
 
   final String text;
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
   final Gradient gradient;
 
   @override

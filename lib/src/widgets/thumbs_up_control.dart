@@ -3,13 +3,13 @@ import 'package:flutter_shared/src/widgets/thumb_widget.dart';
 
 class ThumbsUpControl extends StatefulWidget {
   const ThumbsUpControl({
-    @required this.value,
-    @required this.onChanged,
+    required this.value,
+    required this.onChanged,
   });
 
   // or null if not set
-  final bool value;
-  final ValueChanged<bool> onChanged;
+  final bool? value;
+  final ValueChanged<bool?> onChanged;
 
   @override
   _ThumbsUpControlState createState() => _ThumbsUpControlState();
@@ -18,9 +18,9 @@ class ThumbsUpControl extends StatefulWidget {
 class _ThumbsUpControlState extends State<ThumbsUpControl> {
   @override
   Widget build(BuildContext context) {
-    int groupValue;
+    int? groupValue;
     if (widget.value != null) {
-      groupValue = widget.value ? 1 : 0;
+      groupValue = widget.value == true ? 1 : 0;
     } else {
       groupValue = null;
     }
@@ -30,7 +30,7 @@ class _ThumbsUpControlState extends State<ThumbsUpControl> {
       children: [
         InkWell(
           onTap: () {
-            bool newResult;
+            bool? newResult;
 
             if (groupValue != 1) {
               newResult = true;
@@ -53,7 +53,7 @@ class _ThumbsUpControlState extends State<ThumbsUpControl> {
         ),
         InkWell(
           onTap: () {
-            bool newResult;
+            bool? newResult;
 
             if (groupValue != 0) {
               newResult = false;

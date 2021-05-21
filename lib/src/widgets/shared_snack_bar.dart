@@ -13,12 +13,12 @@ class SharedSnackBars {
     _processStream();
   }
 
-  static SharedSnackBars _instance;
+  static SharedSnackBars? _instance;
   final _pending = StreamController<_StandardSnackBar>();
 
   void show({
-    @required String title,
-    @required String message,
+    required String title,
+    required String message,
     bool error = false,
   }) {
     _pending.add(_StandardSnackBar(
@@ -30,7 +30,7 @@ class SharedSnackBars {
 
   Future<void> _processStream() async {
     await for (final snackbar in _pending.stream) {
-      final BuildContext context = SharedContext().context;
+      final BuildContext? context = SharedContext().context;
 
       if (context != null) {
         await SharedSnackBar._show(
@@ -46,12 +46,12 @@ class SharedSnackBars {
 
 class SharedSnackBar extends StatefulWidget {
   const SharedSnackBar({
-    @required this.child,
-    @required this.onDismissed,
-    @required this.showOutAnimationDuration,
-    @required this.hideOutAnimationDuration,
-    @required this.displayDuration,
-    @required this.additionalTopPadding,
+    required this.child,
+    required this.onDismissed,
+    required this.showOutAnimationDuration,
+    required this.hideOutAnimationDuration,
+    required this.displayDuration,
+    required this.additionalTopPadding,
     this.onTap,
     this.onTop = false,
   });
@@ -62,7 +62,7 @@ class SharedSnackBar extends StatefulWidget {
   final Duration hideOutAnimationDuration;
   final Duration displayDuration;
   final double additionalTopPadding;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final bool onTop;
 
   static Future<bool> _show(
@@ -77,7 +77,7 @@ class SharedSnackBar extends StatefulWidget {
     final Completer<bool> result = Completer<bool>();
 
     if (overlayState != null) {
-      OverlayEntry overlayEntry;
+      late OverlayEntry overlayEntry;
 
       overlayEntry = OverlayEntry(
         builder: (context) {
@@ -112,9 +112,9 @@ class SharedSnackBar extends StatefulWidget {
 
 class _SharedSnackBarState extends State<SharedSnackBar>
     with SingleTickerProviderStateMixin {
-  Animation offsetAnimation;
-  AnimationController animationController;
-  double topPosition;
+  late Animation offsetAnimation;
+  late AnimationController animationController;
+  double? topPosition;
 
   @override
   void initState() {
@@ -187,8 +187,8 @@ class _SharedSnackBarState extends State<SharedSnackBar>
 
 class _StandardSnackBar extends StatefulWidget {
   const _StandardSnackBar({
-    @required this.title,
-    @required this.message,
+    required this.title,
+    required this.message,
     this.error = false,
   });
 
@@ -208,8 +208,8 @@ class _StandardSnackBarState extends State<_StandardSnackBar> {
       child: Container(
         decoration: BoxDecoration(
           color: widget.error
-              ? Colors.red[800].withOpacity(.9)
-              : Colors.green[800].withOpacity(.9),
+              ? Colors.red[800]!.withOpacity(.9)
+              : Colors.green[800]!.withOpacity(.9),
           borderRadius: const BorderRadius.all(Radius.circular(12)),
           boxShadow: const [
             BoxShadow(
@@ -234,7 +234,7 @@ class _StandardSnackBarState extends State<_StandardSnackBar> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      widget.title ?? '',
+                      widget.title,
                       style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -242,7 +242,7 @@ class _StandardSnackBarState extends State<_StandardSnackBar> {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      widget.message ?? '',
+                      widget.message,
                       style: const TextStyle(color: Colors.white, fontSize: 14),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
@@ -263,12 +263,12 @@ class _StandardSnackBarState extends State<_StandardSnackBar> {
 
 class _TapBounceContainer extends StatefulWidget {
   const _TapBounceContainer({
-    @required this.child,
+    required this.child,
     this.onTap,
   });
 
   final Widget child;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   _TapBounceContainerState createState() => _TapBounceContainerState();
@@ -276,8 +276,8 @@ class _TapBounceContainer extends StatefulWidget {
 
 class _TapBounceContainerState extends State<_TapBounceContainer>
     with SingleTickerProviderStateMixin {
-  double _scale;
-  AnimationController _controller;
+  late double _scale;
+  late AnimationController _controller;
 
   final animationDuration = const Duration(milliseconds: 150);
 

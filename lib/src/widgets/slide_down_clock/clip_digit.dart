@@ -3,9 +3,9 @@ import 'package:flutter_shared/src/widgets/slide_down_clock/slide_direction.dart
 
 class ClipHalfRect extends CustomClipper<Rect> {
   ClipHalfRect({
-    @required this.percentage,
-    @required this.isUp,
-    @required this.slideDirection,
+    required this.percentage,
+    required this.isUp,
+    required this.slideDirection,
   });
 
   final double percentage;

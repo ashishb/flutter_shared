@@ -4,10 +4,10 @@ import 'package:intl/intl.dart';
 
 class DatePicker extends StatefulWidget {
   const DatePicker({
-    @required this.startDate,
-    @required this.initialSelectedDate,
+    required this.startDate,
+    required this.initialSelectedDate,
     this.selectableDayPredicate,
-    Key key,
+    Key? key,
     this.width = 60,
     this.height = 100,
     this.controller,
@@ -19,13 +19,13 @@ class DatePicker extends StatefulWidget {
 
   final DateTime startDate;
   final DateTime initialSelectedDate;
-  final SelectableDayPredicate selectableDayPredicate;
+  final SelectableDayPredicate? selectableDayPredicate;
 
   final double width;
   final double height;
-  final DatePickerController controller;
+  final DatePickerController? controller;
   final Color selectionColor;
-  final DateChangeListener onDateChange;
+  final DateChangeListener? onDateChange;
   final int daysCount;
   final String locale;
 
@@ -34,13 +34,13 @@ class DatePicker extends StatefulWidget {
 }
 
 class _DatePickerState extends State<DatePicker> {
-  DateTime _currentDate;
+  DateTime? _currentDate;
 
   final ScrollController _controller = ScrollController();
 
-  TextStyle selectedDateStyle;
-  TextStyle selectedMonthStyle;
-  TextStyle selectedDayStyle;
+  TextStyle? selectedDateStyle;
+  TextStyle? selectedMonthStyle;
+  TextStyle? selectedDayStyle;
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _DatePickerState extends State<DatePicker> {
     _currentDate = widget.initialSelectedDate;
 
     if (widget.controller != null) {
-      widget.controller.datePickerState = this;
+      widget.controller!.datePickerState = this;
     }
 
     super.initState();
@@ -73,7 +73,7 @@ class _DatePickerState extends State<DatePicker> {
 
           bool disabled = false;
           if (widget.selectableDayPredicate != null) {
-            disabled = !widget.selectableDayPredicate(date);
+            disabled = !widget.selectableDayPredicate!(date);
           }
 
           return _DateWidget(
@@ -85,7 +85,7 @@ class _DatePickerState extends State<DatePicker> {
             isSelected: isSelected,
             onDateSelected: (selectedDate) {
               if (widget.onDateChange != null) {
-                widget.onDateChange(selectedDate);
+                widget.onDateChange!(selectedDate);
               }
               setState(() {
                 _currentDate = selectedDate;
@@ -99,24 +99,24 @@ class _DatePickerState extends State<DatePicker> {
 }
 
 class DatePickerController {
-  _DatePickerState _datePickerState;
+  _DatePickerState? _datePickerState;
 
   set datePickerState(_DatePickerState state) {
     _datePickerState = state;
   }
 
-  DateTime get currentDate {
+  DateTime? get currentDate {
     assert(_datePickerState != null,
         'DatePickerController is not attached to any DatePicker View.');
 
-    return _datePickerState._currentDate;
+    return _datePickerState!._currentDate;
   }
 
   void jumpToSelection() {
     assert(_datePickerState != null,
         'DatePickerController is not attached to any DatePicker View.');
 
-    _datePickerState._controller.jumpTo(_calculateDateOffset(currentDate));
+    _datePickerState!._controller.jumpTo(_calculateDateOffset(currentDate!));
   }
 
   void animateToSelection(
@@ -125,7 +125,7 @@ class DatePickerController {
     assert(_datePickerState != null,
         'DatePickerController is not attached to any DatePicker View.');
 
-    _datePickerState._controller.animateTo(_calculateDateOffset(currentDate),
+    _datePickerState!._controller.animateTo(_calculateDateOffset(currentDate!),
         duration: duration, curve: curve);
   }
 
@@ -135,45 +135,45 @@ class DatePickerController {
     assert(_datePickerState != null,
         'DatePickerController is not attached to any DatePicker View.');
 
-    _datePickerState._controller.animateTo(_calculateDateOffset(date),
+    _datePickerState!._controller.animateTo(_calculateDateOffset(date),
         duration: duration, curve: curve);
   }
 
   double _calculateDateOffset(DateTime date) {
     final int offset =
-        date.difference(_datePickerState.widget.startDate).inDays + 1;
+        date.difference(_datePickerState!.widget.startDate).inDays + 1;
 
-    return (offset * _datePickerState.widget.width) + (offset * 6);
+    return (offset * _datePickerState!.widget.width) + (offset * 6);
   }
 }
 
 class _DateWidget extends StatelessWidget {
   const _DateWidget({
-    @required this.date,
+    required this.date,
     this.disabled,
-    @required this.isSelected,
+    required this.isSelected,
     this.width,
     this.onDateSelected,
     this.locale,
     this.selectionColor,
   });
 
-  final double width;
-  final bool disabled;
+  final double? width;
+  final bool? disabled;
   final DateTime date;
   final bool isSelected;
-  final DateSelectionCallback onDateSelected;
-  final String locale;
-  final Color selectionColor;
+  final DateSelectionCallback? onDateSelected;
+  final String? locale;
+  final Color? selectionColor;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: disabled
+      onTap: disabled!
           ? null
           : () {
               if (onDateSelected != null) {
-                onDateSelected(date);
+                onDateSelected!(date);
               }
             },
       child: Container(
@@ -191,15 +191,15 @@ class _DateWidget extends StatelessWidget {
               Text(
                 DateFormat('MMM', locale).format(date).toUpperCase(),
                 style: defaultMonthTextStyle(
-                    disabled: disabled, isSelected: isSelected),
+                    disabled: disabled!, isSelected: isSelected),
               ),
               Text(date.day.toString(),
                   style: defaultDateTextStyle(
-                      disabled: disabled, isSelected: isSelected)),
+                      disabled: disabled!, isSelected: isSelected)),
               Text(
                 DateFormat('E', locale).format(date).toUpperCase(),
                 style: defaultDayTextStyle(
-                    disabled: disabled, isSelected: isSelected),
+                    disabled: disabled!, isSelected: isSelected),
               )
             ],
           ),

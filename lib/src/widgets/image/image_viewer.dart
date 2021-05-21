@@ -12,7 +12,7 @@ import 'package:open_file/open_file.dart';
 import 'package:random_string/random_string.dart';
 import 'package:flutter_shared/flutter_shared.dart';
 
-double initScale({Size imageSize, Size size, double initialScale}) {
+double initScale({Size? imageSize, Size? size, double? initialScale}) {
   // final n1 = imageSize.height / imageSize.width;
   // final n2 = size.height / size.width;
 
@@ -35,8 +35,8 @@ double initScale({Size imageSize, Size size, double initialScale}) {
 
 class ImageViewer extends StatefulWidget {
   const ImageViewer({
-    @required this.index,
-    @required this.swiperItems,
+    required this.index,
+    required this.swiperItems,
   });
 
   final int index;
@@ -50,13 +50,13 @@ class _ImageSwiperState extends State<ImageViewer>
     with SingleTickerProviderStateMixin {
   StreamController<int> rebuildIndex = StreamController<int>.broadcast();
   StreamController<bool> rebuildSwiper = StreamController<bool>.broadcast();
-  AnimationController _animationController;
-  Animation<double> _animation;
-  void Function() animationListener;
+  AnimationController? _animationController;
+  Animation<double>? _animation;
+  late void Function() animationListener;
   List<double> doubleTapScales = <double>[.9, 3.0];
   GlobalKey<ExtendedImageSlidePageState> slidePagekey =
       GlobalKey<ExtendedImageSlidePageState>();
-  int currentIndex;
+  late int currentIndex;
   bool _showSwiper = true;
 
   @override
@@ -94,12 +94,12 @@ class _ImageSwiperState extends State<ImageViewer>
     double initialScale = 1.0;
 
     if (state.extendedImageInfo != null &&
-        state.extendedImageInfo.image != null) {
+        state.extendedImageInfo!.image != null) {
       initialScale = initScale(
           size: size,
           initialScale: initialScale,
-          imageSize: Size(state.extendedImageInfo.image.width.toDouble(),
-              state.extendedImageInfo.image.height.toDouble()));
+          imageSize: Size(state.extendedImageInfo!.image.width.toDouble(),
+              state.extendedImageInfo!.image.height.toDouble()));
     }
     return GestureConfig(
       inPageView: true,
@@ -111,14 +111,14 @@ class _ImageSwiperState extends State<ImageViewer>
 
   void onDoubleTap(ExtendedImageGestureState state) {
     final pointerDownPosition = state.pointerDownPosition;
-    final double begin = state.gestureDetails.totalScale;
+    final double? begin = state.gestureDetails!.totalScale;
     double end;
 
     _animation?.removeListener(animationListener);
 
-    _animationController.stop();
+    _animationController!.stop();
 
-    _animationController.reset();
+    _animationController!.reset();
 
     if (begin == doubleTapScales[0]) {
       end = doubleTapScales[1];
@@ -128,14 +128,14 @@ class _ImageSwiperState extends State<ImageViewer>
 
     animationListener = () {
       state.handleDoubleTap(
-          scale: _animation.value, doubleTapPosition: pointerDownPosition);
+          scale: _animation!.value, doubleTapPosition: pointerDownPosition);
     };
     _animation =
-        _animationController.drive(Tween<double>(begin: begin, end: end));
+        _animationController!.drive(Tween<double>(begin: begin, end: end));
 
-    _animation.addListener(animationListener);
+    _animation!.addListener(animationListener);
 
-    _animationController.forward();
+    _animationController!.forward();
   }
 
   Widget _itemBuilder(BuildContext context, int index) {
@@ -144,11 +144,11 @@ class _ImageSwiperState extends State<ImageViewer>
     final imageSrc = widget.swiperItems[index].imageSrc;
     final String heroTag = widget.swiperItems[index].heroTag;
 
-    Widget image;
+    Widget? image;
 
     if (imageSrc.isFileImage) {
       image = ExtendedImage.file(
-        File(imageSrc.path),
+        File(imageSrc.path!),
         fit: BoxFit.contain,
         enableSlideOutPage: true,
         mode: ExtendedImageMode.gesture,
@@ -159,9 +159,9 @@ class _ImageSwiperState extends State<ImageViewer>
         onDoubleTap: onDoubleTap,
       );
     } else if (imageSrc.isNetworkImage) {
-      if (imageSrc.url.isAssetUrl) {
+      if (imageSrc.url!.isAssetUrl) {
         return ExtendedImage.asset(
-          imageSrc.url,
+          imageSrc.url!,
           fit: BoxFit.contain,
           enableSlideOutPage: true,
           mode: ExtendedImageMode.gesture,
@@ -174,7 +174,7 @@ class _ImageSwiperState extends State<ImageViewer>
       }
 
       image = ExtendedImage.network(
-        imageSrc.url,
+        imageSrc.url!,
         fit: BoxFit.contain,
         enableSlideOutPage: true,
         mode: ExtendedImageMode.gesture,
@@ -186,7 +186,7 @@ class _ImageSwiperState extends State<ImageViewer>
       );
     } else if (imageSrc.isMemoryImage) {
       image = ExtendedImage.memory(
-        imageSrc.memory,
+        imageSrc.memory!,
         fit: BoxFit.contain,
         enableSlideOutPage: true,
         mode: ExtendedImageMode.gesture,
@@ -200,7 +200,7 @@ class _ImageSwiperState extends State<ImageViewer>
 
     return GestureDetector(
       onTap: () {
-        slidePagekey.currentState.popPage();
+        slidePagekey.currentState!.popPage();
         Navigator.pop(context);
       },
       child: image,
@@ -217,7 +217,7 @@ class _ImageSwiperState extends State<ImageViewer>
           iconSize: 44,
           icon: const Icon(Icons.open_in_browser),
           onPressed: () {
-            final String url = widget.swiperItems[currentIndex].imageSrc.path;
+            final String? url = widget.swiperItems[currentIndex].imageSrc.path;
             OpenFile.open(url);
           },
         );
@@ -227,7 +227,7 @@ class _ImageSwiperState extends State<ImageViewer>
           onSelected: (String result) {
             switch (result) {
               case 'copy':
-                final String url =
+                final String? url =
                     widget.swiperItems[currentIndex].imageSrc.url;
                 Clipboard.setData(ClipboardData(text: url));
 
@@ -250,7 +250,7 @@ class _ImageSwiperState extends State<ImageViewer>
     });
   }
 
-  bool _defaultCanMovePage(GestureDetails gestureDetails) =>
+  bool _defaultCanMovePage(GestureDetails? gestureDetails) =>
       widget.swiperItems.length > 1;
 
   @override

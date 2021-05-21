@@ -10,8 +10,8 @@ enum SizeType {
 
 class SizeMenuItem {
   SizeMenuItem({this.title, this.type});
-  String title;
-  SizeType type;
+  String? title;
+  SizeType? type;
 
   static List<SizeMenuItem> items = <SizeMenuItem>[
     SizeMenuItem(title: 'Image Size', type: SizeType.imageSize),
@@ -24,8 +24,8 @@ class SizeMenuItem {
 class SizeMenu extends StatelessWidget {
   const SizeMenu({this.onItemSelected, this.selectedItem});
 
-  final void Function(SizeMenuItem) onItemSelected;
-  final SizeMenuItem selectedItem;
+  final void Function(SizeMenuItem)? onItemSelected;
+  final SizeMenuItem? selectedItem;
 
   Widget _menuButton(BuildContext context) {
     final Widget button = SizedBox(
@@ -36,7 +36,7 @@ class SizeMenu extends StatelessWidget {
           children: <Widget>[
             Flexible(
               child: Text(
-                selectedItem.title,
+                selectedItem!.title!,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -68,7 +68,7 @@ class SizeMenu extends StatelessWidget {
         return menuItems;
       },
       onSelected: (selected) {
-        onItemSelected(selected);
+        onItemSelected!(selected);
       },
       child: button,
     );

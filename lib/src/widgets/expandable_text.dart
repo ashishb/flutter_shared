@@ -9,8 +9,8 @@ class ExpandableText extends StatefulWidget {
   });
 
   final int maxLength;
-  final String text;
-  final TextStyle style;
+  final String? text;
+  final TextStyle? style;
 
   @override
   _ExpandableTextState createState() => _ExpandableTextState();
@@ -23,7 +23,7 @@ class _ExpandableTextState extends State<ExpandableText> {
   Widget build(BuildContext context) {
     if (Utils.isNotEmpty(widget.text)) {
       final truncNotes =
-          expanded ? widget.text : widget.text.truncate(widget.maxLength);
+          expanded ? widget.text! : widget.text!.truncate(widget.maxLength);
 
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,7 +39,7 @@ class _ExpandableTextState extends State<ExpandableText> {
             maxLines: 200,
           ),
           Visibility(
-            visible: widget.text.length > widget.maxLength,
+            visible: widget.text!.length > widget.maxLength,
             child: InkWell(
               onTap: () {
                 expanded = !expanded;
@@ -51,7 +51,7 @@ class _ExpandableTextState extends State<ExpandableText> {
                 padding: const EdgeInsets.only(top: 6.0),
                 child: Text(
                   expanded ? 'Show less' : 'Show more',
-                  style: Theme.of(context).textTheme.caption.copyWith(
+                  style: Theme.of(context).textTheme.caption!.copyWith(
                         fontSize: 12,
                         color: Theme.of(context).accentColor.withOpacity(.8),
                       ),

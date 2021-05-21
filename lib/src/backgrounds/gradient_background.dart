@@ -5,9 +5,9 @@ import 'package:supercharged/supercharged.dart';
 
 class GradientBackground extends StatelessWidget {
   const GradientBackground({
-    @required this.child,
-    @required this.startColor,
-    @required this.endColor,
+    required this.child,
+    required this.startColor,
+    required this.endColor,
   });
 
   final Widget child;
@@ -48,11 +48,11 @@ enum _AniProps { startColor, endColor }
 
 class GradientBackground4 extends StatelessWidget {
   GradientBackground4({
-    @required this.child,
-    @required this.startColor1,
-    @required this.endColor1,
-    @required this.startColor2,
-    @required this.endColor2,
+    required this.child,
+    required this.startColor1,
+    required this.endColor1,
+    required this.startColor2,
+    required this.endColor2,
   });
 
   final Widget child;

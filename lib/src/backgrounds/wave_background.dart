@@ -5,8 +5,8 @@ import 'package:simple_animations/simple_animations.dart';
 
 class WaveBackground extends StatelessWidget {
   const WaveBackground({
-    @required this.child,
-    @required this.color,
+    required this.child,
+    required this.color,
   });
 
   final Widget child;
@@ -52,9 +52,9 @@ class WaveBackground extends StatelessWidget {
 
 class AnimatedWave extends StatelessWidget {
   const AnimatedWave({
-    @required this.height,
-    @required this.speed,
-    @required this.color,
+    required this.height,
+    required this.speed,
+    required this.color,
     this.offset = 0.0,
   });
 

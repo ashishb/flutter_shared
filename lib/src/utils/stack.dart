@@ -17,7 +17,7 @@ class ListStack<T> {
   }
 
   /// get the top of the stack and delete it.
-  T pop() {
+  T? pop() {
     if (isEmpty) {
       return null;
     }
@@ -28,7 +28,7 @@ class ListStack<T> {
   }
 
   /// get the top of the stack without deleting it.
-  T top() {
+  T? top() {
     if (isEmpty) {
       return null;
     }

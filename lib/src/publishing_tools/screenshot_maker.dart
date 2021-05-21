@@ -21,10 +21,10 @@ class CaptureResult {
 class ScreenshotMaker {
   Future<CaptureResult> createImage(
     ui.Image assetImage,
-    String title,
-    PhoneType type, {
+    String? title,
+    PhoneType? type, {
     bool showBackground = true,
-    SizeType resultImageSize,
+    SizeType? resultImageSize,
   }) async {
     final Size imageSize = Size(
       assetImage.width.toDouble(),
@@ -65,10 +65,10 @@ class ScreenshotMaker {
   }
 
   void drawPhoneOnCanvas({
-    @required Canvas canvas,
-    @required ScreenshotParams p,
-    @required String title,
-    @required ui.Image assetImage,
+    required Canvas canvas,
+    required ScreenshotParams p,
+    required String? title,
+    required ui.Image assetImage,
   }) {
     if (p.showBackground && Utils.isNotEmpty(title)) {
       _drawTitle(
@@ -99,31 +99,29 @@ class ScreenshotMaker {
     canvas.drawPath(path, framePaint);
 
     // draw image
-    if (assetImage != null) {
-      final Path clipPath = Path();
-      final RRect clipRrect =
-          RRect.fromRectAndRadius(p.screenshotRect, p.imageFrameRadius);
-      clipPath.addRRect(clipRrect);
+    final Path clipPath = Path();
+    final RRect clipRrect =
+        RRect.fromRectAndRadius(p.screenshotRect, p.imageFrameRadius);
+    clipPath.addRRect(clipRrect);
 
-      canvas.save();
-      canvas.clipPath(clipPath);
+    canvas.save();
+    canvas.clipPath(clipPath);
 
-      paintImage(
-        canvas: canvas,
-        rect: p.screenshotRect,
-        image: assetImage,
-        fit: BoxFit.contain,
-      );
+    paintImage(
+      canvas: canvas,
+      rect: p.screenshotRect,
+      image: assetImage,
+      fit: BoxFit.contain,
+    );
 
-      canvas.restore();
-    }
+    canvas.restore();
   }
 
   Future<CaptureResult> _pictureToResults({
-    ui.PictureRecorder pictureRecorder,
-    Size imageSize,
-    SizeType resultImageSize,
-    Rect rect,
+    required ui.PictureRecorder pictureRecorder,
+    Size? imageSize,
+    SizeType? resultImageSize,
+    required Rect rect,
     bool drawBackground = false,
   }) async {
     final pic = pictureRecorder.endRecording();
@@ -134,16 +132,17 @@ class ScreenshotMaker {
         drawBackground: drawBackground, resultImageSize: resultImageSize);
 
     final data = await resizedImage.toByteData(format: ui.ImageByteFormat.png);
-    final buffer = data.buffer.asUint8List();
+    final buffer = data?.buffer.asUint8List();
 
-    return CaptureResult(buffer, resizedImage.width, resizedImage.height);
+    // NSHACK buffer!
+    return CaptureResult(buffer!, resizedImage.width, resizedImage.height);
   }
 
   void _drawBackground({
-    @required Canvas canvas,
-    @required Rect rect,
-    @required Color startColor,
-    @required Color endColor,
+    required Canvas canvas,
+    required Rect rect,
+    required Color startColor,
+    required Color endColor,
   }) {
     final backPaint = Paint();
     backPaint.shader = LinearGradient(
@@ -159,11 +158,11 @@ class ScreenshotMaker {
   }
 
   void _drawTitle({
-    @required Canvas canvas,
-    @required String title,
-    @required double centerX,
-    @required double startY,
-    @required double titleBoxHeight,
+    required Canvas canvas,
+    required String? title,
+    required double centerX,
+    required double startY,
+    required double titleBoxHeight,
   }) {
     final TextSpan span = TextSpan(
       style: const TextStyle(
@@ -185,12 +184,12 @@ class ScreenshotMaker {
     tp.paint(canvas, Offset(centerX - w, startY + h));
   }
 
-  Future<ui.Image> _resizeImage(ui.Image image, Size size,
-      {bool drawBackground = true, SizeType resultImageSize}) async {
+  Future<ui.Image> _resizeImage(ui.Image image, Size? size,
+      {bool drawBackground = true, SizeType? resultImageSize}) async {
     final pictureRecorder = ui.PictureRecorder();
     final canvas = Canvas(pictureRecorder);
 
-    Size newSize = size;
+    Size? newSize = size;
 
     if (resultImageSize != null) {
       switch (resultImageSize) {
@@ -206,7 +205,7 @@ class ScreenshotMaker {
         case SizeType.imageSize:
           {
             // enforce 2:1 Google play max aspect ratio
-            final double aspectRatio = size.width / size.height;
+            final double aspectRatio = size!.width / size.height;
             if (aspectRatio < .5) {
               newSize = Size(size.height / 2, size.height);
             }
@@ -215,7 +214,7 @@ class ScreenshotMaker {
       }
     }
 
-    final Rect rect = Offset.zero & newSize;
+    final Rect rect = Offset.zero & newSize!;
 
     if (drawBackground) {
       _drawBackground(
@@ -240,7 +239,7 @@ class ScreenshotMaker {
     return result;
   }
 
-  Future<void> saveToFile(String filename, CaptureResult capture) async {
+  Future<void> saveToFile(String? filename, CaptureResult capture) async {
     String path = await FileSystem.documentsPath;
     path = '$path/${filename}_screenshot.png';
 
@@ -253,9 +252,9 @@ class ScreenshotMaker {
   }
 
   static ScreenshotParams phoneParams({
-    @required PhoneType type,
-    @required Size imageSize,
-    @required bool showBackground,
+    required PhoneType? type,
+    required Size imageSize,
+    required bool showBackground,
     Color phoneColor = Colors.black,
     Color phoneFrameColor = Colors.black,
   }) {

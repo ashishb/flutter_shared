@@ -6,20 +6,20 @@ import 'package:flutter_shared/src/widgets/slide_down_clock/slide_direction.dart
 
 class Digit extends StatefulWidget {
   const Digit({
-    @required this.itemStream,
-    @required this.initValue,
-    @required this.id,
-    @required this.textStyle,
-    @required this.decoration,
-    @required this.slideDirection,
-    @required this.padding,
+    required this.itemStream,
+    required this.initValue,
+    required this.id,
+    required this.textStyle,
+    required this.decoration,
+    required this.slideDirection,
+    required this.padding,
   });
 
   final Stream<int> itemStream;
   final int initValue;
   final String id;
   final TextStyle textStyle;
-  final BoxDecoration decoration;
+  final BoxDecoration? decoration;
   final SlideDirection slideDirection;
   final EdgeInsets padding;
 
@@ -28,10 +28,10 @@ class Digit extends StatefulWidget {
 }
 
 class _DigitState extends State<Digit> with SingleTickerProviderStateMixin {
-  StreamSubscription<int> _streamSubscription;
+  StreamSubscription<int>? _streamSubscription;
   int _currentValue = 0;
   int _nextValue = 0;
-  AnimationController _controller;
+  late AnimationController _controller;
 
   bool haveData = false;
 
@@ -39,19 +39,19 @@ class _DigitState extends State<Digit> with SingleTickerProviderStateMixin {
     begin: const Offset(0.0, -1.0),
     end: Offset.zero,
   );
-  Animation<Offset> _slideUpAnimation;
+  late Animation<Offset> _slideUpAnimation;
 
   final Animatable<Offset> _slideDownTween = Tween<Offset>(
     begin: const Offset(0.0, 0.0),
     end: const Offset(0.0, 1.0),
   );
-  Animation<Offset> _slideDownAnimation;
+  late Animation<Offset> _slideDownAnimation;
 
   final Animatable<double> _opacityTween = Tween<double>(
     begin: 0,
     end: 1,
   );
-  Animation<double> _opacityAnimation;
+  late Animation<double> _opacityAnimation;
 
   @override
   void initState() {
@@ -85,9 +85,7 @@ class _DigitState extends State<Digit> with SingleTickerProviderStateMixin {
   @override
   void dispose() {
     _controller.dispose();
-    if (_streamSubscription != null) {
-      _streamSubscription.cancel();
-    }
+    _streamSubscription?.cancel();
     super.dispose();
   }
 
@@ -95,7 +93,7 @@ class _DigitState extends State<Digit> with SingleTickerProviderStateMixin {
     try {
       _controller.removeStatusListener(animationListener);
       if (_streamSubscription != null) {
-        _streamSubscription.cancel();
+        _streamSubscription!.cancel();
       }
     } catch (error) {
       print(error);

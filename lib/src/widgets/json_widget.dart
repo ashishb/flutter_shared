@@ -7,7 +7,7 @@ class JsonViewerWidget extends StatefulWidget {
   const JsonViewerWidget(this.jsonObj, {this.notRoot});
 
   final Map<String, dynamic> jsonObj;
-  final bool notRoot;
+  final bool? notRoot;
 
   @override
   JsonViewerWidgetState createState() => JsonViewerWidgetState();
@@ -88,30 +88,29 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
   List<Widget> _getList() {
     final List<Widget> list = [];
 
-    if (widget.jsonObj != null) {
-      for (final entry in widget.jsonObj.entries) {
-        final bool ex = isExtensible(entry.value);
-        final bool ink = isInkWell(entry.value);
-        list.add(
-          Row(
-            children: <Widget>[
-              _ex(ex, entry),
-              _exAndInk(ex, ink, entry),
-              const Text(
-                ':',
-                style: TextStyle(color: Colors.grey),
-              ),
-              const SizedBox(width: 3),
-              getValueWidget(entry)
-            ],
-          ),
-        );
-        list.add(const SizedBox(height: 4));
-        if (openFlag[entry.key] ?? false) {
-          list.add(getContentWidget(entry.value));
-        }
+    for (final entry in widget.jsonObj.entries) {
+      final bool ex = isExtensible(entry.value);
+      final bool ink = isInkWell(entry.value);
+      list.add(
+        Row(
+          children: <Widget>[
+            _ex(ex, entry),
+            _exAndInk(ex, ink, entry),
+            const Text(
+              ':',
+              style: TextStyle(color: Colors.grey),
+            ),
+            const SizedBox(width: 3),
+            getValueWidget(entry)
+          ],
+        ),
+      );
+      list.add(const SizedBox(height: 4));
+      if (openFlag[entry.key] ?? false) {
+        list.add(getContentWidget(entry.value));
       }
     }
+
     return list;
   }
 
@@ -254,14 +253,14 @@ class JsonArrayViewerWidget extends StatefulWidget {
 
   final List<dynamic> jsonArray;
 
-  final bool notRoot;
+  final bool? notRoot;
 
   @override
   _JsonArrayViewerWidgetState createState() => _JsonArrayViewerWidgetState();
 }
 
 class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
-  List<bool> openFlag;
+  late List<bool> openFlag;
 
   @override
   Widget build(BuildContext context) {

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter_shared/src/widgets/shared_snack_bar.dart';
 import 'package:flutter_shared/src/widgets/ttext.dart';
 import 'package:path/path.dart' as p;
@@ -53,11 +54,11 @@ class Utils {
   }
 
   static Future<void> printAssets(BuildContext context,
-      {String directoryName, String ext}) async {
+      {String? directoryName, String? ext}) async {
     String matchDir = '';
     String matchExt = '';
 
-    if (directoryName != null && ext.isNotEmpty) {
+    if (directoryName != null && ext!.isNotEmpty) {
       matchDir = directoryName;
     }
 
@@ -203,7 +204,7 @@ class Utils {
     return packageInfo.packageName;
   }
 
-  static String _webAppName;
+  static String? _webAppName;
   static set webAppName(String name) => _webAppName = name;
   static Future<String> getAppName() async {
     if (isWeb) {
@@ -212,11 +213,11 @@ class Utils {
 
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-    return packageInfo.appName ?? 'CFBundleDisplayName null';
+    return packageInfo.appName;
   }
 
   static void showSnackbar(BuildContext context, String message,
-      {bool error = false, String action, void Function() onPressed}) {
+      {bool error = false, String? action, void Function()? onPressed}) {
     final snackBar = SnackBar(
       backgroundColor: error ? Colors.red[700] : Colors.green[800],
       content: TText(
@@ -228,7 +229,7 @@ class Utils {
       action: action != null
           ? SnackBarAction(
               label: action,
-              onPressed: onPressed,
+              onPressed: onPressed!,
             )
           : null,
     );
@@ -265,14 +266,14 @@ class Utils {
   // ===========================================
   // Misc
 
-  static bool equalColors(Color color1, Color color2) {
+  static bool equalColors(Color? color1, Color? color2) {
     // colors don't compare well, one might be a material color, the other just has a Color(value)
     // both both might have the same value and should be considered equal
     return color1?.value == color2?.value;
   }
 
   static Size mediaSquareSize(BuildContext context,
-      {double percent = 0.5, double maxDimension}) {
+      {double percent = 0.5, double? maxDimension}) {
     double dimension = min(
         MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
 
@@ -352,7 +353,7 @@ class Utils {
     final currentFocus = FocusScope.of(context);
 
     if (!currentFocus.hasPrimaryFocus && currentFocus.hasFocus) {
-      FocusManager.instance.primaryFocus.unfocus();
+      FocusManager.instance.primaryFocus!.unfocus();
     }
   }
 
@@ -448,8 +449,8 @@ class Utils {
   }
 
   static void successSnackbar({
-    @required String title,
-    @required String message,
+    required String title,
+    required String message,
     bool error = false,
   }) {
     SharedSnackBars().show(
@@ -459,7 +460,7 @@ class Utils {
     );
   }
 
-  static String enumToString(Object enumItem) {
+  static String enumToString(Object? enumItem) {
     if (enumItem == null) {
       return '';
     }
@@ -467,18 +468,12 @@ class Utils {
     return describeEnum(enumItem);
   }
 
-  static T enumFromString<T>(
+  static T? enumFromString<T>(
     List<T> enumValues,
     String value,
   ) {
-    if (value == null || enumValues == null) {
-      return null;
-    }
-
-    return enumValues.singleWhere(
-        (enumItem) =>
-            enumToString(enumItem)?.toLowerCase() == value?.toLowerCase(),
-        orElse: () => null);
+    return enumValues.singleWhereOrNull((enumItem) =>
+        enumToString(enumItem).toLowerCase() == value.toLowerCase());
   }
 
   // removes null value, empty strings, empty lists, empty maps

@@ -9,19 +9,19 @@ const double circleOutline = 10;
 const double shadowAllowance = 20;
 
 class BottomNavBarController {
-  BottomNavBarState barState;
+  BottomNavBarState? barState;
 
   void setPage(int index) {
     if (barState != null) {
-      barState.setPage(index);
+      barState!.setPage(index);
     }
   }
 }
 
 class BottomNavBar extends StatefulWidget {
   BottomNavBar(
-      {@required this.tabs,
-      @required this.onTabChangedListener,
+      {required this.tabs,
+      required this.onTabChangedListener,
       this.controller,
       this.initialSelection = 0,
       this.circleColor,
@@ -31,18 +31,16 @@ class BottomNavBar extends StatefulWidget {
       this.gradient,
       this.barBackgroundColor,
       this.barHeight = 60})
-      : assert(onTabChangedListener != null),
-        assert(tabs != null),
-        assert(tabs.isNotEmpty && tabs.length < 5);
+      : assert(tabs.isNotEmpty && tabs.length < 5);
 
-  final BottomNavBarController controller;
+  final BottomNavBarController? controller;
   final Function(int position) onTabChangedListener;
-  final Color circleColor;
-  final Color activeIconColor;
-  final Color inactiveIconColor;
-  final Color textColor;
-  final Gradient gradient;
-  final Color barBackgroundColor;
+  final Color? circleColor;
+  final Color? activeIconColor;
+  final Color? inactiveIconColor;
+  final Color? textColor;
+  final Gradient? gradient;
+  final Color? barBackgroundColor;
   final double barHeight;
   final List<TabData> tabs;
   final int initialSelection;
@@ -60,13 +58,13 @@ class BottomNavBarState extends State<BottomNavBar>
   double _circleAlignX = 0;
   double _circleIconAlpha = 1;
 
-  Color circleColor;
-  Color activeIconColor;
-  Color inactiveIconColor;
-  Color barBackgroundColor;
-  Color textColor;
-  Gradient gradient;
-  Color shadowColor;
+  Color? circleColor;
+  Color? activeIconColor;
+  Color? inactiveIconColor;
+  Color? barBackgroundColor;
+  Color? textColor;
+  Gradient? gradient;
+  late Color shadowColor;
 
   @override
   void didChangeDependencies() {
@@ -110,14 +108,14 @@ class BottomNavBarState extends State<BottomNavBar>
   @override
   void initState() {
     super.initState();
-    widget.controller.barState = this;
+    widget.controller!.barState = this;
 
     _setSelected(widget.tabs[widget.initialSelection].key);
   }
 
   @override
   void dispose() {
-    widget.controller.barState = null;
+    widget.controller!.barState = null;
     super.dispose();
   }
 
@@ -206,7 +204,7 @@ class BottomNavBarState extends State<BottomNavBar>
                         height: arcHeight,
                         width: arcWidth,
                         child: CustomPaint(
-                          painter: HalfPainter(barBackgroundColor),
+                          painter: HalfPainter(barBackgroundColor!),
                         )),
                     SizedBox(
                       height: circleSize - 5,
@@ -268,7 +266,7 @@ class BottomNavBarState extends State<BottomNavBar>
 }
 
 class TabData {
-  TabData({@required this.iconData, @required this.title});
+  TabData({required this.iconData, required this.title});
 
   IconData iconData;
   String title;

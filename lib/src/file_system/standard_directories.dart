@@ -9,15 +9,15 @@ class StandardDirectories {
     return _instance ??= StandardDirectories._();
   }
   StandardDirectories._();
-  static StandardDirectories _instance;
+  static StandardDirectories? _instance;
 
-  final Map<String, String> _displayNameMap = {};
-  List<ServerFile> _standardDirectories;
+  final Map<String?, String> _displayNameMap = {};
+  List<ServerFile?>? _standardDirectories;
 
   Future<List<ServerFile>> standardDirectories() async {
     if (_standardDirectories == null) {
-      final List<String> result = [];
-      String path;
+      final List<String?> result = [];
+      String? path;
       final String documentsPath = await FileSystem.globalDocumentsPath;
 
       // iOS uses the file_picker directory as it's home
@@ -76,16 +76,16 @@ class StandardDirectories {
       }
 
       _standardDirectories = result.map((p) {
-        return ServerFiles.serverFileForPath(p);
+        return ServerFiles.serverFileForPath(p!);
       }).toList();
     }
 
     // return a copy
-    return List<ServerFile>.from(_standardDirectories);
+    return List<ServerFile>.from(_standardDirectories!);
   }
 
-  String displayName(ServerFile serverFile) {
-    String result = _displayNameMap[serverFile.path];
+  String? displayName(ServerFile serverFile) {
+    String? result = _displayNameMap[serverFile.path];
 
     if (Utils.isEmpty(result)) {
       result = serverFile.name;

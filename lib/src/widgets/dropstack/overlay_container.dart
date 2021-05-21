@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class OverlayContainer extends StatefulWidget {
   const OverlayContainer({
-    @required this.child,
+    required this.child,
   });
 
   final Widget child;
@@ -12,7 +12,7 @@ class OverlayContainer extends StatefulWidget {
 }
 
 class _OverlayContainerState extends State<OverlayContainer> {
-  OverlayEntry _overlayEntry;
+  OverlayEntry? _overlayEntry;
 
   @override
   void initState() {
@@ -41,13 +41,13 @@ class _OverlayContainerState extends State<OverlayContainer> {
         return widget.child;
       });
 
-      Overlay.of(context).insert(_overlayEntry);
+      Overlay.of(context)!.insert(_overlayEntry!);
     });
   }
 
   void _hide() {
     if (_overlayEntry != null) {
-      _overlayEntry.remove();
+      _overlayEntry!.remove();
       _overlayEntry = null;
     }
   }

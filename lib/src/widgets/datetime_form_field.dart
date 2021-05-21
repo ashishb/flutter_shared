@@ -8,17 +8,17 @@ import 'package:intl/intl.dart';
 
 class DateTimeFormField extends StatelessWidget {
   DateTimeFormField({
-    @required DateTime initialValue,
-    @required String label,
-    DateFormat formatter,
+    required DateTime? initialValue,
+    required String? label,
+    DateFormat? formatter,
     this.onSaved,
     this.validator,
     this.autovalidate = false,
     this.enabled = true,
     this.onlyDate = false,
     this.onlyTime = false,
-    DateTime firstDate,
-    DateTime lastDate,
+    DateTime? firstDate,
+    DateTime? lastDate,
   })  : assert(!onlyDate || !onlyTime),
         initialValue = initialValue ?? DateTime.now(),
         label = label ?? 'Date Time',
@@ -32,8 +32,8 @@ class DateTimeFormField extends StatelessWidget {
         lastDate = lastDate ?? DateTime(2100);
 
   final DateTime initialValue;
-  final FormFieldSetter<DateTime> onSaved;
-  final FormFieldValidator<DateTime> validator;
+  final FormFieldSetter<DateTime>? onSaved;
+  final FormFieldValidator<DateTime>? validator;
   final bool autovalidate;
   final bool enabled;
   final String label;
@@ -45,13 +45,13 @@ class DateTimeFormField extends StatelessWidget {
 
   Future<void> _tap(
       BuildContext context, FormFieldState<DateTime> state) async {
-    DateTime date;
-    TimeOfDay time = const TimeOfDay(hour: 0, minute: 0);
+    DateTime? date;
+    TimeOfDay? time = const TimeOfDay(hour: 0, minute: 0);
     if (onlyDate) {
       if (Platform.isAndroid) {
         date = await showDatePicker(
           context: context,
-          initialDate: state.value,
+          initialDate: state.value!,
           firstDate: firstDate,
           lastDate: lastDate,
         );
@@ -80,7 +80,7 @@ class DateTimeFormField extends StatelessWidget {
       if (Platform.isAndroid) {
         time = await showTimePicker(
           context: context,
-          initialTime: TimeOfDay.fromDateTime(state.value),
+          initialTime: TimeOfDay.fromDateTime(state.value!),
         );
         if (time != null) {
           state.didChange(DateTime(
@@ -112,14 +112,14 @@ class DateTimeFormField extends StatelessWidget {
       if (Platform.isAndroid) {
         date = await showDatePicker(
           context: context,
-          initialDate: state.value,
+          initialDate: state.value!,
           firstDate: firstDate,
           lastDate: lastDate,
         );
         if (date != null) {
           time = await showTimePicker(
             context: context,
-            initialTime: TimeOfDay.fromDateTime(state.value),
+            initialTime: TimeOfDay.fromDateTime(state.value!),
           );
           if (time != null) {
             state.didChange(DateTime(
@@ -172,7 +172,7 @@ class DateTimeFormField extends StatelessWidget {
               labelText: label,
               errorText: state.errorText,
             ),
-            child: Text(formatter.format(state.value)),
+            child: Text(formatter.format(state.value!)),
           ),
         );
       },

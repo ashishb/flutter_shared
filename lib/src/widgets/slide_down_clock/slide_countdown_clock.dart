@@ -8,8 +8,8 @@ import 'package:flutter_shared/src/widgets/slide_down_clock/slide_direction.dart
 
 class SlideCountdownClock extends StatefulWidget {
   const SlideCountdownClock({
-    Key key,
-    @required this.duration,
+    Key? key,
+    required this.duration,
     this.textStyle = const TextStyle(
       fontSize: 30,
       color: Colors.black,
@@ -27,11 +27,11 @@ class SlideCountdownClock extends StatefulWidget {
 
   final Duration duration;
   final TextStyle textStyle;
-  final TextStyle separatorTextStyle;
+  final TextStyle? separatorTextStyle;
   final String separator;
-  final BoxDecoration decoration;
+  final BoxDecoration? decoration;
   final SlideDirection slideDirection;
-  final VoidCallback onDone;
+  final VoidCallback? onDone;
   final EdgeInsets padding;
   final bool tightLabel;
   final bool shouldShowDays;
@@ -42,11 +42,11 @@ class SlideCountdownClock extends StatefulWidget {
 }
 
 class SlideCountdownClockState extends State<SlideCountdownClock> {
-  bool shouldShowDays;
-  Duration timeLeft;
-  Stream<DateTime> initStream;
-  StreamSubscription<DateTime> _streamSubscription;
-  StreamController<DateTime> _mainStream;
+  late bool shouldShowDays;
+  late Duration timeLeft;
+  late Stream<DateTime> initStream;
+  StreamSubscription<DateTime>? _streamSubscription;
+  late StreamController<DateTime> _mainStream;
 
   @override
   void initState() {
@@ -70,9 +70,7 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
 
   @override
   void dispose() {
-    if (_streamSubscription != null) {
-      _streamSubscription.cancel();
-    }
+    _streamSubscription?.cancel();
 
     super.dispose();
   }
@@ -88,17 +86,17 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
     _mainStream = StreamController.broadcast();
 
     if (_streamSubscription != null) {
-      _streamSubscription.cancel();
+      _streamSubscription!.cancel();
     }
 
     _streamSubscription = initStream.listen(
       (value) {
         if (timeLeft.inSeconds == 0) {
-          _streamSubscription.pause();
+          _streamSubscription!.pause();
 
           Future.delayed(const Duration(milliseconds: 1000), () {
             if (widget.onDone != null) {
-              widget.onDone();
+              widget.onDone!();
             }
           });
         } else {
@@ -199,7 +197,7 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
     return const SizedBox(width: 3);
   }
 
-  Widget _buildSeparator() {
+  Widget? _buildSeparator() {
     if (widget.separator != null && widget.separator.isNotEmpty) {
       return Text(
         widget.separator,

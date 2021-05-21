@@ -5,7 +5,7 @@ class ColoredButton extends StatelessWidget {
   const ColoredButton({
     this.title,
     this.label,
-    @required this.onPressed,
+    required this.onPressed,
     this.padding,
     this.color,
     this.textColor,
@@ -13,21 +13,21 @@ class ColoredButton extends StatelessWidget {
     this.disabled = false,
   });
 
-  final String title;
-  final Widget label;
+  final String? title;
+  final Widget? label;
   final void Function() onPressed;
-  final EdgeInsetsGeometry padding;
-  final Color color;
-  final Color textColor;
-  final Icon icon;
+  final EdgeInsetsGeometry? padding;
+  final Color? color;
+  final Color? textColor;
+  final Icon? icon;
   final bool disabled;
 
-  Widget buttonLabel() {
+  Widget? buttonLabel() {
     if (label != null) {
       return label;
     }
     return Text(
-      title,
+      title!,
       textAlign: TextAlign.center,
     );
   }
@@ -46,8 +46,8 @@ class ColoredButton extends StatelessWidget {
           padding: padding,
         ),
         onPressed: disabled ? null : onPressed,
-        label: buttonLabel(),
-        icon: icon,
+        label: buttonLabel()!,
+        icon: icon!,
       );
     }
     return TextButton(
@@ -57,7 +57,7 @@ class ColoredButton extends StatelessWidget {
         padding: padding,
       ),
       onPressed: disabled ? null : onPressed,
-      child: buttonLabel(),
+      child: buttonLabel()!,
     );
   }
 }
@@ -70,10 +70,10 @@ class CircularIconButton extends StatelessWidget {
     this.tooltip,
   });
 
-  final VoidCallback onPressed;
-  final Icon icon;
+  final VoidCallback? onPressed;
+  final Icon? icon;
   final double iconSize;
-  final String tooltip;
+  final String? tooltip;
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class CircularIconButton extends StatelessWidget {
         color: Colors.white,
         onPressed: onPressed,
         disabledColor: Colors.grey[400],
-        icon: icon,
+        icon: icon!,
       ),
     );
   }

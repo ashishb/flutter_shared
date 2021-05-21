@@ -8,14 +8,14 @@ import 'package:flutter/services.dart';
 class NodeBackground extends StatelessWidget {
   const NodeBackground({this.child});
 
-  final Widget child;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
         Positioned.fill(child: NodeBackgroundAnimation()),
-        Positioned.fill(child: child),
+        Positioned.fill(child: child!),
       ],
     );
   }
@@ -57,22 +57,22 @@ class AnimationVal {
   }
 
   final Animation<Offset> animation;
-  double radius;
-  Paint paintCircle;
-  Paint gradientPaint;
+  late double radius;
+  late Paint paintCircle;
+  late Paint gradientPaint;
 }
 
 class _NodeBackgroundAnimationState extends State<NodeBackgroundAnimation>
     with TickerProviderStateMixin {
-  List<AnimationVal> animations;
-  List<AnimationController> controllers;
+  List<AnimationVal>? animations;
+  late List<AnimationController> controllers;
   final Random random = Random();
 
   final Color backgroudPatternBlue = Colors.blue.withAlpha(20);
   final Color backgroudCirclePatternBlue = const Color.fromRGBO(0, 55, 255, .1);
   final Color backgroudPatternBlueDark = const Color(0x05FFFFFF);
   final Color backgroudCirclePatternBlueDark = const Color(0x10FFFFFF);
-  ui.Image image;
+  ui.Image? image;
 
   Future<void> _loadImage() async {
     final ByteData bd = await rootBundle.load('assets/images/lsd.png');
@@ -159,16 +159,16 @@ class BackgroundPainter extends CustomPainter {
         super();
 
   final Paint paintLine;
-  List<AnimationVal> animations;
-  ui.Image image;
+  List<AnimationVal>? animations;
+  ui.Image? image;
 
   @override
   void paint(Canvas canvas, Size size) {
-    for (int i = 0; i < animations.length; i++) {
+    for (int i = 0; i < animations!.length; i++) {
       canvas.drawCircle(
-        getOffset(animations[i].animation, size),
-        animations[i].radius,
-        animations[i].paintCircle,
+        getOffset(animations![i].animation, size),
+        animations![i].radius,
+        animations![i].paintCircle,
       );
       // canvas.drawCircle(
       //   getOffset(animations[i].animation, size),
@@ -177,26 +177,26 @@ class BackgroundPainter extends CustomPainter {
       // );
 
       final Rect rect = Rect.fromCircle(
-        center: getOffset(animations[i].animation, size),
-        radius: animations[i].radius,
+        center: getOffset(animations![i].animation, size),
+        radius: animations![i].radius,
       );
 
       if (image != null) {
         paintImage(
           canvas: canvas,
-          image: image,
+          image: image!,
           rect: rect,
         );
       }
     }
 
-    for (int i = 3; i < animations.length; i += 3) {
-      canvas.drawLine(getOffset(animations[i - 3].animation, size),
-          getOffset(animations[i].animation, size), paintLine);
-      canvas.drawLine(getOffset(animations[i - 2].animation, size),
-          getOffset(animations[i].animation, size), paintLine);
-      canvas.drawLine(getOffset(animations[i - 1].animation, size),
-          getOffset(animations[i].animation, size), paintLine);
+    for (int i = 3; i < animations!.length; i += 3) {
+      canvas.drawLine(getOffset(animations![i - 3].animation, size),
+          getOffset(animations![i].animation, size), paintLine);
+      canvas.drawLine(getOffset(animations![i - 2].animation, size),
+          getOffset(animations![i].animation, size), paintLine);
+      canvas.drawLine(getOffset(animations![i - 1].animation, size),
+          getOffset(animations![i].animation, size), paintLine);
     }
   }
 

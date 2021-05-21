@@ -6,12 +6,12 @@ import 'package:flutter_shared/flutter_shared.dart';
 
 class ScreenshotMenuItem {
   ScreenshotMenuItem({this.title = kNoTextTitle, this.filename = 'no-title'});
-  String title;
-  String filename;
+  String? title;
+  String? filename;
 
   static const kNoTextTitle = 'No Title';
 
-  String get displayTitle => title == kNoTextTitle ? '' : title;
+  String? get displayTitle => title == kNoTextTitle ? '' : title;
 
   static Future<List<ScreenshotMenuItem>> get items async {
     final List<ScreenshotMenuItem> result = [];
@@ -27,7 +27,7 @@ class ScreenshotMenuItem {
     result.add(ScreenshotMenuItem());
     for (final x in dataList) {
       result.add(ScreenshotMenuItem(
-          title: x['title'] as String, filename: x['filename'] as String));
+          title: x['title'] as String?, filename: x['filename'] as String?));
     }
 
     return result;
@@ -37,8 +37,8 @@ class ScreenshotMenuItem {
 class ScreenshotMenu extends StatefulWidget {
   const ScreenshotMenu({this.onItemSelected, this.selectedItem});
 
-  final void Function(ScreenshotMenuItem) onItemSelected;
-  final ScreenshotMenuItem selectedItem;
+  final void Function(ScreenshotMenuItem)? onItemSelected;
+  final ScreenshotMenuItem? selectedItem;
 
   @override
   _ScreenshotMenuState createState() => _ScreenshotMenuState();
@@ -69,7 +69,7 @@ class _ScreenshotMenuState extends State<ScreenshotMenu> {
           children: <Widget>[
             Flexible(
               child: Text(
-                widget.selectedItem.title,
+                widget.selectedItem!.title!,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -103,7 +103,7 @@ class _ScreenshotMenuState extends State<ScreenshotMenu> {
         return menuItems;
       },
       onSelected: (selected) {
-        widget.onItemSelected(selected);
+        widget.onItemSelected!(selected);
       },
       child: button,
     );

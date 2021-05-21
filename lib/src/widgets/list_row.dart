@@ -74,10 +74,10 @@ class ListRow extends StatelessWidget {
       titleChildren.add(subWidget!);
     }
 
-    final List<Widget?> rowChildren = [];
+    final List<Widget> rowChildren = [];
 
     if (leading != null) {
-      rowChildren.add(leading);
+      rowChildren.add(leading!);
       rowChildren.add(const SizedBox(width: 14));
     }
 
@@ -92,7 +92,7 @@ class ListRow extends StatelessWidget {
     ]);
 
     if (trailing != null) {
-      rowChildren.add(trailing);
+      rowChildren.add(trailing!);
     }
 
     return Container(
@@ -103,7 +103,7 @@ class ListRow extends StatelessWidget {
         child: Padding(
           padding: padding ?? EdgeInsets.zero,
           child: Row(
-            children: rowChildren as List<Widget>,
+            children: rowChildren,
           ),
         ),
       ),

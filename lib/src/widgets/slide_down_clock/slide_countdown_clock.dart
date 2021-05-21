@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_shared/flutter_shared.dart';
 import 'package:flutter_shared/src/widgets/slide_down_clock/digit.dart';
 
 import 'package:flutter_shared/src/widgets/slide_down_clock/slide_direction.dart';
@@ -198,7 +199,7 @@ class SlideCountdownClockState extends State<SlideCountdownClock> {
   }
 
   Widget? _buildSeparator() {
-    if (widget.separator != null && widget.separator.isNotEmpty) {
+    if (Utils.isNotEmpty(widget.separator)) {
       return Text(
         widget.separator,
         style: widget.separatorTextStyle ?? widget.textStyle,

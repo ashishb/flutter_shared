@@ -159,7 +159,7 @@ class GenericCard extends StatelessWidget {
           child: Positioned(
             right: 8,
             top: 12,
-            child: action!,
+            child: action ?? NothingWidget(),
           ),
         ),
         Visibility(

@@ -120,29 +120,19 @@ class ThemeSet {
     switch (field) {
       case ThemeSetColor.primaryColor:
         return primaryColor;
-        break;
       case ThemeSetColor.accentColor:
         return accentColor;
-        break;
       case ThemeSetColor.textColor:
         return textColor;
-        break;
       case ThemeSetColor.buttonContentColor:
         return buttonContentColor;
-        break;
       case ThemeSetColor.textAccentColor:
         return textAccentColor;
-        break;
       case ThemeSetColor.backgroundColor:
         return backgroundColor;
-        break;
       case ThemeSetColor.headerTextColor:
         return headerTextColor;
-        break;
     }
-
-    print('error: colorForField');
-    return Colors.red;
   }
 
   ThemeSet copyWith({
@@ -193,29 +183,19 @@ class ThemeSet {
     switch (field) {
       case ThemeSetColor.primaryColor:
         return 'Primary Color';
-        break;
       case ThemeSetColor.accentColor:
         return 'Accent Color';
-        break;
       case ThemeSetColor.textColor:
         return 'Text Color';
-        break;
       case ThemeSetColor.buttonContentColor:
         return 'Button Content Color';
-        break;
       case ThemeSetColor.textAccentColor:
         return 'Text Accent Color';
-        break;
       case ThemeSetColor.backgroundColor:
         return 'Background Color';
-        break;
       case ThemeSetColor.headerTextColor:
         return 'Header Text Color';
-        break;
     }
-
-    print('invalid field');
-    return 'unknown';
   }
 
   bool contentIsEqual(ThemeSet other) {

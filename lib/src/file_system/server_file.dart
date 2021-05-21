@@ -198,7 +198,6 @@ class ServerFile {
         case '.webp':
         case '.ico':
           return true;
-          break;
       }
     }
 

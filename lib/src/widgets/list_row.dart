@@ -42,7 +42,7 @@ class ListRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget?> titleChildren = [];
+    final List<Widget> titleChildren = [];
 
     if (Utils.isNotEmpty(title)) {
       titleChildren.add(Text(
@@ -71,7 +71,7 @@ class ListRow extends StatelessWidget {
     }
 
     if (subWidget != null) {
-      titleChildren.add(subWidget);
+      titleChildren.add(subWidget!);
     }
 
     final List<Widget?> rowChildren = [];
@@ -86,7 +86,7 @@ class ListRow extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: titleChildren as List<Widget>,
+          children: titleChildren,
         ),
       ),
     ]);

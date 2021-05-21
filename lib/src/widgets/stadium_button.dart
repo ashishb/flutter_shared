@@ -46,7 +46,7 @@ class StadiumButton extends StatelessWidget {
           horizontal: horizontal,
         ),
         child: Text(
-          title ?? '',
+          title,
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: fontSize,

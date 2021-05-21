@@ -366,7 +366,7 @@ class Requests {
     }
 
     if (localBody != null) {
-      String? contentTypeHeader;
+      String contentTypeHeader;
 
       switch (localBodyEncoding) {
         case RequestBodyEncoding.json:
@@ -383,8 +383,7 @@ class Requests {
           break;
       }
 
-      if (contentTypeHeader != null &&
-          !Common.hasKeyIgnoreCase(localHeaders, 'content-type')) {
+      if (!Common.hasKeyIgnoreCase(localHeaders, 'content-type')) {
         localHeaders['content-type'] = contentTypeHeader;
       }
     }

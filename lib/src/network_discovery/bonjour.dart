@@ -55,12 +55,14 @@ class Bonjour extends ChangeNotifier {
 
     discovery!.eventStream!.listen((event) {
       if (event.type == BonsoirDiscoveryEventType.DISCOVERY_SERVICE_RESOLVED) {
-        final ResolvedBonsoirService service =
-            event.service as ResolvedBonsoirService;
+        final ResolvedBonsoirService? service =
+            event.service as ResolvedBonsoirService?;
 
-        print('Service found : ${service.toJson()}');
-        _resolvedServices.add(service);
-        notifyListeners();
+        if (service != null) {
+          print('Service found : ${service.toJson()}');
+          _resolvedServices.add(service);
+          notifyListeners();
+        }
       } else if (event.type ==
           BonsoirDiscoveryEventType.DISCOVERY_SERVICE_LOST) {
         _resolvedServices.remove(event.service);

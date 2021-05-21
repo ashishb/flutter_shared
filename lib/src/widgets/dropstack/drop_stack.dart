@@ -146,7 +146,7 @@ class DropStack extends ChangeNotifier {
     required bool topOnly,
   }) async {
     if (isNotEmpty) {
-      if (directory != null && directory.isDirectory!) {
+      if (directory.isDirectory!) {
         final bool? drop = await _confirmDrop(
             context: context, directory: directory, topOnly: topOnly);
 

@@ -14,7 +14,7 @@ class JsonViewerWidget extends StatefulWidget {
 }
 
 class JsonViewerWidgetState extends State<JsonViewerWidget> {
-  Map<String, bool> openFlag = {};
+  final Set<String> _openFlag = {};
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
 
   Widget _ex(bool ex, MapEntry entry) {
     if (ex) {
-      final icon = (openFlag[entry.key] ?? false)
+      final icon = _openFlag.contains(entry.key)
           ? const Icon(
               Icons.arrow_drop_down,
               size: arrowIconSize,
@@ -46,7 +46,7 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
       return InkWell(
         onTap: () {
           setState(() {
-            openFlag[entry.key as String] = !(openFlag[entry.key] ?? false);
+            _toggleOpen(entry.key as String);
           });
         },
         child: icon,
@@ -65,7 +65,7 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
       return InkWell(
         onTap: () {
           setState(() {
-            openFlag[entry.key as String] = !(openFlag[entry.key] ?? false);
+            _toggleOpen(entry.key as String);
           });
         },
         child: Text(
@@ -106,7 +106,7 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
         ),
       );
       list.add(const SizedBox(height: 4));
-      if (openFlag[entry.key] ?? false) {
+      if (_openFlag.contains(entry.key)) {
         list.add(getContentWidget(entry.value));
       }
     }
@@ -190,7 +190,7 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
         return InkWell(
           onTap: () {
             setState(() {
-              openFlag[entry.key as String] = !(openFlag[entry.key] ?? false);
+              _toggleOpen(entry.key as String);
             });
           },
           child: Text(
@@ -203,7 +203,7 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
     return InkWell(
       onTap: () {
         setState(() {
-          openFlag[entry.key as String] = !(openFlag[entry.key] ?? false);
+          _toggleOpen(entry.key as String);
         });
       },
       child: const Text(
@@ -246,6 +246,14 @@ class JsonViewerWidgetState extends State<JsonViewerWidget> {
     }
     return 'Object';
   }
+
+  void _toggleOpen(String index) {
+    if (_openFlag.contains(index)) {
+      _openFlag.remove(index);
+    } else {
+      _openFlag.add(index);
+    }
+  }
 }
 
 class JsonArrayViewerWidget extends StatefulWidget {
@@ -260,7 +268,7 @@ class JsonArrayViewerWidget extends StatefulWidget {
 }
 
 class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
-  late List<bool> openFlag;
+  final Set<int> _openFlag = {};
 
   @override
   Widget build(BuildContext context) {
@@ -275,15 +283,9 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
         crossAxisAlignment: CrossAxisAlignment.start, children: _getList());
   }
 
-  @override
-  void initState() {
-    super.initState();
-    openFlag = List.filled(widget.jsonArray.length * 4, false);
-  }
-
   Widget _ex(bool ex, int i) {
     if (ex) {
-      final icon = (openFlag[i] ?? false)
+      final icon = _openFlag.contains(i)
           ? const Icon(
               Icons.arrow_drop_down,
               size: arrowIconSize,
@@ -296,7 +298,7 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
       return InkWell(
         onTap: () {
           setState(() {
-            openFlag[i] = !(openFlag[i] ?? false);
+            _toggleOpen(i);
           });
         },
         child: icon,
@@ -344,7 +346,7 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
         ),
       );
       list.add(const SizedBox(height: 4));
-      if (openFlag[i] ?? false) {
+      if (_openFlag.contains(i)) {
         list.add(JsonViewerWidgetState.getContentWidget(content));
       }
       i++;
@@ -352,11 +354,19 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
     return list;
   }
 
+  void _toggleOpen(int index) {
+    if (_openFlag.contains(index)) {
+      _openFlag.remove(index);
+    } else {
+      _openFlag.add(index);
+    }
+  }
+
   InkWell getInkWell(int index) {
     return InkWell(
       onTap: () {
         setState(() {
-          openFlag[index] = !(openFlag[index] ?? false);
+          _toggleOpen(index);
         });
       },
       child: Text('[$index]', style: TextStyle(color: Colors.purple[900])),
@@ -404,7 +414,7 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
         return InkWell(
           onTap: () {
             setState(() {
-              openFlag[index] = !(openFlag[index] ?? false);
+              _toggleOpen(index);
             });
           },
           child: Text(
@@ -417,7 +427,7 @@ class _JsonArrayViewerWidgetState extends State<JsonArrayViewerWidget> {
     return InkWell(
       onTap: () {
         setState(() {
-          openFlag[index] = !(openFlag[index] ?? false);
+          _toggleOpen(index);
         });
       },
       child: const Text(

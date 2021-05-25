@@ -86,7 +86,7 @@ class _SheetList extends StatelessWidget {
   }
 
   Widget _listView(BuildContext context, ScrollController controller) {
-    final Widget listview = sliderContent!.listView(context, controller);
+    final Widget? listview = sliderContent?.listView(context, controller);
 
     if (listview != null) {
       return listview;

@@ -15,7 +15,7 @@ class FileInfo extends StatefulWidget {
 
   final Map<String, dynamic> map;
   final ServerFile serverFile;
-  final String hostUrl;
+  final String? hostUrl;
 
   @override
   _FileInfoState createState() => _FileInfoState();
@@ -40,7 +40,7 @@ class _FileInfoState extends State<FileInfo> {
 
   Future<void> _loadPDFImage() async {
     if (!_onWeb) {
-      if (widget.serverFile != null && widget.serverFile.isPdf) {
+      if (widget.serverFile.isPdf) {
         // open pdf, make image of first page
         final document = await PdfDocument.openFile(widget.serverFile.path!);
         final page = await document.getPage(1);
@@ -58,7 +58,7 @@ class _FileInfoState extends State<FileInfo> {
     final List<Widget> list = [];
     Widget child;
 
-    if (widget.serverFile != null && widget.serverFile.isFile) {
+    if (widget.serverFile.isFile) {
       // svgs crash Image
       if ((widget.serverFile.isImageDrawable || widget.serverFile.isPdf) &&
           !widget.serverFile.isSvg) {
@@ -74,21 +74,19 @@ class _FileInfoState extends State<FileInfo> {
           }
         }
 
-        if (child != null) {
-          list.add(
-            Align(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: CheckerboardContainer(
-                  color: widget.serverFile.isPdf ? Colors.white : null,
-                  constraints:
-                      const BoxConstraints(maxHeight: 1000, maxWidth: 1000),
-                  child: child,
-                ),
+        list.add(
+          Align(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CheckerboardContainer(
+                color: widget.serverFile.isPdf ? Colors.white : null,
+                constraints:
+                    const BoxConstraints(maxHeight: 1000, maxWidth: 1000),
+                child: child,
               ),
             ),
-          );
-        }
+          ),
+        );
       } else if (widget.serverFile.isVideo) {
         if (_onWeb) {
           String url = '${widget.hostUrl}?preview=${widget.serverFile.path}';
@@ -108,53 +106,51 @@ class _FileInfoState extends State<FileInfo> {
   List<Widget> _buildList(BuildContext context) {
     final List<Widget> list = [];
 
-    if (widget.map != null) {
-      list.addAll(widget.map.keys.map((key) {
-        String valueString = widget.map[key].toString();
+    list.addAll(widget.map.keys.map((key) {
+      String valueString = widget.map[key].toString();
 
-        if (key == 'size' ||
-            key == 'free space' ||
-            key == 'used space' ||
-            key == 'total space') {
-          final int size = widget.map[key] as int;
-          valueString = size.formatBytes(2);
-        }
+      if (key == 'size' ||
+          key == 'free space' ||
+          key == 'used space' ||
+          key == 'total space') {
+        final int size = widget.map[key] as int;
+        valueString = size.formatBytes(2);
+      }
 
-        if (key == 'changed') {
-          valueString =
-              DateFormat.yMMMEd().add_jms().format(DateTime.parse(valueString));
-        }
-        if (key == 'modified') {
-          valueString =
-              DateFormat.yMMMEd().add_jms().format(DateTime.parse(valueString));
-        }
-        if (key == 'accessed') {
-          valueString =
-              DateFormat.yMMMEd().add_jms().format(DateTime.parse(valueString));
-        }
+      if (key == 'changed') {
+        valueString =
+            DateFormat.yMMMEd().add_jms().format(DateTime.parse(valueString));
+      }
+      if (key == 'modified') {
+        valueString =
+            DateFormat.yMMMEd().add_jms().format(DateTime.parse(valueString));
+      }
+      if (key == 'accessed') {
+        valueString =
+            DateFormat.yMMMEd().add_jms().format(DateTime.parse(valueString));
+      }
 
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Text(
-                  '$key:',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              child: Text(
+                '$key:',
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Expanded(
-                flex: 2,
-                child: Text(valueString),
-              ),
-            ],
-          ),
-        );
-      }).toList());
-    }
+            ),
+            Expanded(
+              flex: 2,
+              child: Text(valueString),
+            ),
+          ],
+        ),
+      );
+    }).toList());
 
     return list;
   }

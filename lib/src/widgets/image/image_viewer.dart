@@ -93,8 +93,7 @@ class _ImageSwiperState extends State<ImageViewer>
   ) {
     double initialScale = 1.0;
 
-    if (state.extendedImageInfo != null &&
-        state.extendedImageInfo!.image != null) {
+    if (state.extendedImageInfo != null) {
       initialScale = initScale(
           size: size,
           initialScale: initialScale,

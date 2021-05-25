@@ -29,7 +29,7 @@ class Digit extends StatefulWidget {
 
 class _DigitState extends State<Digit> with SingleTickerProviderStateMixin {
   StreamSubscription<int>? _streamSubscription;
-  int _currentValue = 0;
+  int? _currentValue = 0;
   int _nextValue = 0;
   late AnimationController _controller;
 

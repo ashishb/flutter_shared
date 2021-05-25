@@ -59,7 +59,7 @@ class ColorParams {
     return darkMode ? barTextColorDark : barTextColor;
   }
 
-  void _withIntegratedAppBar(ThemeSet themeSet) {
+  void _withIntegratedAppBar(ThemeSet? themeSet) {
     if (transparentAppBar!) {
       barColor = Colors.transparent;
       barColorDark = Colors.transparent;

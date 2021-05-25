@@ -472,6 +472,10 @@ class Utils {
     List<T> enumValues,
     String value,
   ) {
+    if (Utils.isEmpty(enumValues) || Utils.isEmpty(value)) {
+      return null;
+    }
+
     return enumValues.singleWhereOrNull((enumItem) =>
         enumToString(enumItem).toLowerCase() == value.toLowerCase());
   }

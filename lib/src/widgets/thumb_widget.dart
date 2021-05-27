@@ -16,7 +16,7 @@ class ThumbWidget extends StatelessWidget {
   final double opacity;
 
   Widget _thumb(int index) {
-    const Color outlinedColor = Color.fromRGBO(150, 150, 150, 1);
+    const Color unselectedColor = Color.fromRGBO(180, 180, 180, 1);
 
     IconData icon;
     IconData outlinedIcon;
@@ -31,18 +31,18 @@ class ThumbWidget extends StatelessWidget {
       icon = FontAwesome.thumbs_down;
       outlinedIcon = FontAwesome.thumbs_down;
 
-      iconColor = Colors.red[800];
+      iconColor = Colors.red[600];
     } else {
       icon = FontAwesome.thumbs_up;
       outlinedIcon = FontAwesome.thumbs_up;
       yOffset *= -1;
 
-      iconColor = Colors.green[800];
+      iconColor = Colors.green[600];
     }
 
     final isDouble = index == 0 || index == 3;
 
-    Color? firstIconColor = isSelected ? iconColor : outlinedColor;
+    Color? firstIconColor = isSelected ? iconColor : unselectedColor;
     if (isDouble) {
       firstIconColor = Utils.darken(firstIconColor!, .05);
     }
@@ -81,7 +81,7 @@ class ThumbWidget extends StatelessWidget {
               bottom: yOffset,
               child: Icon(
                 isSelected ? icon : outlinedIcon,
-                color: isSelected ? iconColor : outlinedColor,
+                color: isSelected ? iconColor : unselectedColor,
                 size: iconSize,
               ),
             ),

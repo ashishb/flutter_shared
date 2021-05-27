@@ -40,7 +40,7 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
 
   @override
   Widget build(BuildContext context) {
-    String textResult = '';
+    String textResult = 'Select Rating';
 
     switch (widget.value) {
       case 0:
@@ -91,7 +91,7 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
                   textResult,
                   style: Theme.of(context).textTheme.caption!.copyWith(
                         fontWeight: FontWeight.bold,
-                        fontSize: 32,
+                        fontSize: 30,
                       ),
                 ),
               ],

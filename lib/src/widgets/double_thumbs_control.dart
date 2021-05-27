@@ -9,7 +9,7 @@ class DoubleThumbsControl extends StatefulWidget {
   });
 
   // or null if not set
-  final int value; // 0-3
+  final int? value; // 0-3
   final ValueChanged<int?> onChanged;
   final bool showText;
 

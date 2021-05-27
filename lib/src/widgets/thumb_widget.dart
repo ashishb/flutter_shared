@@ -11,7 +11,7 @@ class ThumbWidget extends StatelessWidget {
   });
 
   final int index; // 0-3
-  final int selectedIndex; // 0-3
+  final int? selectedIndex; // 0-3 or null
   final double iconSize;
   final double opacity;
 

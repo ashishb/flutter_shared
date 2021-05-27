@@ -53,11 +53,14 @@ class AppTheme {
       bottomNavigationBarTheme: _bottomNavBarTheme(appColor),
       textTheme: _textTheme(darkMode!),
       iconTheme: iconTheme,
+
       accentColor: params.accentColor,
       dividerColor: darkMode!
           ? Colors.white12
           : Colors.black12, // params.accentColor.withOpacity(.5),
       primaryColor: appColor,
+      primaryColorLight: appColor, // circle avatar uses these light/dark
+      primaryColorDark: appColor,
       toggleableActiveColor: appColor,
       dialogBackgroundColor: ThemeSetManager().currentTheme!.backgroundColor,
       sliderTheme: sliderTheme,
@@ -69,12 +72,12 @@ class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         enabledBorder: UnderlineInputBorder(
-          borderSide:
-              BorderSide(color: ThemeSetManager().currentTheme!.textAccentColor!),
+          borderSide: BorderSide(
+              color: ThemeSetManager().currentTheme!.textAccentColor!),
         ),
         border: UnderlineInputBorder(
-          borderSide:
-              BorderSide(color: ThemeSetManager().currentTheme!.textAccentColor!),
+          borderSide: BorderSide(
+              color: ThemeSetManager().currentTheme!.textAccentColor!),
         ),
         hintStyle:
             TextStyle(color: ThemeSetManager().currentTheme!.textAccentColor),
@@ -222,7 +225,8 @@ class AppTheme {
     return result;
   }
 
-  ColorScheme _colorScheme({required bool darkMode, Color? primary, Color? secondary}) {
+  ColorScheme _colorScheme(
+      {required bool darkMode, Color? primary, Color? secondary}) {
     ColorScheme scheme = ThemeData.light().colorScheme;
     if (darkMode) {
       scheme = ThemeData.dark().colorScheme;

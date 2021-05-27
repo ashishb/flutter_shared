@@ -57,7 +57,8 @@ class AppTheme {
       accentColor: params.accentColor,
       dividerColor: darkMode!
           ? Colors.white12
-          : Colors.black12, // params.accentColor.withOpacity(.5),
+          : const Color.fromRGBO(
+              0, 0, 0, .05), // params.accentColor.withOpacity(.5),
       primaryColor: appColor,
       primaryColorLight: appColor, // circle avatar uses these light/dark
       primaryColorDark: appColor,

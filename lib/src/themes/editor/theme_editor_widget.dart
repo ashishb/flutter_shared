@@ -147,7 +147,10 @@ class _ThemeEditorWidgetState extends State<ThemeEditorWidget> {
                       await FlutterBarcodeScanner.scanBarcode(
                           '#ff6666', 'Cancel', true, ScanMode.DEFAULT);
 
-                  if (Utils.isNotEmpty(barcodeScanRes)) {
+                  // "-1" gets returned on cancel or back
+                  // we only want json back in this case
+                  if (Utils.isNotEmpty(barcodeScanRes) &&
+                      barcodeScanRes.firstChar == '{') {
                     final ThemeSet newTheme = ThemeSet.fromMap(
                         json.decode(barcodeScanRes) as Map<String, dynamic>);
 

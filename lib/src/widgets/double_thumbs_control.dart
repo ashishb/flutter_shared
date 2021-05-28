@@ -91,7 +91,7 @@ class _DoubleThumbsControlState extends State<DoubleThumbsControl> {
                   textResult,
                   style: Theme.of(context).textTheme.caption!.copyWith(
                         fontWeight: FontWeight.bold,
-                        fontSize: 30,
+                        fontSize: 22,
                       ),
                 ),
               ],

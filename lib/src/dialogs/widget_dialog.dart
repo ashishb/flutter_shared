@@ -10,7 +10,8 @@ Future<bool?> showWidgetDialog({
   String cancelButtonName = 'Cancel',
   bool barrierDismissible = true,
   EdgeInsets? buttonPadding,
-  EdgeInsets? insetPadding,
+  EdgeInsets insetPadding =
+      const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
   EdgeInsets? titlePadding,
   EdgeInsets actionsPadding = EdgeInsets.zero,
   EdgeInsets contentPadding = const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
@@ -20,7 +21,7 @@ Future<bool?> showWidgetDialog({
     barrierDismissible: barrierDismissible,
     builder: (context) => AlertDialog(
       buttonPadding: buttonPadding,
-      insetPadding: insetPadding!,
+      insetPadding: insetPadding,
       titlePadding: titlePadding,
       actionsPadding: actionsPadding,
       contentPadding: contentPadding,

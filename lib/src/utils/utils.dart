@@ -192,7 +192,7 @@ class Utils {
     }
 
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    return packageInfo.version + (debugBuild ? 'd' : '');
+    return packageInfo.version;
   }
 
   static Future<String> getAppID() async {

@@ -14,11 +14,12 @@ Future<void> showVideoDialog(BuildContext context,
     children: [
       Flexible(
         child: VideoPlayerWidget(
-            serverFile: serverFile,
-            hostUrl: hostUrl,
-            onClose: () {
-              Navigator.pop(context);
-            }),
+          serverFile: serverFile,
+          hostUrl: hostUrl,
+          onClose: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
     ],
   );
@@ -134,7 +135,9 @@ class _PlayPauseOverlay extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            controller!.value.isPlaying ? controller!.pause() : controller!.play();
+            controller!.value.isPlaying
+                ? controller!.pause()
+                : controller!.play();
           },
         ),
         Positioned(

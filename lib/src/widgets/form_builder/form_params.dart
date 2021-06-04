@@ -48,7 +48,7 @@ class FormBuilderParams extends ChangeNotifier {
     required this.map,
     this.saveNotifier,
   }) {
-    map.keys.forEach((mapKey) {
+    widgetKeys().forEach((mapKey) {
       formParams[mapKey] =
           FormParam(formData: map, builderParams: this, mapKey: mapKey);
     });
@@ -62,8 +62,14 @@ class FormBuilderParams extends ChangeNotifier {
     return null;
   }
 
+  // override this to change order
+  // call super to get default keys
+  List<String> widgetKeys() {
+    return map.keys.toList();
+  }
+
   void filter() {
-    map.keys.forEach((key) {
+    widgetKeys().forEach((key) {
       switch (key) {
         case 'id':
         case 'userId':

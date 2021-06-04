@@ -11,7 +11,7 @@ class FieldBuilder {
   }) {
     final List<Widget> result = [];
 
-    builderParams.map.keys.forEach((mapKey) {
+    builderParams.widgetKeys().forEach((mapKey) {
       final formParams = builderParams.formParams;
 
       if (!formParams[mapKey]!.hide) {

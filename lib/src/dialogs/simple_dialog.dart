@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 Future<T?> showSimpleDialog<T>({
   required BuildContext context,
-  required String title,
   required List<Widget> children,
   bool barrierDismissible = true,
 }) {

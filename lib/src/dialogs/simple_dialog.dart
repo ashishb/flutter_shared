@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 Future<T?> showSimpleDialog<T>({
   required BuildContext context,
   required List<Widget> children,
+  EdgeInsets contentPadding = const EdgeInsets.fromLTRB(0.0, 12.0, 0.0, 16.0),
   bool barrierDismissible = true,
 }) {
   return showGeneralDialog<T>(
@@ -15,7 +16,7 @@ Future<T?> showSimpleDialog<T>({
         child: Opacity(
           opacity: a1.value,
           child: SimpleDialog(
-            // contentPadding: EdgeInsets.zero,
+            contentPadding: contentPadding,
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             children: children,

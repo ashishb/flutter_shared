@@ -521,6 +521,43 @@ class Utils {
     }
     return params;
   }
+
+  static Future<String?> jsonAssets({
+    required BuildContext context,
+    required String directoryName,
+    required String filename,
+  }) async {
+    final bundle = DefaultAssetBundle.of(context);
+
+    final manifestContent = await bundle.loadString('AssetManifest.json');
+
+    final Map<String, dynamic> manifestMap =
+        json.decode(manifestContent) as Map<String, dynamic>;
+
+    final List<String> paths = manifestMap.keys.where((String path) {
+      final dirPath = p.split(p.dirname(path));
+
+      if (Utils.isNotEmpty(dirPath)) {
+        return directoryName == dirPath.last;
+      }
+
+      return false;
+    }).where((String path) {
+      return p.basename(path) == filename;
+    }).toList();
+
+    if (paths.length == 1) {
+      final contents = await bundle.loadString(paths[0]);
+
+      // debugPrint(contents, wrapWidth: 555);
+
+      return contents;
+    }
+
+    print('jsonAssets: not found');
+
+    return null;
+  }
 }
 
 class NothingWidget extends StatelessWidget {

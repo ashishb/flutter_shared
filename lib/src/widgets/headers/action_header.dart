@@ -85,7 +85,7 @@ class ActionHeader extends StatelessWidget {
           if (iconData != null)
             IconButton(
               padding: EdgeInsets.zero,
-              constraints: BoxConstraints.tight(const Size(32, 32)),
+              constraints: BoxConstraints.loose(const Size(32, 32)),
               iconSize: iconSize,
               // icon: Icon(iconData, color: _textStyle(context).color),
               icon: Icon(iconData, color: Theme.of(context).accentColor),

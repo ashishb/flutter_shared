@@ -88,7 +88,7 @@ class DraggableScrollbar extends StatefulWidget {
         ),
         child: Container(
           padding: const EdgeInsets.only(left: 4),
-          constraints: BoxConstraints.tight(
+          constraints: BoxConstraints.loose(
               const Size(widthScrollThumb, heightScrollThumb)),
           child: const Icon(Icons.reorder, color: Colors.white),
         ),
@@ -113,8 +113,8 @@ class ScrollLabel extends StatelessWidget {
   final Animation<double>? animation;
   final Text child;
 
-  static const BoxConstraints constraints =
-      BoxConstraints.tightFor(width: 48.0, height: 48.0);
+  static BoxConstraints constraints =
+      BoxConstraints.loose(const Size(48.0, 48.0));
 
   @override
   Widget build(BuildContext context) {
@@ -360,7 +360,8 @@ class SlideFadeTransition extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: animation!,
-      builder: (context, child) => animation!.value == 0.0 ? Container() : child!,
+      builder: (context, child) =>
+          animation!.value == 0.0 ? Container() : child!,
       child: SlideTransition(
         position: Tween(
           begin: const Offset(0.3, 0.0),

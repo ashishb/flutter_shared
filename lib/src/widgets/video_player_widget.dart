@@ -2,7 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/file_system/server_file.dart';
+import 'package:flutter_shared/src/utils/utils.dart';
+import 'package:flutter_shared/src/widgets/preview_dialog.dart';
+
 import 'package:open_file/open_file.dart';
 import 'package:video_player/video_player.dart';
 

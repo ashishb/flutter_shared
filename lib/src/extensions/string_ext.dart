@@ -1,5 +1,5 @@
-import 'package:flutter_shared/flutter_shared.dart';
 import 'package:characters/characters.dart';
+import 'package:flutter_shared/src/utils/utils.dart';
 
 extension StringUtils on String {
   bool get isAssetUrl {

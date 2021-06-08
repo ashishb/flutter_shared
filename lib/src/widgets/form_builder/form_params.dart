@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/utils/utils.dart';
+import 'package:flutter_shared/src/extensions/string_ext.dart';
 
 class FormParam {
   FormParam({

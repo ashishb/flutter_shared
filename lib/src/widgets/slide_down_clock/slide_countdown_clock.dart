@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/utils/utils.dart';
+
 import 'package:flutter_shared/src/widgets/slide_down_clock/digit.dart';
 
 import 'package:flutter_shared/src/widgets/slide_down_clock/slide_direction.dart';

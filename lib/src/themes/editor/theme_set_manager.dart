@@ -2,7 +2,10 @@ import 'dart:convert';
 
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/material.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/themes/editor/theme_set.dart';
+import 'package:flutter_shared/src/utils/preferences.dart';
+import 'package:flutter_shared/src/utils/string_utils.dart';
+import 'package:flutter_shared/src/utils/utils.dart';
 
 class ThemeSetManager {
   factory ThemeSetManager() {
@@ -76,8 +79,8 @@ class ThemeSetManager {
       // a scan might have the same name, but different contents, don't want to wipe users set with same name
       if (scanned) {
         // bail out if another theme has same content, but different name
-        final ThemeSet? foundTheme = themeSets.firstWhereOrNull(
-            (test) => themeSet.contentIsEqual(test));
+        final ThemeSet? foundTheme =
+            themeSets.firstWhereOrNull((test) => themeSet.contentIsEqual(test));
 
         if (foundTheme == null) {
           resultTheme =

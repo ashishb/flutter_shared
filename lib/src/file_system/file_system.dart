@@ -4,12 +4,14 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_shared/src/file_system/server_file.dart';
 import 'package:flutter_shared/src/file_system/server_files.dart';
 import 'package:flutter_shared/src/file_system/zip_archive.dart';
+import 'package:flutter_shared/src/utils/utils.dart';
 import 'package:mime_type/mime_type.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/extensions/string_ext.dart';
 
 class FileSystem {
   static final Map<String, String> _pathCache = {};

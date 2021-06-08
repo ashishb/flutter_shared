@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/file_system/server_file.dart';
 import 'package:flutter_shared/src/file_system/standard_directories.dart';
 
 class ServerFiles {

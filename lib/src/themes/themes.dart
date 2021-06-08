@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/google_fonts/google_font_library.dart';
+
 import 'package:flutter_shared/src/themes/color_params.dart';
+import 'package:flutter_shared/src/themes/editor/theme_set.dart';
+import 'package:flutter_shared/src/themes/editor/theme_set_manager.dart';
+import 'package:flutter_shared/src/utils/utils.dart';
 
 class AppTheme {
   AppTheme({

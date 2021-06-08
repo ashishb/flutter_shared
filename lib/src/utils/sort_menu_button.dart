@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/hive_db/hive_box.dart';
+import 'package:flutter_shared/src/utils/browser_prefs.dart';
+import 'package:flutter_shared/src/widgets/menu_item.dart';
+
 import 'package:hive/hive.dart';
 
 class BrowserSortMenuButton extends StatelessWidget {

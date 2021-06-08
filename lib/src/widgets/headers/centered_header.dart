@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/themes/editor/theme_set_manager.dart';
 
 class CenteredHeader extends StatelessWidget {
   const CenteredHeader(this.header, {this.top, this.bottom});

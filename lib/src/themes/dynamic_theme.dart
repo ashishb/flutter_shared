@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/themes/editor/theme_set.dart';
+import 'package:flutter_shared/src/themes/editor/theme_set_manager.dart';
+import 'package:flutter_shared/src/themes/themes.dart';
+import 'package:flutter_shared/src/utils/preferences.dart';
+import 'package:flutter_shared/src/utils/utils.dart';
 
 class DynamicTheme with ChangeNotifier {
   DynamicTheme() {

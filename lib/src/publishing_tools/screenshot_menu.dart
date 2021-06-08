@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/widgets/menu_item.dart';
 
 class ScreenshotMenuItem {
   ScreenshotMenuItem({this.title = kNoTextTitle, this.filename = 'no-title'});

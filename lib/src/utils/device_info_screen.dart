@@ -4,7 +4,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:device_info/device_info.dart';
-import 'package:flutter_shared/flutter_shared.dart';
+import 'package:flutter_shared/src/utils/utils.dart';
+import 'package:flutter_shared/src/widgets/list_row.dart';
+import 'package:flutter_shared/src/extensions/string_ext.dart';
 
 class DeviceInfoScreen extends StatefulWidget {
   @override

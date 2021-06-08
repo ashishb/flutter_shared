@@ -174,16 +174,7 @@ class Utils {
   static bool get isWeb {
     // Platform not available on web
     // but this constant is the current work around
-    if (kIsWeb) {
-      return true;
-    }
-
-    // not sure why there isn't a web choice, this might be obsolete at some point
-    return !(Platform.isAndroid ||
-        Platform.isIOS ||
-        Platform.isMacOS ||
-        Platform.isLinux ||
-        Platform.isWindows);
+    return kIsWeb;
   }
 
   static Future<String> getAppVersion() async {
